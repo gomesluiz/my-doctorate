@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 
+import br.unicamp.ic.miner.domain.core.Dataset;
 import br.unicamp.ic.miner.domain.core.IssueForest;
 import br.unicamp.ic.miner.domain.core.IssueNode;
 import br.unicamp.ic.miner.domain.core.IssueRemoteRepository;
@@ -34,16 +35,16 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 	private final String regex = "((\\d+){6})$";
 	private Pattern pattern;
 	private Logger logger;
-	private String dataset;
+	private Dataset dataset;
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
 	 * 
 	 * @param reader
-	 * @param dataset TODO
+	 * @param dataset
 	 * @param logger
 	 */
-	public BZIssuesImporter(IssueFileReader reader, String dataset, Logger logger) {
+	public BZIssuesImporter(IssueFileReader reader, Dataset dataset, Logger logger) {
 		this.reader = reader;
 		this.pattern = Pattern.compile(regex);
 		this.logger = logger;
@@ -63,7 +64,7 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 				issues.add(issue);
 			}
 		}
-		//extractForest();
+		// extractForest();
 	}
 
 	/**
@@ -73,13 +74,14 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 	 * @return an instance of <code>Issue</code> class.
 	 */
 	public IssueNode extractIssue(int number) {
-		return read(formatUrl(this.dataset, String.valueOf(number)));
+		return read(String.format(dataset.formatUrl(number)));
 	}
 
 	/**
 	 * Extracts an issue by its URL.
 	 * 
-	 * @param url URL of issue.
+	 * @param url
+	 *            URL of issue.
 	 * @return an instance of <code>Issue</code> class.
 	 */
 	@Override
@@ -87,7 +89,6 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 		return extractFrom(url);
 	}
 
-	
 	public void extractForest() {
 		forest = new IssueForest();
 		for (IssueNode entry : issues) {
@@ -144,19 +145,17 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 				FileResource fileResource = new FileResource(file);
 				text = fileResource.asString();
 			} else {
-				String url = formatUrl(this.dataset, key);
+				String url = dataset.formatUrl(Integer.valueOf(key));
 				URLResource urlResource = new URLResource(url);
 				text = urlResource.asString();
 				writeIssueEntry(key, text);
 			}
 
-			//text.replaceAll("(<summary>.*)[^;](.*</summary>)", "$1$2");
-			
 			InputStream xml = new ByteArrayInputStream(text.getBytes());
 			BZIssueEntry entry = (BZIssueEntry) reader.load(xml);
 
 			issue = new IssueNode(entry);
-			
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -181,10 +180,6 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 		return address.substring(ini + 1, end);
 	}
 
-	private String formatUrl(String dataset, String key) {
-		return String.format("https://bz.apache.org/%s/show_bug.cgi?ctype=xml&id=%s", dataset, key);
-	}
-
 	private void writeIssueEntry(String code, String entry) {
 		String name = reader.getPath() + code + ".xml";
 
@@ -200,7 +195,6 @@ public class BZIssuesImporter extends IssueRemoteRepository {
 		}
 	}
 
-	
 	public void extractTopologicalData() {
 		forest.extractTopological();
 	}

@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 
+import br.unicamp.ic.miner.domain.core.Dataset;
 import br.unicamp.ic.miner.domain.core.IssueComment;
 import br.unicamp.ic.miner.domain.core.IssueForest;
 import br.unicamp.ic.miner.domain.core.IssueNode;
@@ -37,7 +38,7 @@ public class JIRAIssuesImporter extends IssueRemoteRepository {
 	private final String regex = "((\\w+)-(\\d+))$";
 	private Pattern pattern;
 	private Logger logger;
-	private String dataset;
+	private Dataset dataset;
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
@@ -46,7 +47,7 @@ public class JIRAIssuesImporter extends IssueRemoteRepository {
 	 * @param dataset TODO
 	 * @param logger
 	 */
-	public JIRAIssuesImporter(IssueFileReader reader, String dataset, Logger logger) {
+	public JIRAIssuesImporter(IssueFileReader reader, Dataset dataset, Logger logger) {
 		this.reader = reader;
 		this.pattern = Pattern.compile(regex);
 		this.logger = logger;
@@ -76,7 +77,7 @@ public class JIRAIssuesImporter extends IssueRemoteRepository {
 	 * @return an instance of <code>Issue</code> class.
 	 */
 	public IssueNode extractIssue(int number) {
-		return read(formatUrl(this.dataset + "-" + number));
+		return read(dataset.formatUrl(number));
 	}
 
 	/**
@@ -147,14 +148,12 @@ public class JIRAIssuesImporter extends IssueRemoteRepository {
 				FileResource fileResource = new FileResource(file);
 				text = fileResource.asString();
 			} else {
-				String url = formatUrl(key);
+				String url = dataset.formatUrl(Integer.parseInt(key));
 				URLResource urlResource = new URLResource(url);
 				text = urlResource.asString();
 				writeIssueEntry(key, text);
 			}
 
-			//text.replaceAll("(<summary>.*)[^;](.*</summary>)", "$1$2");
-			
 			InputStream xml = new ByteArrayInputStream(text.getBytes());
 			JIRAIssueEntry entry = (JIRAIssueEntry) reader.load(xml);
 
@@ -212,9 +211,9 @@ public class JIRAIssuesImporter extends IssueRemoteRepository {
 		return address.substring(ini + 1, end);
 	}
 
-	private String formatUrl(String key) {
-		return String.format("https://issues.apache.org/jira/si/jira.issueviews:issue-xml/%s/%s.xml", key, key);
-	}
+	//private String formatUrl(String key) {
+	//	return String.format("https://issues.apache.org/jira/si/jira.issueviews:issue-xml/%s/%s.xml", key, key);
+	//}
 
 	private void writeIssueEntry(String code, String entry) {
 		String name = reader.getPath() + code + ".xml";

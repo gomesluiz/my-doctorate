@@ -1,6 +1,3 @@
 /target/
-/data/xml/
-/data/html/
-/data/csv/
+/data/
 *.*~
-.Rproj.user

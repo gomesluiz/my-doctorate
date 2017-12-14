@@ -11,7 +11,7 @@ import br.unicamp.ic.miner.infrastructure.persistence.IssueFileWriter;
  * @since 2016-02-01
  *
  */
-public class IssueExtractor {
+public class IssueCrawler {
 
 	private IssueRemoteRepository		from;
 	private IssueFileWriter	to;
@@ -24,7 +24,7 @@ public class IssueExtractor {
 	 * @param to
 	 *          The mechanism to export information.
 	 */
-	public IssueExtractor(IssueRemoteRepository from, IssueFileWriter to) {
+	public IssueCrawler(IssueRemoteRepository from, IssueFileWriter to) {
 		this.from = from;
 		this.to = to;
 	}
