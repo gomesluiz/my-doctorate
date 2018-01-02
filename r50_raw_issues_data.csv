@@ -1,0 +1,5 @@
+IssueKey,Assignee,Created,Resolution,Resolved,Severity,Status,Type,Updated,ResolutionCode,StatusCode,TypeCode,Votes,DaysToResolve,QuantityOfComments,QuantityOfLinesInDescription,QuantityOfWordsInDescription,QuantityOfCharactersInDescription,QuantityOfWordsInTitle,QuantityOfCharactersInTitle,SeverityCode
+510,warrensomebody,1998-07-24,INVALID,1998-10-05,major,CLOSED,,1999-04-21,2,0,0,0,-19,0,1,0,2,5,35,5
+508,hyatt,1998-07-21,INVALID,1999-01-20,trivial,VERIFIED,,1999-04-21,2,5,0,0,364,0,1,0,2,3,21,2
+507,waterson,1998-07-20,INVALID,2003-08-27,normal,VERIFIED,,2017-05-24,2,5,0,0,1833,0,1,0,2,5,45,3
+509,bugz,1998-07-23,INVALID,1999-06-07,critical,VERIFIED,,2002-01-18,2,5,0,0,349,0,1,0,2,8,50,6

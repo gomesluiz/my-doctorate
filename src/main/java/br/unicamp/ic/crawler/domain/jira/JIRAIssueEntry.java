@@ -12,13 +12,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import br.unicamp.ic.crawler.domain.core.IssueComment;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
+import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
 
 /**
  * The <code>BZIssueEntry</code> class maps an issue entry. This class is
  * instantiated by Leitor.load method.
  * 
  * @see Channel
- * @see br.unicamp.ic.issueminer.haoop.infrastructure.LeitorXML#load(InputStream)
+ * @see br.unicamp.ic.issueminer.haoop.infrastructure.LeitorXML#load()
  * 
  * @author Luiz Alberto
  * @version %I, %G
@@ -40,13 +41,13 @@ public class JIRAIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public String getKeySequential() {
+	public int getKeySequential() {
 		String key = channel.getItemKey();
 		int pos = key.indexOf("-");
 		if (pos == -1) {
-			return "-1";
+			return -1;
 		}
-		return key.substring(pos + 1);
+		return Integer.parseInt(key.substring(pos + 1));
 	}
 
 	@Override
@@ -259,6 +260,18 @@ public class JIRAIssueEntry implements IssueEntry {
 			break;
 		}
 		return result;
+	}
+
+	@Override
+	public void registerActivity(IssueEntryActivity activity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IssueEntryActivity> getActivities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

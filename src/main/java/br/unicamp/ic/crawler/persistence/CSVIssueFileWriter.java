@@ -7,11 +7,12 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
+import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 
 /**
  * The <code>CSVIssueFileWriter</code> class implements a file writer which uses
- * csv format to store a List of <code>IssueNode</code>  instances in a specific 
+ * csv format to store a List of <code>IssueNode</code> instances in a specific
  * format.
  * 
  * <PRE>
@@ -21,58 +22,76 @@ import br.unicamp.ic.crawler.domain.core.IssueNode;
  * 
  * @author Luiz Alberto
  * @version 1.0
- * @see IssueFileWriter
+ * @see FileWriter
  *
  */
 public class CSVIssueFileWriter implements IssueFileWriter {
 
-	private String							file;
-	private CSVRecordFormatter	formatter;
+	private String prefix;
+	private CSVOutputFormatter issueformatter;
 
 	/**
 	 * CSVIssueFileWriter constructor
 	 * 
-	 * @param file file 
-	 * @param formatter
+	 * @param filePrefix
+	 *            file
+	 * @param issueFormatter
 	 */
-	public CSVIssueFileWriter(String file, CSVRecordFormatter formatter) {
-		this.file = file;
-		this.formatter = formatter;
+	public CSVIssueFileWriter(String filePrefix, CSVOutputFormatter issueFormatter) {
+		this.prefix = filePrefix;
+		this.issueformatter = issueFormatter;
 	}
 
 	/**
 	 * Writes issues into csv file.
 	 * 
-	 * @param issues to write.
+	 * @param issues
+	 *            to write.
 	 */
 	public void write(final List<IssueNode> issues) {
-		FileWriter writer = null;
-		CSVPrinter printer = null;
+		FileWriter writer1 = null, writer2 = null;
+		CSVPrinter printer1 = null, printer2 = null;
 		CSVFormat format = CSVFormat.DEFAULT;
-		Object[] headers = formatter.getHeaders();
-
 		try {
-			writer = new FileWriter(this.file);
-			printer = new CSVPrinter(writer, format);
-			printer.printRecord(headers);
+			writer1 = new FileWriter(this.prefix + "_raw_issues_data.csv");
+			writer2 = new FileWriter(this.prefix + "_raw_issues_history_data.csv");
+
+			printer1 = new CSVPrinter(writer1, format);
+			printer2 = new CSVPrinter(writer2, format);
+
+			printer1.printRecord(issueformatter.getHeaders(CSVOutputFormatter.ISSUE_HEADER_TYPE));
+			printer2.printRecord(issueformatter.getHeaders(CSVOutputFormatter.HISTORY_HEADER_TYPE));
+
 			for (IssueNode issue : issues) {
-				printer.printRecord(formatter.format(issue));
+				printer1.printRecord(issueformatter.format(issue));
+				for (IssueEntryActivity activity : issue.getActivities()) {
+					printer2.printRecord(issueformatter.format(issue.getKey(), activity));
+				}
 			}
 
 		} catch (IOException e) {
 			throw new RuntimeException("Erro: " + e.getMessage());
 		} finally {
 			try {
-				if (writer != null) {
-					writer.flush();
-					writer.close();
+				if (writer1 != null) {
+					writer1.flush();
+					writer1.close();
 				}
-				if (printer != null) {
-					printer.close();
+				if (writer2 != null) {
+					writer2.flush();
+					writer2.close();
+				}
+				if (printer1 != null) {
+					printer1.close();
+				}
+				if (printer2 != null) {
+					printer2.close();
 				}
 			} catch (IOException e) {
 				throw new RuntimeException("Erro: " + e.getMessage());
 			}
 		}
+
 	}
+
 }

@@ -1,39 +1,36 @@
 package br.unicamp.ic.crawler.domain.bugzilla;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import com.thoughtworks.xstream.converters.extended.ToAttributedValueConverter;
 
 import br.unicamp.ic.crawler.domain.core.IssueComment;
 
-@XStreamAlias("comment")
-@XStreamConverter(value=ToAttributedValueConverter.class, strings={"message"})
+//@XStreamAlias("comment")
+//@XStreamConverter(value=ToAttributedValueConverter.class, strings={"message"})
 public class BZIssueComment implements IssueComment{
 	
 	@XStreamAsAttribute 
-	private String id;
+	private String commentid;
 	
 	@XStreamAsAttribute 
-	private String author;
+	private String who;
 	
 	@XStreamAsAttribute 
-	private String created;
+	private String bug_when;
 	
 	@XStreamOmitField
-	private String message;
+	private String thetext;
 	
 	public String getId() {
-		return id;
+		return commentid;
 	}
 	public String getAuthor() {
-		return author;
+		return who;
 	}
 	public String getCreated() {
-		return created;
+		return bug_when;
 	}
 	public String getMessage() {
-		return message;
+		return thetext;
 	}
 }

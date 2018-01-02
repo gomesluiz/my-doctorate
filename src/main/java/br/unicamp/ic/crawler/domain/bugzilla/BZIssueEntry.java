@@ -12,12 +12,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import br.unicamp.ic.crawler.domain.core.IssueComment;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
+import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
 
 @XStreamAlias("bugzilla")
 public class BZIssueEntry implements IssueEntry {
 
 	private Bug bug;
-	private List<BZIssueEntryActivity> history;
+	private List<IssueEntryActivity> history;
 
 	@Override
 	public String getDescription() {
@@ -30,8 +31,10 @@ public class BZIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public String getKeySequential() {
-		return getKey();
+	public int getKeySequential() {
+		if (getKey().equals("")) return -1; 
+		
+		return Integer.parseInt(getKey());
 	}
 
 	@Override
@@ -59,7 +62,14 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getResolved() {
-		return getUpdated();
+		String result = "2017-12-29";
+		for(IssueEntryActivity activity: history) {
+			if (activity.getAdded().equals("RESOLVED")) {
+				result = activity.getWhen().substring(0,10);
+			}
+		}
+		return result;
+		
 	}
 
 	@Override
@@ -99,6 +109,7 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public int getDaysToResolve() {
+		
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-mm-dd");
 		DateTime startDate = formatter.parseDateTime(getCreated());
 		DateTime endDate = formatter.parseDateTime(getResolved());
@@ -210,6 +221,19 @@ public class BZIssueEntry implements IssueEntry {
 		}
 		return result;
 
+	}
+
+	@Override
+	public void registerActivity(IssueEntryActivity activity) {
+		if (history == null) {
+			history = new ArrayList<IssueEntryActivity>();
+		}
+		this.history.add(activity);
+	}
+
+	@Override
+	public List<IssueEntryActivity> getActivities() {
+		return history;
 	}
 
 }

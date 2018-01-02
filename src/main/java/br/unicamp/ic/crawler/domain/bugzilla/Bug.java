@@ -106,6 +106,9 @@ public class Bug {
 	@XStreamAlias("comment_sort_order")
 	private String commentSortOrder;
 
+	@XStreamImplicit
+	private List<BZIssueComment> long_desc = new ArrayList<BZIssueComment>();
+
 	public String getBugId() {
 		return returnEmptyIfNull(bugId);
 	}

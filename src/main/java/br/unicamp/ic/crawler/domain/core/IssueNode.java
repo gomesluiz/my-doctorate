@@ -199,6 +199,9 @@ public class IssueNode {
 		return quantityOfWords;
 	}
 
+	public List<IssueEntryActivity> getActivities(){
+		return entry.getActivities();
+	}
 	public int getQuantityOfCharactersInDescription() {
 		return getDescription().length();
 	}

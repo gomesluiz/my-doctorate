@@ -1,0 +1,41 @@
+IssueKey,Who,When,What,Removed,Added
+510,byrd,1998-10-04 19:39:41 PDT,Assignee,byrd,mourey
+510,mourey,1998-10-05 10:28:45 PDT,Assignee,mourey,warren
+510,warrensomebody,1998-10-05 13:04:29 PDT,Status,NEW,RESOLVED
+510,warrensomebody,1998-10-05 13:04:29 PDT,Resolution,---,INVALID
+510,warrensomebody,1998-10-05 13:04:29 PDT,Last Resolved,,1998-10-05 13:04:29
+510,leger,1999-03-02 17:45:38 PST,Product,Mozilla,NGLayout
+510,leger,1999-03-02 17:45:38 PST,Version,1998-06-03,other
+510,leger,1999-03-02 17:45:38 PST,Component,Plugins,Plug-ins
+510,glynn,1999-03-19 16:55:28 PST,Status,RESOLVED,CLOSED
+508,blythe,1998-10-09 08:19:18 PDT,Assignee,blythe,hyatt
+508,hyatt,1999-01-20 01:15:51 PST,Status,NEW,RESOLVED
+508,hyatt,1999-01-20 01:15:51 PST,Resolution,---,INVALID
+508,hyatt,1999-01-20 01:15:51 PST,Last Resolved,,1999-01-20 01:15:51
+508,leger,1999-03-04 09:23:34 PST,Status,RESOLVED,VERIFIED
+507,terry,1998-08-27 16:29:37 PDT,Last Resolved,,1998-08-27 16:29:37
+507,terry,1998-08-27 16:29:37 PDT,Status,NEW,RESOLVED
+507,terry,1998-08-27 16:29:37 PDT,Resolution,---,INVALID
+507,terry,1998-08-27 16:29:37 PDT,Component,,NetLib
+507,leger,1999-03-04 09:23:27 PST,Status,RESOLVED,VERIFIED
+507,adam,2001-05-31 05:29:13 PDT,CC,,adam
+507,octalc0de,2002-07-21 12:37:13 PDT,Status,VERIFIED,CLOSED
+507,octalc0de,2002-07-21 12:37:13 PDT,CC,,octalc0de
+507,bugzilla,2003-08-27 16:21:48 PDT,Status,CLOSED,REOPENED
+507,bugzilla,2003-08-27 16:21:48 PDT,Resolution,INVALID,---
+507,bugzilla,2003-08-27 16:22:34 PDT,Status,REOPENED,RESOLVED
+507,bugzilla,2003-08-27 16:22:34 PDT,Resolution,---,INVALID
+507,bugzilla,2003-08-27 16:22:34 PDT,Last Resolved,1998-08-27 16:29:37,2003-08-27 16:22:34
+507,bugzilla,2003-08-27 16:23:17 PDT,Status,RESOLVED,VERIFIED
+507,tiago.morbus.sa,2010-09-23 15:14:03 PDT,CC,,tiago.morbus.sa
+507,drevitchi,2011-03-05 12:45:19 PST,CC,,afterthespaghetti
+507,TheBlackDeath333,2013-07-03 00:56:48 PDT,CC,,TheBlackDeath333
+507,kbrosnan,2013-11-01 13:52:58 PDT,Restrict Comments,,1
+507,greg,2017-05-24 02:53:32 PDT,CC,,greg
+509,mike+mozilla,1998-09-14 13:37:40 PDT,Assignee,mccabe,mlm
+509,mlm,1998-09-14 19:32:30 PDT,Status,NEW,ASSIGNED
+509,clayton,1999-03-11 10:00:54 PST,Target Milestone,M3,M7
+509,leger,1999-06-07 10:49:20 PDT,Status,NEW,RESOLVED
+509,leger,1999-06-07 10:49:20 PDT,Resolution,---,INVALID
+509,leger,1999-06-07 10:49:20 PDT,Last Resolved,,1999-06-07 10:49:20
+509,leger,1999-06-07 10:49:28 PDT,Status,RESOLVED,VERIFIED

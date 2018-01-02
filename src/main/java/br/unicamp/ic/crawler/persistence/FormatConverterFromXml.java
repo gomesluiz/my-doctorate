@@ -1,32 +1,29 @@
 package br.unicamp.ic.crawler.persistence;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
- * The <code>XmlReader</code> class implements XML reading files.
+ * The <code>FormatConverterFromXml</code> class implements XML reading files.
  * 
  * @author Luiz Alberto
  * @version %I%, %G%
  * @since 1.0
  */
-public class XmlReader implements IssueFileReader {
+public class FormatConverterFromXml implements FormatConverter {
 
-	private XStream	stream;
-	private String	path;
+	private XStream stream;
 
 	/**
-	 * Instantiates a <code>XmlReader</code> object.
-	 * 
-	 * @param path of file to be read.
+	 * Instantiates a <code>FormatConverterFromXml</code> object.
 	 */
-	public XmlReader(String path) {
+	public FormatConverterFromXml() {
 		stream = new XStream(new DomDriver());
 		stream.autodetectAnnotations(true);
 		stream.ignoreUnknownElements();
-		this.path = path;
 	}
 
 	/**
@@ -36,18 +33,10 @@ public class XmlReader implements IssueFileReader {
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object load(InputStream inputStream, Class type) {
+	public Object load(String contents, Class type) {
+		InputStream xml = new ByteArrayInputStream(contents.getBytes());
 		stream.processAnnotations(type);
-		return stream.fromXML(inputStream);
+		return stream.fromXML(xml);
 	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public String getPath() {
-		return this.path;
-	}
-	
 
 }

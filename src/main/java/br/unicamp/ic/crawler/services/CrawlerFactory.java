@@ -1,22 +1,25 @@
 package br.unicamp.ic.crawler.services;
 
-import br.unicamp.ic.crawler.domain.bugzilla.BZCrawler;
-import br.unicamp.ic.crawler.domain.core.Crawler;
+import org.apache.logging.log4j.Logger;
+
+import br.unicamp.ic.crawler.domain.bugzilla.BZXmlCrawler;
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.jira.JIRACrawler;
-import br.unicamp.ic.crawler.persistence.IssueFileReader;
-import br.unicamp.ic.crawler.persistence.XmlReader;
+import br.unicamp.ic.crawler.persistence.FormatConverter;
+import br.unicamp.ic.crawler.persistence.FormatConverterFromXml;
 
 public class CrawlerFactory {
 	
-	public static Crawler getCrawler(Dataset dataset, String inPath) {
-		Crawler crawler;
+	public static final String BTS_BUGZILLA = "bugzilla";
+	
+	public static IssueCrawler getInstance(Dataset dataset, Logger logger) {
+		IssueCrawler crawler;
 		//
-		IssueFileReader reader = new XmlReader(inPath);;
-		if (dataset.getName().equals("mozilla")) {
-			crawler = new BZCrawler(reader);
+		FormatConverter converter = new FormatConverterFromXml();
+		if (dataset.getBts().equals(BTS_BUGZILLA)) {
+			crawler = new BZXmlCrawler(dataset, converter, logger);
 		} else {
-			crawler = new JIRACrawler(reader);
+			crawler = new JIRACrawler(dataset, converter, logger);
 		}
 		return crawler;
 	}

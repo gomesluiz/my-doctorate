@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 
 /**
@@ -11,43 +12,20 @@ import br.unicamp.ic.crawler.domain.core.IssueNode;
  * @author luiz
  *
  */
-public class CSVRawRecordFormatter implements CSVRecordFormatter {
-
-	List<String> words;
-
-	/**
-	 * 
-	 */
-	public CSVRawRecordFormatter() {
-		words = new ArrayList<String>();
-	}
-
-	/**
-	 * 
-	 */
+public class CSVRawIssueFormatter implements CSVOutputFormatter {
 	@Override
-	public Object[] getHeaders() {
-		ArrayList<String> headers = new ArrayList<String>(Arrays.asList("IssueKey"
-				, "Assignee"
-				, "Created"
-				, "Resolution"
-				, "Resolved"
-				, "Severity"
-				, "Status"
-				, "Type"
-				, "Updated"
-				, "ResolutionCode"
-				, "StatusCode"
-				, "TypeCode"
-				, "Votes"
-				, "DaysToResolve"
-				, "QuantityOfComments"
-				, "QuantityOfLinesInDescription"
-				, "QuantityOfWordsInDescription"
-				, "QuantityOfCharactersInDescription"
-				, "QuantityOfWordsInTitle"
-				, "QuantityOfCharactersInTitle"
-				, "SeverityCode"));
+	public Object[] getHeaders(int header) {
+		ArrayList<String> headers;
+
+		if (header == ISSUE_HEADER_TYPE) {
+			headers = new ArrayList<String>(Arrays.asList("IssueKey", "Assignee", "Created", "Resolution", "Resolved",
+					"Severity", "Status", "Type", "Updated", "ResolutionCode", "StatusCode", "TypeCode", "Votes",
+					"DaysToResolve", "QuantityOfComments", "QuantityOfLinesInDescription",
+					"QuantityOfWordsInDescription", "QuantityOfCharactersInDescription", "QuantityOfWordsInTitle",
+					"QuantityOfCharactersInTitle", "SeverityCode"));
+		} else {
+			headers = new ArrayList<String>(Arrays.asList("IssueKey", "Who", "When", "What", "Removed", "Added"));
+		}
 
 		return headers.toArray();
 	}
@@ -86,5 +64,20 @@ public class CSVRawRecordFormatter implements CSVRecordFormatter {
 		record.add(issue.getSeverityCode());
 
 		return record;
+	}
+
+	@Override
+	public Iterable<?> format(String key, IssueEntryActivity activity) {
+		List<Object> record = new ArrayList<Object>();
+
+		record.add(key);
+		record.add(activity.getWho());
+		record.add(activity.getWhen());
+		record.add(activity.getWhat());
+		record.add(activity.getRemoved());
+		record.add(activity.getAdded());
+
+		return record;
+
 	}
 }

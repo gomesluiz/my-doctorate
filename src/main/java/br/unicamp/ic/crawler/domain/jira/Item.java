@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  * contents using gets methods. This class is instantiated by Leitor.carrega
  * method.
  * 
- * @see br.unicamp.ic.issueminer.haoop.infrastructure.LeitorXML#load(InputStream)
+ * @see br.unicamp.ic.issueminer.haoop.infrastructure.LeitorXML#load()
  * 
  * @author Luiz Alberto
  * @version %I, %G

@@ -1,15 +1,12 @@
 package br.unicamp.ic.crawler.persistence;
 
-import java.io.InputStream;
-
 /**
  * 
  * @author 	Luiz Alberto
  * @version %I%, %G%
  *
  */
-public interface IssueFileReader {
+public interface FormatConverter {
 	@SuppressWarnings("rawtypes")
-	Object load(InputStream inputStream, Class type);
-	String getPath();
+	Object load(String contents, Class type);
 }
