@@ -7,17 +7,21 @@ package br.unicamp.ic.crawler.domain.core;
  */
 public class Dataset {
 	private String name;
+	private String bts;
+	
 	private String remoteIssueUrl;
 	private String localIssuePath;
 	private String issueFileFormat;
+	
 	private String remoteIssueHistoryUrl;
 	private String localIssueHistoryPath;
 	private String issueHistoryFileFormat;
-	private String localNameMask;
+	
+	private String nameMask;
+	
 	private int firstIssue;
 	private int lastIssue;
-	private String bts;
-
+	
 	/**
 	 * 
 	 * @param name
@@ -43,7 +47,7 @@ public class Dataset {
 		this.remoteIssueHistoryUrl = remoteIssueHistoryUrl;
 		this.localIssueHistoryPath = localIssueHistoryPath;
 		this.issueHistoryFileFormat = issueHistoryFileFormat;
-		this.localNameMask = localNameMask;
+		this.nameMask = localNameMask;
 		this.firstIssue = firstIssue;
 		this.lastIssue = lastIssue;
 		this.bts = bts;
@@ -101,8 +105,8 @@ public class Dataset {
 	/**
 	 * @return the localNameMask
 	 */
-	public String getLocalNameMask() {
-		return localNameMask;
+	public String getNameMask() {
+		return nameMask;
 	}
 
 	/**
@@ -135,7 +139,7 @@ public class Dataset {
 	 */
 	public String formatLocalIssueFileName(int key) {
 		StringBuilder fileName = new StringBuilder(localIssuePath);
-		fileName.append(localNameMask);
+		fileName.append(nameMask);
 		fileName.append(".");
 		fileName.append(issueFileFormat);
 		return String.format(fileName.toString(), key);
@@ -157,7 +161,7 @@ public class Dataset {
 	 */
 	public String formatLocalIssueHistoryFileName(int key) {
 		StringBuilder fileName = new StringBuilder(localIssueHistoryPath);
-		fileName.append(localNameMask);
+		fileName.append(nameMask);
 		fileName.append(".");
 		fileName.append(issueHistoryFileFormat);
 		return String.format(fileName.toString(), key);
@@ -170,6 +174,11 @@ public class Dataset {
 	public String getBts() {
 		// TODO Auto-generated method stub
 		return this.bts;
+	}
+
+	public String getNameWithKey(int key) {
+		// TODO Auto-generated method stub
+		return String.format(nameMask, key);
 	}
 
 	

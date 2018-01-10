@@ -3,7 +3,6 @@ package br.unicamp.ic.crawler.domain.bugzilla;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -29,10 +28,7 @@ import br.unicamp.ic.crawler.services.filters.IssueFilter;
  */
 public class BZXmlCrawler extends IssueCrawler {
 	private FormatConverter xmlConverter;
-	private Logger logger;
-	private final String regex = "((\\d+){6})$";
-	private Pattern pattern;
-
+	
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
 	 * 
@@ -46,51 +42,19 @@ public class BZXmlCrawler extends IssueCrawler {
 		this.dataset = dataset;
 		this.xmlConverter = converter;
 		this.logger = logger;
-		this.pattern = Pattern.compile(regex);
 		this.issues = new ArrayList<IssueNode>();
 	}
 
 	@Override
-	public void downloadAll() {
-		try {
-			File folder = new File(dataset.getLocalIssuePath());
-			if (!folder.exists()) {
-				folder.mkdirs();
-			}
-			
-			for (int i = dataset.getFirstIssue(); i <= dataset.getLastIssue(); i++) {
-				download(i);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+	public String formatRemoteIssueUrl(int key) {
+		return String.format(dataset.getRemoteIssueUrl(), key);
 	}
-
+	
 	@Override
-	public void download(int key) {
-		try {
-			String url = dataset.formatRemoteIssueUrl(key);
-			logger.trace(url);
-			
-			File localIssueFile = new File(dataset.formatLocalIssueFileName(key));
-			File localHistoryFile = new File(dataset.formatLocalIssueHistoryFileName(key));
-			
-			if (localIssueFile.exists() && localHistoryFile.exists()) return; 
-				
-			String contents = readContentsFrom(url);
-			if (!contents.toLowerCase().contains("invalidbugid")) {
-				writeContentsTo(dataset.formatLocalIssueFileName(key), contents);
-
-				url = dataset.formatRemoteIssueHistoryUrl(key);
-				logger.trace(url);
-				writeContentsTo(dataset.formatLocalIssueHistoryFileName(key), readContentsFrom(url));
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-
-		}
+	public String formatRemoteIssueHistoryUrl(int key) {
+		return String.format(dataset.getRemoteIssueHistoryUrl(), key);
 	}
-
+	
 	@Override
 	public void search(IssueFilter filter) {
 		if (issues.size() == 0) {
@@ -100,13 +64,29 @@ public class BZXmlCrawler extends IssueCrawler {
 	}
 
 	@Override
-	public IssueEntry convert(String contents) {
+	public String readFrom(String url) {
+		String contents = null;
+		try {
+			contents = readContents(url);
+			
+			String buffer = contents.toLowerCase();
+			if (buffer.contains("<bug error=\"" + "invalidbugid" + "\"" + ">")
+					|| buffer.contains("<bug error=\"" + "notfound" + "\"" + ">"))
+				contents = null;
+		} catch (Exception e) {
+			logger.trace(e);
+		}
+		
+		return contents;
+	}
+	
+	@Override
+	public IssueEntry parse(String contents) {
 		return (BZIssueEntry) xmlConverter.load(contents, BZIssueEntry.class);
 	}
 
 	@Override
 	public List<IssueEntryActivity> extract(int key) {
-
 		List<IssueEntryActivity> activities = new ArrayList<IssueEntryActivity>();
 		if (key == -1)
 			return activities;
