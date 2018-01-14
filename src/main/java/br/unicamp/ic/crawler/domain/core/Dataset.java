@@ -3,22 +3,32 @@ package br.unicamp.ic.crawler.domain.core;
 /**
  * 
  * @author luiz
+ * 
+ * TODO rename this class to Project
+ * TODO create issue and history attributes
+ * TODO create an interval class
  *
  */
 public class Dataset {
 	private String name;
 	private String bts;
 	
+	// 	
 	private String remoteIssueUrl;
+	
 	private String localIssuePath;
 	private String issueFileFormat;
 	
+	//
 	private String remoteIssueHistoryUrl;
+	
 	private String localIssueHistoryPath;
 	private String issueHistoryFileFormat;
 	
+	//
 	private String nameMask;
 	
+	//
 	private int firstIssue;
 	private int lastIssue;
 	
