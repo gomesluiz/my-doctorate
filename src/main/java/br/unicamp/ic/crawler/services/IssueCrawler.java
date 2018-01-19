@@ -14,6 +14,7 @@ import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 import br.unicamp.ic.crawler.persistence.IssueFileWriter;
+import br.unicamp.ic.crawler.persistence.IssueRepository;
 import br.unicamp.ic.crawler.persistence.FileResource;
 import br.unicamp.ic.crawler.persistence.URLResource;
 import br.unicamp.ic.crawler.services.filters.IssueFilter;
@@ -33,12 +34,11 @@ public abstract class IssueCrawler {
 	protected Dataset dataset;
 	protected List<IssueNode> issues;
 	protected Logger logger;
+	protected IssueRepository repository;
 
 	public abstract String readFrom(String url);
-	public abstract List<IssueEntryActivity> extract(int key);
 	public abstract String formatRemoteIssueUrl(int key);
 	public abstract String formatRemoteIssueHistoryUrl(int key);
-	public abstract IssueEntry parse(String contents);
 	public abstract void search(IssueFilter filter);
 
 	/**
@@ -55,31 +55,13 @@ public abstract class IssueCrawler {
 	}
 
 	/**
-	 * TODO refactor
 	 * @return
 	 */
-	protected final List<IssueNode> loadIssuesFromFile() {
-		List<IssueNode> issues = new ArrayList<IssueNode>();
-		File folder = new File(dataset.getLocalIssuePath());
-		if (folder.exists()) {
-			File[] files = folder.listFiles();
-			for (File file : files) {
-				if (file.getName().endsWith(dataset.getIssueFileFormat())) {
-					FileResource fileResource = new FileResource(file);
-					String contents = fileResource.asString();
-					IssueEntry entry = parse(contents);
-					List<IssueEntryActivity> activities = extract(entry.getKeySequential());
-					for (IssueEntryActivity activity : activities) {
-						entry.registerActivity(activity);
-					}
-					issues.add(new IssueNode(entry));
-				}
-			}
-		}
+	public final List<IssueNode> loadFrom() {
+		List<IssueNode> issues = repository.findAll();
 		return issues;
-
 	}
-
+	
 	/**
 	 * 
 	 * @param out
@@ -150,7 +132,5 @@ public abstract class IssueCrawler {
 
 		}
 	}
-
-	
 
 }

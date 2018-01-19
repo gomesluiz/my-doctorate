@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
-import br.unicamp.ic.crawler.persistence.FormatConverter;
+import br.unicamp.ic.crawler.persistence.IssueParser;
 import br.unicamp.ic.crawler.services.IssueCrawler;
 import br.unicamp.ic.crawler.services.filters.IssueFilter;
 
@@ -20,7 +20,7 @@ import br.unicamp.ic.crawler.services.filters.IssueFilter;
  */
 public class JIRACrawler extends IssueCrawler {
 
-	private FormatConverter converter;
+	private IssueParser converter;
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
@@ -34,7 +34,7 @@ public class JIRACrawler extends IssueCrawler {
 	 *            TODO
 	 * @param logger
 	 */
-	public JIRACrawler(Dataset dataset, FormatConverter converter, Logger logger) {
+	public JIRACrawler(Dataset dataset, IssueParser converter, Logger logger) {
 		this.converter = converter;
 		this.dataset = dataset;
 		this.converter = converter;
@@ -57,16 +57,6 @@ public class JIRACrawler extends IssueCrawler {
 	public void search(IssueFilter filter) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public IssueEntry parse(String contents) {
-		return (JIRAIssueEntry) converter.load(contents, JIRAIssueEntry.class);
-	}
-
-	@Override
-	public List<IssueEntryActivity> extract(int key) {
-		return null;
 	}
 
 	@Override
