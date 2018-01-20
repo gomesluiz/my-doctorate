@@ -5,14 +5,20 @@ package br.unicamp.ic.crawler.domain.bugzilla;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.persistence.IssueParser;
+import br.unicamp.ic.crawler.domain.core.IssueNode;
+import br.unicamp.ic.crawler.persistence.IssueRepository;
+import br.unicamp.ic.crawler.persistence.IssueRepositoryFromMemory;
+import br.unicamp.ic.crawler.services.IssueParser;
 
 /**
  * @author luiz
@@ -49,53 +55,53 @@ public class ParseIssueAndHistoryTest {
 	}
 
 	@Test
-	public final void parseAnIssueInXmlValidFormat() {
-		String xml = "<bugzilla version=\"5.0.3\" urlbase=\"https://bugs.eclipse.org/bugs/\" maintainer=\"webmaster@eclipse.org\">"
-				+ "<bug>"
-					+ "<bug_id>14582</bug_id>"
-					+ "<creation_ts>2002-04-25 06:24:21 -0400</creation_ts>"
-					+ "<short_desc>rename enabled on multi-selection</short_desc>"
-					+ "<delta_ts>2002-04-25 06:33:05 -0400</delta_ts>"
-					+ "<reporter_accessible>1</reporter_accessible>"
-					+ "<cclist_accessible>1</cclist_accessible>"
-					+ "<classification_id>2</classification_id>"
-					+ "<classification>Eclipse</classification>"
-					+ "<product>JDT</product>"
-					+ "<component>UI</component>"
-					+ "<version>2.0</version>"
-					+ "<rep_platform>PC</rep_platform>"
-					+ "<op_sys>Windows 2000</op_sys>"
-					+ "<bug_status>RESOLVED</bug_status>"
-					+ "<resolution>FIXED</resolution>"
-					+ "<bug_file_loc/><status_whiteboard/>"
-					+ "<keywords/><priority>P3</priority>"
-					+ "<bug_severity>major</bug_severity>"
-					+ "<target_milestone>---</target_milestone>"
-					+ "<everconfirmed>1</everconfirmed>"
-					+ "<reporter name=\"Adam Kiezun\">akiezun</reporter>"
-					+ "<assigned_to name=\"Adam Kiezun\">akiezun</assigned_to>"
-					+ "<votes>0</votes>"
-					+ "<comment_sort_order>oldest_to_newest</comment_sort_order>"
-					+ "<long_desc isprivate=\"0\">"
-					+ "<commentid>46391</commentid>"
-					+ "<comment_count>0</comment_count>"
-					+ "<who name=\"Adam Kiezun\">akiezun</who>"
-					+ "<bug_when>2002-04-25 06:24:21 -0400</bug_when>"
-					+ "<thetext> </thetext>"
-					+ "</long_desc><long_desc isprivate=\"0\">"
-					+ "<commentid>46392</commentid>"
-					+ "<comment_count>1</comment_count>"
-					+ "<who name=\"Adam Kiezun\">akiezun</who>"
-					+ "<bug_when>2002-04-25 06:33:05 -0400</bug_when>"
-					+ "<thetext>fixed</thetext>"
-					+ "</long_desc>"
-					+ "</bug>"
-				+ "</bugzilla>";
+	public final void parseAnIssueFromBugzillaXmlValidFormat() {
+		String xml = IssueRepositoryFromMemory.reports.get(0);	
 		IssueParser parser = new BZIssueParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
-		assertEquals(entry.getKey(), "14582");
-		assertEquals(entry.getSeverity(), "major");
-		assertEquals(entry.getStatus(), "RESOLVED");
+		assertEquals("14582", entry.getKey());
+		assertEquals("2002-04-25", entry.getCreated());
+		assertEquals("major", entry.getSeverity());
+		assertEquals("RESOLVED", entry.getStatus());
+	}
+	
+	@Test
+	public final void parseAnIssueHistoryFromBugzillaHtmlValidFormat() {
+		String html = IssueRepositoryFromMemory.histories.get(0);
+		BZHistoryParserInHtml parser = new BZHistoryParserInHtml();
+		List<IssueActivityEntry> activities = parser.parse(html);
+		assertEquals(2, activities.size());
+		
+		IssueActivityEntry anActivity = activities.get(0);
+		assertEquals("akiezun", anActivity.getWho());
+		assertEquals("2002-04-25", anActivity.getWhen());
+		assertEquals("status", anActivity.getWhat());
+		assertEquals("new", anActivity.getRemoved());
+		assertEquals("resolved", anActivity.getAdded());
+		
+		anActivity = activities.get(1);
+		assertEquals("akiezun", anActivity.getWho());
+		assertEquals("2002-04-25", anActivity.getWhen());
+		assertEquals("resolution", anActivity.getWhat());
+		assertEquals("---", anActivity.getRemoved());
+		assertEquals("fixed", anActivity.getAdded());
+		
+	}
+	
+	/**
+	 * TODO: move to approriate class.
+	 */
+	
+	@Test
+	public final void createIssueNode() {
+		IssueRepository repository = new IssueRepositoryFromMemory();
+		IssueNode issue = repository.findBy("14582");
+		
+		assertEquals("2002-04-25", issue.getResolved());
+		assertEquals("major", issue.getSeverity());
+		assertEquals("3", issue.getSeverityCode());
+		
+		assertEquals(0, issue.getDaysToResolve());
 	}
 
 }

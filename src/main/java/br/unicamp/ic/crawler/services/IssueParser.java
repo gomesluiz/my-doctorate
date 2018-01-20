@@ -1,4 +1,4 @@
-package br.unicamp.ic.crawler.persistence;
+package br.unicamp.ic.crawler.services;
 
 /**
  * 

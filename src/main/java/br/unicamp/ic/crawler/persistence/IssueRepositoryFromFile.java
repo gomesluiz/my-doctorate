@@ -6,8 +6,10 @@ import java.util.List;
 
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
+import br.unicamp.ic.crawler.services.HistoryParser;
+import br.unicamp.ic.crawler.services.IssueParser;
 
 public class IssueRepositoryFromFile implements IssueRepository {
 
@@ -32,8 +34,8 @@ public class IssueRepositoryFromFile implements IssueRepository {
 					FileResource fileResource = new FileResource(file);
 					String contents = fileResource.asString();
 					IssueEntry entry = (IssueEntry) issueParser.parse(contents);
-					List<IssueEntryActivity> activities = extract(entry.getKeySequential());
-					for (IssueEntryActivity activity : activities) {
+					List<IssueActivityEntry> activities = extract(entry.getKeySequential());
+					for (IssueActivityEntry activity : activities) {
 						entry.registerActivity(activity);
 					}
 					issues.add(new IssueNode(entry));
@@ -43,8 +45,8 @@ public class IssueRepositoryFromFile implements IssueRepository {
 		return issues;
 	}
 
-	private List<IssueEntryActivity> extract(int key) {
-		List<IssueEntryActivity> activities = new ArrayList<IssueEntryActivity>();
+	private List<IssueActivityEntry> extract(int key) {
+		List<IssueActivityEntry> activities = new ArrayList<IssueActivityEntry>();
 		if (key == -1)
 			return activities;
 
@@ -54,6 +56,12 @@ public class IssueRepositoryFromFile implements IssueRepository {
 		
 		activities = historyParser.parse(contents);
 		return activities;
+	}
+
+	@Override
+	public IssueNode findBy(String key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

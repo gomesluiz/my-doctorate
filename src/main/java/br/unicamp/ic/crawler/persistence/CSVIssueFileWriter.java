@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 
 /**
@@ -64,7 +64,7 @@ public class CSVIssueFileWriter implements IssueFileWriter {
 
 			for (IssueNode issue : issues) {
 				printer1.printRecord(issueformatter.format(issue));
-				for (IssueEntryActivity activity : issue.getActivities()) {
+				for (IssueActivityEntry activity : issue.getActivities()) {
 					printer2.printRecord(issueformatter.format(issue.getKey(), activity));
 				}
 			}

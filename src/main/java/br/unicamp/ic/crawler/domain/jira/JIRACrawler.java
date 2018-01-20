@@ -6,9 +6,10 @@ import org.apache.logging.log4j.Logger;
 
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
-import br.unicamp.ic.crawler.persistence.IssueParser;
+import br.unicamp.ic.crawler.persistence.URLResource;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.services.IssueCrawler;
+import br.unicamp.ic.crawler.services.IssueParser;
 import br.unicamp.ic.crawler.services.filters.IssueFilter;
 
 /**
@@ -60,10 +61,11 @@ public class JIRACrawler extends IssueCrawler {
 	}
 
 	@Override
-	public String readFrom(String url) {
+	public String downloadFrom(String url) {
 		String contents = null;
 		try {
-			 contents = readContents(url);
+			URLResource urlResource = new URLResource(url);
+			contents = urlResource.asString();
 		} catch (Exception e) {
 			logger.trace(e.getMessage());
 		}

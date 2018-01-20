@@ -12,13 +12,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import br.unicamp.ic.crawler.domain.core.IssueComment;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 
 @XStreamAlias("bugzilla")
 public class BZIssueEntry implements IssueEntry {
 
 	private Bug bug;
-	private List<IssueEntryActivity> history;
+	private List<IssueActivityEntry> history;
 
 	@Override
 	public String getDescription() {
@@ -62,19 +62,21 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getResolved() {
-		String result = "2017-12-29";
-		for(IssueEntryActivity activity: history) {
-			if (activity.getAdded().equals("RESOLVED")) {
+		DateTime now = new DateTime();
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
+		String result = format.print(now);
+		
+		for(IssueActivityEntry activity: history) {
+			if (activity.getAdded().equals(ISSUE_STATUS_RESOLVED)) {
 				result = activity.getWhen().substring(0,10);
 			}
 		}
 		return result;
-		
 	}
 
 	@Override
 	public String getSeverity() {
-		return bug.getBugSeverity();
+		return bug.getBugSeverity().toLowerCase();
 	}
 
 	@Override
@@ -120,28 +122,28 @@ public class BZIssueEntry implements IssueEntry {
 	@Override
 	public String convertSeverityToCode() {
 		String result;
-		String value = bug.getBugSeverity().toLowerCase();
+		String value = this.getSeverity();
 
 		switch (value) {
 		case "blocker":
-			result = "7";
+			result = "1";
 			break;
 		case "critical":
-			result = "6";
+			result = "2";
 			break;
 		case "major":
-			result = "5";
+			result = "3";
 			break;
 		case "normal":
 			result = "4";
 		case "minor":
-			result = "3";
+			result = "5";
 			break;
 		case "trivial":
-			result = "2";
+			result = "6";
 			break;
 		case "enhancement":
-			result = "1";
+			result = "7";
 			break;
 		default:
 			result = "0";
@@ -224,15 +226,15 @@ public class BZIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public void registerActivity(IssueEntryActivity activity) {
+	public void registerActivity(IssueActivityEntry activity) {
 		if (history == null) {
-			history = new ArrayList<IssueEntryActivity>();
+			history = new ArrayList<IssueActivityEntry>();
 		}
 		this.history.add(activity);
 	}
 
 	@Override
-	public List<IssueEntryActivity> getActivities() {
+	public List<IssueActivityEntry> getActivities() {
 		return history;
 	}
 

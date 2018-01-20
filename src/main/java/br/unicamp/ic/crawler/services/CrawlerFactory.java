@@ -6,7 +6,6 @@ import br.unicamp.ic.crawler.domain.bugzilla.BZXmlCrawler;
 import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.jira.JIRACrawler;
-import br.unicamp.ic.crawler.persistence.IssueParser;
 
 public class CrawlerFactory {
 	

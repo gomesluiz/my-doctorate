@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 
 /**
@@ -67,7 +67,7 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 	}
 
 	@Override
-	public Iterable<?> format(String key, IssueEntryActivity activity) {
+	public Iterable<?> format(String key, IssueActivityEntry activity) {
 		List<Object> record = new ArrayList<Object>();
 
 		record.add(key);

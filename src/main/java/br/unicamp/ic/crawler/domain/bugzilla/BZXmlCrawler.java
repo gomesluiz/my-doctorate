@@ -6,9 +6,10 @@ import org.apache.logging.log4j.Logger;
 
 import br.unicamp.ic.crawler.domain.core.Dataset;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
-import br.unicamp.ic.crawler.persistence.IssueParser;
 import br.unicamp.ic.crawler.persistence.IssueRepository;
+import br.unicamp.ic.crawler.persistence.URLResource;
 import br.unicamp.ic.crawler.services.IssueCrawler;
+import br.unicamp.ic.crawler.services.IssueParser;
 import br.unicamp.ic.crawler.services.filters.IssueFilter;
 
 /**
@@ -39,6 +40,24 @@ public class BZXmlCrawler extends IssueCrawler {
 	}
 
 	@Override
+	public String downloadFrom(String url) {
+		String contents = null;
+		try {
+			URLResource urlResource = new URLResource(url);
+			contents = urlResource.asString();
+
+			String buffer = contents.toLowerCase();
+			if (buffer.contains("<bug error=\"" + "invalidbugid" + "\"" + ">")
+					|| buffer.contains("<bug error=\"" + "notfound" + "\"" + ">"))
+				contents = null;
+		} catch (Exception e) {
+			logger.trace(e);
+		}
+
+		return contents;
+	}
+
+	@Override
 	public String formatRemoteIssueUrl(int key) {
 		return String.format(dataset.getRemoteIssueUrl(), key);
 	}
@@ -50,27 +69,7 @@ public class BZXmlCrawler extends IssueCrawler {
 
 	@Override
 	public void search(IssueFilter filter) {
-		if (issues.size() == 0) {
-			issues = loadFrom();
-		}
 		issues = filter.filter(issues);
-	}
-
-	@Override
-	public String readFrom(String url) {
-		String contents = null;
-		try {
-			contents = readContents(url);
-
-			String buffer = contents.toLowerCase();
-			if (buffer.contains("<bug error=\"" + "invalidbugid" + "\"" + ">")
-					|| buffer.contains("<bug error=\"" + "notfound" + "\"" + ">"))
-				contents = null;
-		} catch (Exception e) {
-			logger.trace(e);
-		}
-
-		return contents;
 	}
 
 }

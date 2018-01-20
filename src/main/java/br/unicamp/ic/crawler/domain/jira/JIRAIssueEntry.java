@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import br.unicamp.ic.crawler.domain.core.IssueComment;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 
 /**
  * The <code>BZIssueEntry</code> class maps an issue entry. This class is
@@ -72,7 +72,8 @@ public class JIRAIssueEntry implements IssueEntry {
 
 	@Override
 	public String getSeverity() {
-		return channel.getPriority();
+		String value = channel.getPriority();
+		return value == null ? null : channel.getPriority().toLowerCase();
 	}
 
 	@Override
@@ -128,23 +129,23 @@ public class JIRAIssueEntry implements IssueEntry {
 		String result = "0";
 
 		if (this.getSeverity() != null) {
-			String value = this.getSeverity().toLowerCase();
+			String value = this.getSeverity();
 
 			switch (value) {
 			case "blocker":
-				result = "5";
+				result = "1";
 				break;
 			case "critical":
-				result = "4";
+				result = "2";
 				break;
 			case "major":
 				result = "3";
 				break;
 			case "minor":
-				result = "2";
+				result = "4";
 				break;
 			case "trivial":
-				result = "1";
+				result = "5";
 				break;
 			}
 		}
@@ -263,13 +264,13 @@ public class JIRAIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public void registerActivity(IssueEntryActivity activity) {
+	public void registerActivity(IssueActivityEntry activity) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<IssueEntryActivity> getActivities() {
+	public List<IssueActivityEntry> getActivities() {
 		// TODO Auto-generated method stub
 		return null;
 	}

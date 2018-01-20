@@ -5,6 +5,7 @@ import java.util.List;
 public interface IssueEntry {
 
 	final String ISSUE_ENTRY_NA = "NA";
+	final String ISSUE_STATUS_RESOLVED = "resolved";
 
 	String getAssignee();
 
@@ -44,7 +45,7 @@ public interface IssueEntry {
 
 	int getDaysToResolve();
 
-	void registerActivity(IssueEntryActivity activity);
+	void registerActivity(IssueActivityEntry activity);
 	
-	List<IssueEntryActivity> getActivities();
+	List<IssueActivityEntry> getActivities();
 }

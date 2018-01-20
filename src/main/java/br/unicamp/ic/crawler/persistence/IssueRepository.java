@@ -8,4 +8,6 @@ public interface IssueRepository {
 
 	List<IssueNode> findAll();
 
+	IssueNode findBy(String key);
+
 }

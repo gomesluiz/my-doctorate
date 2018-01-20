@@ -8,14 +8,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
-import br.unicamp.ic.crawler.persistence.HistoryParser;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
+import br.unicamp.ic.crawler.services.HistoryParser;
 
 public class BZHistoryParserInHtml implements HistoryParser {
 
 	@Override
-	public List<IssueEntryActivity> parse(String contents) {
-		List<IssueEntryActivity> activities = new ArrayList<IssueEntryActivity>();
+	public List<IssueActivityEntry> parse(String contents) {
+		List<IssueActivityEntry> activities = new ArrayList<IssueActivityEntry>();
 		Document doc = Jsoup.parse(contents);
 		Element table = doc.select("table").get(0);
 		Elements rows = table.select("tr");
@@ -30,7 +30,7 @@ public class BZHistoryParserInHtml implements HistoryParser {
 			what = rows.get(j).select("td").get(shift).text();
 			removed = rows.get(j).select("td").get(shift + 1).text();
 			added = rows.get(j).select("td").get(shift + 2).text();
-			BZIssueEntryActivity activity = new BZIssueEntryActivity(who, when, what, removed, added);
+			BZIssueActivityEntry activity = new BZIssueActivityEntry(who, when, what, removed, added);
 			activities.add(activity);
 		}
 		return activities;

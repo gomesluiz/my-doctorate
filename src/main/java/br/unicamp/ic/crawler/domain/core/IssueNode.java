@@ -199,7 +199,7 @@ public class IssueNode {
 		return quantityOfWords;
 	}
 
-	public List<IssueEntryActivity> getActivities(){
+	public List<IssueActivityEntry> getActivities(){
 		return entry.getActivities();
 	}
 	public int getQuantityOfCharactersInDescription() {

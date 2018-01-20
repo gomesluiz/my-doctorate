@@ -1,6 +1,6 @@
 package br.unicamp.ic.crawler.persistence;
 
-import br.unicamp.ic.crawler.domain.core.IssueEntryActivity;
+import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueNode;
 
 public interface CSVOutputFormatter {
@@ -10,5 +10,5 @@ public interface CSVOutputFormatter {
 	Object[] getHeaders(int headerType);
 	
 	Iterable<?> format(IssueNode issue);
-	Iterable<?> format(String key, IssueEntryActivity activity);
+	Iterable<?> format(String key, IssueActivityEntry activity);
 }

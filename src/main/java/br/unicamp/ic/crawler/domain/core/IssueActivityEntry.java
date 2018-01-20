@@ -1,6 +1,6 @@
 package br.unicamp.ic.crawler.domain.core;
 
-public interface IssueEntryActivity {
+public interface IssueActivityEntry {
 
 	String getWho();
 

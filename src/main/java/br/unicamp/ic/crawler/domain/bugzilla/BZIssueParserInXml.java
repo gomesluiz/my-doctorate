@@ -6,7 +6,7 @@ import java.io.InputStream;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import br.unicamp.ic.crawler.persistence.IssueParser;
+import br.unicamp.ic.crawler.services.IssueParser;
 
 /**
  * The <code>FormatConverterFromXml</code> class implements XML reading files.
