@@ -1,6 +1,6 @@
-package br.unicamp.ic.crawler.services.filters;
+package br.unicamp.ic.crawler.domain.core.filters;
 
-import br.unicamp.ic.crawler.domain.core.IssueNode;
+import br.unicamp.ic.crawler.domain.core.Report;
 
 public class IssueFilterByCreated extends IssueFilter {
 	private String start;
@@ -12,7 +12,7 @@ public class IssueFilterByCreated extends IssueFilter {
 	}
 
 	@Override
-	public boolean evaluate(IssueNode issue) {
+	public boolean evaluate(Report issue) {
 		return ((issue.getCreated() == start) && (issue.getCreated() == end));
 	}
 	

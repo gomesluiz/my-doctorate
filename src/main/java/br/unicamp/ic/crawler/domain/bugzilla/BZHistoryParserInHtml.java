@@ -8,8 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import br.unicamp.ic.crawler.domain.core.HistoryParser;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
-import br.unicamp.ic.crawler.services.HistoryParser;
 
 public class BZHistoryParserInHtml implements HistoryParser {
 

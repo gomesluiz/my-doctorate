@@ -1,4 +1,4 @@
-package br.unicamp.ic.crawler.services;
+package br.unicamp.ic.crawler.domain.core;
 
 /**
  * 

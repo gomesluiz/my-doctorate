@@ -1,16 +1,14 @@
 package br.unicamp.ic.crawler.domain.bugzilla;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.logging.log4j.Logger;
-
-import br.unicamp.ic.crawler.domain.core.Dataset;
-import br.unicamp.ic.crawler.domain.core.IssueNode;
-import br.unicamp.ic.crawler.persistence.IssueRepository;
+import br.unicamp.ic.crawler.domain.core.ReportCrawler;
+import br.unicamp.ic.crawler.domain.core.Project;
+import br.unicamp.ic.crawler.domain.core.Report;
+import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
+import br.unicamp.ic.crawler.persistence.ReportRepository;
 import br.unicamp.ic.crawler.persistence.URLResource;
-import br.unicamp.ic.crawler.services.IssueCrawler;
-import br.unicamp.ic.crawler.services.IssueParser;
-import br.unicamp.ic.crawler.services.filters.IssueFilter;
 
 /**
  * Extract information Bugzilla Tracking Systems.
@@ -19,23 +17,21 @@ import br.unicamp.ic.crawler.services.filters.IssueFilter;
  * @version 1.0
  * 
  */
-public class BZXmlCrawler extends IssueCrawler {
+public class BZXmlCrawler extends ReportCrawler {
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
 	 * 
-	 * @param dataset
-	 *            TODO
-	 * @param converter
-	 * @param logger
+	 * @param project
 	 *            TODO
 	 * @param repository
+	 * 
 	 *            TODO
 	 */
-	public BZXmlCrawler(Dataset dataset, IssueParser converter, Logger logger, IssueRepository repository) {
-		this.dataset = dataset;
-		this.logger = logger;
-		this.issues = new ArrayList<IssueNode>();
+	public BZXmlCrawler(Project project, ReportRepository repository) {
+		super();
+		this.project = project;
+		this.reports = new ArrayList<Report>();
 		this.repository = repository;
 	}
 
@@ -51,7 +47,7 @@ public class BZXmlCrawler extends IssueCrawler {
 					|| buffer.contains("<bug error=\"" + "notfound" + "\"" + ">"))
 				contents = null;
 		} catch (Exception e) {
-			logger.trace(e);
+			subject.setMessage(e.getMessage());
 		}
 
 		return contents;
@@ -59,17 +55,18 @@ public class BZXmlCrawler extends IssueCrawler {
 
 	@Override
 	public String formatRemoteIssueUrl(int key) {
-		return String.format(dataset.getRemoteIssueUrl(), key);
+		return String.format(project.getRemoteIssueUrl(), key);
 	}
 
 	@Override
 	public String formatRemoteIssueHistoryUrl(int key) {
-		return String.format(dataset.getRemoteIssueHistoryUrl(), key);
+		return String.format(project.getRemoteIssueHistoryUrl(), key);
 	}
 
 	@Override
-	public void search(IssueFilter filter) {
-		issues = filter.filter(issues);
+	public List<Report> search(IssueFilter filter) {
+		reports = filter.filter(reports);
+		return reports;
 	}
 
 }

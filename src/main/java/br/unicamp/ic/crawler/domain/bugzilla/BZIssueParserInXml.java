@@ -6,7 +6,7 @@ import java.io.InputStream;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import br.unicamp.ic.crawler.services.IssueParser;
+import br.unicamp.ic.crawler.domain.core.IssueParser;
 
 /**
  * The <code>FormatConverterFromXml</code> class implements XML reading files.
@@ -20,7 +20,7 @@ public class BZIssueParserInXml implements IssueParser {
 	private XStream stream;
 
 	public BZIssueParserInXml() {
-		stream = new XStream(new DomDriver());
+		stream = new XStream();
 		stream.autodetectAnnotations(true);
 		stream.ignoreUnknownElements();
 	}

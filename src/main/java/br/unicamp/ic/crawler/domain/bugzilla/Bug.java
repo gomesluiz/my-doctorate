@@ -144,17 +144,26 @@ public class Bug {
 	public String getAssigneeTo() {
 		return returnEmptyIfNull(assignedTo);
 	}
-	
-	public List<BZIssueComment> getComments(){
+
+	public List<BZIssueComment> getComments() {
 		return new ArrayList<BZIssueComment>();
 	}
-	
+
 	public String getShortDesc() {
 		return returnEmptyIfNull(shortDesc);
 	}
-	
+
 	private String returnEmptyIfNull(String s) {
 		return s == null ? "" : s;
+	}
+
+	public String getProduct() {
+		String result = returnEmptyIfNull(this.product);
+
+		result = result.toUpperCase();
+		result = result.replace(" ", "_");
+
+		return result;
 	}
 
 }

@@ -71,7 +71,17 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.11.2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.ogce/xpp3 -->
+		<dependency>
+			<groupId>org.ogce</groupId>
+			<artifactId>xpp3</artifactId>
+			<version>1.1.6</version>
+		</dependency>
+
 	</dependencies>
+
+
 
 	<reporting>
 		<plugins>

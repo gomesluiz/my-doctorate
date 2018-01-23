@@ -1,9 +1,9 @@
-package br.unicamp.ic.crawler.services.filters;
+package br.unicamp.ic.crawler.domain.core.filters;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unicamp.ic.crawler.domain.core.IssueNode;
+import br.unicamp.ic.crawler.domain.core.Report;
 
 /**
  * TODO
@@ -16,16 +16,16 @@ public abstract class IssueFilter {
 	 * @param issue
 	 * @return
 	 */
-	protected abstract boolean evaluate(IssueNode issue);
+	protected abstract boolean evaluate(Report issue);
 	
 	/**
 	 * TODO
 	 * @param issues
 	 * @return
 	 */
-	public List<IssueNode> filter(List<IssueNode> issues) {
-		List<IssueNode> result = new ArrayList<IssueNode>();
-		for(IssueNode issue: issues) {
+	public List<Report> filter(List<Report> issues) {
+		List<Report> result = new ArrayList<Report>();
+		for(Report issue: issues) {
 			if (evaluate(issue) == true) {
 				result.add(issue);
 			}

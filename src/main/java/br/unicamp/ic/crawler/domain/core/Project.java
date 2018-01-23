@@ -9,7 +9,7 @@ package br.unicamp.ic.crawler.domain.core;
  * TODO create an interval class
  *
  */
-public class Dataset {
+public class Project {
 	private String name;
 	private String bts;
 	
@@ -46,7 +46,7 @@ public class Dataset {
 	 * @param lastIssue
 	 * @param bts TODO
 	 */
-	public Dataset(String name, String remoteIssueUrl, String localIssuePath, String issueFileFormat,
+	public Project(String name, String remoteIssueUrl, String localIssuePath, String issueFileFormat,
 			String remoteIssueHistoryUrl, String localIssueHistoryPath, String issueHistoryFileFormat,
 			String localNameMask, int firstIssue, int lastIssue, String bts) {
 		super();

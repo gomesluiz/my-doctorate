@@ -1,23 +1,14 @@
-package br.unicamp.ic.crawler.services;
+package br.unicamp.ic.crawler.domain.core;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
-
-import br.unicamp.ic.crawler.domain.core.Dataset;
-import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
-import br.unicamp.ic.crawler.domain.core.IssueNode;
+import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
 import br.unicamp.ic.crawler.persistence.IssueFileWriter;
-import br.unicamp.ic.crawler.persistence.IssueRepository;
-import br.unicamp.ic.crawler.persistence.FileResource;
-import br.unicamp.ic.crawler.persistence.URLResource;
-import br.unicamp.ic.crawler.services.filters.IssueFilter;
+import br.unicamp.ic.crawler.persistence.ReportRepository;
 
 /**
  * The <code>IssueCrawler</code> abstract class offers template methods to down-
@@ -30,11 +21,12 @@ import br.unicamp.ic.crawler.services.filters.IssueFilter;
  * @author Luiz Alberto (gomes.luiz@gmail.com)
  * 
  */
-public abstract class IssueCrawler {
-	protected Dataset dataset;
-	protected List<IssueNode> issues;
-	protected Logger logger;
-	protected IssueRepository repository;
+public abstract class ReportCrawler{
+
+	protected Project project;
+	protected List<Report> reports;
+	protected ReportRepository repository;
+	protected Subject subject;
 
 	public abstract String downloadFrom(String url);
 
@@ -42,16 +34,24 @@ public abstract class IssueCrawler {
 
 	public abstract String formatRemoteIssueHistoryUrl(int key);
 
-	public abstract void search(IssueFilter filter);
+	public abstract List<Report> search(IssueFilter filter);
 
+	public ReportCrawler() {
+		subject = new Subject();
+		new LoggerObserver(subject);
+	}
+	
+	/**
+	 * 
+	 */
 	public final void downloadAll() {
 		try {
-			File folder = new File(dataset.getLocalIssuePath());
+			File folder = new File(project.getLocalIssuePath());
 			if (!folder.exists()) {
 				folder.mkdirs();
 			}
 
-			for (int i = dataset.getFirstIssue(); i <= dataset.getLastIssue(); i++) {
+			for (int i = project.getFirstIssue(); i <= project.getLastIssue(); i++) {
 				download(i);
 			}
 		} catch (Exception e) {
@@ -59,13 +59,17 @@ public abstract class IssueCrawler {
 		}
 	}
 
+	/**
+	 * 
+	 * @param key
+	 */
 	protected final void download(int key) {
 
 		try {
 			String url = this.formatRemoteIssueUrl(key);
 
-			File localIssueFile = new File(dataset.formatLocalIssueFileName(key));
-			File localHistoryFile = new File(dataset.formatLocalIssueHistoryFileName(key));
+			File localIssueFile = new File(project.formatLocalIssueFileName(key));
+			File localHistoryFile = new File(project.formatLocalIssueHistoryFileName(key));
 
 			if (localIssueFile.exists() && localHistoryFile.exists())
 				return;
@@ -73,17 +77,17 @@ public abstract class IssueCrawler {
 			String issueContents = downloadFrom(url);
 			if (issueContents == null)
 				return;
-			logger.trace(url);
+			subject.setMessage(url);
 
 			url = this.formatRemoteIssueHistoryUrl(key);
 
 			String issueHistoryContents = downloadFrom(url);
 			if (issueHistoryContents == null)
 				return;
-			logger.trace(url);
+			subject.setMessage(url);
 
-			writeTo(dataset.formatLocalIssueFileName(key), issueContents);
-			writeTo(dataset.formatLocalIssueHistoryFileName(key), issueHistoryContents);
+			writeTo(project.formatLocalIssueFileName(key), issueContents);
+			writeTo(project.formatLocalIssueHistoryFileName(key), issueHistoryContents);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -91,14 +95,26 @@ public abstract class IssueCrawler {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public final void load() {
-		issues = repository.findAll();
+		reports = repository.findAll();
 	}
 
+	/**
+	 * 
+	 * @param out
+	 */
 	public void export(IssueFileWriter out) {
-		out.write(issues);
+		out.write(reports);
 	}
 
+	/**
+	 * 
+	 * @param target
+	 * @param contents
+	 */
 	protected void writeTo(String target, String contents) {
 		try {
 

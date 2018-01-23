@@ -1,16 +1,14 @@
 package br.unicamp.ic.crawler.domain.jira;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
-
-import br.unicamp.ic.crawler.domain.core.Dataset;
-import br.unicamp.ic.crawler.domain.core.IssueEntry;
+import br.unicamp.ic.crawler.domain.core.ReportCrawler;
+import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.Project;
+import br.unicamp.ic.crawler.domain.core.Report;
+import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
 import br.unicamp.ic.crawler.persistence.URLResource;
-import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
-import br.unicamp.ic.crawler.services.IssueCrawler;
-import br.unicamp.ic.crawler.services.IssueParser;
-import br.unicamp.ic.crawler.services.filters.IssueFilter;
 
 /**
  * Extract information from Jira issues.
@@ -19,7 +17,7 @@ import br.unicamp.ic.crawler.services.filters.IssueFilter;
  * @version 1.0
  * 
  */
-public class JIRACrawler extends IssueCrawler {
+public class JIRACrawler extends ReportCrawler {
 
 	private IssueParser converter;
 
@@ -31,32 +29,28 @@ public class JIRACrawler extends IssueCrawler {
 	 * @param dataset
 	 *            TODO
 	 * @param converter
-	 * @param logger
-	 *            TODO
-	 * @param logger
 	 */
-	public JIRACrawler(Dataset dataset, IssueParser converter, Logger logger) {
+	public JIRACrawler(Project dataset, IssueParser converter) {
 		this.converter = converter;
-		this.dataset = dataset;
+		this.project = dataset;
 		this.converter = converter;
-		this.logger = logger;
 	}
 
 	@Override
 	public String formatRemoteIssueUrl(int key) {
-		String name = dataset.getNameWithKey(key).toUpperCase();
-		return String.format(dataset.getRemoteIssueUrl(), name, name);
+		String name = project.getNameWithKey(key).toUpperCase();
+		return String.format(project.getRemoteIssueUrl(), name, name);
 	}
 
 	@Override
 	public String formatRemoteIssueHistoryUrl(int key) {
-		String name = dataset.getNameWithKey(key).toUpperCase();
-		return String.format(dataset.getRemoteIssueHistoryUrl(), name);
+		String name = project.getNameWithKey(key).toUpperCase();
+		return String.format(project.getRemoteIssueHistoryUrl(), name);
 	}
 
 	@Override
-	public void search(IssueFilter filter) {
-		// TODO Auto-generated method stub
+	public List<Report> search(IssueFilter filter) {
+		return new ArrayList<Report>();
 
 	}
 
@@ -67,7 +61,7 @@ public class JIRACrawler extends IssueCrawler {
 			URLResource urlResource = new URLResource(url);
 			contents = urlResource.asString();
 		} catch (Exception e) {
-			logger.trace(e.getMessage());
+			subject.setMessage(e.getMessage());
 		}
 		return contents;
 	}

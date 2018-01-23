@@ -13,12 +13,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.unicamp.ic.crawler.domain.bugzilla.BZHistoryParserInHtml;
+import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueNode;
-import br.unicamp.ic.crawler.persistence.IssueRepository;
-import br.unicamp.ic.crawler.persistence.IssueRepositoryFromMemory;
-import br.unicamp.ic.crawler.services.IssueParser;
+import br.unicamp.ic.crawler.domain.core.Report;
+import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.persistence.ReportRepository;
+import br.unicamp.ic.crawler.persistence.ReportRepositoryFromMemory;
 
 /**
  * @author luiz
@@ -26,9 +28,6 @@ import br.unicamp.ic.crawler.services.IssueParser;
  */
 public class ParseIssueAndHistoryTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -56,10 +55,10 @@ public class ParseIssueAndHistoryTest {
 
 	@Test
 	public final void parseAnIssueFromBugzillaXmlValidFormat() {
-		String xml = IssueRepositoryFromMemory.reports.get(0);	
+		String xml = ReportRepositoryFromMemory.reports.get(0);	
 		IssueParser parser = new BZIssueParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
-		assertEquals("14582", entry.getKey());
+		assertEquals("JDT-14582", entry.getKey());
 		assertEquals("2002-04-25", entry.getCreated());
 		assertEquals("major", entry.getSeverity());
 		assertEquals("RESOLVED", entry.getStatus());
@@ -67,7 +66,7 @@ public class ParseIssueAndHistoryTest {
 	
 	@Test
 	public final void parseAnIssueHistoryFromBugzillaHtmlValidFormat() {
-		String html = IssueRepositoryFromMemory.histories.get(0);
+		String html = ReportRepositoryFromMemory.histories.get(0);
 		BZHistoryParserInHtml parser = new BZHistoryParserInHtml();
 		List<IssueActivityEntry> activities = parser.parse(html);
 		assertEquals(2, activities.size());
@@ -94,14 +93,15 @@ public class ParseIssueAndHistoryTest {
 	
 	@Test
 	public final void createIssueNode() {
-		IssueRepository repository = new IssueRepositoryFromMemory();
-		IssueNode issue = repository.findBy("14582");
+		ReportRepository repository = new ReportRepositoryFromMemory();
+		Report issue = repository.findBy("CORE_GRAVEYARD-13271");
 		
-		assertEquals("2002-04-25", issue.getResolved());
-		assertEquals("major", issue.getSeverity());
-		assertEquals("3", issue.getSeverityCode());
+		assertEquals("1999-09-07", issue.getCreated());
+		assertEquals("2000-02-09", issue.getResolved());
+		assertEquals("normal", issue.getSeverity());
+		assertEquals("5", issue.getSeverityCode());
 		
-		assertEquals(0, issue.getDaysToResolve());
+		assertEquals(155, issue.getDaysToResolve());
 	}
 
 }

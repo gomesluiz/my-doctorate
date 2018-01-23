@@ -12,14 +12,13 @@ import java.util.regex.Pattern;
  * @since 2016-05-24
  * 
  */
-public class IssueNode {
+public class Report {
 	static final Pattern REMOVE_TAGS = Pattern.compile("<.+?>");
 
 	private List<IssueComment> comments;
-
 	private IssueEntry entry;
 
-	public IssueNode(IssueEntry entry) {
+	public Report(IssueEntry entry) {
 		this.entry = entry;
 		this.comments = new ArrayList<IssueComment>();
 	}
@@ -75,7 +74,7 @@ public class IssueNode {
 	 * @return the resolution action.
 	 */
 	public String getResolution() {
-		return entry.getResolution();
+		return entry.getResolution().toLowerCase();
 	}
 
 	/**
@@ -84,7 +83,7 @@ public class IssueNode {
 	 * @return the issue status.
 	 */
 	public String getStatus() {
-		return entry.getStatus();
+		return entry.getStatus().toLowerCase();
 	}
 
 	/**

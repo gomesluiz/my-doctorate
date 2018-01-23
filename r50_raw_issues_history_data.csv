@@ -1,41 +1,271 @@
 IssueKey,Who,When,What,Removed,Added
-510,byrd,1998-10-04 19:39:41 PDT,Assignee,byrd,mourey
-510,mourey,1998-10-05 10:28:45 PDT,Assignee,mourey,warren
-510,warrensomebody,1998-10-05 13:04:29 PDT,Status,NEW,RESOLVED
-510,warrensomebody,1998-10-05 13:04:29 PDT,Resolution,---,INVALID
-510,warrensomebody,1998-10-05 13:04:29 PDT,Last Resolved,,1998-10-05 13:04:29
-510,leger,1999-03-02 17:45:38 PST,Product,Mozilla,NGLayout
-510,leger,1999-03-02 17:45:38 PST,Version,1998-06-03,other
-510,leger,1999-03-02 17:45:38 PST,Component,Plugins,Plug-ins
-510,glynn,1999-03-19 16:55:28 PST,Status,RESOLVED,CLOSED
-508,blythe,1998-10-09 08:19:18 PDT,Assignee,blythe,hyatt
-508,hyatt,1999-01-20 01:15:51 PST,Status,NEW,RESOLVED
-508,hyatt,1999-01-20 01:15:51 PST,Resolution,---,INVALID
-508,hyatt,1999-01-20 01:15:51 PST,Last Resolved,,1999-01-20 01:15:51
-508,leger,1999-03-04 09:23:34 PST,Status,RESOLVED,VERIFIED
-507,terry,1998-08-27 16:29:37 PDT,Last Resolved,,1998-08-27 16:29:37
-507,terry,1998-08-27 16:29:37 PDT,Status,NEW,RESOLVED
-507,terry,1998-08-27 16:29:37 PDT,Resolution,---,INVALID
-507,terry,1998-08-27 16:29:37 PDT,Component,,NetLib
-507,leger,1999-03-04 09:23:27 PST,Status,RESOLVED,VERIFIED
-507,adam,2001-05-31 05:29:13 PDT,CC,,adam
-507,octalc0de,2002-07-21 12:37:13 PDT,Status,VERIFIED,CLOSED
-507,octalc0de,2002-07-21 12:37:13 PDT,CC,,octalc0de
-507,bugzilla,2003-08-27 16:21:48 PDT,Status,CLOSED,REOPENED
-507,bugzilla,2003-08-27 16:21:48 PDT,Resolution,INVALID,---
-507,bugzilla,2003-08-27 16:22:34 PDT,Status,REOPENED,RESOLVED
-507,bugzilla,2003-08-27 16:22:34 PDT,Resolution,---,INVALID
-507,bugzilla,2003-08-27 16:22:34 PDT,Last Resolved,1998-08-27 16:29:37,2003-08-27 16:22:34
-507,bugzilla,2003-08-27 16:23:17 PDT,Status,RESOLVED,VERIFIED
-507,tiago.morbus.sa,2010-09-23 15:14:03 PDT,CC,,tiago.morbus.sa
-507,drevitchi,2011-03-05 12:45:19 PST,CC,,afterthespaghetti
-507,TheBlackDeath333,2013-07-03 00:56:48 PDT,CC,,TheBlackDeath333
-507,kbrosnan,2013-11-01 13:52:58 PDT,Restrict Comments,,1
-507,greg,2017-05-24 02:53:32 PDT,CC,,greg
-509,mike+mozilla,1998-09-14 13:37:40 PDT,Assignee,mccabe,mlm
-509,mlm,1998-09-14 19:32:30 PDT,Status,NEW,ASSIGNED
-509,clayton,1999-03-11 10:00:54 PST,Target Milestone,M3,M7
-509,leger,1999-06-07 10:49:20 PDT,Status,NEW,RESOLVED
-509,leger,1999-06-07 10:49:20 PDT,Resolution,---,INVALID
-509,leger,1999-06-07 10:49:20 PDT,Last Resolved,,1999-06-07 10:49:20
-509,leger,1999-06-07 10:49:28 PDT,Status,RESOLVED,VERIFIED
+JDT-7945,daniel_megert,2002-01-28,severity,normal,major
+JDT-9566,akiezun,2002-02-13,severity,normal,major
+PLATFORM-10481,justin,2002-03-01,severity,normal,major
+PLATFORM-6995,john.arthorne,2001-12-17,severity,normal,major
+PLATFORM-10482,justin,2002-03-01,severity,normal,major
+PLATFORM-5456,kai-uwe_maetzel,2001-11-02,severity,normal,critical
+JDT-9815,erich_gamma,2002-02-14,severity,major,normal
+PLATFORM-10757,daniel_megert,2002-03-11,severity,normal,major
+JDT-3550,claude_knaus,2002-09-18,severity,normal,minor
+JDT-14561,nick_edgar,2002-04-24,severity,normal,critical
+PLATFORM-8021,nick_edgar,2002-01-23,severity,normal,critical
+PLATFORM-12579,hudsonr,2002-04-08,severity,normal,major
+PLATFORM-13985,nick_edgar,2002-04-17,severity,normal,major
+JDT-11278,mfaraj,2002-03-13,severity,normal,trivial
+PLATFORM-2051,nick_edgar,2002-01-18,severity,enhancement,major
+PLATFORM-12463,birsan,2002-08-01,severity,major,critical
+PLATFORM-12597,veronika_irvine,2002-05-15,severity,major,normal
+JDT-6457,dirk_baeumer,2002-01-10,severity,normal,major
+PDE-6065,nick_edgar,2002-05-13,severity,normal,critical
+PDE-9261,nick_edgar,2002-06-03,severity,normal,major
+PLATFORM-5399,kevin_haaland,2002-09-03,severity,normal,enhancement
+PLATFORM-5399,kevin_haaland,2002-09-03,severity,enhancement,major
+PLATFORM-2470,knut_radloff,2002-09-05,severity,enhancement,normal
+PLATFORM-9355,tomasz,2003-10-03,severity,enhancement,major
+PLATFORM-9355,tomasz,2003-11-11,severity,major,critical
+PLATFORM-9772,kevin_mcguire,2002-02-15,severity,normal,major
+PLATFORM-9772,kevin_mcguire,2002-02-27,severity,major,normal
+PLATFORM-14061,nick_edgar,2002-04-18,severity,normal,major
+PLATFORM-14061,nick_edgar,2002-05-30,severity,major,critical
+PLATFORM-13804,nick_edgar,2002-04-25,severity,normal,critical
+JDT-4912,erich_gamma,2001-10-11,severity,normal,major
+PLATFORM-7073,john.arthorne,2001-12-18,severity,normal,major
+PLATFORM-10483,justin,2002-03-01,severity,normal,blocker
+PLATFORM-10871,akiezun,2002-03-06,severity,normal,major
+JDT-11827,akiezun,2002-03-20,severity,normal,major
+JDT-8812,daniel_megert,2002-01-31,severity,major,critical
+PLATFORM-12718,nick_edgar,2002-05-16,severity,normal,major
+PLATFORM-6585,kevin_mcguire,2001-12-07,severity,critical,normal
+CDT-7866,turnham,2002-03-19,severity,normal,major
+PLATFORM-12347,kevin_mcguire,2002-03-27,severity,major,normal
+PLATFORM-12922,nick_edgar,2002-05-26,severity,normal,critical
+PLATFORM-12367,kevin_mcguire,2002-03-27,severity,normal,minor
+PLATFORM-2469,randy_giffen,2002-01-22,severity,normal,minor
+PDE-13115,sridhar,2002-05-30,severity,major,normal
+PLATFORM-7697,duongn,2002-03-01,severity,enhancement,major
+PLATFORM-10491,justin,2002-03-01,severity,normal,major
+PLATFORM-13198,nick_edgar,2002-04-15,severity,normal,major
+PLATFORM-13002,nick_edgar,2002-04-24,severity,normal,blocker
+JDT-3893,andre_weinand,2001-10-11,severity,normal,major
+JDT-5317,erich_gamma,2001-10-29,severity,normal,major
+JDT-5877,erich_gamma,2002-03-25,severity,trivial,normal
+PLATFORM-10722,konradk,2002-05-23,severity,normal,critical
+PLATFORM-2497,knut_radloff,2003-01-13,severity,enhancement,normal
+JDT-3906,daniel_megert,2002-02-27,severity,minor,major
+JDT-6164,daniel_megert,2004-03-24,severity,normal,minor
+PLATFORM-14595,nick_edgar,2002-04-25,severity,normal,major
+PLATFORM-14473,nick_edgar,2002-04-24,severity,normal,major
+CDT-11040,weisz,2002-03-20,severity,normal,critical
+PLATFORM-8785,tokei.ihto,2002-01-30,severity,blocker,major
+CDT-12124,enriquev,2002-04-29,severity,enhancement,minor
+CDT-9589,turnham,2002-03-19,severity,normal,major
+PLATFORM-10231,kevin_mcguire,2002-02-27,severity,normal,major
+PLATFORM-9246,sridhar,2002-03-01,severity,normal,minor
+JDT-13325,daniel_megert,2002-04-10,severity,major,critical
+PLATFORM-9082,nick_edgar,2002-05-13,severity,normal,major
+PLATFORM-14314,nick_edgar,2002-05-31,severity,normal,critical
+PLATFORM-12110,klicnik,2002-03-22,severity,normal,major
+PLATFORM-6202,kevin_haaland,2001-11-21,severity,normal,enhancement
+PLATFORM-6202,markus.kell.r,2004-12-07,severity,enhancement,normal
+PLATFORM-2529,kevin_haaland,2002-09-03,severity,enhancement,normal
+PLATFORM-13178,kevin_mcguire,2002-04-10,severity,normal,major
+PLATFORM-12810,nick_edgar,2002-05-26,severity,normal,major
+PLATFORM-6493,mkamp,2001-12-02,severity,blocker,major
+PLATFORM-13185,kevin_mcguire,2002-04-10,severity,normal,major
+JDT-8263,johan.walles,2002-02-28,severity,normal,major
+PLATFORM-8872,nick_edgar,2002-05-15,severity,normal,critical
+CDT-10015,turnham,2002-02-27,severity,normal,critical
+PDE-5746,dejan,2002-04-26,severity,minor,normal
+PLATFORM-6642,miked,2001-12-06,severity,critical,normal
+CDT-10123,turnham,2002-03-19,severity,normal,major
+PLATFORM-9287,nmiya,2002-03-22,severity,normal,critical
+CDT-10539,turnham,2002-03-04,severity,minor,normal
+CDT-10539,turnham,2002-03-19,severity,normal,major
+JDT-4167,dirk_baeumer,2002-02-27,severity,normal,major
+PLATFORM-9739,kevin_mcguire,2002-02-15,severity,normal,major
+PLATFORM-2523,nick_edgar,2002-05-17,severity,enhancement,major
+JDT-6146,dirk_baeumer,2002-01-09,severity,minor,normal
+PLATFORM-9545,dejan,2002-02-13,severity,normal,major
+PLATFORM-7400,dennis_mcknight,2002-01-09,severity,normal,major
+JDT-7085,dirk_baeumer,2002-01-10,severity,normal,major
+JDT-14848,martinae,2002-09-18,severity,normal,major
+PLATFORM-9500,sridhar,2002-03-01,severity,normal,blocker
+PLATFORM-8089,dirk_baeumer,2002-01-23,severity,normal,critical
+PLATFORM-14635,nick_edgar,2002-04-25,severity,normal,critical
+PLATFORM-7771,tod_creasey,2003-01-14,severity,minor,normal
+CDT-11704,dmcknigh,2002-03-19,severity,normal,major
+PLATFORM-7667,john.arthorne,2002-01-16,severity,normal,major
+PLATFORM-10940,clau,2002-03-07,severity,enhancement,critical
+PLATFORM-9811,kevin_mcguire,2002-02-15,severity,normal,major
+PLATFORM-14009,nick_edgar,2002-04-17,severity,normal,major
+PLATFORM-14493,kai-uwe_maetzel,2002-04-30,severity,normal,critical
+PLATFORM-9826,nick_edgar,2002-05-16,severity,normal,major
+PLATFORM-14154,nick_edgar,2002-04-18,severity,normal,major
+PLATFORM-11883,john.arthorne,2002-03-20,severity,normal,critical
+PLATFORM-2268,tod_creasey,2002-09-03,severity,enhancement,normal
+PLATFORM-7845,veronika_irvine,2003-04-10,severity,normal,enhancement
+PLATFORM-7845,markus.kell.r,2004-03-26,severity,enhancement,normal
+JDT-3315,dirk_baeumer,2003-01-16,severity,major,normal
+PLATFORM-7500,dlwhiteman,2002-01-11,severity,normal,major
+PLATFORM-9138,kevin_mcguire,2002-02-15,severity,normal,major
+CDT-9851,turnham,2002-03-19,severity,normal,major
+PLATFORM-11484,nick_edgar,2002-05-31,severity,critical,major
+PLATFORM-14909,birsan,2002-05-01,severity,normal,major
+JDT-10616,claude_knaus,2002-03-12,severity,normal,major
+JDT-12955,glongman,2002-08-05,severity,blocker,critical
+PLATFORM-6513,nick_edgar,2002-04-24,severity,normal,major
+JDT-7496,erich_gamma,2002-03-25,severity,trivial,normal
+CDT-10174,turnham,2002-03-19,severity,normal,major
+PLATFORM-9211,veronika_irvine,2003-03-26,severity,blocker,major
+PLATFORM-13335,nick_edgar,2002-04-10,severity,normal,critical
+JDT-9568,akiezun,2002-02-13,severity,minor,normal
+PLATFORM-7101,hudsonr,2002-11-11,severity,enhancement,critical
+PLATFORM-7101,snorthov,2003-01-23,severity,critical,normal
+PLATFORM-7101,hudsonr,2003-04-21,severity,normal,major
+PLATFORM-9725,kevin_mcguire,2002-02-27,severity,normal,minor
+PLATFORM-14932,nick_edgar,2002-04-30,severity,normal,critical
+PLATFORM-14932,nick_edgar,2002-05-01,severity,critical,blocker
+PLATFORM-14778,nick_edgar,2002-05-13,severity,normal,major
+PLATFORM-14391,jean-michel_lemieux,2003-03-14,severity,enhancement,normal
+PLATFORM-13821,nick_edgar,2002-04-15,severity,normal,major
+JDT-14702,erich_gamma,2002-06-12,severity,blocker,critical
+PLATFORM-14464,nick_edgar,2002-04-24,severity,normal,blocker
+JDT-11067,olivier_thomann,2002-03-11,severity,normal,minor
+JDT-10970,kai-uwe_maetzel,2002-03-07,severity,normal,critical
+PDE-9252,sridhar,2002-03-01,severity,normal,minor
+PLATFORM-9769,kevin_mcguire,2002-02-15,severity,normal,major
+CDT-10531,dmcknigh,2002-03-19,severity,normal,major
+PLATFORM-9719,birsan,2002-04-22,severity,normal,major
+CDT-10283,turnham,2002-03-19,severity,normal,major
+PLATFORM-14650,nick_edgar,2002-04-25,severity,normal,major
+JDT-13603,winchest,2002-04-15,severity,normal,critical
+JDT-7383,dirk_baeumer,2002-01-10,severity,normal,major
+PLATFORM-12758,nick_edgar,2002-04-11,severity,normal,major
+PLATFORM-14937,john.arthorne,2002-04-30,severity,normal,major
+PLATFORM-11498,mike_wilson,2002-03-18,severity,normal,major
+PLATFORM-10408,janeli,2002-02-27,severity,critical,major
+PLATFORM-10408,janeli,2002-04-20,severity,major,critical
+PLATFORM-14847,hudsonr,2002-05-20,severity,normal,major
+PLATFORM-6825,john.arthorne,2001-12-14,severity,normal,critical
+PLATFORM-11164,dj.houghton,2002-09-10,severity,normal,enhancement
+PLATFORM-11164,akiezun,2002-12-04,severity,enhancement,major
+PLATFORM-14167,kevin_mcguire,2002-04-19,severity,enhancement,normal
+JDT-3859,andre_weinand,2001-10-11,severity,normal,major
+CDT-10396,chanskw,2002-02-27,severity,normal,major
+PLATFORM-13472,kevin_mcguire,2002-04-10,severity,normal,critical
+PLATFORM-12782,akiezun,2002-04-04,severity,normal,major
+PLATFORM-2789,kevin_haaland,2002-03-20,severity,enhancement,normal
+PDE-9257,sridhar,2002-03-01,severity,normal,major
+PLATFORM-14740,nick_edgar,2002-04-26,severity,normal,critical
+CDT-10650,turnham,2002-03-04,severity,normal,major
+CDT-7546,turnham,2002-03-19,severity,minor,major
+PLATFORM-11036,kevin_mcguire,2002-03-11,severity,normal,major
+PLATFORM-2165,randy_giffen,2002-01-22,severity,enhancement,normal
+PLATFORM-10050,kai-uwe_maetzel,2002-06-05,severity,minor,major
+PLATFORM-13458,konradk,2002-04-22,severity,normal,minor
+PDE-9499,sridhar,2002-03-01,severity,normal,blocker
+PLATFORM-13346,nick_edgar,2002-06-03,severity,normal,critical
+PLATFORM-14263,nick_edgar,2002-04-22,severity,normal,critical
+JDT-11271,klicnik,2002-03-13,severity,normal,major
+JDT-11271,klicnik,2002-03-14,severity,major,critical
+PLATFORM-14165,john.arthorne,2002-04-19,severity,critical,normal
+PLATFORM-14730,nick_edgar,2002-04-26,severity,normal,critical
+PLATFORM-12047,nick_edgar,2002-04-11,severity,normal,major
+PLATFORM-2535,randy_giffen,2002-01-22,severity,normal,minor
+PLATFORM-13682,john.arthorne,2002-04-17,severity,normal,major
+PLATFORM-9768,andre_weinand,2002-03-07,severity,normal,minor
+PLATFORM-12535,celek,2002-04-04,severity,normal,critical
+PLATFORM-13657,mike_wilson,2002-04-12,severity,normal,major
+JDT-8685,erich_gamma,2002-01-29,severity,normal,major
+PLATFORM-1749,darin.eclipse,2001-11-28,severity,normal,critical
+PLATFORM-14748,nick_edgar,2002-04-26,severity,normal,major
+PLATFORM-5867,john.arthorne,2001-11-13,severity,normal,major
+PLATFORM-5324,erich_gamma,2001-11-13,severity,normal,enhancement
+PLATFORM-5324,andre_weinand,2001-12-12,severity,enhancement,normal
+PLATFORM-14160,nick_edgar,2002-04-18,severity,normal,major
+PLATFORM-14291,deboer,2002-04-22,severity,normal,critical
+PLATFORM-14291,nick_edgar,2002-04-24,severity,critical,blocker
+PLATFORM-2229,nick_edgar,2002-05-03,severity,normal,major
+PLATFORM-2229,nick_edgar,2002-05-31,severity,major,critical
+PLATFORM-2229,nick_edgar,2002-06-05,severity,critical,major
+PLATFORM-9747,kevin_mcguire,2002-02-15,severity,normal,major
+JDT-9909,akiezun,2002-02-27,severity,normal,major
+PLATFORM-10596,kevin_mcguire,2002-03-01,severity,normal,major
+PLATFORM-1877,kevin_haaland,2002-09-03,severity,enhancement,normal
+PLATFORM-6002,darin.eclipse,2001-11-28,severity,normal,critical
+PLATFORM-6002,darin.eclipse,2001-11-29,severity,critical,normal
+PLATFORM-14145,nick_edgar,2002-05-26,severity,normal,critical
+PLATFORM-14145,nick_edgar,2002-06-05,severity,critical,major
+PLATFORM-9131,celek,2002-04-04,severity,normal,major
+PLATFORM-10480,justin,2002-03-01,severity,normal,minor
+PLATFORM-2338,randy_giffen,2002-08-08,severity,enhancement,minor
+JDT-14592,olivier_thomann,2002-04-25,severity,normal,minor
+PLATFORM-13478,kevin_mcguire,2002-04-10,severity,normal,minor
+PLATFORM-9494,celek,2002-04-04,severity,normal,major
+PLATFORM-11582,nick_edgar,2002-05-17,severity,normal,critical
+PLATFORM-11582,nick_edgar,2002-06-05,severity,critical,major
+JDT-5048,daniel_megert,2001-10-23,severity,normal,major
+PLATFORM-1843,kevin_haaland,2002-09-03,severity,enhancement,normal
+JDT-12492,kai-uwe_maetzel,2002-04-02,severity,normal,critical
+PLATFORM-9812,kevin_mcguire,2002-02-27,severity,normal,minor
+PLATFORM-14776,kevin_mcguire,2002-04-26,severity,normal,major
+PLATFORM-14981,nick_edgar,2002-05-01,severity,normal,major
+PLATFORM-10826,klicnik,2002-03-06,severity,normal,major
+JDT-12550,kai-uwe_maetzel,2002-04-02,severity,normal,critical
+PLATFORM-2221,kevin_haaland,2002-03-06,severity,enhancement,trivial
+PLATFORM-9780,kevin_mcguire,2002-02-27,severity,normal,major
+PLATFORM-12371,kevin_mcguire,2002-03-27,severity,normal,minor
+PLATFORM-3152,celek,2002-04-04,severity,normal,critical
+PLATFORM-14680,nick_edgar,2002-05-13,severity,normal,critical
+JDT-13558,akiezun,2002-04-11,severity,major,critical
+PLATFORM-13246,nick_edgar,2002-05-13,severity,normal,major
+PLATFORM-14441,nick_edgar,2002-05-24,severity,normal,major
+JDT-10577,daniel_megert,2002-03-01,severity,normal,major
+PLATFORM-11634,kevin_mcguire,2002-03-19,severity,normal,major
+PLATFORM-14048,rodrigo,2002-05-14,severity,critical,normal
+PLATFORM-11142,kevin_mcguire,2002-03-11,severity,normal,major
+PLATFORM-14335,nick_edgar,2002-04-22,severity,normal,critical
+JDT-12733,leon.pesenson,2002-04-08,severity,normal,major
+JDT-13939,fuse,2002-04-25,severity,normal,major
+JDT-14819,nick_edgar,2002-04-29,severity,major,critical
+PLATFORM-8507,nick_edgar,2002-01-25,severity,normal,major
+PLATFORM-8507,veronika_irvine,2002-10-29,severity,major,normal
+JDT-14386,martinae,2002-09-18,severity,normal,trivial
+PLATFORM-10288,kevin_haaland,2002-03-07,severity,enhancement,normal
+CDT-10179,enriquev,2002-02-26,severity,normal,major
+CDT-10179,turnham,2002-02-27,severity,major,blocker
+JDT-10957,kai-uwe_maetzel,2002-03-07,severity,normal,critical
+JDT-8535,tokei.ihto,2002-01-26,severity,normal,minor
+JDT-11433,kai-uwe_maetzel,2002-03-17,severity,normal,major
+PLATFORM-10514,justin,2002-03-01,severity,normal,major
+JDT-3963,daniel_megert,2002-02-27,severity,critical,normal
+PLATFORM-10034,nick_edgar,2002-05-24,severity,normal,major
+JDT-5819,dirk_baeumer,2002-01-08,severity,normal,major
+PLATFORM-13545,kevin_mcguire,2002-04-11,severity,normal,minor
+PLATFORM-13463,jed.anderson,2003-01-28,severity,normal,critical
+PLATFORM-13463,john.arthorne,2003-01-28,severity,critical,normal
+JDT-13189,akiezun,2002-04-10,severity,major,critical
+PLATFORM-9708,kevin_mcguire,2002-02-15,severity,normal,major
+PLATFORM-13969,mike_wilson,2002-04-17,severity,major,normal
+JDT-3821,dirk_baeumer,2002-01-21,severity,normal,major
+PLATFORM-9341,nick_edgar,2002-05-19,severity,normal,major
+PLATFORM-9341,nick_edgar,2002-05-26,severity,major,critical
+CDT-8416,turnham,2002-03-19,severity,normal,major
+PLATFORM-5353,kevin_haaland,2001-10-31,severity,normal,major
+PLATFORM-13703,dsanders,2002-05-29,severity,enhancement,critical
+PLATFORM-8094,klicnik,2002-01-23,severity,normal,major
+JDT-4329,daniel_megert,2001-10-23,severity,normal,major
+PLATFORM-8506,john.arthorne,2002-02-05,severity,normal,major
+PLATFORM-7734,nick_edgar,2002-05-13,severity,normal,major
+PLATFORM-7734,nick_edgar,2002-05-14,severity,major,critical
+PLATFORM-11744,kevin_mcguire,2002-03-21,severity,normal,major
+PLATFORM-13134,kevin_mcguire,2002-04-09,severity,normal,major
+JDT-5290,darin.eclipse,2001-11-28,severity,normal,critical
+PLATFORM-11606,kevin_mcguire,2002-03-19,severity,normal,major
+JDT-13677,martinae,2002-09-18,severity,normal,minor
+PLATFORM-9836,kevin_mcguire,2002-02-15,severity,normal,major
+PLATFORM-9836,kevin_mcguire,2002-02-27,severity,major,minor
+JDT-7354,olivier_thomann,2002-01-08,severity,enhancement,normal
+PLATFORM-14644,nick_edgar,2002-04-25,severity,normal,critical
+PLATFORM-14244,konradk,2002-04-22,severity,normal,minor
