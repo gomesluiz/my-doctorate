@@ -7,7 +7,7 @@ import java.util.List;
 import br.unicamp.ic.crawler.domain.core.HistoryParser;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
-import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.ReportPasser;
 import br.unicamp.ic.crawler.domain.core.LoggerObserver;
 import br.unicamp.ic.crawler.domain.core.Project;
 import br.unicamp.ic.crawler.domain.core.Report;
@@ -15,56 +15,70 @@ import br.unicamp.ic.crawler.domain.core.Subject;
 
 public class ReportRepositoryFromFile implements ReportRepository {
 
-	private Project dataset;
-	private IssueParser issueParser;
+	private Project project;
+	private ReportPasser reportParser;
 	private HistoryParser historyParser;
 	private Subject subject;
 
-	public ReportRepositoryFromFile(Project project, IssueParser issueParser, HistoryParser historyParser) {
-		this.dataset = project;
-		this.issueParser = issueParser;
+	public ReportRepositoryFromFile(Project project, ReportPasser issueParser, HistoryParser historyParser) {
+		this.project = project;
+		this.reportParser = issueParser;
 		this.historyParser = historyParser;
 		this.subject = new Subject();
 		new LoggerObserver(this.subject);
-
 	}
 
 	@Override
 	public List<Report> findAll() {
-		List<Report> issues = new ArrayList<Report>();
 		int count = 0, total = 0;
-		File folder = new File(dataset.getLocalIssuePath());
-		if (folder.exists()) {
-			File[] files = folder.listFiles((dir, name) -> name.endsWith(dataset.getIssueFileFormat()));
-			total = files.length;
-			for (File file : files) {
-				FileResource fileResource = new FileResource(file);
-				String contents = fileResource.asString();
-				IssueEntry entry = (IssueEntry) issueParser.parse(contents);
-				List<IssueActivityEntry> activities = extract(entry.getKeySequential());
-				for (IssueActivityEntry activity : activities) {
-					entry.registerActivity(activity);
-				}
-				issues.add(new Report(entry));
-				count += 1;
-				if (count % 20 == 0) {
-					subject.setMessage(count + " of " + total);
-				}
-//				if (count % 200 == 0) {
-//					break;
-//				}
-				
+		List<Report> reports = new ArrayList<Report>();
+		File[] files = getReportFiles();
+		total = files.length;
+		for (File file : files) {
+			IssueEntry entry = convertFrom(file);
+			reports.add(new Report(entry));
+			count += 1;
+			if (count % 1 == 0) {
+				subject.setMessage(count + " of " + total);
 			}
 		}
-		return issues;
+		return reports;
 	}
 
-	private List<IssueActivityEntry> extract(int key) {
+	@Override
+	public Report findBy(String key) {
+		Report report = null;
+		File[] files = getReportFiles();
+		if (files == null)
+			return null;
+		for (File file : files) {
+			if (file.getName().equals(key)) {
+				IssueEntry entry = convertFrom(file);
+				report = new Report(entry);
+			}
+
+		}
+		return report;
+
+	}
+
+	private IssueEntry convertFrom(File file) {
+		FileResource fileResource = new FileResource(file);
+		String contents = fileResource.asString();
+		IssueEntry entry = (IssueEntry) reportParser.parse(contents);
+		List<IssueActivityEntry> activities = extractHistory(entry.getKeySequential());
+		for (IssueActivityEntry activity : activities) {
+			entry.registerActivity(activity);
+		}
+		return entry;
+	}
+
+	private List<IssueActivityEntry> extractHistory(int key) {
 		List<IssueActivityEntry> activities = new ArrayList<IssueActivityEntry>();
 		if (key == -1)
 			return activities;
 
-		File file = new File(dataset.formatLocalIssueHistoryFileName(key));
+		File file = new File(project.formatLocalIssueHistoryFileName(key));
 		FileResource fileResource = new FileResource(file);
 		String contents = fileResource.asString();
 
@@ -72,10 +86,13 @@ public class ReportRepositoryFromFile implements ReportRepository {
 		return activities;
 	}
 
-	@Override
-	public Report findBy(String key) {
-		// TODO Auto-generated method stub
-		return null;
+	private File[] getReportFiles() {
+		File folder = new File(project.getLocalReportFolder());
+		File[] files = new File[] {};
+		if (folder.exists()) {
+			files = folder.listFiles((dir, name) -> name.endsWith(project.getIssueFileFormat()));
+		}
+		return files;
 	}
 
 }

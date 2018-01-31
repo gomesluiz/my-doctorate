@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unicamp.ic.crawler.domain.core.ReportCrawler;
-import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.ReportPasser;
 import br.unicamp.ic.crawler.domain.core.Project;
 import br.unicamp.ic.crawler.domain.core.Report;
-import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
+import br.unicamp.ic.crawler.domain.core.filters.ReportFilter;
 import br.unicamp.ic.crawler.persistence.URLResource;
 
 /**
@@ -19,7 +19,7 @@ import br.unicamp.ic.crawler.persistence.URLResource;
  */
 public class JIRACrawler extends ReportCrawler {
 
-	private IssueParser converter;
+	private ReportPasser converter;
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
@@ -30,7 +30,7 @@ public class JIRACrawler extends ReportCrawler {
 	 *            TODO
 	 * @param converter
 	 */
-	public JIRACrawler(Project dataset, IssueParser converter) {
+	public JIRACrawler(Project dataset, ReportPasser converter) {
 		this.converter = converter;
 		this.project = dataset;
 		this.converter = converter;
@@ -49,7 +49,7 @@ public class JIRACrawler extends ReportCrawler {
 	}
 
 	@Override
-	public List<Report> search(IssueFilter filter) {
+	public List<Report> search(ReportFilter filter) {
 		return new ArrayList<Report>();
 
 	}

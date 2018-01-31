@@ -7,7 +7,7 @@ import br.unicamp.ic.crawler.domain.core.Report;
  * @author luiz
  *
  */
-public class IssueFilterByStatus extends IssueFilter {
+public class IssueFilterByStatus extends ReportFilter {
 
 	private String statusOne;
 	private String statusTwo;

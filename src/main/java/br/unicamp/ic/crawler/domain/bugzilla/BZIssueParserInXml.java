@@ -4,9 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.ReportPasser;
 
 /**
  * The <code>FormatConverterFromXml</code> class implements XML reading files.
@@ -15,7 +14,7 @@ import br.unicamp.ic.crawler.domain.core.IssueParser;
  * @version %I%, %G%
  * @since 1.0
  */
-public class BZIssueParserInXml implements IssueParser {
+public class BZIssueParserInXml implements ReportPasser {
 
 	private XStream stream;
 

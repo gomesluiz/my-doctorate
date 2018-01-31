@@ -18,7 +18,7 @@ import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.Report;
-import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.ReportPasser;
 import br.unicamp.ic.crawler.persistence.ReportRepository;
 import br.unicamp.ic.crawler.persistence.ReportRepositoryFromMemory;
 
@@ -26,7 +26,7 @@ import br.unicamp.ic.crawler.persistence.ReportRepositoryFromMemory;
  * @author luiz
  *
  */
-public class ParseIssueAndHistoryTest {
+public class ParseReportAndHistoryTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -56,7 +56,7 @@ public class ParseIssueAndHistoryTest {
 	@Test
 	public final void parseAnIssueFromBugzillaXmlValidFormat() {
 		String xml = ReportRepositoryFromMemory.reports.get(0);	
-		IssueParser parser = new BZIssueParserInXml();
+		ReportPasser parser = new BZIssueParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
 		assertEquals("JDT-14582", entry.getKey());
 		assertEquals("2002-04-25", entry.getCreated());
@@ -87,21 +87,4 @@ public class ParseIssueAndHistoryTest {
 		
 	}
 	
-	/**
-	 * TODO: move to approriate class.
-	 */
-	
-	@Test
-	public final void createIssueNode() {
-		ReportRepository repository = new ReportRepositoryFromMemory();
-		Report issue = repository.findBy("CORE_GRAVEYARD-13271");
-		
-		assertEquals("1999-09-07", issue.getCreated());
-		assertEquals("2000-02-09", issue.getResolved());
-		assertEquals("normal", issue.getSeverity());
-		assertEquals("5", issue.getSeverityCode());
-		
-		assertEquals(155, issue.getDaysToResolve());
-	}
-
 }

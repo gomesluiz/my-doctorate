@@ -80,7 +80,7 @@ public class Project {
 	/**
 	 * @return the localIssuePath
 	 */
-	public String getLocalIssuePath() {
+	public String getLocalReportFolder() {
 		return localIssuePath;
 	}
 
@@ -122,14 +122,14 @@ public class Project {
 	/**
 	 * @return the firstIssue
 	 */
-	public int getFirstIssue() {
+	public int getFirstReportNumber() {
 		return firstIssue;
 	}
 
 	/**
 	 * @return the lastIssue
 	 */
-	public int getLastIssue() {
+	public int getLastReportNumber() {
 		return lastIssue;
 	}
 

@@ -2,7 +2,7 @@ package br.unicamp.ic.crawler.domain.core.filters;
 
 import br.unicamp.ic.crawler.domain.core.Report;
 
-public class IssueFilterByResolution extends IssueFilter {
+public class IssueFilterByResolution extends ReportFilter {
 
 	private String resolution;
 

@@ -2,7 +2,7 @@ package br.unicamp.ic.crawler.domain.core.filters;
 
 import br.unicamp.ic.crawler.domain.core.Report;
 
-public class IssueFilterOutBySeverity extends IssueFilter {
+public class IssueFilterOutBySeverity extends ReportFilter {
 
 	private String severity;
 

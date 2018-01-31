@@ -16,7 +16,7 @@ public class CrawlerFactory {
 		ReportCrawler crawler = null;
 		//
 		if (project.getBts().equals(BTS_BUGZILLA)) {
-			IssueParser issueParser = new BZIssueParserInXml();
+			ReportPasser issueParser = new BZIssueParserInXml();
 			HistoryParser historyParser = new BZHistoryParserInHtml();
 			ReportRepository repository = new ReportRepositoryFromFile(project, issueParser, historyParser);
 			crawler = new BZXmlCrawler(project, repository);

@@ -199,6 +199,10 @@ public class Report {
 	}
 
 	public List<IssueActivityEntry> getActivities(){
+		List<IssueActivityEntry> result = entry.getActivities();
+		
+		if (result == null) return new ArrayList<IssueActivityEntry>();
+		
 		return entry.getActivities();
 	}
 	public int getQuantityOfCharactersInDescription() {

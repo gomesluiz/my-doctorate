@@ -51,15 +51,18 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 
 		List<Object> record = new ArrayList<Object>();
 
+		String resolved = issue.getResolved();
+		int daysToResolve = issue.getDaysToResolve();
+		
 		String description = issue.getDescription();
 		description = description.replaceAll("\\&.*?\\;", "").replaceAll("<.*?>", " ");
-
+System.out.println(issue.getKey());
 		record.add(issue.getKey());
 		record.add(issue.getAssignee());
 		record.add(issue.getCreated());
 		record.add(issue.getResolution());
 		record.add(issue.getResolutionCode());
-		record.add(issue.getResolved());
+		record.add(resolved);
 		record.add(issue.getSeverity());
 		record.add(issue.getSeverityCode());
 		record.add(issue.getStatus());
@@ -68,9 +71,9 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 		record.add(issue.getTypeCode());
 		record.add(issue.getUpdated());
 		record.add(issue.getVotes());
-		record.add(issue.getDaysToResolve());
+		record.add(daysToResolve);
 		record.add(issue.getQuantityOfComments());
-
+		
 		return record;
 	}
 

@@ -10,7 +10,7 @@ import br.unicamp.ic.crawler.domain.core.HistoryParser;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.Report;
-import br.unicamp.ic.crawler.domain.core.IssueParser;
+import br.unicamp.ic.crawler.domain.core.ReportPasser;
 import br.unicamp.ic.crawler.persistence.ReportRepository;
 
 public class ReportRepositoryFromMemory implements ReportRepository {
@@ -1533,7 +1533,7 @@ public class ReportRepositoryFromMemory implements ReportRepository {
 
 	public ReportRepositoryFromMemory() {
 
-		IssueParser issueParser = new BZIssueParserInXml();
+		ReportPasser issueParser = new BZIssueParserInXml();
 		HistoryParser historyParser = new BZHistoryParserInHtml();
 
 		for (int i = 0; i < reports.size(); i++) {

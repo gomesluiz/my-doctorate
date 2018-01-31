@@ -6,6 +6,6 @@ package br.unicamp.ic.crawler.domain.core;
  * @version %I%, %G%
  *
  */
-public interface IssueParser {
+public interface ReportPasser {
 	Object parse(String contents);
 }

@@ -27,7 +27,7 @@ public class IssueDataCrawlerConsole {
 
 	public static void main(final String[] args) {
 
-		List<Project> datasets = Arrays.asList(
+		List<Project> projects = Arrays.asList(
 				new Project("mozilla", "https://bugzilla.mozilla.org/show_bug.cgi?ctype=xml&id=%d",
 						"/home/luiz/Workspace/issue-crawler/data/mozilla/xml/", "xml",
 						"https://bugzilla.mozilla.org/show_activity.cgi?id=%d",
@@ -62,18 +62,13 @@ public class IssueDataCrawlerConsole {
 						"/home/luiz/Workspace/issue-crawler/data/winehq/xml/", "xml",
 						"https://bugs.winehq.org/show_activity.cgi?id=%d",
 						"/home/luiz/Workspace/issue-crawler/data/winehq/xml/", "html", "WINEHQ-%d", 10000, 15000,
-						CrawlerFactory.BTS_BUGZILLA),
-				new Project("opennlp", "https://issues.apache.org/jira/si/jira.issueviews:issue-xml/%s/%s.xml",
-						"/home/luiz/Workspace/issue-crawler/data/opennlp/xml/", "xml",
-						"https://issues.apache.org/jira/browse/%s?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel",
-						"/home/luiz/Workspace/issue-crawler/data/opennlp/xml/", "html", "OPENNLP-%d", 0, 10,
-						CrawlerFactory.BTS_JIRA));
+						CrawlerFactory.BTS_BUGZILLA));
+		
 		Logger logger = LogManager.getRootLogger();
 		CSVOutputFormatter formatter = new CSVRawIssueFormatter();
 		IssueFileWriter output = new CSVIssueFileWriter("r50", formatter);
 
-		//for (Project dataset : datasets) {
-			Project project = datasets.get(1);
+		for (Project project: projects) {
 			ReportCrawler crawler = CrawlerFactory.getInstance(project);
 			logger.trace("Start " + project.getName() + " !");
 			crawler.load();
@@ -82,6 +77,6 @@ public class IssueDataCrawlerConsole {
 			crawler.search(new IssueFilterOutBySeverity("Enhancement"));
 			crawler.export(output);
 			logger.trace("Finish " + project.getName() + " !");
-		//}
+		}
 	}
 }

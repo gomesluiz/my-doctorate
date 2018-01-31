@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
-import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
+import br.unicamp.ic.crawler.domain.core.filters.ReportFilter;
 import br.unicamp.ic.crawler.persistence.IssueFileWriter;
 import br.unicamp.ic.crawler.persistence.ReportRepository;
 
@@ -21,7 +22,7 @@ import br.unicamp.ic.crawler.persistence.ReportRepository;
  * @author Luiz Alberto (gomes.luiz@gmail.com)
  * 
  */
-public abstract class ReportCrawler{
+public abstract class ReportCrawler {
 
 	protected Project project;
 	protected List<Report> reports;
@@ -34,25 +35,41 @@ public abstract class ReportCrawler{
 
 	public abstract String formatRemoteIssueHistoryUrl(int key);
 
-	public abstract List<Report> search(IssueFilter filter);
+	public abstract List<Report> search(ReportFilter filter);
 
 	public ReportCrawler() {
 		subject = new Subject();
 		new LoggerObserver(subject);
 	}
-	
+
 	/**
+	 * Downloads all bug reports starting on first until last bug report defined in
+	 * a <code>Project<code> object.
 	 * 
+	 * @param randomize
+	 *            TODO
 	 */
-	public final void downloadAll() {
+	public final void getAll(boolean randomize) {
 		try {
-			File folder = new File(project.getLocalIssuePath());
+			File folder = new File(project.getLocalReportFolder());
+			int min = project.getFirstReportNumber();
+			int max = project.getLastReportNumber();
+
 			if (!folder.exists()) {
 				folder.mkdirs();
 			}
 
-			for (int i = project.getFirstIssue(); i <= project.getLastIssue(); i++) {
-				download(i);
+			if (randomize) {
+				Random generator = new Random();
+
+				for (int i = min; i <= max; i++) {
+					int key = generator.nextInt((max - min) + 1) + min;
+					getOne(key);
+				}
+			} else {
+				for (int key = min; key <= max; key++) {
+					getOne(key);
+				}
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -60,10 +77,11 @@ public abstract class ReportCrawler{
 	}
 
 	/**
+	 * Downloads one report whose id is defined by key.
 	 * 
-	 * @param key
+	 * @param key report identified.
 	 */
-	protected final void download(int key) {
+	protected final void getOne(int key) {
 
 		try {
 			String url = this.formatRemoteIssueUrl(key);
@@ -107,7 +125,7 @@ public abstract class ReportCrawler{
 	 * @param out
 	 */
 	public void export(IssueFileWriter out) {
-		out.write(reports);
+		out.write(this.project, this.reports);
 	}
 
 	/**

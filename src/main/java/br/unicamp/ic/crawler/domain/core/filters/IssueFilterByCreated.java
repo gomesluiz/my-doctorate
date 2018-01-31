@@ -2,7 +2,7 @@ package br.unicamp.ic.crawler.domain.core.filters;
 
 import br.unicamp.ic.crawler.domain.core.Report;
 
-public class IssueFilterByCreated extends IssueFilter {
+public class IssueFilterByCreated extends ReportFilter {
 	private String start;
 	private String end;
 

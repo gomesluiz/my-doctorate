@@ -1,6 +1,6 @@
 package br.unicamp.ic.crawler.domain.bugzilla;
 
- import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -36,8 +36,9 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public int getKeySequential() {
-		if (bug.getBugId().equals("")) return -1; 
-		
+		if (bug.getBugId().equals(""))
+			return -1;
+
 		return Integer.parseInt(bug.getBugId());
 	}
 
@@ -66,13 +67,13 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getResolved() {
-		DateTime now = new DateTime();
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
-		String result = format.print(now);
-		
-		for(IssueActivityEntry activity: history) {
-			if (activity.getAdded().equals(ISSUE_STATUS_RESOLVED)) {
-				result = activity.getWhen().substring(0,10);
+		String result = "0000-00-00";
+
+		if (history != null) {
+			for (IssueActivityEntry activity : history) {
+				if (activity.getAdded().equals(ISSUE_STATUS_RESOLVED)) {
+					result = activity.getWhen().substring(0, 10);
+				}
 			}
 		}
 		return result;
@@ -115,11 +116,14 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public int getDaysToResolve() {
+
+		if  (this.getResolved().equals("0000-00-00")) return -1;
 		
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 		LocalDate startDate = LocalDate.parse(this.getCreated(), formatter);
 		LocalDate endDate = LocalDate.parse(this.getResolved(), formatter);
 		Days days = Days.daysBetween(startDate, endDate);
+		
 		return days.getDays();
 	}
 

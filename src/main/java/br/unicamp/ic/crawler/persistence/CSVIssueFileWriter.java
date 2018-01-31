@@ -1,5 +1,6 @@
 package br.unicamp.ic.crawler.persistence;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
+import br.unicamp.ic.crawler.domain.core.Project;
 import br.unicamp.ic.crawler.domain.core.Report;
 
 /**
@@ -48,13 +50,23 @@ public class CSVIssueFileWriter implements IssueFileWriter {
 	 * @param issues
 	 *            to write.
 	 */
-	public void write(final List<Report> issues) {
+	public void write(Project project, final List<Report> issues) {
 		FileWriter writer1 = null, writer2 = null;
 		CSVPrinter printer1 = null, printer2 = null;
 		CSVFormat format = CSVFormat.DEFAULT;
 		try {
-			writer1 = new FileWriter(this.prefix + "_raw_issues_data.csv");
-			writer2 = new FileWriter(this.prefix + "_raw_issues_history_data.csv");
+			String path = project.getLocalReportFolder();
+			path = path.replace("xml", "csv");
+			File folder = new File(path);
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+
+			String reportPath = path + this.prefix + "_raw_issues_data.csv";
+			String historyPath = path + this.prefix + "_raw_issues_history_data.csv";
+
+			writer1 = new FileWriter(reportPath);
+			writer2 = new FileWriter(historyPath);
 
 			printer1 = new CSVPrinter(writer1, format);
 			printer2 = new CSVPrinter(writer2, format);
@@ -65,7 +77,7 @@ public class CSVIssueFileWriter implements IssueFileWriter {
 			for (Report issue : issues) {
 				printer1.printRecord(issueformatter.format(issue));
 				for (IssueActivityEntry activity : issue.getActivities()) {
-					if (activity.getWhat().equals("severity")) {
+					if (activity.getWhat().toLowerCase().contains("severity")) {
 						printer2.printRecord(issueformatter.format(issue.getKey(), activity));
 					}
 				}

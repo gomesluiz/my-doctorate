@@ -6,7 +6,7 @@ import java.util.List;
 import br.unicamp.ic.crawler.domain.core.ReportCrawler;
 import br.unicamp.ic.crawler.domain.core.Project;
 import br.unicamp.ic.crawler.domain.core.Report;
-import br.unicamp.ic.crawler.domain.core.filters.IssueFilter;
+import br.unicamp.ic.crawler.domain.core.filters.ReportFilter;
 import br.unicamp.ic.crawler.persistence.ReportRepository;
 import br.unicamp.ic.crawler.persistence.URLResource;
 
@@ -64,7 +64,7 @@ public class BZXmlCrawler extends ReportCrawler {
 	}
 
 	@Override
-	public List<Report> search(IssueFilter filter) {
+	public List<Report> search(ReportFilter filter) {
 		reports = filter.filter(reports);
 		return reports;
 	}

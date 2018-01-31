@@ -10,7 +10,7 @@ import br.unicamp.ic.crawler.domain.core.Report;
  * @author luiz
  *
  */
-public abstract class IssueFilter {
+public abstract class ReportFilter {
 	/**
 	 * TODO
 	 * @param issue

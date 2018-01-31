@@ -17,7 +17,16 @@ public class BZHistoryParserInHtml implements HistoryParser {
 	public List<IssueActivityEntry> parse(String contents) {
 		List<IssueActivityEntry> activities = new ArrayList<IssueActivityEntry>();
 		Document doc = Jsoup.parse(contents);
+		
+		int numberOfTable = doc.select("table").size();
+		
+		if (numberOfTable == 0) return activities;
+		
+		//TODO think more about this.
 		Element table = doc.select("table").get(0);
+		if (numberOfTable > 1)
+			table = doc.select("table").get(1);
+
 		Elements rows = table.select("tr");
 		String who = "", when = "", what = "", removed = "", added = "";
 		for (int j = 1; j < rows.size(); j++) {
