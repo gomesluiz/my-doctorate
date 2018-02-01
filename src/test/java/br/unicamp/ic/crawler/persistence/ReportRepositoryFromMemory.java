@@ -1567,4 +1567,15 @@ public class ReportRepositoryFromMemory implements ReportRepository {
 		return result;
 	}
 
+	@Override
+	public void add(String target, String contents) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int count() {
+		return reports.size();
+	}
+
 }

@@ -37,13 +37,13 @@ public class JIRACrawler extends ReportCrawler {
 	}
 
 	@Override
-	public String formatRemoteIssueUrl(int key) {
+	public String formatRemoteReportUrl(int key) {
 		String name = project.getNameWithKey(key).toUpperCase();
 		return String.format(project.getRemoteIssueUrl(), name, name);
 	}
 
 	@Override
-	public String formatRemoteIssueHistoryUrl(int key) {
+	public String formatRemoteReportHistoryUrl(int key) {
 		String name = project.getNameWithKey(key).toUpperCase();
 		return String.format(project.getRemoteIssueHistoryUrl(), name);
 	}

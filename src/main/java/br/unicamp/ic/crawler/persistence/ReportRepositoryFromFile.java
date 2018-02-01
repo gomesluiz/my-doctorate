@@ -1,6 +1,9 @@
 package br.unicamp.ic.crawler.persistence;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,22 @@ public class ReportRepositoryFromFile implements ReportRepository {
 
 	}
 
+	/**
+	 * 
+	 * @param target
+	 * @param contents
+	 */
+	public  void add(String target, String contents) {
+		try {
+	
+			FileWriter out = new FileWriter(target);
+			BufferedWriter writer = new BufferedWriter(out);
+			writer.write(contents);
+			writer.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 	private IssueEntry convertFrom(File file) {
 		FileResource fileResource = new FileResource(file);
 		String contents = fileResource.asString();
@@ -90,9 +109,15 @@ public class ReportRepositoryFromFile implements ReportRepository {
 		File folder = new File(project.getLocalReportFolder());
 		File[] files = new File[] {};
 		if (folder.exists()) {
-			files = folder.listFiles((dir, name) -> name.endsWith(project.getIssueFileFormat()));
+			files = folder.listFiles((dir, name) -> name.endsWith(project.getReportFileExtension()));
 		}
 		return files;
+	}
+
+	@Override
+	public int count() {
+		File files[] = getReportFiles();
+		return files.length;
 	}
 
 }

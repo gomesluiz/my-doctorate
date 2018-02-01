@@ -1,9 +1,6 @@
 package br.unicamp.ic.crawler.domain.core;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -30,13 +27,13 @@ public abstract class ReportCrawler {
 	protected Subject subject;
 
 	public abstract String downloadFrom(String url);
-
-	public abstract String formatRemoteIssueUrl(int key);
-
-	public abstract String formatRemoteIssueHistoryUrl(int key);
-
+	public abstract String formatRemoteReportUrl(int key);
+	public abstract String formatRemoteReportHistoryUrl(int key);
 	public abstract List<Report> search(ReportFilter filter);
-
+	
+	/**
+	 * Class constructor.
+	 */
 	public ReportCrawler() {
 		subject = new Subject();
 		new LoggerObserver(subject);
@@ -45,11 +42,8 @@ public abstract class ReportCrawler {
 	/**
 	 * Downloads all bug reports starting on first until last bug report defined in
 	 * a <code>Project<code> object.
-	 * 
-	 * @param randomize
-	 *            TODO
 	 */
-	public final void getAll(boolean randomize) {
+	public final void getAll() {
 		try {
 			File folder = new File(project.getLocalReportFolder());
 			int min = project.getFirstReportNumber();
@@ -59,17 +53,37 @@ public abstract class ReportCrawler {
 				folder.mkdirs();
 			}
 
-			if (randomize) {
-				Random generator = new Random();
+			for (int key = min; key <= max; key++) {
+				getOne(key);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 
-				for (int i = min; i <= max; i++) {
-					int key = generator.nextInt((max - min) + 1) + min;
-					getOne(key);
-				}
-			} else {
-				for (int key = min; key <= max; key++) {
-					getOne(key);
-				}
+	/**
+	 * Downloads all bug reports starting on first until last bug report defined in
+	 * a <code>Project<code> object.
+	 * 
+	 * @param percentage percentage of bug reports to be downloaded.
+	 */
+	public final void getAll(double percentage) {
+		try {
+			File folder = new File(project.getLocalReportFolder());
+			int min = project.getFirstReportNumber();
+			int max = project.getLastReportNumber();
+
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+
+			Random generator = new Random();
+			int start = repository.count() + 1;
+			int end = (int) ((max - min) * (percentage / 100));
+			for (int i = start; i <= end; i++) {
+				int key = generator.nextInt((max - min) + 1) + min;
+				subject.setMessage("Start at : " + start +" End at: " + end + " Current : " + i + " Key :" + key);
+				getOne(key);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
@@ -79,12 +93,13 @@ public abstract class ReportCrawler {
 	/**
 	 * Downloads one report whose id is defined by key.
 	 * 
-	 * @param key report identified.
+	 * @param key
+	 *            report identified.
 	 */
 	protected final void getOne(int key) {
 
 		try {
-			String url = this.formatRemoteIssueUrl(key);
+			String reportUrl = this.formatRemoteReportUrl(key);
 
 			File localIssueFile = new File(project.formatLocalIssueFileName(key));
 			File localHistoryFile = new File(project.formatLocalIssueHistoryFileName(key));
@@ -92,21 +107,19 @@ public abstract class ReportCrawler {
 			if (localIssueFile.exists() && localHistoryFile.exists())
 				return;
 
-			String issueContents = downloadFrom(url);
-			if (issueContents == null)
+			String reportContent = downloadFrom(reportUrl);
+			if (reportContent == null)
 				return;
-			subject.setMessage(url);
+			
 
-			url = this.formatRemoteIssueHistoryUrl(key);
+			String reportHistoryUrl = this.formatRemoteReportHistoryUrl(key);
 
-			String issueHistoryContents = downloadFrom(url);
-			if (issueHistoryContents == null)
+			String reportHistoryContent = downloadFrom(reportHistoryUrl);
+			if (reportHistoryContent == null)
 				return;
-			subject.setMessage(url);
-
-			writeTo(project.formatLocalIssueFileName(key), issueContents);
-			writeTo(project.formatLocalIssueHistoryFileName(key), issueHistoryContents);
-
+			
+			repository.add(project.formatLocalIssueFileName(key), reportContent);
+			repository.add(project.formatLocalIssueHistoryFileName(key), reportHistoryContent);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 
@@ -128,20 +141,4 @@ public abstract class ReportCrawler {
 		out.write(this.project, this.reports);
 	}
 
-	/**
-	 * 
-	 * @param target
-	 * @param contents
-	 */
-	protected void writeTo(String target, String contents) {
-		try {
-
-			FileWriter out = new FileWriter(target);
-			BufferedWriter writer = new BufferedWriter(out);
-			writer.write(contents);
-			writer.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
 }

@@ -54,12 +54,12 @@ public class BZXmlCrawler extends ReportCrawler {
 	}
 
 	@Override
-	public String formatRemoteIssueUrl(int key) {
+	public String formatRemoteReportUrl(int key) {
 		return String.format(project.getRemoteIssueUrl(), key);
 	}
 
 	@Override
-	public String formatRemoteIssueHistoryUrl(int key) {
+	public String formatRemoteReportHistoryUrl(int key) {
 		return String.format(project.getRemoteIssueHistoryUrl(), key);
 	}
 

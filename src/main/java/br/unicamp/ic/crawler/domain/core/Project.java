@@ -87,7 +87,7 @@ public class Project {
 	/**
 	 * @return the issueFileFormat
 	 */
-	public String getIssueFileFormat() {
+	public String getReportFileExtension() {
 		return issueFileFormat;
 	}
 
