@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.unicamp.ic.crawler.domain.bugzilla.BZHistoryParserInHtml;
-import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
+import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
 import br.unicamp.ic.crawler.domain.core.HistoryParser;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
@@ -1533,7 +1533,7 @@ public class ReportRepositoryFromMemory implements ReportRepository {
 
 	public ReportRepositoryFromMemory() {
 
-		ReportPasser issueParser = new BZIssueParserInXml();
+		ReportPasser issueParser = new BZReportParserInXml();
 		HistoryParser historyParser = new BZHistoryParserInHtml();
 
 		for (int i = 0; i < reports.size(); i++) {

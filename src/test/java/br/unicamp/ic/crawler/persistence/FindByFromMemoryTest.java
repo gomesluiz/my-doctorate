@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.unicamp.ic.crawler.domain.bugzilla.BZHistoryParserInHtml;
-import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
+import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.Report;

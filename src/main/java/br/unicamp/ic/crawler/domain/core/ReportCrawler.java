@@ -27,10 +27,13 @@ public abstract class ReportCrawler {
 	protected Subject subject;
 
 	public abstract String downloadFrom(String url);
+
 	public abstract String formatRemoteReportUrl(int key);
+
 	public abstract String formatRemoteReportHistoryUrl(int key);
+
 	public abstract List<Report> search(ReportFilter filter);
-	
+
 	/**
 	 * Class constructor.
 	 */
@@ -65,10 +68,13 @@ public abstract class ReportCrawler {
 	 * Downloads all bug reports starting on first until last bug report defined in
 	 * a <code>Project<code> object.
 	 * 
-	 * @param percentage percentage of bug reports to be downloaded.
+	 * @param percentage
+	 *            percentage of bug reports to be downloaded.
 	 */
 	public final void getAll(double percentage) {
 		try {
+			subject.setMessage("Start " + project.getName() + " !");
+
 			File folder = new File(project.getLocalReportFolder());
 			int min = project.getFirstReportNumber();
 			int max = project.getLastReportNumber();
@@ -82,9 +88,11 @@ public abstract class ReportCrawler {
 			int end = (int) ((max - min) * (percentage / 100));
 			for (int i = start; i <= end; i++) {
 				int key = generator.nextInt((max - min) + 1) + min;
-				subject.setMessage("Start at : " + start +" End at: " + end + " Current : " + i + " Key :" + key);
+				subject.setMessage("[" + project.getName() + "]" + " Start at : " + start + " End at: " + end
+						+ " Current : " + i + " Key :" + key);
 				getOne(key);
 			}
+			subject.setMessage("Finish " + project.getName() + " !");
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -110,14 +118,13 @@ public abstract class ReportCrawler {
 			String reportContent = downloadFrom(reportUrl);
 			if (reportContent == null)
 				return;
-			
 
 			String reportHistoryUrl = this.formatRemoteReportHistoryUrl(key);
 
 			String reportHistoryContent = downloadFrom(reportHistoryUrl);
 			if (reportHistoryContent == null)
 				return;
-			
+
 			repository.add(project.formatLocalIssueFileName(key), reportContent);
 			repository.add(project.formatLocalIssueHistoryFileName(key), reportHistoryContent);
 		} catch (Exception e) {

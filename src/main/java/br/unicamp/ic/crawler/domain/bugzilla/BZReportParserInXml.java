@@ -14,11 +14,11 @@ import br.unicamp.ic.crawler.domain.core.ReportPasser;
  * @version %I%, %G%
  * @since 1.0
  */
-public class BZIssueParserInXml implements ReportPasser {
+public class BZReportParserInXml implements ReportPasser {
 
 	private XStream stream;
 
-	public BZIssueParserInXml() {
+	public BZReportParserInXml() {
 		stream = new XStream();
 		stream.autodetectAnnotations(true);
 		stream.ignoreUnknownElements();

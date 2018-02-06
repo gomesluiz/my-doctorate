@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
-import br.unicamp.ic.crawler.domain.bugzilla.BZXmlCrawler;
+import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
+import br.unicamp.ic.crawler.domain.bugzilla.BZReportCrawlerInXml;
 import br.unicamp.ic.crawler.domain.core.filters.IssueFilterByResolution;
 import br.unicamp.ic.crawler.domain.core.filters.IssueFilterByStatus;
 import br.unicamp.ic.crawler.domain.core.filters.IssueNoFilter;
@@ -33,7 +33,7 @@ public class SearchReportsTest {
 				CrawlerFactory.BTS_BUGZILLA);
 
 		repository = new ReportRepositoryFromMemory();
-		crawler = new BZXmlCrawler(project, repository);
+		crawler = new BZReportCrawlerInXml(project, repository);
 
 	}
 

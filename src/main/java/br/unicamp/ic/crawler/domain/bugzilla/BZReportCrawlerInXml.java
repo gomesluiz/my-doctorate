@@ -17,7 +17,7 @@ import br.unicamp.ic.crawler.persistence.URLResource;
  * @version 1.0
  * 
  */
-public class BZXmlCrawler extends ReportCrawler {
+public class BZReportCrawlerInXml extends ReportCrawler {
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
@@ -28,7 +28,7 @@ public class BZXmlCrawler extends ReportCrawler {
 	 * 
 	 *            TODO
 	 */
-	public BZXmlCrawler(Project project, ReportRepository repository) {
+	public BZReportCrawlerInXml(Project project, ReportRepository repository) {
 		super();
 		this.project = project;
 		this.reports = new ArrayList<Report>();

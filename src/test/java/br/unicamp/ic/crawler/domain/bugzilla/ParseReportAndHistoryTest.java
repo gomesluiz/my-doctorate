@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.unicamp.ic.crawler.domain.bugzilla.BZHistoryParserInHtml;
-import br.unicamp.ic.crawler.domain.bugzilla.BZIssueParserInXml;
+import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
 import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
 import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.Report;
@@ -56,7 +56,7 @@ public class ParseReportAndHistoryTest {
 	@Test
 	public final void parseAnIssueFromBugzillaXmlValidFormat() {
 		String xml = ReportRepositoryFromMemory.reports.get(0);	
-		ReportPasser parser = new BZIssueParserInXml();
+		ReportPasser parser = new BZReportParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
 		assertEquals("JDT-14582", entry.getKey());
 		assertEquals("2002-04-25", entry.getCreated());
