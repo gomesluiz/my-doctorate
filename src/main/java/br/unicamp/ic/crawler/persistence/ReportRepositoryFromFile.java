@@ -38,12 +38,13 @@ public class ReportRepositoryFromFile implements ReportRepository {
 		File[] files = getReportFiles();
 		total = files.length;
 		for (File file : files) {
+			subject.setMessage(file.getName());
+//			if (count % 1 == 0) {
+//				subject.setMessage(count + " of " + total);
+//			}
 			IssueEntry entry = convertFrom(file);
 			reports.add(new Report(entry));
 			count += 1;
-			if (count % 1 == 0) {
-				subject.setMessage(count + " of " + total);
-			}
 		}
 		return reports;
 	}

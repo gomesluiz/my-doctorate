@@ -56,7 +56,6 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 		
 		String description = issue.getDescription();
 		description = description.replaceAll("\\&.*?\\;", "").replaceAll("<.*?>", " ");
-System.out.println(issue.getKey());
 		record.add(issue.getKey());
 		record.add(issue.getAssignee());
 		record.add(issue.getCreated());

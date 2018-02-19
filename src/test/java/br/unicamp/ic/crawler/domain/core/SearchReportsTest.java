@@ -4,13 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
 import br.unicamp.ic.crawler.domain.bugzilla.BZReportCrawlerInXml;
 import br.unicamp.ic.crawler.domain.core.filters.IssueFilterByResolution;
 import br.unicamp.ic.crawler.domain.core.filters.IssueFilterByStatus;
@@ -46,14 +43,14 @@ public class SearchReportsTest {
 	public final void searchReportsWithNoFilter() {
 
 		List<Report> reports = crawler.search(new IssueNoFilter());
-		assertEquals(3, reports.size());
+		assertEquals(5, reports.size());
 	}
 
 	@Test
 	public final void searchReportsWithFilterStatusResolved() {
 
 		List<Report> reports = crawler.search(new IssueFilterByStatus("Resolved"));
-		assertEquals(2, reports.size());
+		assertEquals(3, reports.size());
 	}
 
 	@Test
@@ -67,21 +64,21 @@ public class SearchReportsTest {
 	public final void searchReportsWithFilterStatusClosed() {
 
 		List<Report> reports = crawler.search(new IssueFilterByStatus("Closed"));
-		assertEquals(1, reports.size());
+		assertEquals(2, reports.size());
 	}
 
 	@Test
 	public final void searchReportsWithFilterStatusResolvedOrClosed() {
 
 		List<Report> reports = crawler.search(new IssueFilterByStatus("Resolved", "Closed"));
-		assertEquals(3, reports.size());
+		assertEquals(5, reports.size());
 	}
 
 	@Test
 	public final void searchReportsWithFilterResolutionFixed() {
 
 		List<Report> reports = crawler.search(new IssueFilterByResolution("Fixed"));
-		assertEquals(3, reports.size());
+		assertEquals(4, reports.size());
 	}
 
 	@Test

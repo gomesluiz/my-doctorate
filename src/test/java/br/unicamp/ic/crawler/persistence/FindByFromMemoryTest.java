@@ -5,22 +5,13 @@ package br.unicamp.ic.crawler.persistence;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.unicamp.ic.crawler.domain.bugzilla.BZHistoryParserInHtml;
-import br.unicamp.ic.crawler.domain.bugzilla.BZReportParserInXml;
-import br.unicamp.ic.crawler.domain.core.IssueActivityEntry;
-import br.unicamp.ic.crawler.domain.core.IssueEntry;
 import br.unicamp.ic.crawler.domain.core.Report;
-import br.unicamp.ic.crawler.domain.core.ReportPasser;
-import br.unicamp.ic.crawler.persistence.ReportRepository;
-import br.unicamp.ic.crawler.persistence.ReportRepositoryFromMemory;
 
 /**
  * @author luiz
@@ -78,5 +69,18 @@ public class FindByFromMemoryTest {
 
 		assertEquals(0, issue.getDaysToResolve());
 	}
+	@Test
+	public final void findByABugReportResolvedInNoDays() {
+		ReportRepository repository = new ReportRepositoryFromMemory();
+		Report issue = repository.findBy("WINE-9981");
+
+		assertEquals("2007-10-10", issue.getCreated());
+		assertEquals("2007-11-26", issue.getResolved());
+		assertEquals("normal", issue.getSeverity());
+		assertEquals("5", issue.getSeverityCode());
+
+		assertEquals(47, issue.getDaysToResolve());
+	}
+
 
 }

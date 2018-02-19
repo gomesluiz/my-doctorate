@@ -94,6 +94,7 @@ public abstract class ReportCrawler {
 			}
 			subject.setMessage("Finish " + project.getName() + " !");
 		} catch (Exception e) {
+		
 			throw new RuntimeException(e.getMessage());
 		}
 	}

@@ -2,8 +2,6 @@ package br.unicamp.ic.crawler.console;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import br.unicamp.ic.crawler.domain.core.CrawlerFactory;
 import br.unicamp.ic.crawler.domain.core.Project;
@@ -14,6 +12,7 @@ import br.unicamp.ic.crawler.domain.core.ReportCrawler;
  *
  * @author Luiz Alberto
  * @since 2016-01-02
+ * https://hibernate.atlassian.net/si/jira.issueviews:issue-xml/HHH-12279/HHH-12279.xml
  */
 public class IssueDataDownloaderConsole {
 
@@ -59,7 +58,18 @@ public class IssueDataDownloaderConsole {
 						"/home/luiz/Workspace/issue-crawler/data/mozilla/xml/", "xml",
 						"https://bugzilla.mozilla.org/show_activity.cgi?id=%d",
 						"/home/luiz/Workspace/issue-crawler/data/mozilla/xml/", "html", "MOZILLA-%d", 1, 1000000,
-						CrawlerFactory.BTS_BUGZILLA));
+						CrawlerFactory.BTS_BUGZILLA),
+				new Project("kernel", "https://bugzilla.kernel.org/show_bug.cgi?ctype=xml&id=%d",
+						"/home/luiz/Workspace/issue-crawler/data/kernel/xml/", "xml",
+						"https://bugzilla.kernel.org/show_activity.cgi?id=%d",
+						"/home/luiz/Workspace/issue-crawler/data/kernel/xml/", "html", "KERNEL-%d", 1, 198745,
+						CrawlerFactory.BTS_BUGZILLA)
+//				new Project("hhh", "https://hibernate.atlassian.net/si/jira.issueviews:issue-xml/%s/%s.xml",
+//						"/home/luiz/Workspace/issue-crawler/data/hibernate/xml/", "xml",
+//						"https://hibernate.atlassian.net/browse/%s?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel", 
+//						"/home/luiz/Workspace/issue-crawler/data/hibernate/xml/", "html", "HHH-%d", 1, 12129,
+//						CrawlerFactory.BTS_JIRA)
+				);
 
 		for (Project project : projects) {
 			Thread th = new Thread(new Runnable() {

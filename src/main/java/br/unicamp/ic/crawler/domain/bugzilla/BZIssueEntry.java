@@ -27,10 +27,10 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getKey() {
-		StringBuilder sb = new StringBuilder(bug.getProduct());
-		sb.append("-");
-		sb.append(bug.getBugId());
-		return sb.toString();
+		StringBuilder key = new StringBuilder(bug.getProduct());
+		key.append("-");
+		key.append(bug.getBugId());
+		return key.toString();
 	}
 
 	@Override

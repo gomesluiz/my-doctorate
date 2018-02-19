@@ -3,11 +3,14 @@ package br.unicamp.ic.crawler.domain.jira;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unicamp.ic.crawler.domain.core.ReportCrawler;
-import br.unicamp.ic.crawler.domain.core.ReportPasser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import br.unicamp.ic.crawler.domain.core.Project;
 import br.unicamp.ic.crawler.domain.core.Report;
+import br.unicamp.ic.crawler.domain.core.ReportCrawler;
 import br.unicamp.ic.crawler.domain.core.filters.ReportFilter;
+import br.unicamp.ic.crawler.persistence.ReportRepository;
 import br.unicamp.ic.crawler.persistence.URLResource;
 
 /**
@@ -17,9 +20,7 @@ import br.unicamp.ic.crawler.persistence.URLResource;
  * @version 1.0
  * 
  */
-public class JIRACrawler extends ReportCrawler {
-
-	private ReportPasser converter;
+public class JiraReportCrawlerInXml extends ReportCrawler {
 
 	/**
 	 * Constructs a IssueJiraExtraxtor instance.
@@ -30,10 +31,9 @@ public class JIRACrawler extends ReportCrawler {
 	 *            TODO
 	 * @param converter
 	 */
-	public JIRACrawler(Project dataset, ReportPasser converter) {
-		this.converter = converter;
+	public JiraReportCrawlerInXml(Project dataset, ReportRepository repository) {
 		this.project = dataset;
-		this.converter = converter;
+		this.repository = repository;
 	}
 
 	@Override
@@ -58,8 +58,10 @@ public class JIRACrawler extends ReportCrawler {
 	public String downloadFrom(String url) {
 		String contents = null;
 		try {
-			URLResource urlResource = new URLResource(url);
-			contents = urlResource.asString();
+			Document doc = Jsoup.connect(url)
+					.userAgent("Mozilla/5.0")
+					.get();
+			contents = doc.html();
 		} catch (Exception e) {
 			subject.setMessage(e.getMessage());
 		}
