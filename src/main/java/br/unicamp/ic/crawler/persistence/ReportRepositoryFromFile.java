@@ -33,18 +33,12 @@ public class ReportRepositoryFromFile implements ReportRepository {
 
 	@Override
 	public List<Report> findAll() {
-		int count = 0, total = 0;
 		List<Report> reports = new ArrayList<Report>();
 		File[] files = getReportFiles();
-		total = files.length;
 		for (File file : files) {
 			subject.setMessage(file.getName());
-//			if (count % 1 == 0) {
-//				subject.setMessage(count + " of " + total);
-//			}
 			IssueEntry entry = convertFrom(file);
 			reports.add(new Report(entry));
-			count += 1;
 		}
 		return reports;
 	}
@@ -71,9 +65,9 @@ public class ReportRepositoryFromFile implements ReportRepository {
 	 * @param target
 	 * @param contents
 	 */
-	public  void add(String target, String contents) {
+	public void add(String target, String contents) {
 		try {
-	
+
 			FileWriter out = new FileWriter(target);
 			BufferedWriter writer = new BufferedWriter(out);
 			writer.write(contents);
@@ -82,6 +76,7 @@ public class ReportRepositoryFromFile implements ReportRepository {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+
 	private IssueEntry convertFrom(File file) {
 		FileResource fileResource = new FileResource(file);
 		String contents = fileResource.asString();
@@ -98,11 +93,15 @@ public class ReportRepositoryFromFile implements ReportRepository {
 		if (key == -1)
 			return activities;
 
-		File file = new File(project.formatLocalIssueHistoryFileName(key));
-		FileResource fileResource = new FileResource(file);
-		String contents = fileResource.asString();
+		try {
+			File file = new File(project.formatLocalIssueHistoryFileName(key));
+			FileResource fileResource = new FileResource(file);
+			String contents = fileResource.asString();
 
-		activities = historyParser.parse(contents);
+			activities = historyParser.parse(contents);
+		} catch (Exception e) {
+			System.err.println("FileResource: cannot access :" + project.formatLocalIssueHistoryFileName(key));
+		}
 		return activities;
 	}
 

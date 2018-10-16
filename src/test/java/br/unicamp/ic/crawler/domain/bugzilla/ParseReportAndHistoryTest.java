@@ -51,13 +51,14 @@ public class ParseReportAndHistoryTest {
 
 	@Test
 	public final void parseAnIssueFromBugzillaXmlValidFormat() {
-		String xml = ReportRepositoryFromMemory.reports.get(0);	
+		String xml = ReportRepositoryFromMemory.reports.get(5);	
 		ReportPasser parser = new BZReportParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
-		assertEquals("JDT-14582", entry.getKey());
-		assertEquals("2002-04-25", entry.getCreated());
-		assertEquals("major", entry.getSeverity());
+		assertEquals("PLATFORM-77", entry.getKey());
+		assertEquals("2001-10-10", entry.getCreated());
+		assertEquals("normal", entry.getSeverity());
 		assertEquals("RESOLVED", entry.getStatus());
+		assertEquals(3, entry.getComments().size());
 	}
 	
 	@Test

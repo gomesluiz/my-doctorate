@@ -9,6 +9,8 @@ import br.unicamp.ic.crawler.domain.core.Report;
 
 /**
  * 
+ * The <code>CSVRawIssueFormatter</code> class implements issue raw format.
+ * 
  * @author luiz
  *
  */
@@ -19,25 +21,27 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 
 		if (header == ISSUE_HEADER_TYPE) {
 			headers = new ArrayList<String>(Arrays.asList(
-					"IssueKey"
+					"Key"
+					, "Summary"
+					, "Description"
 					, "Assignee"
 					, "Created"
 					, "Resolution"
 					, "ResolutionCode"
 					, "Resolved"
-					, "Severity"
-					, "SeverityCode"
 					, "Status"
 					, "StatusCode"
 					, "Type"
 					, "TypeCode"
 					, "Updated"
 					, "Votes"
-					, "DaysToResolve"
 					, "QuantityOfComments"
+					, "DaysToResolve"
+					, "Severity"
+					, "SeverityCode"
 					));
 		} else {
-			headers = new ArrayList<String>(Arrays.asList("IssueKey", "Who", "When", "What", "Removed", "Added"));
+			headers = new ArrayList<String>(Arrays.asList("Key", "Who", "When", "What", "Removed", "Added"));
 		}
 
 		return headers.toArray();
@@ -47,31 +51,44 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 	 * 
 	 */
 	@Override
-	public List<Object> format(Report issue) {
+	public List<Object> format(Report report) {
 
 		List<Object> record = new ArrayList<Object>();
 
-		String resolved = issue.getResolved();
-		int daysToResolve = issue.getDaysToResolve();
+		String resolved = report.getResolved();
+		int daysToResolve = report.getDaysToResolve();
 		
-		String description = issue.getDescription();
-		description = description.replaceAll("\\&.*?\\;", "").replaceAll("<.*?>", " ");
-		record.add(issue.getKey());
-		record.add(issue.getAssignee());
-		record.add(issue.getCreated());
-		record.add(issue.getResolution());
-		record.add(issue.getResolutionCode());
+		String description = report.getDescription();
+		String summary = report.getSummary();
+		
+		description = description.replaceAll("\\&.*?\\;", "")
+				.replaceAll("<.*?>", "")
+				.replaceAll("\"", "")
+				.replaceAll(",", "");
+		summary = summary.replaceAll("\\&.*?\\;", "")
+				.replaceAll("<.*?>", "")
+				.replaceAll("\"", "")
+				.replaceAll(",", "");
+		
+		record.add(report.getKey());
+		record.add(summary);
+		record.add(description);
+		record.add(report.getAssignee());
+		record.add(report.getCreated());
+		record.add(report.getResolution());
+		record.add(report.getResolutionCode());
 		record.add(resolved);
-		record.add(issue.getSeverity());
-		record.add(issue.getSeverityCode());
-		record.add(issue.getStatus());
-		record.add(issue.getStatusCode());
-		record.add(issue.getType());
-		record.add(issue.getTypeCode());
-		record.add(issue.getUpdated());
-		record.add(issue.getVotes());
+		record.add(report.getStatus());
+		record.add(report.getStatusCode());
+		record.add(report.getType());
+		record.add(report.getTypeCode());
+		record.add(report.getUpdated());
+		record.add(report.getVotes());
+		record.add(report.getQuantityOfComments());
 		record.add(daysToResolve);
-		record.add(issue.getQuantityOfComments());
+		record.add(report.getSeverity());
+		record.add(report.getSeverityCode());
+
 		
 		return record;
 	}

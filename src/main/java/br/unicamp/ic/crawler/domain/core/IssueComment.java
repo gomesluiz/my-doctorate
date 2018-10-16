@@ -1,7 +1,7 @@
 package br.unicamp.ic.crawler.domain.core;
 
 public interface IssueComment {
-	public String getId();
+	public int getId();
 	public String getAuthor();
 	public String getCreated();
 	public String getMessage();

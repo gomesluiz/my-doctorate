@@ -13,7 +13,7 @@ import br.unicamp.ic.crawler.domain.core.IssueComment;
 public class Comment implements IssueComment{
 	
 	@XStreamAsAttribute 
-	private String id;
+	private int id;
 	
 	@XStreamAsAttribute 
 	private String author;
@@ -24,7 +24,7 @@ public class Comment implements IssueComment{
 	@XStreamOmitField
 	private String message;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	public String getAuthor() {

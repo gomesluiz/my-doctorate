@@ -33,7 +33,7 @@ public interface IssueEntry {
 
 	String converteStatusToCode();
 
-	String getTitle();
+	String getSummary();
 
 	String getType();
 

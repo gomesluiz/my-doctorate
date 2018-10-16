@@ -22,7 +22,12 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getDescription() {
-		return ISSUE_ENTRY_NA;
+		String description = ISSUE_ENTRY_NA;
+		List<BZIssueComment> comments = bug.getComments();
+		
+		if (comments.size() > 0) description = comments.get(0).getMessage();
+		
+		return description;
 	}
 
 	@Override
@@ -104,7 +109,7 @@ public class BZIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public String getTitle() {
+	public String getSummary() {
 		return bug.getShortDesc();
 	}
 

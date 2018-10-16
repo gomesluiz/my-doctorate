@@ -1226,7 +1226,98 @@ public class ReportRepositoryFromMemory implements ReportRepository {
 					+ "    <comment_count>2</comment_count>\n" + "    <who name=\"Martin Adamek\">madamek</who>\n"
 					+ "    <bug_when>2007-01-09 12:14:40 +0000</bug_when>\n" + "    <thetext>\n" + "\n"
 					+ "*** This issue has been marked as a duplicate of 91993 ***</thetext>\n" + "  </long_desc>\n"
-					+ "      \n" + "      \n" + "\n" + "    </bug>\n" + "\n" + "</bugzilla>\n" + "");
+					+ "      \n" + "      \n" + "\n" + "    </bug>\n" + "\n" + "</bugzilla>\n" + "",
+					"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n" + 
+					"<!DOCTYPE bugzilla SYSTEM \"https://bugs.eclipse.org/bugs/page.cgi?id=bugzilla.dtd\">\n" + 
+					"\n" + 
+					"<bugzilla version=\"5.0.3\"\n" + 
+					"          urlbase=\"https://bugs.eclipse.org/bugs/\"\n" + 
+					"          \n" + 
+					"          maintainer=\"webmaster@eclipse.org\"\n" + 
+					">\n" + 
+					"\n" + 
+					"    <bug>\n" + 
+					"          <bug_id>77</bug_id>\n" + 
+					"          \n" + 
+					"          <creation_ts>2001-10-10 21:36:03 -0400</creation_ts>\n" + 
+					"          <short_desc>DCR: Need &quot;Expand All&quot; in comparison editor (1GE50QW)</short_desc>\n" + 
+					"          <delta_ts>2002-05-23 21:20:36 -0400</delta_ts>\n" + 
+					"          <reporter_accessible>1</reporter_accessible>\n" + 
+					"          <cclist_accessible>1</cclist_accessible>\n" + 
+					"          <classification_id>2</classification_id>\n" + 
+					"          <classification>Eclipse</classification>\n" + 
+					"          <product>Platform</product>\n" + 
+					"          <component>Team</component>\n" + 
+					"          <version>2.0</version>\n" + 
+					"          <rep_platform>All</rep_platform>\n" + 
+					"          <op_sys>All</op_sys>\n" + 
+					"          <bug_status>RESOLVED</bug_status>\n" + 
+					"          <resolution>FIXED</resolution>\n" + 
+					"          \n" + 
+					"          \n" + 
+					"          <bug_file_loc></bug_file_loc>\n" + 
+					"          <status_whiteboard></status_whiteboard>\n" + 
+					"          <keywords></keywords>\n" + 
+					"          <priority>P3</priority>\n" + 
+					"          <bug_severity>normal</bug_severity>\n" + 
+					"          <target_milestone>2.0 M6</target_milestone>\n" + 
+					"          \n" + 
+					"          \n" + 
+					"          <everconfirmed>1</everconfirmed>\n" + 
+					"          <reporter name=\"DJ Houghton\">dj.houghton</reporter>\n" + 
+					"          <assigned_to name=\"James Moody\">James_Moody</assigned_to>\n" + 
+					"          \n" + 
+					"          \n" + 
+					"          \n" + 
+					"          <votes>0</votes>\n" + 
+					"\n" + 
+					"      \n" + 
+					"\n" + 
+					"      \n" + 
+					"\n" + 
+					"      \n" + 
+					"\n" + 
+					"          <comment_sort_order>oldest_to_newest</comment_sort_order>  \n" + 
+					"    \n" + 
+					"    <long_desc isprivate=\"0\" >\n" + 
+					"      <commentid>83</commentid>\n" + 
+					"      <comment_count>0</comment_count>\n" + 
+					"      <who name=\"DJ Houghton\">dj.houghton</who>\n" + 
+					"      <bug_when>2001-10-10 21:36:03 -0400</bug_when>\n" + 
+					"      <thetext>When you compare a Java project with the team stream version,\n" + 
+					"	    the resulting editor should have an &quot;Expand All...&quot; menu option\n" + 
+					"	    (like the Catchup/Release view) so you can quickly drill down\n" + 
+					"	    through folders to get to your changes.\n" + 
+					"\n" + 
+					"      NOTES:\n" + 
+					"\n" + 
+					"      KM (5/22/01 3:51:02 PM)\n" + 
+					"	    Is this us or compare framework?\n" + 
+					"\n" + 
+					"      AW (01.06.01 10:54:34)\n" + 
+					"	    It&apos;s you.</thetext>\n" + 
+					"    </long_desc>\n" + 
+					"    \n" + 
+					"    <long_desc isprivate=\"0\" >\n" + 
+					"      <commentid>6396</commentid>\n" + 
+					"      <comment_count>1</comment_count>\n" + 
+					"      <who name=\"DJ Houghton\">dj.houghton</who>\n" + 
+					"      <bug_when>2001-10-23 23:42:10 -0400</bug_when>\n" + 
+					"      <thetext>PRODUCT VERSION:0.109 JRE on WINNT</thetext>\n" + 
+					"    </long_desc>\n" + 
+					"    \n" + 
+					"    <long_desc isprivate=\"0\" >\n" + 
+					"      <commentid>45789</commentid>\n" + 
+					"      <comment_count>2</comment_count>\n" + 
+					"      <who name=\"Kevin McGuire\">Kevin_McGuire</who>\n" + 
+					"      <bug_when>2002-04-23 15:38:47 -0400</bug_when>\n" + 
+					"      <thetext>fixed some time ago</thetext>\n" + 
+					"    </long_desc>\n" + 
+					"    \n" + 
+					"</bug>\n" + 
+					"\n" + 
+					"</bugzilla>\n" + 
+					"");
 	public static List<String> histories = Arrays.asList("<!DOCTYPE html>\n" + "<html lang=\"en\">\n" + "  <head>\n"
 			+ "    <title>Changes made to bug 14582</title>\n" + "\n"
 			+ "      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" + "\n"

@@ -53,7 +53,7 @@ public class CSVIssueFileWriter implements IssueFileWriter {
 	public void write(Project project, final List<Report> issues) {
 		FileWriter writer1 = null, writer2 = null;
 		CSVPrinter printer1 = null, printer2 = null;
-		CSVFormat format = CSVFormat.DEFAULT;
+		CSVFormat format = CSVFormat.EXCEL;
 		try {
 			String path = project.getLocalReportFolder();
 			path = path.replace("xml", "csv");
@@ -62,8 +62,8 @@ public class CSVIssueFileWriter implements IssueFileWriter {
 				folder.mkdirs();
 			}
 
-			String reportPath = path + this.prefix + "_raw_issues_data.csv";
-			String historyPath = path + this.prefix + "_raw_issues_history_data.csv";
+			String reportPath = path + this.prefix + "_bug_report_data.csv";
+			String historyPath = path + this.prefix + "_bug_report_history_data.csv";
 
 			writer1 = new FileWriter(reportPath);
 			writer2 = new FileWriter(historyPath);

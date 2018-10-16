@@ -106,7 +106,7 @@ public class JIRAIssueEntry implements IssueEntry {
 	}
 
 	@Override
-	public String getTitle() {
+	public String getSummary() {
 		return channel.getTitle();
 	}
 

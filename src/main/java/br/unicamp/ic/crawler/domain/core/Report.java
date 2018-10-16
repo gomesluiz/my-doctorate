@@ -15,12 +15,12 @@ import java.util.regex.Pattern;
 public class Report {
 	static final Pattern REMOVE_TAGS = Pattern.compile("<.+?>");
 
-	private List<IssueComment> comments;
 	private IssueEntry entry;
 
 	public Report(IssueEntry entry) {
 		this.entry = entry;
-		this.comments = new ArrayList<IssueComment>();
+		new ArrayList<IssueComment>();
+
 	}
 
 	/**
@@ -39,6 +39,15 @@ public class Report {
 	 */
 	public String getCreated() {
 		return entry.getCreated();
+	}
+
+	/**
+	 * Returns the summary text.
+	 * 
+	 * @return the summary text
+	 */
+	public String getSummary() {
+		return entry.getSummary();
 	}
 
 	/**
@@ -105,22 +114,12 @@ public class Report {
 	}
 
 	/**
-	 * Adds comment to <code>comments</code> list.
-	 * 
-	 * @param c issue comment
-	 */
-	public void addComment(IssueComment c) {
-		this.comments.add(c);
-
-	}
-
-	/**
 	 * Gets a collection of issues comments.
 	 * 
 	 * @return collection of comments.
 	 */
 	public List<IssueComment> getComments() {
-		return this.comments;
+		return this.entry.getComments();
 	}
 
 	/**
@@ -152,73 +151,62 @@ public class Report {
 	}
 
 	/**
-	 * Gets the issue resolution code 
-	 * @return
+	 * Gets the issue resolution code
+	 * 
+	 * @return resolution code
 	 */
 	public String getResolutionCode() {
 		return entry.convertResolutionToCode();
 	}
 
+	/**
+	 * Gets the issue status code
+	 * 
+	 * @return the status code
+	 */
 	public String getStatusCode() {
 		return entry.converteStatusToCode();
 	}
 
+	/**
+	 * Gets the comment quantity.
+	 * 
+	 * @return the quantity of comments
+	 */
 	public int getQuantityOfComments() {
 		List<IssueComment> comments = this.getComments();
 		return comments.size();
 	}
 
+	/**
+	 * Gets assignee of issue report
+	 * 
+	 * @return the assignee name
+	 */
 	public String getAssignee() {
 		return entry.getAssignee();
 	}
 
-	public String getTitle() {
-		return entry.getTitle();
-	}
-
+	/**
+	 * Gets votes gives to report.
+	 * 
+	 * @return the votes gives to report
+	 */
 	public String getVotes() {
 		return entry.getVotes();
 	}
 
-	public int getQuantityOfLinesInDescription() {
-		int quantityOfLines = 0;
-		if (getQuantityOfCharactersInDescription() > 0) {
-			quantityOfLines = getDescription().split("\r\n|\r|\n").length;
-		}
-		return quantityOfLines;
-
-	}
-
-	public int getQuantityOfWordsInDescription() {
-		int quantityOfWords = 0;
-		if (getQuantityOfCharactersInDescription() > 0) {
-			quantityOfWords = getDescription().split("\\w+").length;
-		}
-
-		return quantityOfWords;
-	}
-
-	public List<IssueActivityEntry> getActivities(){
+	public List<IssueActivityEntry> getActivities() {
 		List<IssueActivityEntry> result = entry.getActivities();
-		
-		if (result == null) return new ArrayList<IssueActivityEntry>();
-		
+
+		if (result == null)
+			return new ArrayList<IssueActivityEntry>();
+
 		return entry.getActivities();
-	}
-	public int getQuantityOfCharactersInDescription() {
-		return getDescription().length();
-	}
-
-	public int getQuantityOfWordsInTitle() {
-		return getTitle().split("\\w+").length;
-	}
-
-	public int getQuantityOfCharactersInTitle() {
-		return getTitle().length();
 	}
 
 	public String toString() {
-		return "Issue [key=" + getKey() + ", title=" + getTitle() + "]";
+		return "Issue [key=" + getKey() + ", title=" + getSummary() + "]";
 	}
 
 }
