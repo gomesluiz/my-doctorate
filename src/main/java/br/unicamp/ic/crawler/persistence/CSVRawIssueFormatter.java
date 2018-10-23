@@ -21,7 +21,7 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 
 		if (header == ISSUE_HEADER_TYPE) {
 			headers = new ArrayList<String>(Arrays.asList(
-					"Key"
+					"Bug_Id"
 					, "Summary"
 					, "Description"
 					, "Assignee"
