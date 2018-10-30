@@ -1,8 +1,10 @@
+if (!require('caret')) install.packages('caret')
 if (!require('qdap')) install.packages('qdap')
 if (!require('tm')) install.packages('tm')
 if (!require('viridisLite')) install.packages('viridisLite')
 if (!require('wordcloud')) install.packages('wordcloud')
 
+library(caret)
 library(qdap)
 library(tm)
 library(wordcloud)
@@ -38,6 +40,7 @@ make_dtm <- function(corpus){
   #dtm           <- removeSparseTerms(dtm, sparse = 0.6)
   return(dtm)
 }
+
 
 # days to resolve boxplot 
 plot_boxplot <- function(bug_report_raw_data, label) {
@@ -77,6 +80,20 @@ plot_histogram<- function(bug_report_raw_data, label) {
          col = c("royalblue", "red"),
          lwd = c(2, 2, 2))
 }
+
+# implementar este gráfico
+# transparentTheme(trans = .9)
+# featurePlot(x = iris[, 1:4], 
+#             y = iris$Species,
+#             plot = "density", 
+#             ## Pass in options to xyplot() to 
+#             ## make it prettier
+#             scales = list(x = list(relation="free"), 
+#                           y = list(relation="free")), 
+#             adjust = 1.5, 
+#             pch = "|", 
+#             layout = c(4, 1), 
+#             auto.key = list(columns = 3))
 
 all_data <- read.csv("~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_data.csv"
                      , stringsAsFactors=FALSE)
