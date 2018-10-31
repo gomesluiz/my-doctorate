@@ -93,7 +93,7 @@ filtered_data   <- all_data %>%
 
 for (feature in c("Description", "Summary")) {
   
-  flog.trace("Model %s Making document term matrix from %s feature", model, feature)
+  flog.trace("Making document term matrix from <%s> feature", feature)
   dtm     <-  make_dtm(filtered_data[, c('Bug_Id', feature)], 200)
   dtm_df  <-  as.data.frame(tidy(dtm))
   names(dtm_df) <- c("Bug_Id", "Term", "Count")
@@ -111,6 +111,7 @@ for (feature in c("Description", "Summary")) {
   merged_data <- na.omit(merged_data)
   
   for (model in models) {
+    
     for (threshold in thresholds) {
       merged_data$Is_Long <- as.factor(ifelse(merged_data$DaysToResolve <= threshold, 0, 1))
       
