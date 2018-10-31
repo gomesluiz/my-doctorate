@@ -1,0 +1,108 @@
+nohup: ignoring input
+Loading required package: class
+Loading required package: caret
+Loading required package: lattice
+Loading required package: ggplot2
+Loading required package: doMC
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: futile.logger
+Loading required package: qdap
+Loading required package: qdapDictionaries
+Loading required package: qdapRegex
+
+Attaching package: ‘qdapRegex’
+
+The following object is masked from ‘package:ggplot2’:
+
+    %+%
+
+Loading required package: qdapTools
+Loading required package: RColorBrewer
+
+Attaching package: ‘qdap’
+
+The following object is masked from ‘package:class’:
+
+    condense
+
+The following object is masked from ‘package:base’:
+
+    Filter
+
+Loading required package: SnowballC
+Loading required package: tm
+Loading required package: NLP
+
+Attaching package: ‘NLP’
+
+The following object is masked from ‘package:qdap’:
+
+    ngrams
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+
+Attaching package: ‘tm’
+
+The following objects are masked from ‘package:qdap’:
+
+    as.DocumentTermMatrix, as.TermDocumentMatrix
+
+Loading required package: tidytext
+Loading required package: tidyr
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:qdap’:
+
+    %>%
+
+NULL
+TRACE [2018-10-31 00:12:04] Opening data files from Eclipse,
+Warning message:
+In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+  embedded nul(s) found in input
+Warning message:
+In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+  embedded nul(s) found in input
+TRACE [2018-10-31 00:12:05] Making document term matrix from summary feature
+Warning message:
+In weighting(x) :
+  empty document(s): Z_ARCHIVED-97778 MDT-253464 ACTF-258597 Z_ARCHIVED-100395 Z_ARCHIVED-100542
+TRACE [2018-10-31 00:12:10] Predicting long lived bug with knn using threshold 4.
+TRACE [2018-10-31 00:16:03] Evaluating predicting: F-measure 0.349442
+TRACE [2018-10-31 00:16:03] Predicting long lived bug with svmRadial using threshold 4.
+TRACE [2018-10-31 00:22:55] Evaluating predicting: F-measure 0.038462
+TRACE [2018-10-31 00:22:55] Predicting long lived bug with knn using threshold 8.
+TRACE [2018-10-31 00:26:53] Evaluating predicting: F-measure 0.545359
+TRACE [2018-10-31 00:26:53] Predicting long lived bug with svmRadial using threshold 8.
+TRACE [2018-10-31 00:34:03] Evaluating predicting: F-measure 0.683923
+TRACE [2018-10-31 00:34:03] Predicting long lived bug with knn using threshold 16.
+TRACE [2018-10-31 00:37:19] Evaluating predicting: F-measure 0.712495
+TRACE [2018-10-31 00:37:19] Predicting long lived bug with svmRadial using threshold 16.
+TRACE [2018-10-31 00:44:13] Evaluating predicting: F-measure 0.763709
+TRACE [2018-10-31 00:44:13] Predicting long lived bug with knn using threshold 32.
+TRACE [2018-10-31 00:48:11] Evaluating predicting: F-measure 0.813443
+TRACE [2018-10-31 00:48:11] Predicting long lived bug with svmRadial using threshold 32.
+TRACE [2018-10-31 00:54:30] Evaluating predicting: F-measure 0.829146
+TRACE [2018-10-31 00:54:30] Predicting long lived bug with knn using threshold 64.
+TRACE [2018-10-31 00:58:29] Evaluating predicting: F-measure 0.885375
+TRACE [2018-10-31 00:58:29] Predicting long lived bug with svmRadial using threshold 64.
+TRACE [2018-10-31 01:04:14] Evaluating predicting: F-measure 0.887496
+TRACE [2018-10-31 01:04:14] Predicting long lived bug with knn using threshold 128.
+TRACE [2018-10-31 01:08:14] Evaluating predicting: F-measure 0.932378
+TRACE [2018-10-31 01:08:14] Predicting long lived bug with svmRadial using threshold 128.
+TRACE [2018-10-31 01:13:09] Evaluating predicting: F-measure 0.932339
+TRACE [2018-10-31 01:13:09] Predicting long lived bug with knn using threshold 256.
+TRACE [2018-10-31 01:16:25] Evaluating predicting: F-measure 0.967277
+TRACE [2018-10-31 01:16:25] Predicting long lived bug with svmRadial using threshold 256.
+TRACE [2018-10-31 01:19:31] Evaluating predicting: F-measure 0.967295
+TRACE [2018-10-31 01:19:31] Predicting long lived bug with knn using threshold 512.
+TRACE [2018-10-31 01:22:48] Evaluating predicting: F-measure 0.991337
+TRACE [2018-10-31 01:22:48] Predicting long lived bug with svmRadial using threshold 512.
+TRACE [2018-10-31 01:23:58] Evaluating predicting: F-measure 0.991337
+TRACE [2018-10-31 01:23:58] Recording evaluation results on CSV file.

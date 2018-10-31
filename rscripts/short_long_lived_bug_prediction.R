@@ -20,7 +20,7 @@ library(tm)
 library(tidytext)
 library(tidyr)
 
-registerDoMC(cores=2)
+registerDoMC(cores=8)
 flog.threshold(TRACE)
 
 # text cleaning function.
