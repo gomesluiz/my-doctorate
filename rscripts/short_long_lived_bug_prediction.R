@@ -149,10 +149,11 @@ for (feature in c("Description", "Summary")) {
       precision <- tp / (tp + fp)
       recall <- tp / (tp + fn)
       fmeasure <- (2 * recall * precision) / (recall + precision)
-      acc_0 <- tp / (tp + fp)
-      acc_1 <- tn / (tn + fn)
+      acc_class_0 <- tp / (tp + fp)
+      acc_class_1 <- tn / (tn + fn)
+      balanced_acc <- (acc_class_0 + acc_class_1)/2
         
-        flog.trace("Evaluating predicting: Acc_0: %f, Acc_1: %f", acc_0, acc_1)
+      flog.trace("Evaluating predicting: Balanced Accuracy: %f", balanced_acc)
       
       one.evaluation <-
         data.frame(
@@ -171,8 +172,7 @@ for (feature in c("Description", "Summary")) {
           Fp = fp,
           Tn = tn,
           Fn = fn,
-          Acc_0 = acc_0,
-          Acc_1 = acc_1,
+          Balanced_Acc = balanced_acc,
           Precision = precision,
           Recall = recall,
           Fmeasure = fmeasure
