@@ -3,6 +3,7 @@ rm(list=ls(all=TRUE))
 if (!require('class')) install.packages("class")
 if (!require('caret')) install.packages("caret")
 if (!require('doMC')) install.packages("doMC")
+if (!require('dplyr')) install.packages("dplyr")
 if (!require("futile.logger")) install.packages("futile.logger")
 if (!require('qdap')) install.packages('qdap')
 if (!require('SnowballC')) install.packages('SnowballC')
@@ -47,7 +48,7 @@ clean_corpus <- function(corpus) {
   corpus <-  tm_map(corpus, content_transformer(tolower))
   corpus <-  tm_map(corpus, removePunctuation)
   corpus <-  tm_map(corpus, removeNumbers)
-  corpus <-  tm_map(corpus, removeWords, c(stopwords("en"), "eclipse", "java"))
+  corpus <-  tm_map(corpus, removeWords, c(stopwords("en")))
   corpus <-  tm_map(corpus, stripWhitespace)
   
   corpus <- tm_map(corpus, stemDocument)
@@ -81,80 +82,105 @@ bug_report_raw_data$DaysToResolve <- as.numeric(bug_report_raw_data$DaysToResolv
 all_data <- read.csv("~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_data.csv", stringsAsFactors=FALSE)
 all_data$DaysToResolve <- as.numeric(all_data$DaysToResolve)
 
-flog.trace("Making document term matrix from summary feature")
-filtered_data   <- subset(all_data, DaysToResolve >=0 & DaysToResolve <= 730)
-summary_dtm     <- make_dtm(filtered_data[, c('Bug_Id', 'Summary')], 200)
-summary_dtm_df  <- as.data.frame(tidy(summary_dtm))
-names(summary_dtm_df) <- c("Bug_Id", "Term", "Count")
-summary_dtm_df        <- summary_dtm_df %>% spread(key=Term, value=Count, fill=0)
-
-filtered_data <- merge(x=filtered_data[, c("Bug_Id", "DaysToResolve")]
-                       , y=summary_dtm_df, all.x=TRUE, by.x="Bug_Id", by.y="Bug_Id")
-filtered_data <- na.omit(filtered_data)
-
-models      <- c("knn", "svmRadial")
-thresholds  <- c(4, 8, 16, 32, 64, 128, 256, 512) 
+models      <- c("knn", "rf", "svmRadial")
+thresholds  <- c(4, 8, 16, 32, 64, 128, 256, 512)
 all.evaluations <- NULL
 unused_columns <- c('Bug_Id', 'Is_Long', 'DaysToResolve')
-for (threshold in thresholds) {
-  filtered_data$Is_Long <- as.factor(ifelse(filtered_data$DaysToResolve <= threshold, 0, 1))
-  for (model in models) {
-    flog.trace("Predicting long lived bug with %s using threshold %d.", model, threshold)
-    set.seed(1234)
-    index <- createDataPartition(filtered_data$Is_Long, p=0.75, list=FALSE)
-    
-    train_data <- filtered_data[index, !(names(filtered_data) %in% unused_columns)]
-    train_data_classes <- as.data.frame(filtered_data[index, c('Is_Long')])
-    names(train_data_classes) <- c('Is_Long')
+filtered_data   <- all_data %>%
+  filter(DaysToResolve >= 0) %>%
+  filter(DaysToResolve <= 730)
 
-    test_data <- filtered_data[-index, !(names(filtered_data) %in% unused_columns)]
-    test_data_classes <- as.data.frame(filtered_data[-index, c('Is_Long')])
-    names(test_data_classes) <- c('Is_Long')
-    
-    model_knn <- train(train_data, train_data_classes$Is_Long, method = model)
-    predictions <- predict(object=model_knn, test_data)
-    
-    cm <- confusionMatrix(data = predictions,
-                          reference = test_data_classes$Is_Long,
-                          mode = "prec_recall")
-    tp <- cm$table[1, 1]
-    fp <- cm$table[1, 2]
-    tn <- cm$table[2, 1]
-    fn <- cm$table[2, 2]
-    
-    precision <- tp / (tp + fp)
-    recall <- tp / (tp + fn)
-    fmeasure <- (2 * recall * precision) / (recall + precision)
-    
-    flog.trace("Evaluating predicting: F-measure %f", fmeasure)
-    
-    one.evaluation <-
-      data.frame(
-        Dataset = "Eclipse",
-        Model = model,
-        Threshold = threshold,
-        Train_Size = nrow(train_data),
-        Train_Qt_Class_0 = nrow(subset(train_data_classes, Is_Long == 0)),
-        Train_Qt_Class_1 = nrow(subset(train_data_classes, Is_Long == 1)),
-        Test_Size = nrow(test_data),
-        Test_Qt_Class_0 = nrow(subset(test_data_classes, Is_Long == 0)),
-        Test_Qt_Class_1 = nrow(subset(test_data_classes, Is_Long == 1)),
-        Summary_N_Terms = 200,
-        Tp = tp,
-        Fp = fp,
-        Tn = tn,
-        Fn = fn,
-        Precision = precision,
-        Recall = recall,
-        Fmeasure = fmeasure,
-        Acc_0 = tp / (tp + fp),
-        Acc_1 = tn / (tn + fn)
-      )
-    
-    if (is.null(all.evaluations)) {
-      all.evaluations <- one.evaluation
-    } else {
-      all.evaluations <- rbind(all.evaluations , one.evaluation)
+for (feature in c("Description", "Summary")) {
+  
+  flog.trace("Model %s Making document term matrix from %s feature", model, feature)
+  dtm     <-  make_dtm(filtered_data[, c('Bug_Id', feature)], 200)
+  dtm_df  <-  as.data.frame(tidy(dtm))
+  names(dtm_df) <- c("Bug_Id", "Term", "Count")
+  dtm_df  <- dtm_df %>% spread(key = Term, value = Count, fill = 0)
+  
+  merged_data <-
+    merge(
+      x = filtered_data[, c("Bug_Id", "DaysToResolve")]
+      ,
+      y = dtm_df,
+      all.x = TRUE,
+      by.x = "Bug_Id",
+      by.y = "Bug_Id"
+    )
+  merged_data <- na.omit(merged_data)
+  
+  for (model in models) {
+    for (threshold in thresholds) {
+      merged_data$Is_Long <- as.factor(ifelse(merged_data$DaysToResolve <= threshold, 0, 1))
+      
+      flog.trace("Predicting long lived bug with %s using threshold %d.",
+                 model,
+                 threshold)
+      set.seed(1234)
+      index <-
+        createDataPartition(merged_data$Is_Long, p = 0.75, list = FALSE)
+      
+      train_data <-
+        merged_data[index, !(names(merged_data) %in% unused_columns)]
+      train_data_classes <-
+        as.data.frame(merged_data[index, c('Is_Long')])
+      names(train_data_classes) <- c('Is_Long')
+      
+      test_data <-
+        merged_data[-index, !(names(merged_data) %in% unused_columns)]
+      test_data_classes <-
+        as.data.frame(merged_data[-index, c('Is_Long')])
+      names(test_data_classes) <- c('Is_Long')
+      
+      model_knn <-
+        train(train_data, train_data_classes$Is_Long, method = model)
+      predictions <- predict(object = model_knn, test_data)
+      
+      cm <- confusionMatrix(data = predictions,
+                            reference = test_data_classes$Is_Long,
+                            mode = "prec_recall")
+      tp <- cm$table[1, 1]
+      fp <- cm$table[1, 2]
+      tn <- cm$table[2, 1]
+      fn <- cm$table[2, 2]
+      
+      precision <- tp / (tp + fp)
+      recall <- tp / (tp + fn)
+      fmeasure <- (2 * recall * precision) / (recall + precision)
+      acc_0 <- tp / (tp + fp)
+      acc_1 <- tn / (tn + fn)
+        
+        flog.trace("Evaluating predicting: Acc_0: %f, Acc_1: %f", acc_0, acc_1)
+      
+      one.evaluation <-
+        data.frame(
+          Dataset = "Eclipse",
+          Model = substr(model, 1, 3),
+          Threshold = threshold,
+          Train_Size = nrow(train_data),
+          Train_Qt_Class_0 = nrow(subset(train_data_classes, Is_Long == 0)),
+          Train_Qt_Class_1 = nrow(subset(train_data_classes, Is_Long == 1)),
+          Test_Size = nrow(test_data),
+          Test_Qt_Class_0 = nrow(subset(test_data_classes, Is_Long == 0)),
+          Test_Qt_Class_1 = nrow(subset(test_data_classes, Is_Long == 1)),
+          Feature = feature,
+          N_Terms = 200,
+          Tp = tp,
+          Fp = fp,
+          Tn = tn,
+          Fn = fn,
+          Acc_0 = acc_0,
+          Acc_1 = acc_1,
+          Precision = precision,
+          Recall = recall,
+          Fmeasure = fmeasure
+        )
+      
+      if (is.null(all.evaluations)) {
+        all.evaluations <- one.evaluation
+      } else {
+        all.evaluations <- rbind(all.evaluations , one.evaluation)
+      }
     }
   }
 }
