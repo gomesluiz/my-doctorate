@@ -81,7 +81,8 @@ bug_report_raw_data <- read.csv("~/Workspace/issue-crawler/data/eclipse/csv/r1_b
 bug_report_raw_data$DaysToResolve <- as.numeric(bug_report_raw_data$DaysToResolve)
 
 all_data <- read.csv("~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_data.csv", stringsAsFactors=FALSE)
-all_data$DaysToResolve <- as.numeric(all_data$DaysToResolve)
+all_data$Description_Summary  <- paste(all_data$Description, all_data$Summary, sep = " ")
+all_data$DaysToResolve        <- as.numeric(all_data$DaysToResolve)
 
 models      <- c("knn", "rf", "svmRadial")
 thresholds  <- c(4, 8, 16, 32, 64, 128, 256, 512)
@@ -91,7 +92,7 @@ filtered_data   <- all_data %>%
   filter(DaysToResolve >= 0) %>%
   filter(DaysToResolve <= 730)
 
-for (feature in c("Description", "Summary")) {
+for (feature in c("Description", "Summary", "Description_Summary")) {
   
   flog.trace("Making document term matrix from <%s> feature", feature)
   dtm     <-  make_dtm(filtered_data[, c('Bug_Id', feature)], 200)
