@@ -173,6 +173,8 @@ for (feature in c("Description", "Summary", "Description_Summary")) {
           Fp = fp,
           Tn = tn,
           Fn = fn,
+          Acc_0 = acc_class_0,
+          Acc_1 = acc_class_1,
           Balanced_Acc = balanced_acc,
           Precision = precision,
           Recall = recall,
