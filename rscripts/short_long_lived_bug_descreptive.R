@@ -10,37 +10,7 @@ library(tm)
 library(wordcloud)
 library(viridisLite)
 
-# text cleaning function.
-clean_text <- function(text){
-  text <- replace_abbreviation(text)
-  text <- replace_contraction(text)
-# text <- replace_number(text)
-# text <- replace_ordinal(text)
-  text <- replace_symbol(text)
-  text <- tolower(text)
-  return(text)
-}
-# corpus cleaning function.
-clean_corpus <- function(corpus) {
-  corpus <-  tm_map(corpus, removePunctuation)
-  corpus <-  tm_map(corpus, stripWhitespace)
-  corpus <-  tm_map(corpus, removeNumbers)
-  corpus <-  tm_map(corpus, content_transformer(tolower))
-  corpus <-  tm_map(corpus, removeWords, c(stopwords("en"), "eclipse"))
-  return(corpus)
-}
-# make dtm
-make_dtm <- function(corpus){
-  names(corpus) <- c('doc_id', 'text')
-  corpus$text   <- clean_text(corpus$text)
-  corpus        <- DataframeSource(corpus)
-  corpus        <- Corpus(corpus)
-  corpus        <- clean_corpus(corpus)
-  dtm           <- DocumentTermMatrix(corpus)
-  #dtm           <- removeSparseTerms(dtm, sparse = 0.6)
-  return(dtm)
-}
-
+source("~/Workspace/issue-crawler/rscripts/lib_tm.R")
 
 # days to resolve boxplot 
 plot_boxplot <- function(bug_report_raw_data, label) {
