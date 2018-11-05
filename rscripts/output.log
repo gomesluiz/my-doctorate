@@ -7,6 +7,18 @@ Loading required package: doMC
 Loading required package: foreach
 Loading required package: iterators
 Loading required package: parallel
+Loading required package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
 Loading required package: futile.logger
 Loading required package: qdap
 Loading required package: qdapDictionaries
@@ -14,14 +26,29 @@ Loading required package: qdapRegex
 
 Attaching package: ‘qdapRegex’
 
+The following object is masked from ‘package:dplyr’:
+
+    explain
+
 The following object is masked from ‘package:ggplot2’:
 
     %+%
 
 Loading required package: qdapTools
+
+Attaching package: ‘qdapTools’
+
+The following object is masked from ‘package:dplyr’:
+
+    id
+
 Loading required package: RColorBrewer
 
 Attaching package: ‘qdap’
+
+The following object is masked from ‘package:dplyr’:
+
+    %>%
 
 The following object is masked from ‘package:class’:
 
@@ -30,6 +57,20 @@ The following object is masked from ‘package:class’:
 The following object is masked from ‘package:base’:
 
     Filter
+
+Loading required package: randomForest
+randomForest 4.6-14
+Type rfNews() to see new features/changes/bug fixes.
+
+Attaching package: ‘randomForest’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+The following object is masked from ‘package:ggplot2’:
+
+    margin
 
 Loading required package: SnowballC
 Loading required package: tm
@@ -62,47 +103,163 @@ The following object is masked from ‘package:qdap’:
     %>%
 
 NULL
-TRACE [2018-10-31 00:12:04] Opening data files from Eclipse,
+TRACE [2018-11-02 01:12:14] Opening data files from Eclipse,
 Warning message:
 In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
   embedded nul(s) found in input
 Warning message:
 In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
   embedded nul(s) found in input
-TRACE [2018-10-31 00:12:05] Making document term matrix from summary feature
-Warning message:
-In weighting(x) :
+TRACE [2018-11-02 01:12:15] Making document term matrix from <Description> feature
+TRACE [2018-11-02 01:12:59] Predicting long lived bug with knn using threshold 4.
+TRACE [2018-11-02 01:15:51] Evaluating predicting: Balanced Accuracy: 0.438643
+TRACE [2018-11-02 01:15:51] Predicting long lived bug with knn using threshold 8.
+TRACE [2018-11-02 01:20:29] Evaluating predicting: Balanced Accuracy: 0.528320
+TRACE [2018-11-02 01:20:29] Predicting long lived bug with knn using threshold 16.
+TRACE [2018-11-02 01:25:00] Evaluating predicting: Balanced Accuracy: 0.601031
+TRACE [2018-11-02 01:25:00] Predicting long lived bug with knn using threshold 32.
+TRACE [2018-11-02 01:27:47] Evaluating predicting: Balanced Accuracy: 0.702693
+TRACE [2018-11-02 01:27:47] Predicting long lived bug with knn using threshold 64.
+TRACE [2018-11-02 01:32:23] Evaluating predicting: Balanced Accuracy: 0.782331
+TRACE [2018-11-02 01:32:23] Predicting long lived bug with knn using threshold 128.
+TRACE [2018-11-02 01:36:49] Evaluating predicting: Balanced Accuracy: 0.873110
+TRACE [2018-11-02 01:36:49] Predicting long lived bug with knn using threshold 256.
+TRACE [2018-11-02 01:39:34] Evaluating predicting: Balanced Accuracy: 0.967892
+TRACE [2018-11-02 01:39:34] Predicting long lived bug with knn using threshold 512.
+TRACE [2018-11-02 01:42:18] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 01:42:18] Predicting long lived bug with rf using threshold 4.
+TRACE [2018-11-02 02:54:34] Evaluating predicting: Balanced Accuracy: 0.469924
+TRACE [2018-11-02 02:54:34] Predicting long lived bug with rf using threshold 8.
+TRACE [2018-11-02 04:11:56] Evaluating predicting: Balanced Accuracy: 0.516736
+TRACE [2018-11-02 04:11:56] Predicting long lived bug with rf using threshold 16.
+TRACE [2018-11-02 05:35:14] Evaluating predicting: Balanced Accuracy: 0.565702
+TRACE [2018-11-02 05:35:14] Predicting long lived bug with rf using threshold 32.
+TRACE [2018-11-02 07:16:54] Evaluating predicting: Balanced Accuracy: 0.415747
+TRACE [2018-11-02 07:16:54] Predicting long lived bug with rf using threshold 64.
+TRACE [2018-11-02 09:08:39] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 09:08:39] Predicting long lived bug with rf using threshold 128.
+TRACE [2018-11-02 11:17:01] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 11:17:01] Predicting long lived bug with rf using threshold 256.
+TRACE [2018-11-02 13:31:59] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 13:31:59] Predicting long lived bug with rf using threshold 512.
+TRACE [2018-11-02 15:05:06] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:05:06] Predicting long lived bug with svmRadial using threshold 4.
+TRACE [2018-11-02 15:12:56] Evaluating predicting: Balanced Accuracy: 0.528179
+TRACE [2018-11-02 15:12:56] Predicting long lived bug with svmRadial using threshold 8.
+TRACE [2018-11-02 15:20:09] Evaluating predicting: Balanced Accuracy: 0.514815
+TRACE [2018-11-02 15:20:09] Predicting long lived bug with svmRadial using threshold 16.
+TRACE [2018-11-02 15:28:02] Evaluating predicting: Balanced Accuracy: 0.556418
+TRACE [2018-11-02 15:28:02] Predicting long lived bug with svmRadial using threshold 32.
+TRACE [2018-11-02 15:35:37] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:35:37] Predicting long lived bug with svmRadial using threshold 64.
+TRACE [2018-11-02 15:43:29] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:43:29] Predicting long lived bug with svmRadial using threshold 128.
+TRACE [2018-11-02 15:50:30] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:50:30] Predicting long lived bug with svmRadial using threshold 256.
+TRACE [2018-11-02 15:54:31] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:54:31] Predicting long lived bug with svmRadial using threshold 512.
+TRACE [2018-11-02 15:56:10] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 15:56:10] Making document term matrix from <Summary> feature
+TRACE [2018-11-02 15:56:14] Predicting long lived bug with knn using threshold 4.
+TRACE [2018-11-02 16:00:17] Evaluating predicting: Balanced Accuracy: 0.437855
+TRACE [2018-11-02 16:00:17] Predicting long lived bug with knn using threshold 8.
+TRACE [2018-11-02 16:04:17] Evaluating predicting: Balanced Accuracy: 0.534478
+TRACE [2018-11-02 16:04:17] Predicting long lived bug with knn using threshold 16.
+TRACE [2018-11-02 16:07:30] Evaluating predicting: Balanced Accuracy: 0.606292
+TRACE [2018-11-02 16:07:30] Predicting long lived bug with knn using threshold 32.
+TRACE [2018-11-02 16:11:30] Evaluating predicting: Balanced Accuracy: 0.680250
+TRACE [2018-11-02 16:11:30] Predicting long lived bug with knn using threshold 64.
+TRACE [2018-11-02 16:14:44] Evaluating predicting: Balanced Accuracy: 0.788128
+TRACE [2018-11-02 16:14:44] Predicting long lived bug with knn using threshold 128.
+TRACE [2018-11-02 16:17:59] Evaluating predicting: Balanced Accuracy: 0.936729
+TRACE [2018-11-02 16:17:59] Predicting long lived bug with knn using threshold 256.
+TRACE [2018-11-02 16:21:59] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 16:21:59] Predicting long lived bug with knn using threshold 512.
+TRACE [2018-11-02 16:25:57] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-02 16:25:57] Predicting long lived bug with rf using threshold 4.
+TRACE [2018-11-02 20:13:55] Evaluating predicting: Balanced Accuracy: 0.467892
+TRACE [2018-11-02 20:13:55] Predicting long lived bug with rf using threshold 8.
+TRACE [2018-11-02 23:54:24] Evaluating predicting: Balanced Accuracy: 0.527335
+TRACE [2018-11-02 23:54:24] Predicting long lived bug with rf using threshold 16.
+TRACE [2018-11-03 03:44:38] Evaluating predicting: Balanced Accuracy: 0.556561
+TRACE [2018-11-03 03:44:38] Predicting long lived bug with rf using threshold 32.
+TRACE [2018-11-03 07:35:40] Evaluating predicting: Balanced Accuracy: 0.762749
+TRACE [2018-11-03 07:35:40] Predicting long lived bug with rf using threshold 64.
+TRACE [2018-11-03 11:59:08] Evaluating predicting: Balanced Accuracy: 0.566130
+TRACE [2018-11-03 11:59:08] Predicting long lived bug with rf using threshold 128.
+TRACE [2018-11-03 16:36:53] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 16:36:53] Predicting long lived bug with rf using threshold 256.
+TRACE [2018-11-03 19:37:02] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 19:37:02] Predicting long lived bug with rf using threshold 512.
+TRACE [2018-11-03 21:03:37] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:03:37] Predicting long lived bug with svmRadial using threshold 4.
+TRACE [2018-11-03 21:10:29] Evaluating predicting: Balanced Accuracy: 0.481351
+TRACE [2018-11-03 21:10:29] Predicting long lived bug with svmRadial using threshold 8.
+TRACE [2018-11-03 21:17:33] Evaluating predicting: Balanced Accuracy: 0.528385
+TRACE [2018-11-03 21:17:33] Predicting long lived bug with svmRadial using threshold 16.
+TRACE [2018-11-03 21:24:22] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:24:22] Predicting long lived bug with svmRadial using threshold 32.
+TRACE [2018-11-03 21:30:37] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:30:37] Predicting long lived bug with svmRadial using threshold 64.
+TRACE [2018-11-03 21:36:27] Evaluating predicting: Balanced Accuracy: 0.649250
+TRACE [2018-11-03 21:36:27] Predicting long lived bug with svmRadial using threshold 128.
+TRACE [2018-11-03 21:41:05] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:41:05] Predicting long lived bug with svmRadial using threshold 256.
+TRACE [2018-11-03 21:44:17] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:44:18] Predicting long lived bug with svmRadial using threshold 512.
+TRACE [2018-11-03 21:45:30] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 21:45:30] Making document term matrix from <Description_Summary> feature
+TRACE [2018-11-03 21:46:09] Predicting long lived bug with knn using threshold 4.
+TRACE [2018-11-03 21:48:15] Evaluating predicting: Balanced Accuracy: 0.454133
+TRACE [2018-11-03 21:48:15] Predicting long lived bug with knn using threshold 8.
+TRACE [2018-11-03 21:50:19] Evaluating predicting: Balanced Accuracy: 0.534717
+TRACE [2018-11-03 21:50:19] Predicting long lived bug with knn using threshold 16.
+TRACE [2018-11-03 21:52:26] Evaluating predicting: Balanced Accuracy: 0.607276
+TRACE [2018-11-03 21:52:26] Predicting long lived bug with knn using threshold 32.
+TRACE [2018-11-03 21:54:32] Evaluating predicting: Balanced Accuracy: 0.707638
+TRACE [2018-11-03 21:54:32] Predicting long lived bug with knn using threshold 64.
+TRACE [2018-11-03 21:56:40] Evaluating predicting: Balanced Accuracy: 0.757417
+TRACE [2018-11-03 21:56:40] Predicting long lived bug with knn using threshold 128.
+TRACE [2018-11-03 21:58:46] Evaluating predicting: Balanced Accuracy: 0.827580
+TRACE [2018-11-03 21:58:46] Predicting long lived bug with knn using threshold 256.
+TRACE [2018-11-03 22:00:53] Evaluating predicting: Balanced Accuracy: 0.967962
+TRACE [2018-11-03 22:00:53] Predicting long lived bug with knn using threshold 512.
+TRACE [2018-11-03 22:02:59] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-03 22:02:59] Predicting long lived bug with rf using threshold 4.
+TRACE [2018-11-03 22:57:57] Evaluating predicting: Balanced Accuracy: 0.466915
+TRACE [2018-11-03 22:57:57] Predicting long lived bug with rf using threshold 8.
+TRACE [2018-11-03 23:53:48] Evaluating predicting: Balanced Accuracy: 0.512366
+TRACE [2018-11-03 23:53:48] Predicting long lived bug with rf using threshold 16.
+TRACE [2018-11-04 00:54:23] Evaluating predicting: Balanced Accuracy: 0.553093
+TRACE [2018-11-04 00:54:23] Predicting long lived bug with rf using threshold 32.
+TRACE [2018-11-04 02:06:14] Evaluating predicting: Balanced Accuracy: 0.576072
+TRACE [2018-11-04 02:06:14] Predicting long lived bug with rf using threshold 64.
+TRACE [2018-11-04 03:24:47] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 03:24:47] Predicting long lived bug with rf using threshold 128.
+TRACE [2018-11-04 05:01:48] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 05:01:48] Predicting long lived bug with rf using threshold 256.
+TRACE [2018-11-04 06:38:53] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 06:38:53] Predicting long lived bug with rf using threshold 512.
+TRACE [2018-11-04 07:55:02] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 07:55:02] Predicting long lived bug with svmRadial using threshold 4.
+TRACE [2018-11-04 08:02:57] Evaluating predicting: Balanced Accuracy: 0.476895
+TRACE [2018-11-04 08:02:57] Predicting long lived bug with svmRadial using threshold 8.
+TRACE [2018-11-04 08:11:00] Evaluating predicting: Balanced Accuracy: 0.506192
+TRACE [2018-11-04 08:11:00] Predicting long lived bug with svmRadial using threshold 16.
+TRACE [2018-11-04 08:18:47] Evaluating predicting: Balanced Accuracy: 0.308022
+TRACE [2018-11-04 08:18:47] Predicting long lived bug with svmRadial using threshold 32.
+TRACE [2018-11-04 08:26:19] Evaluating predicting: Balanced Accuracy: 0.353431
+TRACE [2018-11-04 08:26:19] Predicting long lived bug with svmRadial using threshold 64.
+TRACE [2018-11-04 08:34:52] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 08:34:52] Predicting long lived bug with svmRadial using threshold 128.
+TRACE [2018-11-04 08:42:14] Evaluating predicting: Balanced Accuracy: 0.686396
+TRACE [2018-11-04 08:42:14] Predicting long lived bug with svmRadial using threshold 256.
+TRACE [2018-11-04 08:46:09] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-04 08:46:09] Predicting long lived bug with svmRadial using threshold 512.
+TRACE [2018-11-04 08:47:42] Evaluating predicting: Balanced Accuracy: NaN
+Warning messages:
+1: In weighting(x) :
+  empty document(s): EFXCLIPSE-489599 E4-283006 LINUX_TOOLS-357280 JDT-514733 SUBVERSIVE-476175 PLATFORM-502353 PLATFORM-492973 Z_ARCHIVED-71297 PLATFORM-441280 EFXCLIPSE-490432 EFXCLIPSE-488527 WTP_WEBSERVICES-142620 VIATRA-492423 GEF-64260 EGIT-322408 COMMUNITY-140209 COMMUNITY-299513 JDT-44401 JETTY-394545 GEF-494736 JETTY-356823 ORION-511660 EFXCLIPSE-493139 Z_ARCHIVED-53960 Z_ARCHIVED-369755 EFXCLIPSE-479047 SUBVERSIVE-462328 EPF-147161 ECLIPSELINK-396541 QVTO-235598 PLATFORM-98972 TITAN-512793 EFXCLIPSE-490569 EQUINOX-516095 Z_ARCHIVED-134410 WEB_TOOLS-115353 LINUX_TOOLS-390874 PLATFORM-520254 EQUINOX-346822 EFXCLIPSE-482422 JDT-49686 PLATFORM-287517 PLATFORM-483462 PLATFORM-254808 TMF-478388 PLATFORM-298755 TMF-232780 GMF-TOOLING-144679 JETTY-415830 EFXCLIPSE-414938 LDT-384989 EFXCLIPSE-489760 SUBVERSIVE-488683 WTP_WEBSERVICES-142355 ORION-416281 EMF-379491 QVTD-439239 SUBVERSIVE-416796 ORION-473091 JETTY-409099 ECLIPSELINK-211300 JDT-183023 WTP_SOURCE_EDITING-115727 WTP_JAVA_EE_T [... truncated]
+2: In weighting(x) :
   empty document(s): Z_ARCHIVED-97778 MDT-253464 ACTF-258597 Z_ARCHIVED-100395 Z_ARCHIVED-100542
-TRACE [2018-10-31 00:12:10] Predicting long lived bug with knn using threshold 4.
-TRACE [2018-10-31 00:16:03] Evaluating predicting: F-measure 0.349442
-TRACE [2018-10-31 00:16:03] Predicting long lived bug with svmRadial using threshold 4.
-TRACE [2018-10-31 00:22:55] Evaluating predicting: F-measure 0.038462
-TRACE [2018-10-31 00:22:55] Predicting long lived bug with knn using threshold 8.
-TRACE [2018-10-31 00:26:53] Evaluating predicting: F-measure 0.545359
-TRACE [2018-10-31 00:26:53] Predicting long lived bug with svmRadial using threshold 8.
-TRACE [2018-10-31 00:34:03] Evaluating predicting: F-measure 0.683923
-TRACE [2018-10-31 00:34:03] Predicting long lived bug with knn using threshold 16.
-TRACE [2018-10-31 00:37:19] Evaluating predicting: F-measure 0.712495
-TRACE [2018-10-31 00:37:19] Predicting long lived bug with svmRadial using threshold 16.
-TRACE [2018-10-31 00:44:13] Evaluating predicting: F-measure 0.763709
-TRACE [2018-10-31 00:44:13] Predicting long lived bug with knn using threshold 32.
-TRACE [2018-10-31 00:48:11] Evaluating predicting: F-measure 0.813443
-TRACE [2018-10-31 00:48:11] Predicting long lived bug with svmRadial using threshold 32.
-TRACE [2018-10-31 00:54:30] Evaluating predicting: F-measure 0.829146
-TRACE [2018-10-31 00:54:30] Predicting long lived bug with knn using threshold 64.
-TRACE [2018-10-31 00:58:29] Evaluating predicting: F-measure 0.885375
-TRACE [2018-10-31 00:58:29] Predicting long lived bug with svmRadial using threshold 64.
-TRACE [2018-10-31 01:04:14] Evaluating predicting: F-measure 0.887496
-TRACE [2018-10-31 01:04:14] Predicting long lived bug with knn using threshold 128.
-TRACE [2018-10-31 01:08:14] Evaluating predicting: F-measure 0.932378
-TRACE [2018-10-31 01:08:14] Predicting long lived bug with svmRadial using threshold 128.
-TRACE [2018-10-31 01:13:09] Evaluating predicting: F-measure 0.932339
-TRACE [2018-10-31 01:13:09] Predicting long lived bug with knn using threshold 256.
-TRACE [2018-10-31 01:16:25] Evaluating predicting: F-measure 0.967277
-TRACE [2018-10-31 01:16:25] Predicting long lived bug with svmRadial using threshold 256.
-TRACE [2018-10-31 01:19:31] Evaluating predicting: F-measure 0.967295
-TRACE [2018-10-31 01:19:31] Predicting long lived bug with knn using threshold 512.
-TRACE [2018-10-31 01:22:48] Evaluating predicting: F-measure 0.991337
-TRACE [2018-10-31 01:22:48] Predicting long lived bug with svmRadial using threshold 512.
-TRACE [2018-10-31 01:23:58] Evaluating predicting: F-measure 0.991337
-TRACE [2018-10-31 01:23:58] Recording evaluation results on CSV file.
+TRACE [2018-11-04 08:47:42] Recording evaluation results on CSV file.
