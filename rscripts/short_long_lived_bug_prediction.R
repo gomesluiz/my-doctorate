@@ -81,9 +81,12 @@ for (feature in c("Description", "Summary", "Description_Summary")) {
         as.data.frame(merged_data[-index, c('Is_Long')])
       names(test_data_classes) <- c('Is_Long')
       
-      model_knn <-
-        train(train_data, train_data_classes$Is_Long, method = model)
-      predictions <- predict(object = model_knn, test_data)
+      fit_control <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
+      
+      fit_model <-
+        train(train_data, train_data_classes$Is_Long, method = model, trControl =  fit_control)
+      
+      predictions <- predict(object = fit_model, test_data)
       
       cm <- confusionMatrix(data = predictions,
                             reference = test_data_classes$Is_Long,
@@ -106,6 +109,7 @@ for (feature in c("Description", "Summary", "Description_Summary")) {
         data.frame(
           Dataset = "Eclipse",
           Model = substr(model, 1, 3),
+          Resampling = "cv 5x2",
           Threshold = threshold,
           Train_Size = nrow(train_data),
           Train_Qt_Class_0 = nrow(subset(train_data_classes, Is_Long == 0)),
