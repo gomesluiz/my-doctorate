@@ -30,8 +30,9 @@ all_data <- read.csv("~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_d
 all_data$Description_Summary  <- paste(all_data$Description, all_data$Summary, sep = " ")
 all_data$DaysToResolve        <- as.numeric(all_data$DaysToResolve)
 
+samplings   <- c("bootstrap", "cv52")
 models      <- c("knn", "rf", "svmRadial")
-thresholds  <- c(4, 8, 16, 32, 64, 128, 256, 512)
+thresholds  <- seq(4, 512, by=4)
 all.evaluations <- NULL
 unused_columns <- c('Bug_Id', 'Is_Long', 'DaysToResolve')
 filtered_data   <- all_data %>%
@@ -62,9 +63,7 @@ for (feature in c("Description", "Summary", "Description_Summary")) {
     for (threshold in thresholds) {
       merged_data$Is_Long <- as.factor(ifelse(merged_data$DaysToResolve <= threshold, 0, 1))
       
-      flog.trace("Predicting long lived bug with %s using threshold %d.",
-                 model,
-                 threshold)
+      
       set.seed(1234)
       index <-
         createDataPartition(merged_data$Is_Long, p = 0.75, list = FALSE)
@@ -81,60 +80,79 @@ for (feature in c("Description", "Summary", "Description_Summary")) {
         as.data.frame(merged_data[-index, c('Is_Long')])
       names(test_data_classes) <- c('Is_Long')
       
-      fit_control <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
-      
-      fit_model <-
-        train(train_data, train_data_classes$Is_Long, method = model, trControl =  fit_control)
-      
-      predictions <- predict(object = fit_model, test_data)
-      
-      cm <- confusionMatrix(data = predictions,
-                            reference = test_data_classes$Is_Long,
-                            mode = "prec_recall")
-      tp <- cm$table[1, 1]
-      fp <- cm$table[1, 2]
-      tn <- cm$table[2, 1]
-      fn <- cm$table[2, 2]
-      
-      precision <- tp / (tp + fp)
-      recall <- tp / (tp + fn)
-      fmeasure <- (2 * recall * precision) / (recall + precision)
-      acc_class_0 <- tp / (tp + fp)
-      acc_class_1 <- tn / (tn + fn)
-      balanced_acc <- (acc_class_0 + acc_class_1)/2
+      for (sampling in samplings) {
+        flog.trace("Predicting long lived bug with %s using threshold %d and sampling %s.",
+                   model,
+                   threshold,
+                   sampling)
         
-      flog.trace("Evaluating predicting: Balanced Accuracy: %f", balanced_acc)
-      
-      one.evaluation <-
-        data.frame(
-          Dataset = "Eclipse",
-          Model = substr(model, 1, 3),
-          Resampling = "cv 5x2",
-          Threshold = threshold,
-          Train_Size = nrow(train_data),
-          Train_Qt_Class_0 = nrow(subset(train_data_classes, Is_Long == 0)),
-          Train_Qt_Class_1 = nrow(subset(train_data_classes, Is_Long == 1)),
-          Test_Size = nrow(test_data),
-          Test_Qt_Class_0 = nrow(subset(test_data_classes, Is_Long == 0)),
-          Test_Qt_Class_1 = nrow(subset(test_data_classes, Is_Long == 1)),
-          Feature = feature,
-          N_Terms = 200,
-          Tp = tp,
-          Fp = fp,
-          Tn = tn,
-          Fn = fn,
-          Acc_0 = acc_class_0,
-          Acc_1 = acc_class_1,
-          Balanced_Acc = balanced_acc,
-          Precision = precision,
-          Recall = recall,
-          Fmeasure = fmeasure
-        )
-      
-      if (is.null(all.evaluations)) {
-        all.evaluations <- one.evaluation
-      } else {
-        all.evaluations <- rbind(all.evaluations , one.evaluation)
+        if (sampling == "bootstrap") {
+          fit_model <-
+            train(train_data,
+                  train_data_classes$Is_Long,
+                  method = model)
+        } else {
+          fit_control <-
+            trainControl(method = "repeatedcv",
+                         number = 5,
+                         repeats = 2)
+          fit_model <-
+            train(train_data,
+                  train_data_classes$Is_Long,
+                  method = model,
+                  trControl =  fit_control)  
+        }
+        
+        predictions <- predict(object = fit_model, test_data)
+        
+        cm <- confusionMatrix(data = predictions,
+                              reference = test_data_classes$Is_Long,
+                              mode = "prec_recall")
+        tp <- cm$table[1, 1]
+        fp <- cm$table[1, 2]
+        tn <- cm$table[2, 1]
+        fn <- cm$table[2, 2]
+        
+        precision <- tp / (tp + fp)
+        recall <- tp / (tp + fn)
+        fmeasure <- (2 * recall * precision) / (recall + precision)
+        acc_class_0 <- tp / (tp + fp)
+        acc_class_1 <- tn / (tn + fn)
+        balanced_acc <- (acc_class_0 + acc_class_1) / 2
+        
+        flog.trace("Evaluating predicting: Balanced Accuracy: %f", balanced_acc)
+        
+        one.evaluation <-
+          data.frame(
+            Dataset = "Eclipse",
+            Model = substr(model, 1, 3),
+            Resampling = "cv 5x2",
+            Threshold = threshold,
+            Train_Size = nrow(train_data),
+            Train_Qt_Class_0 = nrow(subset(train_data_classes, Is_Long == 0)),
+            Train_Qt_Class_1 = nrow(subset(train_data_classes, Is_Long == 1)),
+            Test_Size = nrow(test_data),
+            Test_Qt_Class_0 = nrow(subset(test_data_classes, Is_Long == 0)),
+            Test_Qt_Class_1 = nrow(subset(test_data_classes, Is_Long == 1)),
+            Feature = feature,
+            N_Terms = 200,
+            Tp = tp,
+            Fp = fp,
+            Tn = tn,
+            Fn = fn,
+            Acc_0 = acc_class_0,
+            Acc_1 = acc_class_1,
+            Balanced_Acc = balanced_acc,
+            Precision = precision,
+            Recall = recall,
+            Fmeasure = fmeasure
+          )
+        
+        if (is.null(all.evaluations)) {
+          all.evaluations <- one.evaluation
+        } else {
+          all.evaluations <- rbind(all.evaluations , one.evaluation)
+        }
       }
     }
   }
