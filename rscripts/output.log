@@ -1346,3 +1346,367 @@ TRACE [2018-11-21 11:14:29] Evaluating predicting: Balanced Accuracy: 0.467892
 TRACE [2018-11-21 11:14:29] Recording evaluation results on CSV file.
 TRACE [2018-11-21 11:14:29] Making document term matrix from <Summary> feature
 TRACE [2018-11-21 11:14:29] Predicting long lived bug with rf using threshold 8 and sampling bootstrap.
+TRACE [2018-11-21 13:11:34] Evaluating predicting: Balanced Accuracy: 0.527335
+TRACE [2018-11-21 13:11:34] Recording evaluation results on CSV file.
+TRACE [2018-11-21 13:11:34] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 13:11:34] Predicting long lived bug with rf using threshold 12 and sampling bootstrap.
+TRACE [2018-11-21 15:18:58] Evaluating predicting: Balanced Accuracy: 0.540263
+TRACE [2018-11-21 15:18:58] Recording evaluation results on CSV file.
+TRACE [2018-11-21 15:18:58] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 15:18:58] Predicting long lived bug with rf using threshold 16 and sampling bootstrap.
+TRACE [2018-11-21 17:25:34] Evaluating predicting: Balanced Accuracy: 0.556561
+TRACE [2018-11-21 17:25:34] Recording evaluation results on CSV file.
+TRACE [2018-11-21 17:25:34] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 17:25:34] Predicting long lived bug with rf using threshold 20 and sampling bootstrap.
+TRACE [2018-11-21 19:30:17] Evaluating predicting: Balanced Accuracy: 0.619063
+TRACE [2018-11-21 19:30:17] Recording evaluation results on CSV file.
+TRACE [2018-11-21 19:30:17] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 19:30:17] Predicting long lived bug with rf using threshold 24 and sampling bootstrap.
+TRACE [2018-11-21 21:37:35] Evaluating predicting: Balanced Accuracy: 0.657851
+TRACE [2018-11-21 21:37:35] Recording evaluation results on CSV file.
+TRACE [2018-11-21 21:37:35] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 21:37:35] Predicting long lived bug with rf using threshold 28 and sampling bootstrap.
+TRACE [2018-11-21 23:45:29] Evaluating predicting: Balanced Accuracy: 0.596529
+TRACE [2018-11-21 23:45:29] Recording evaluation results on CSV file.
+TRACE [2018-11-21 23:45:29] Making document term matrix from <Summary> feature
+TRACE [2018-11-21 23:45:29] Predicting long lived bug with rf using threshold 32 and sampling bootstrap.
+TRACE [2018-11-22 01:52:56] Evaluating predicting: Balanced Accuracy: 0.762749
+TRACE [2018-11-22 01:52:56] Recording evaluation results on CSV file.
+TRACE [2018-11-22 01:52:56] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 01:52:56] Predicting long lived bug with rf using threshold 64 and sampling bootstrap.
+TRACE [2018-11-22 04:12:55] Evaluating predicting: Balanced Accuracy: 0.566130
+TRACE [2018-11-22 04:12:55] Recording evaluation results on CSV file.
+TRACE [2018-11-22 04:12:55] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 04:12:55] Predicting long lived bug with rf using threshold 96 and sampling bootstrap.
+TRACE [2018-11-22 06:37:25] Evaluating predicting: Balanced Accuracy: 0.421222
+TRACE [2018-11-22 06:37:25] Recording evaluation results on CSV file.
+TRACE [2018-11-22 06:37:25] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 06:37:25] Predicting long lived bug with rf using threshold 128 and sampling bootstrap.
+TRACE [2018-11-22 09:31:35] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 09:31:35] Recording evaluation results on CSV file.
+TRACE [2018-11-22 09:31:35] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 09:31:35] Predicting long lived bug with rf using threshold 160 and sampling bootstrap.
+TRACE [2018-11-22 12:05:10] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 12:05:10] Recording evaluation results on CSV file.
+TRACE [2018-11-22 12:05:10] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 12:05:10] Predicting long lived bug with rf using threshold 192 and sampling bootstrap.
+TRACE [2018-11-22 14:30:57] Evaluating predicting: Balanced Accuracy: 0.954472
+TRACE [2018-11-22 14:30:57] Recording evaluation results on CSV file.
+TRACE [2018-11-22 14:30:57] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 14:30:57] Predicting long lived bug with rf using threshold 224 and sampling bootstrap.
+TRACE [2018-11-22 16:45:05] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 16:45:05] Recording evaluation results on CSV file.
+TRACE [2018-11-22 16:45:05] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 16:45:05] Predicting long lived bug with rf using threshold 256 and sampling bootstrap.
+TRACE [2018-11-22 18:50:31] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 18:50:31] Recording evaluation results on CSV file.
+TRACE [2018-11-22 18:50:31] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 18:50:31] Predicting long lived bug with rf using threshold 288 and sampling bootstrap.
+TRACE [2018-11-22 20:53:43] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 20:53:43] Recording evaluation results on CSV file.
+TRACE [2018-11-22 20:53:43] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 20:53:43] Predicting long lived bug with rf using threshold 320 and sampling bootstrap.
+TRACE [2018-11-22 22:45:27] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-22 22:45:27] Recording evaluation results on CSV file.
+TRACE [2018-11-22 22:45:27] Making document term matrix from <Summary> feature
+TRACE [2018-11-22 22:45:27] Predicting long lived bug with rf using threshold 352 and sampling bootstrap.
+TRACE [2018-11-23 00:34:26] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 00:34:26] Recording evaluation results on CSV file.
+TRACE [2018-11-23 00:34:26] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 00:34:26] Predicting long lived bug with rf using threshold 384 and sampling bootstrap.
+TRACE [2018-11-23 02:07:36] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 02:07:36] Recording evaluation results on CSV file.
+TRACE [2018-11-23 02:07:36] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 02:07:36] Predicting long lived bug with rf using threshold 416 and sampling bootstrap.
+TRACE [2018-11-23 03:36:45] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 03:36:45] Recording evaluation results on CSV file.
+TRACE [2018-11-23 03:36:45] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 03:36:46] Predicting long lived bug with rf using threshold 448 and sampling bootstrap.
+TRACE [2018-11-23 04:52:42] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 04:52:42] Recording evaluation results on CSV file.
+TRACE [2018-11-23 04:52:42] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 04:52:42] Predicting long lived bug with rf using threshold 480 and sampling bootstrap.
+TRACE [2018-11-23 06:06:01] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 06:06:01] Recording evaluation results on CSV file.
+TRACE [2018-11-23 06:06:01] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 06:06:01] Predicting long lived bug with rf using threshold 512 and sampling bootstrap.
+TRACE [2018-11-23 07:12:07] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 07:12:07] Recording evaluation results on CSV file.
+TRACE [2018-11-23 07:12:07] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 07:12:07] Predicting long lived bug with rf using threshold 4 and sampling cv52.
+TRACE [2018-11-23 07:45:39] Evaluating predicting: Balanced Accuracy: 0.465992
+TRACE [2018-11-23 07:45:39] Recording evaluation results on CSV file.
+TRACE [2018-11-23 07:45:39] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 07:45:39] Predicting long lived bug with rf using threshold 8 and sampling cv52.
+TRACE [2018-11-23 08:19:10] Evaluating predicting: Balanced Accuracy: 0.525155
+TRACE [2018-11-23 08:19:10] Recording evaluation results on CSV file.
+TRACE [2018-11-23 08:19:10] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 08:19:10] Predicting long lived bug with rf using threshold 12 and sampling cv52.
+TRACE [2018-11-23 08:56:11] Evaluating predicting: Balanced Accuracy: 0.546536
+TRACE [2018-11-23 08:56:11] Recording evaluation results on CSV file.
+TRACE [2018-11-23 08:56:11] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 08:56:12] Predicting long lived bug with rf using threshold 16 and sampling cv52.
+TRACE [2018-11-23 09:33:11] Evaluating predicting: Balanced Accuracy: 0.576102
+TRACE [2018-11-23 09:33:11] Recording evaluation results on CSV file.
+TRACE [2018-11-23 09:33:11] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 09:33:11] Predicting long lived bug with rf using threshold 20 and sampling cv52.
+TRACE [2018-11-23 10:10:47] Evaluating predicting: Balanced Accuracy: 0.600354
+TRACE [2018-11-23 10:10:47] Recording evaluation results on CSV file.
+TRACE [2018-11-23 10:10:47] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 10:10:47] Predicting long lived bug with rf using threshold 24 and sampling cv52.
+TRACE [2018-11-23 10:49:04] Evaluating predicting: Balanced Accuracy: 0.666545
+TRACE [2018-11-23 10:49:04] Recording evaluation results on CSV file.
+TRACE [2018-11-23 10:49:04] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 10:49:05] Predicting long lived bug with rf using threshold 28 and sampling cv52.
+TRACE [2018-11-23 11:28:57] Evaluating predicting: Balanced Accuracy: 0.618881
+TRACE [2018-11-23 11:28:57] Recording evaluation results on CSV file.
+TRACE [2018-11-23 11:28:57] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 11:28:58] Predicting long lived bug with rf using threshold 32 and sampling cv52.
+TRACE [2018-11-23 12:09:15] Evaluating predicting: Balanced Accuracy: 0.742864
+TRACE [2018-11-23 12:09:15] Recording evaluation results on CSV file.
+TRACE [2018-11-23 12:09:15] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 12:09:15] Predicting long lived bug with rf using threshold 64 and sampling cv52.
+TRACE [2018-11-23 12:50:48] Evaluating predicting: Balanced Accuracy: 0.566130
+TRACE [2018-11-23 12:50:48] Recording evaluation results on CSV file.
+TRACE [2018-11-23 12:50:48] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 12:50:48] Predicting long lived bug with rf using threshold 96 and sampling cv52.
+TRACE [2018-11-23 13:33:25] Evaluating predicting: Balanced Accuracy: 0.421448
+TRACE [2018-11-23 13:33:25] Recording evaluation results on CSV file.
+TRACE [2018-11-23 13:33:25] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 13:33:25] Predicting long lived bug with rf using threshold 128 and sampling cv52.
+TRACE [2018-11-23 14:14:57] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 14:14:57] Recording evaluation results on CSV file.
+TRACE [2018-11-23 14:14:57] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 14:14:57] Predicting long lived bug with rf using threshold 160 and sampling cv52.
+TRACE [2018-11-23 14:54:05] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 14:54:05] Recording evaluation results on CSV file.
+TRACE [2018-11-23 14:54:05] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 14:54:05] Predicting long lived bug with rf using threshold 192 and sampling cv52.
+TRACE [2018-11-23 15:33:34] Evaluating predicting: Balanced Accuracy: 0.954472
+TRACE [2018-11-23 15:33:34] Recording evaluation results on CSV file.
+TRACE [2018-11-23 15:33:34] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 15:33:34] Predicting long lived bug with rf using threshold 224 and sampling cv52.
+TRACE [2018-11-23 16:09:54] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 16:09:54] Recording evaluation results on CSV file.
+TRACE [2018-11-23 16:09:54] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 16:09:54] Predicting long lived bug with rf using threshold 256 and sampling cv52.
+TRACE [2018-11-23 16:43:21] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 16:43:21] Recording evaluation results on CSV file.
+TRACE [2018-11-23 16:43:21] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 16:43:21] Predicting long lived bug with rf using threshold 288 and sampling cv52.
+TRACE [2018-11-23 17:17:08] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 17:17:08] Recording evaluation results on CSV file.
+TRACE [2018-11-23 17:17:08] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 17:17:08] Predicting long lived bug with rf using threshold 320 and sampling cv52.
+TRACE [2018-11-23 17:48:55] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 17:48:55] Recording evaluation results on CSV file.
+TRACE [2018-11-23 17:48:55] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 17:48:55] Predicting long lived bug with rf using threshold 352 and sampling cv52.
+TRACE [2018-11-23 18:16:36] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 18:16:36] Recording evaluation results on CSV file.
+TRACE [2018-11-23 18:16:36] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 18:16:36] Predicting long lived bug with rf using threshold 384 and sampling cv52.
+TRACE [2018-11-23 18:42:21] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 18:42:21] Recording evaluation results on CSV file.
+TRACE [2018-11-23 18:42:21] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 18:42:21] Predicting long lived bug with rf using threshold 416 and sampling cv52.
+TRACE [2018-11-23 19:07:07] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 19:07:07] Recording evaluation results on CSV file.
+TRACE [2018-11-23 19:07:07] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 19:07:07] Predicting long lived bug with rf using threshold 448 and sampling cv52.
+TRACE [2018-11-23 19:29:38] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 19:29:38] Recording evaluation results on CSV file.
+TRACE [2018-11-23 19:29:38] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 19:29:38] Predicting long lived bug with rf using threshold 480 and sampling cv52.
+TRACE [2018-11-23 19:50:16] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 19:50:16] Recording evaluation results on CSV file.
+TRACE [2018-11-23 19:50:16] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 19:50:16] Predicting long lived bug with rf using threshold 512 and sampling cv52.
+TRACE [2018-11-23 20:09:58] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 20:09:58] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:09:58] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:09:58] Predicting long lived bug with svmRadial using threshold 4 and sampling bootstrap.
+TRACE [2018-11-23 20:16:48] Evaluating predicting: Balanced Accuracy: 0.481351
+TRACE [2018-11-23 20:16:48] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:16:48] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:16:48] Predicting long lived bug with svmRadial using threshold 8 and sampling bootstrap.
+TRACE [2018-11-23 20:23:51] Evaluating predicting: Balanced Accuracy: 0.528385
+TRACE [2018-11-23 20:23:51] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:23:51] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:23:51] Predicting long lived bug with svmRadial using threshold 12 and sampling bootstrap.
+TRACE [2018-11-23 20:30:54] Evaluating predicting: Balanced Accuracy: 0.548931
+TRACE [2018-11-23 20:30:54] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:30:54] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:30:54] Predicting long lived bug with svmRadial using threshold 16 and sampling bootstrap.
+TRACE [2018-11-23 20:37:45] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 20:37:45] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:37:45] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:37:45] Predicting long lived bug with svmRadial using threshold 20 and sampling bootstrap.
+TRACE [2018-11-23 20:44:20] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 20:44:20] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:44:20] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:44:20] Predicting long lived bug with svmRadial using threshold 24 and sampling bootstrap.
+TRACE [2018-11-23 20:50:48] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 20:50:48] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:50:48] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:50:48] Predicting long lived bug with svmRadial using threshold 28 and sampling bootstrap.
+TRACE [2018-11-23 20:57:11] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 20:57:11] Recording evaluation results on CSV file.
+TRACE [2018-11-23 20:57:11] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 20:57:11] Predicting long lived bug with svmRadial using threshold 32 and sampling bootstrap.
+TRACE [2018-11-23 21:03:25] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:03:25] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:03:25] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:03:25] Predicting long lived bug with svmRadial using threshold 64 and sampling bootstrap.
+TRACE [2018-11-23 21:09:06] Evaluating predicting: Balanced Accuracy: 0.649250
+TRACE [2018-11-23 21:09:06] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:09:06] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:09:06] Predicting long lived bug with svmRadial using threshold 96 and sampling bootstrap.
+TRACE [2018-11-23 21:14:27] Evaluating predicting: Balanced Accuracy: 0.421222
+TRACE [2018-11-23 21:14:27] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:14:27] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:14:27] Predicting long lived bug with svmRadial using threshold 128 and sampling bootstrap.
+TRACE [2018-11-23 21:19:05] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:19:05] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:19:05] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:19:05] Predicting long lived bug with svmRadial using threshold 160 and sampling bootstrap.
+TRACE [2018-11-23 21:23:27] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:23:27] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:23:27] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:23:27] Predicting long lived bug with svmRadial using threshold 192 and sampling bootstrap.
+TRACE [2018-11-23 21:27:14] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:27:14] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:27:14] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:27:14] Predicting long lived bug with svmRadial using threshold 224 and sampling bootstrap.
+TRACE [2018-11-23 21:30:27] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:30:27] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:30:27] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:30:27] Predicting long lived bug with svmRadial using threshold 256 and sampling bootstrap.
+TRACE [2018-11-23 21:33:34] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:33:34] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:33:34] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:33:34] Predicting long lived bug with svmRadial using threshold 288 and sampling bootstrap.
+TRACE [2018-11-23 21:36:27] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:36:27] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:36:27] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:36:27] Predicting long lived bug with svmRadial using threshold 320 and sampling bootstrap.
+TRACE [2018-11-23 21:38:59] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:38:59] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:38:59] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:38:59] Predicting long lived bug with svmRadial using threshold 352 and sampling bootstrap.
+TRACE [2018-11-23 21:41:11] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:41:11] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:41:11] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:41:11] Predicting long lived bug with svmRadial using threshold 384 and sampling bootstrap.
+TRACE [2018-11-23 21:43:07] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:43:07] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:43:07] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:43:07] Predicting long lived bug with svmRadial using threshold 416 and sampling bootstrap.
+TRACE [2018-11-23 21:44:49] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:44:49] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:44:49] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:44:49] Predicting long lived bug with svmRadial using threshold 448 and sampling bootstrap.
+TRACE [2018-11-23 21:46:20] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:46:20] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:46:20] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:46:20] Predicting long lived bug with svmRadial using threshold 480 and sampling bootstrap.
+TRACE [2018-11-23 21:47:44] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:47:44] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:47:44] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:47:44] Predicting long lived bug with svmRadial using threshold 512 and sampling bootstrap.
+TRACE [2018-11-23 21:48:57] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:48:57] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:48:57] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:48:57] Predicting long lived bug with svmRadial using threshold 4 and sampling cv52.
+TRACE [2018-11-23 21:51:05] Evaluating predicting: Balanced Accuracy: 0.459566
+TRACE [2018-11-23 21:51:05] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:51:05] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:51:05] Predicting long lived bug with svmRadial using threshold 8 and sampling cv52.
+TRACE [2018-11-23 21:53:15] Evaluating predicting: Balanced Accuracy: 0.527685
+TRACE [2018-11-23 21:53:15] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:53:15] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:53:15] Predicting long lived bug with svmRadial using threshold 12 and sampling cv52.
+TRACE [2018-11-23 21:55:25] Evaluating predicting: Balanced Accuracy: 0.510362
+TRACE [2018-11-23 21:55:25] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:55:25] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:55:26] Predicting long lived bug with svmRadial using threshold 16 and sampling cv52.
+TRACE [2018-11-23 21:57:37] Evaluating predicting: Balanced Accuracy: 0.714565
+TRACE [2018-11-23 21:57:37] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:57:37] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:57:37] Predicting long lived bug with svmRadial using threshold 20 and sampling cv52.
+TRACE [2018-11-23 21:59:47] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 21:59:47] Recording evaluation results on CSV file.
+TRACE [2018-11-23 21:59:47] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 21:59:47] Predicting long lived bug with svmRadial using threshold 24 and sampling cv52.
+TRACE [2018-11-23 22:01:59] Evaluating predicting: Balanced Accuracy: 0.335565
+TRACE [2018-11-23 22:01:59] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:01:59] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:01:59] Predicting long lived bug with svmRadial using threshold 28 and sampling cv52.
+TRACE [2018-11-23 22:04:14] Evaluating predicting: Balanced Accuracy: 0.646028
+TRACE [2018-11-23 22:04:14] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:04:14] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:04:14] Predicting long lived bug with svmRadial using threshold 32 and sampling cv52.
+TRACE [2018-11-23 22:06:26] Evaluating predicting: Balanced Accuracy: 0.521280
+TRACE [2018-11-23 22:06:26] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:06:26] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:06:26] Predicting long lived bug with svmRadial using threshold 64 and sampling cv52.
+TRACE [2018-11-23 22:09:05] Evaluating predicting: Balanced Accuracy: 0.649250
+TRACE [2018-11-23 22:09:05] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:09:05] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:09:05] Predicting long lived bug with svmRadial using threshold 96 and sampling cv52.
+TRACE [2018-11-23 22:11:37] Evaluating predicting: Balanced Accuracy: 0.546406
+TRACE [2018-11-23 22:11:37] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:11:37] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:11:37] Predicting long lived bug with svmRadial using threshold 128 and sampling cv52.
+TRACE [2018-11-23 22:14:02] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:14:02] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:14:02] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:14:02] Predicting long lived bug with svmRadial using threshold 160 and sampling cv52.
+TRACE [2018-11-23 22:16:15] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:16:15] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:16:15] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:16:15] Predicting long lived bug with svmRadial using threshold 192 and sampling cv52.
+TRACE [2018-11-23 22:18:13] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:18:13] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:18:13] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:18:13] Predicting long lived bug with svmRadial using threshold 224 and sampling cv52.
+TRACE [2018-11-23 22:19:42] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:19:42] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:19:42] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:19:42] Predicting long lived bug with svmRadial using threshold 256 and sampling cv52.
+TRACE [2018-11-23 22:21:15] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:21:15] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:21:15] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:21:16] Predicting long lived bug with svmRadial using threshold 288 and sampling cv52.
+TRACE [2018-11-23 22:22:37] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:22:37] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:22:37] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:22:37] Predicting long lived bug with svmRadial using threshold 320 and sampling cv52.
+TRACE [2018-11-23 22:23:48] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:23:48] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:23:48] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:23:48] Predicting long lived bug with svmRadial using threshold 352 and sampling cv52.
+TRACE [2018-11-23 22:24:43] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:24:43] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:24:43] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:24:43] Predicting long lived bug with svmRadial using threshold 384 and sampling cv52.
+TRACE [2018-11-23 22:25:31] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:25:31] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:25:31] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:25:31] Predicting long lived bug with svmRadial using threshold 416 and sampling cv52.
+TRACE [2018-11-23 22:26:15] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:26:15] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:26:15] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:26:15] Predicting long lived bug with svmRadial using threshold 448 and sampling cv52.
+TRACE [2018-11-23 22:26:55] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:26:55] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:26:55] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:26:55] Predicting long lived bug with svmRadial using threshold 480 and sampling cv52.
+TRACE [2018-11-23 22:27:29] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:27:29] Recording evaluation results on CSV file.
+TRACE [2018-11-23 22:27:29] Making document term matrix from <Summary> feature
+TRACE [2018-11-23 22:27:29] Predicting long lived bug with svmRadial using threshold 512 and sampling cv52.
+TRACE [2018-11-23 22:28:02] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-11-23 22:28:02] Recording evaluation results on CSV file.
+There were 50 or more warnings (use warnings() to see the first 50)
+TRACE [2018-11-23 22:28:02] End of predicting long lived bug.
