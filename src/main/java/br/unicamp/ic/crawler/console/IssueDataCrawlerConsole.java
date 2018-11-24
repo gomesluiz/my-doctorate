@@ -72,7 +72,7 @@ public class IssueDataCrawlerConsole {
 		
 		Logger logger = LogManager.getRootLogger();
 		CSVOutputFormatter formatter = new CSVRawIssueFormatter();
-		IssueFileWriter output = new CSVIssueFileWriter("r1", formatter);
+		IssueFileWriter output = new CSVIssueFileWriter("r2", formatter);
 
 		for (Project project: projects) {
 			ReportCrawler crawler = CrawlerFactory.getInstance(project);

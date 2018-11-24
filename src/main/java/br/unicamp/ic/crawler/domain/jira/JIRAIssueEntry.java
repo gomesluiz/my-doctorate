@@ -275,4 +275,10 @@ public class JIRAIssueEntry implements IssueEntry {
 		return null;
 	}
 
+	@Override
+	public String getReporter() {
+		// TODO Auto-generated method stub
+		return channel.getReporter();
+	}
+
 }

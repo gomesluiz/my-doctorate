@@ -56,8 +56,12 @@ public class ParseReportAndHistoryTest {
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
 		assertEquals("PLATFORM-77", entry.getKey());
 		assertEquals("2001-10-10", entry.getCreated());
+		assertEquals("James_Moody", entry.getType());
 		assertEquals("normal", entry.getSeverity());
 		assertEquals("RESOLVED", entry.getStatus());
+		assertEquals("dj.houghton", entry.getReporter());
+		assertEquals("James_Moody", entry.getAssignee());
+		
 		assertEquals(3, entry.getComments().size());
 	}
 	

@@ -152,4 +152,9 @@ final class Channel {
 				+ ", buildInfo=" + buildInfo + ", item=" + item + "]";
 	}
 
+	public String getReporter() {
+		// TODO Auto-generated method stub
+		return item.getReporter();
+	}
+
 }

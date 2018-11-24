@@ -39,6 +39,7 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 					, "DaysToResolve"
 					, "Severity"
 					, "SeverityCode"
+					, "Reporter"
 					));
 		} else {
 			headers = new ArrayList<String>(Arrays.asList("Key", "Who", "When", "What", "Removed", "Added"));
@@ -74,6 +75,7 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 		record.add(summary);
 		record.add(description);
 		record.add(report.getAssignee());
+		record.add(report.getResolution());
 		record.add(report.getCreated());
 		record.add(report.getResolution());
 		record.add(report.getResolutionCode());
@@ -88,7 +90,7 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 		record.add(daysToResolve);
 		record.add(report.getSeverity());
 		record.add(report.getSeverityCode());
-
+		record.add(report.getReporter());
 		
 		return record;
 	}

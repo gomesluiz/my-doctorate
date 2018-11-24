@@ -179,6 +179,15 @@ public class Report {
 	}
 
 	/**
+	 * Gets reporter of issue report
+	 * 
+	 * @return the assignee name
+	 */
+	public String getReporter() {
+		return entry.getReporter();
+	}
+	
+	/**
 	 * Gets assignee of issue report
 	 * 
 	 * @return the assignee name
@@ -196,6 +205,7 @@ public class Report {
 		return entry.getVotes();
 	}
 
+	
 	public List<IssueActivityEntry> getActivities() {
 		List<IssueActivityEntry> result = entry.getActivities();
 

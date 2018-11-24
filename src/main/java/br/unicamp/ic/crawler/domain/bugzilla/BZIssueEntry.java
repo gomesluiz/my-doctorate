@@ -253,4 +253,9 @@ public class BZIssueEntry implements IssueEntry {
 		return history;
 	}
 
+	@Override
+	public String getReporter() {
+		return bug.getReporter();
+	}
+
 }

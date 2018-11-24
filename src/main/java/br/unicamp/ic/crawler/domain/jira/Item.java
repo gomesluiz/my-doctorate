@@ -166,4 +166,9 @@ final class Item {
 		return votes;
 	}
 
+	public String getReporter() {
+		// TODO Auto-generated method stub
+		return reporter;
+	}
+
 }

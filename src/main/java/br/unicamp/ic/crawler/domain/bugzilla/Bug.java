@@ -145,6 +145,10 @@ public class Bug {
 		return returnEmptyIfNull(assignedTo);
 	}
 
+	public String getReporter() {
+		return returnEmptyIfNull(reporter);
+	}
+	
 	public List<BZIssueComment> getComments() {
 		return descriptions;
 	}

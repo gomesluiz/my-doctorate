@@ -8,40 +8,25 @@ public interface IssueEntry {
 	final String ISSUE_STATUS_RESOLVED = "resolved";
 
 	String getAssignee();
-
 	List<IssueComment> getComments();
-
 	String getCreated();
-
 	String getKey();
-
 	int getKeySequential();
-
 	String getDescription();
-
 	String getSeverity();
-
 	String convertSeverityToCode();
-
 	String getResolution();
-
 	String convertResolutionToCode();
-
 	String getResolved();
-
 	String getStatus();
-
 	String converteStatusToCode();
-
 	String getSummary();
-
 	String getType();
-
 	String convertTypeToCode();
-
 	String getUpdated();
-
 	String getVotes();
+	String getReporter();
+	
 
 	int getDaysToResolve();
 
