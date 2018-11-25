@@ -1,2 +1,0 @@
-Dataset,Model,Resampling,Distribution,Threshold,Train_Size,Train_Qt_Class_0,Train_Qt_Class_1,Test_Size,Test_Qt_Class_0,Test_Qt_Class_1,Feature,N_Terms,Tp,Fp,Tn,Fn,Acc_0,Acc_1,Balanced_Acc,Precision,Recall,Fmeasure
-Eclipse,knn,bootstrap,balanced,4,5804,2511,3293,1933,836,1097,Description,200,272,326,564,771,0.454849498327759,0.42247191011236,0.438660704220059,0.454849498327759,0.2607861936721,0.331505179768434
