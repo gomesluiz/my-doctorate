@@ -1,5 +1,5 @@
 FormatEvaluationFileName <- function(path=".") {
-  name  <- paste(path, "%s-%s-evaluation.csv", sep = "")
+  name  <- file.path(path, "%s-%s-evaluation.csv")
   name  <- sprintf(name, format(Sys.time(), "%Y%m%d%H%M%S"), "long_live_bug")
   return(name)
 }
@@ -20,7 +20,7 @@ GetLastEvaluationFile <- function(folder="."){
 
   if (is.na(files[1])) return(NA)
 
-  return(paste(folder, files[1], sep = ""))
+  return(file.path(folder, files[1]))
 }
 
 InsertOneEvaluationData <- function(evaluation.file, one.evaluation) {

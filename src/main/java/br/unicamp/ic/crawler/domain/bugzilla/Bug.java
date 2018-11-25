@@ -169,5 +169,8 @@ public class Bug {
 
 		return result;
 	}
+	public String getComponent() {
+		return this.component;
+	}
 
 }

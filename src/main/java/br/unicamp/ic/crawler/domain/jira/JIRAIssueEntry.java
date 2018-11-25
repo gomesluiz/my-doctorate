@@ -133,19 +133,19 @@ public class JIRAIssueEntry implements IssueEntry {
 
 			switch (value) {
 			case "blocker":
-				result = "1";
+				result = "5";
 				break;
 			case "critical":
-				result = "2";
+				result = "4";
 				break;
 			case "major":
 				result = "3";
 				break;
 			case "minor":
-				result = "4";
+				result = "2";
 				break;
 			case "trivial":
-				result = "5";
+				result = "1";
 				break;
 			}
 		}
@@ -279,6 +279,18 @@ public class JIRAIssueEntry implements IssueEntry {
 	public String getReporter() {
 		// TODO Auto-generated method stub
 		return channel.getReporter();
+	}
+
+	@Override
+	public String getProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getComponent() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

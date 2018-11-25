@@ -219,4 +219,12 @@ public class Report {
 		return "Issue [key=" + getKey() + ", title=" + getSummary() + "]";
 	}
 
+	public String getComponent() {
+		return entry.getComponent();
+	}
+
+	public String getProduct() {
+		return entry.getProduct();
+	}
+
 }

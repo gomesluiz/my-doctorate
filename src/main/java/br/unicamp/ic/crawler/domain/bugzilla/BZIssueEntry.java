@@ -71,7 +71,7 @@ public class BZIssueEntry implements IssueEntry {
 
 	@Override
 	public String getResolved() {
-		String result = "0000-00-00";
+		String result = this.getUpdated();
 
 		if (history != null) {
 			for (IssueActivityEntry activity : history) {
@@ -80,7 +80,7 @@ public class BZIssueEntry implements IssueEntry {
 				}
 			}
 		}
-		return result;
+		return result != null? result:"0000-00-00";
 	}
 
 	@Override
@@ -138,21 +138,21 @@ public class BZIssueEntry implements IssueEntry {
 
 		switch (value) {
 		case "blocker":
-			result = "1";
+			result = "6";
 			break;
 		case "critical":
-			result = "2";
-			break;
-		case "major":
-			result = "3";
-			break;
-		case "normal":
-			result = "4";
-		case "minor":
 			result = "5";
 			break;
+		case "major":
+			result = "4";
+			break;
+		case "normal":
+			result = "3";
+		case "minor":
+			result = "2";
+			break;
 		case "trivial":
-			result = "6";
+			result = "1";
 			break;
 		case "enhancement":
 			result = "7";
@@ -256,6 +256,16 @@ public class BZIssueEntry implements IssueEntry {
 	@Override
 	public String getReporter() {
 		return bug.getReporter();
+	}
+
+	@Override
+	public String getProduct() {
+		return bug.getProduct();
+	}
+
+	@Override
+	public String getComponent() {
+		return bug.getComponent();
 	}
 
 }

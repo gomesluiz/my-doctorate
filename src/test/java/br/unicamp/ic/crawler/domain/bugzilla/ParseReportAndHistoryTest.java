@@ -50,17 +50,45 @@ public class ParseReportAndHistoryTest {
 	}
 
 	@Test
-	public final void parseAnIssueFromBugzillaXmlValidFormat() {
+	public final void parseAnIssue5FromBugzillaXmlValidFormat() {
 		String xml = ReportRepositoryFromMemory.reports.get(5);	
 		ReportPasser parser = new BZReportParserInXml();
 		IssueEntry entry = (IssueEntry) parser.parse(xml);
 		assertEquals("PLATFORM-77", entry.getKey());
 		assertEquals("2001-10-10", entry.getCreated());
-		assertEquals("James_Moody", entry.getType());
+		assertEquals("2002-05-23", entry.getUpdated());
+		assertEquals("2002-05-23", entry.getResolved());
+		assertEquals(225, entry.getDaysToResolve());
+		assertEquals("", entry.getType());
 		assertEquals("normal", entry.getSeverity());
 		assertEquals("RESOLVED", entry.getStatus());
 		assertEquals("dj.houghton", entry.getReporter());
 		assertEquals("James_Moody", entry.getAssignee());
+		
+		assertEquals("Team", entry.getComponent());
+		assertEquals("PLATFORM", entry.getProduct());
+		
+		assertEquals(3, entry.getComments().size());
+	}
+	
+	@Test
+	public final void parseAnIssue4FromBugzillaXmlValidFormat() {
+		String xml = ReportRepositoryFromMemory.reports.get(4);	
+		ReportPasser parser = new BZReportParserInXml();
+		IssueEntry entry = (IssueEntry) parser.parse(xml);
+		assertEquals("JAVAEE-92086", entry.getKey());
+		assertEquals("2007-01-09", entry.getCreated());
+		assertEquals("2007-01-09", entry.getUpdated());
+		assertEquals("2007-01-09", entry.getResolved());
+		assertEquals(0, entry.getDaysToResolve());
+		assertEquals("DEFECT", entry.getType());
+		assertEquals("blocker", entry.getSeverity());
+		assertEquals("RESOLVED", entry.getStatus());
+		assertEquals("jhorvath", entry.getReporter());
+		assertEquals("madamek", entry.getAssignee());
+		
+		assertEquals("EJB", entry.getComponent());
+		assertEquals("JAVAEE", entry.getProduct());
 		
 		assertEquals(3, entry.getComments().size());
 	}

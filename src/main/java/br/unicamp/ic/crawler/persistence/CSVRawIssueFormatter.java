@@ -22,24 +22,26 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 		if (header == ISSUE_HEADER_TYPE) {
 			headers = new ArrayList<String>(Arrays.asList(
 					"Bug_Id"
+					, "Created"
+					, "Component"
+					, "Product"
 					, "Summary"
 					, "Description"
 					, "Assignee"
-					, "Created"
+					, "Reporter"
 					, "Resolution"
 					, "ResolutionCode"
-					, "Resolved"
 					, "Status"
 					, "StatusCode"
-					, "Type"
-					, "TypeCode"
+					//, "Type"
+					//, "TypeCode"
 					, "Updated"
 					, "Votes"
 					, "QuantityOfComments"
+					, "Resolved"
 					, "DaysToResolve"
 					, "Severity"
 					, "SeverityCode"
-					, "Reporter"
 					));
 		} else {
 			headers = new ArrayList<String>(Arrays.asList("Key", "Who", "When", "What", "Removed", "Added"));
@@ -72,25 +74,28 @@ public class CSVRawIssueFormatter implements CSVOutputFormatter {
 				.replaceAll(",", "");
 		
 		record.add(report.getKey());
+		record.add(report.getCreated());
+		record.add(report.getComponent());
+		record.add(report.getProduct());
 		record.add(summary);
 		record.add(description);
 		record.add(report.getAssignee());
-		record.add(report.getResolution());
-		record.add(report.getCreated());
+		record.add(report.getReporter());		
 		record.add(report.getResolution());
 		record.add(report.getResolutionCode());
-		record.add(resolved);
 		record.add(report.getStatus());
 		record.add(report.getStatusCode());
-		record.add(report.getType());
-		record.add(report.getTypeCode());
+		//record.add(report.getType());
+		//record.add(report.getTypeCode());
 		record.add(report.getUpdated());
 		record.add(report.getVotes());
 		record.add(report.getQuantityOfComments());
+		record.add(resolved);
 		record.add(daysToResolve);
 		record.add(report.getSeverity());
 		record.add(report.getSeverityCode());
-		record.add(report.getReporter());
+
+		
 		
 		return record;
 	}

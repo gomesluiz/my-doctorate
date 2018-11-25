@@ -26,6 +26,8 @@ public interface IssueEntry {
 	String getUpdated();
 	String getVotes();
 	String getReporter();
+	String getProduct();
+	String getComponent();
 	
 
 	int getDaysToResolve();
