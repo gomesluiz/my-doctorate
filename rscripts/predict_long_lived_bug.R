@@ -84,8 +84,8 @@ flog.trace("Number of reports data file after filtering: %d", nrow(filtered_data
 prev_feature = ""
 for (i in start.parameter:nrow(parameters)) {
   parameter <- parameters[i,]
-  flog.trace("Making document term matrix from <%s> feature", parameter$feature)
   if (parameter$feature != prev_feature) {
+    flog.trace("Making document term matrix from <%s> feature", parameter$feature)
     dtm     <- make_dtm(filtered_data[, c('Bug_Id', parameter$feature)], 200)
     dtm_df  <-  as.data.frame(tidy(dtm))
     names(dtm_df) <- c("Bug_Id", "Term", "Count")
@@ -102,7 +102,6 @@ for (i in start.parameter:nrow(parameters)) {
     prev_feature = parameter$feature
     colnames(merged_data)[colnames(merged_data) == "class"] <- "CLASS"
   }
-
 
   merged_data$class <- as.factor(ifelse(merged_data$DaysToResolve <= parameter$threshold, 0, 1))
   balanced.data <- SMOTE(merged_data[, c(3:176, 178:202)], merged_data[, 203], K = 3, dup_size = 0)$data
