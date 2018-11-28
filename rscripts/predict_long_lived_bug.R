@@ -98,13 +98,16 @@ for (i in start.parameter:nrow(parameters)) {
         by.x = "Bug_Id",
         by.y = "Bug_Id"
       )
-    merged_data <- na.omit(merged_data)
     prev_feature = parameter$feature
+    merged_data <- na.omit(merged_data)
+    # SMOTE crash with column with target name.
+    merged_data <- merged_data[, !names(merged_data) %in% c("target")]
     colnames(merged_data)[colnames(merged_data) == "class"] <- "CLASS"
   }
 
   merged_data$class <- as.factor(ifelse(merged_data$DaysToResolve <= parameter$threshold, 0, 1))
-  balanced.data <- SMOTE(merged_data[, c(3:176, 178:202)], merged_data[, 203], K = 3, dup_size = 0)$data
+
+  balanced.data <- SMOTE(merged_data[, c(3:201)], merged_data[, 202], K = 3, dup_size = 0)$data
 
   set.seed(1234)
   index <- createDataPartition(balanced.data$class, p = 0.75, list = FALSE)
