@@ -1,3 +1,5 @@
+
+# nohup Rscript ./predict_long_lived_bug.R > output.log 2>&1 &
 rm(list = ls(all = TRUE))
 
 if (!require('class')) install.packages("class")
@@ -10,7 +12,6 @@ if (!require('smotefamily')) install.packages('smotefamily')
 if (!require('tidytext')) install.packages('tidytext')
 if (!require('tidyr')) install.packages("tidyr")
 if (!require('utils')) install.packages("utils")
-
 library(doMC)
 library(futile.logger)
 library(caret)
