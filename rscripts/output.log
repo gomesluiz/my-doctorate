@@ -102,13 +102,203 @@ The following objects are masked from ‘package:qdap’:
 
     as.DocumentTermMatrix, as.TermDocumentMatrix
 
-TRACE [2018-12-05 10:56:40] Last evaluation file generated: ~/Workspace/issue-crawler/rscripts/results/20181125021535-long_live_bug-evaluation.csv
-TRACE [2018-12-05 10:56:40] Starting with parameter: 338
+TRACE [2018-12-08 12:57:55] Last evaluation file generated: ~/Workspace/issue-crawler/rscripts/results/20181125021535-long_live_bug-evaluation.csv
+TRACE [2018-12-08 12:57:55] Starting with parameter: 352
 Warning message:
 In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
   embedded nul(s) found in input
-TRACE [2018-12-05 10:56:41] Bug report data file: ~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_data.csv
-TRACE [2018-12-05 10:56:41] Number of reports in data file: 12200
-TRACE [2018-12-05 10:56:41] Number of reports data file after filtering: 7960
-TRACE [2018-12-05 10:56:41] Making document term matrix from <Summary> feature
-TRACE [2018-12-05 10:56:51] Predicting long lived bug with rf using threshold 288 and sampling bootstrap.
+TRACE [2018-12-08 12:57:55] Bug report data file: ~/Workspace/issue-crawler/data/eclipse/csv/r1_bug_report_data.csv
+TRACE [2018-12-08 12:57:55] Number of reports in data file: 12200
+TRACE [2018-12-08 12:57:56] Number of reports data file after filtering: 7960
+TRACE [2018-12-08 12:57:56] Making document term matrix from <Summary> feature
+TRACE [2018-12-08 12:58:20] Predicting long lived bug with rf using threshold 28 and sampling cv52.
+TRACE [2018-12-08 14:06:54] Evaluating predicting: Balanced Accuracy: 0.507992
+TRACE [2018-12-08 14:06:54] Recording evaluation results on CSV file.
+TRACE [2018-12-08 14:07:12] Predicting long lived bug with rf using threshold 32 and sampling cv52.
+TRACE [2018-12-08 15:18:52] Evaluating predicting: Balanced Accuracy: 0.513810
+TRACE [2018-12-08 15:18:52] Recording evaluation results on CSV file.
+TRACE [2018-12-08 15:19:06] Predicting long lived bug with rf using threshold 64 and sampling cv52.
+TRACE [2018-12-08 16:26:07] Evaluating predicting: Balanced Accuracy: 0.516070
+TRACE [2018-12-08 16:26:07] Recording evaluation results on CSV file.
+TRACE [2018-12-08 16:26:19] Predicting long lived bug with rf using threshold 96 and sampling cv52.
+TRACE [2018-12-08 17:53:48] Evaluating predicting: Balanced Accuracy: 0.495589
+TRACE [2018-12-08 17:53:48] Recording evaluation results on CSV file.
+TRACE [2018-12-08 17:54:00] Predicting long lived bug with rf using threshold 128 and sampling cv52.
+TRACE [2018-12-08 19:08:46] Evaluating predicting: Balanced Accuracy: 0.510766
+TRACE [2018-12-08 19:08:46] Recording evaluation results on CSV file.
+TRACE [2018-12-08 19:08:57] Predicting long lived bug with rf using threshold 160 and sampling cv52.
+TRACE [2018-12-08 20:29:05] Evaluating predicting: Balanced Accuracy: 0.505776
+TRACE [2018-12-08 20:29:05] Recording evaluation results on CSV file.
+TRACE [2018-12-08 20:29:11] Predicting long lived bug with rf using threshold 192 and sampling cv52.
+TRACE [2018-12-08 21:34:00] Evaluating predicting: Balanced Accuracy: 0.514948
+TRACE [2018-12-08 21:34:00] Recording evaluation results on CSV file.
+TRACE [2018-12-08 21:34:09] Predicting long lived bug with rf using threshold 224 and sampling cv52.
+TRACE [2018-12-08 22:33:12] Evaluating predicting: Balanced Accuracy: 0.517090
+TRACE [2018-12-08 22:33:12] Recording evaluation results on CSV file.
+TRACE [2018-12-08 22:33:19] Predicting long lived bug with rf using threshold 256 and sampling cv52.
+TRACE [2018-12-08 23:29:06] Evaluating predicting: Balanced Accuracy: 0.505723
+TRACE [2018-12-08 23:29:06] Recording evaluation results on CSV file.
+TRACE [2018-12-08 23:29:10] Predicting long lived bug with rf using threshold 288 and sampling cv52.
+TRACE [2018-12-09 00:21:42] Evaluating predicting: Balanced Accuracy: 0.517537
+TRACE [2018-12-09 00:21:42] Recording evaluation results on CSV file.
+TRACE [2018-12-09 00:21:47] Predicting long lived bug with rf using threshold 320 and sampling cv52.
+TRACE [2018-12-09 01:11:13] Evaluating predicting: Balanced Accuracy: 0.508282
+TRACE [2018-12-09 01:11:13] Recording evaluation results on CSV file.
+TRACE [2018-12-09 01:11:18] Predicting long lived bug with rf using threshold 352 and sampling cv52.
+TRACE [2018-12-09 01:57:17] Evaluating predicting: Balanced Accuracy: 0.509738
+TRACE [2018-12-09 01:57:17] Recording evaluation results on CSV file.
+TRACE [2018-12-09 01:57:20] Predicting long lived bug with rf using threshold 384 and sampling cv52.
+TRACE [2018-12-09 02:44:34] Evaluating predicting: Balanced Accuracy: 0.504369
+TRACE [2018-12-09 02:44:34] Recording evaluation results on CSV file.
+TRACE [2018-12-09 02:44:37] Predicting long lived bug with rf using threshold 416 and sampling cv52.
+TRACE [2018-12-09 03:26:57] Evaluating predicting: Balanced Accuracy: 0.505471
+TRACE [2018-12-09 03:26:57] Recording evaluation results on CSV file.
+TRACE [2018-12-09 03:27:00] Predicting long lived bug with rf using threshold 448 and sampling cv52.
+TRACE [2018-12-09 04:09:04] Evaluating predicting: Balanced Accuracy: 0.510526
+TRACE [2018-12-09 04:09:04] Recording evaluation results on CSV file.
+TRACE [2018-12-09 04:09:05] Predicting long lived bug with rf using threshold 480 and sampling cv52.
+TRACE [2018-12-09 04:49:46] Evaluating predicting: Balanced Accuracy: 0.506314
+TRACE [2018-12-09 04:49:46] Recording evaluation results on CSV file.
+TRACE [2018-12-09 04:49:49] Predicting long lived bug with rf using threshold 512 and sampling cv52.
+TRACE [2018-12-09 05:26:52] Evaluating predicting: Balanced Accuracy: 0.504159
+TRACE [2018-12-09 05:26:52] Recording evaluation results on CSV file.
+TRACE [2018-12-09 05:27:03] Predicting long lived bug with svmRadial using threshold 4 and sampling bootstrap.
+TRACE [2018-12-09 05:33:37] Evaluating predicting: Balanced Accuracy: 0.493629
+TRACE [2018-12-09 05:33:37] Recording evaluation results on CSV file.
+TRACE [2018-12-09 05:33:49] Predicting long lived bug with svmRadial using threshold 8 and sampling bootstrap.
+TRACE [2018-12-09 05:40:29] Evaluating predicting: Balanced Accuracy: 0.538858
+TRACE [2018-12-09 05:40:29] Recording evaluation results on CSV file.
+TRACE [2018-12-09 05:40:40] Predicting long lived bug with svmRadial using threshold 12 and sampling bootstrap.
+TRACE [2018-12-09 05:47:20] Evaluating predicting: Balanced Accuracy: 0.538919
+TRACE [2018-12-09 05:47:20] Recording evaluation results on CSV file.
+TRACE [2018-12-09 05:47:30] Predicting long lived bug with svmRadial using threshold 16 and sampling bootstrap.
+TRACE [2018-12-09 05:53:55] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-12-09 05:53:55] Recording evaluation results on CSV file.
+TRACE [2018-12-09 05:54:05] Predicting long lived bug with svmRadial using threshold 20 and sampling bootstrap.
+TRACE [2018-12-09 06:00:23] Evaluating predicting: Balanced Accuracy: 0.571543
+TRACE [2018-12-09 06:00:23] Recording evaluation results on CSV file.
+TRACE [2018-12-09 06:00:44] Predicting long lived bug with svmRadial using threshold 24 and sampling bootstrap.
+TRACE [2018-12-09 06:12:04] Evaluating predicting: Balanced Accuracy: 0.520271
+TRACE [2018-12-09 06:12:04] Recording evaluation results on CSV file.
+TRACE [2018-12-09 06:12:23] Predicting long lived bug with svmRadial using threshold 28 and sampling bootstrap.
+TRACE [2018-12-09 06:23:33] Evaluating predicting: Balanced Accuracy: 0.527155
+TRACE [2018-12-09 06:23:34] Recording evaluation results on CSV file.
+TRACE [2018-12-09 06:23:51] Predicting long lived bug with svmRadial using threshold 32 and sampling bootstrap.
+TRACE [2018-12-09 06:34:34] Evaluating predicting: Balanced Accuracy: 0.533647
+TRACE [2018-12-09 06:34:34] Recording evaluation results on CSV file.
+TRACE [2018-12-09 06:34:47] Predicting long lived bug with svmRadial using threshold 64 and sampling bootstrap.
+TRACE [2018-12-09 06:46:43] Evaluating predicting: Balanced Accuracy: 0.558396
+TRACE [2018-12-09 06:46:43] Recording evaluation results on CSV file.
+TRACE [2018-12-09 06:46:55] Predicting long lived bug with svmRadial using threshold 96 and sampling bootstrap.
+TRACE [2018-12-09 07:03:32] Evaluating predicting: Balanced Accuracy: 0.564885
+TRACE [2018-12-09 07:03:32] Recording evaluation results on CSV file.
+TRACE [2018-12-09 07:03:43] Predicting long lived bug with svmRadial using threshold 128 and sampling bootstrap.
+TRACE [2018-12-09 07:19:32] Evaluating predicting: Balanced Accuracy: 0.587887
+TRACE [2018-12-09 07:19:32] Recording evaluation results on CSV file.
+TRACE [2018-12-09 07:19:43] Predicting long lived bug with svmRadial using threshold 160 and sampling bootstrap.
+TRACE [2018-12-09 07:37:05] Evaluating predicting: Balanced Accuracy: 0.582261
+TRACE [2018-12-09 07:37:05] Recording evaluation results on CSV file.
+TRACE [2018-12-09 07:37:11] Predicting long lived bug with svmRadial using threshold 192 and sampling bootstrap.
+TRACE [2018-12-09 07:54:07] Evaluating predicting: Balanced Accuracy: 0.588895
+TRACE [2018-12-09 07:54:07] Recording evaluation results on CSV file.
+TRACE [2018-12-09 07:54:15] Predicting long lived bug with svmRadial using threshold 224 and sampling bootstrap.
+TRACE [2018-12-09 08:11:58] Evaluating predicting: Balanced Accuracy: 0.564102
+TRACE [2018-12-09 08:11:58] Recording evaluation results on CSV file.
+TRACE [2018-12-09 08:12:06] Predicting long lived bug with svmRadial using threshold 256 and sampling bootstrap.
+TRACE [2018-12-09 08:29:08] Evaluating predicting: Balanced Accuracy: 0.572592
+TRACE [2018-12-09 08:29:08] Recording evaluation results on CSV file.
+TRACE [2018-12-09 08:29:12] Predicting long lived bug with svmRadial using threshold 288 and sampling bootstrap.
+TRACE [2018-12-09 08:47:01] Evaluating predicting: Balanced Accuracy: 0.581059
+TRACE [2018-12-09 08:47:01] Recording evaluation results on CSV file.
+TRACE [2018-12-09 08:47:06] Predicting long lived bug with svmRadial using threshold 320 and sampling bootstrap.
+TRACE [2018-12-09 09:02:58] Evaluating predicting: Balanced Accuracy: 0.564722
+TRACE [2018-12-09 09:02:58] Recording evaluation results on CSV file.
+TRACE [2018-12-09 09:03:02] Predicting long lived bug with svmRadial using threshold 352 and sampling bootstrap.
+TRACE [2018-12-09 09:18:10] Evaluating predicting: Balanced Accuracy: 0.558030
+TRACE [2018-12-09 09:18:10] Recording evaluation results on CSV file.
+TRACE [2018-12-09 09:18:13] Predicting long lived bug with svmRadial using threshold 384 and sampling bootstrap.
+TRACE [2018-12-09 09:32:37] Evaluating predicting: Balanced Accuracy: 0.553436
+TRACE [2018-12-09 09:32:37] Recording evaluation results on CSV file.
+TRACE [2018-12-09 09:32:41] Predicting long lived bug with svmRadial using threshold 416 and sampling bootstrap.
+TRACE [2018-12-09 09:45:33] Evaluating predicting: Balanced Accuracy: 0.548963
+TRACE [2018-12-09 09:45:33] Recording evaluation results on CSV file.
+TRACE [2018-12-09 09:45:36] Predicting long lived bug with svmRadial using threshold 448 and sampling bootstrap.
+TRACE [2018-12-09 09:57:10] Evaluating predicting: Balanced Accuracy: 0.540531
+TRACE [2018-12-09 09:57:10] Recording evaluation results on CSV file.
+TRACE [2018-12-09 09:57:12] Predicting long lived bug with svmRadial using threshold 480 and sampling bootstrap.
+TRACE [2018-12-09 10:07:12] Evaluating predicting: Balanced Accuracy: 0.533337
+TRACE [2018-12-09 10:07:12] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:07:14] Predicting long lived bug with svmRadial using threshold 512 and sampling bootstrap.
+TRACE [2018-12-09 10:16:28] Evaluating predicting: Balanced Accuracy: 0.528337
+TRACE [2018-12-09 10:16:28] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:16:39] Predicting long lived bug with svmRadial using threshold 4 and sampling cv52.
+TRACE [2018-12-09 10:18:44] Evaluating predicting: Balanced Accuracy: 0.496130
+TRACE [2018-12-09 10:18:44] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:18:57] Predicting long lived bug with svmRadial using threshold 8 and sampling cv52.
+TRACE [2018-12-09 10:21:03] Evaluating predicting: Balanced Accuracy: 0.522163
+TRACE [2018-12-09 10:21:03] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:21:15] Predicting long lived bug with svmRadial using threshold 12 and sampling cv52.
+TRACE [2018-12-09 10:23:23] Evaluating predicting: Balanced Accuracy: 0.541332
+TRACE [2018-12-09 10:23:23] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:23:33] Predicting long lived bug with svmRadial using threshold 16 and sampling cv52.
+TRACE [2018-12-09 10:25:39] Evaluating predicting: Balanced Accuracy: NaN
+TRACE [2018-12-09 10:25:39] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:25:48] Predicting long lived bug with svmRadial using threshold 20 and sampling cv52.
+TRACE [2018-12-09 10:27:55] Evaluating predicting: Balanced Accuracy: 0.571543
+TRACE [2018-12-09 10:27:55] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:28:17] Predicting long lived bug with svmRadial using threshold 24 and sampling cv52.
+TRACE [2018-12-09 10:31:51] Evaluating predicting: Balanced Accuracy: 0.521373
+TRACE [2018-12-09 10:31:51] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:32:10] Predicting long lived bug with svmRadial using threshold 28 and sampling cv52.
+TRACE [2018-12-09 10:35:35] Evaluating predicting: Balanced Accuracy: 0.524943
+TRACE [2018-12-09 10:35:35] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:35:52] Predicting long lived bug with svmRadial using threshold 32 and sampling cv52.
+TRACE [2018-12-09 10:39:03] Evaluating predicting: Balanced Accuracy: 0.530367
+TRACE [2018-12-09 10:39:03] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:39:15] Predicting long lived bug with svmRadial using threshold 64 and sampling cv52.
+TRACE [2018-12-09 10:42:49] Evaluating predicting: Balanced Accuracy: 0.559096
+TRACE [2018-12-09 10:42:49] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:43:00] Predicting long lived bug with svmRadial using threshold 96 and sampling cv52.
+TRACE [2018-12-09 10:47:47] Evaluating predicting: Balanced Accuracy: 0.572913
+TRACE [2018-12-09 10:47:47] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:47:59] Predicting long lived bug with svmRadial using threshold 128 and sampling cv52.
+TRACE [2018-12-09 10:52:31] Evaluating predicting: Balanced Accuracy: 0.574452
+TRACE [2018-12-09 10:52:31] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:52:41] Predicting long lived bug with svmRadial using threshold 160 and sampling cv52.
+TRACE [2018-12-09 10:57:39] Evaluating predicting: Balanced Accuracy: 0.582657
+TRACE [2018-12-09 10:57:39] Recording evaluation results on CSV file.
+TRACE [2018-12-09 10:57:44] Predicting long lived bug with svmRadial using threshold 192 and sampling cv52.
+TRACE [2018-12-09 11:02:37] Evaluating predicting: Balanced Accuracy: 0.585394
+TRACE [2018-12-09 11:02:37] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:02:46] Predicting long lived bug with svmRadial using threshold 224 and sampling cv52.
+TRACE [2018-12-09 11:07:52] Evaluating predicting: Balanced Accuracy: 0.561815
+TRACE [2018-12-09 11:07:52] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:07:59] Predicting long lived bug with svmRadial using threshold 256 and sampling cv52.
+TRACE [2018-12-09 11:12:52] Evaluating predicting: Balanced Accuracy: 0.571761
+TRACE [2018-12-09 11:12:52] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:12:56] Predicting long lived bug with svmRadial using threshold 288 and sampling cv52.
+TRACE [2018-12-09 11:18:02] Evaluating predicting: Balanced Accuracy: 0.575196
+TRACE [2018-12-09 11:18:02] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:18:07] Predicting long lived bug with svmRadial using threshold 320 and sampling cv52.
+TRACE [2018-12-09 11:22:40] Evaluating predicting: Balanced Accuracy: 0.563383
+TRACE [2018-12-09 11:22:40] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:22:45] Predicting long lived bug with svmRadial using threshold 352 and sampling cv52.
+TRACE [2018-12-09 11:27:09] Evaluating predicting: Balanced Accuracy: 0.562526
+TRACE [2018-12-09 11:27:09] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:27:13] Predicting long lived bug with svmRadial using threshold 384 and sampling cv52.
+TRACE [2018-12-09 11:31:10] Evaluating predicting: Balanced Accuracy: 0.555655
+TRACE [2018-12-09 11:31:10] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:31:14] Predicting long lived bug with svmRadial using threshold 416 and sampling cv52.
+TRACE [2018-12-09 11:35:11] Evaluating predicting: Balanced Accuracy: 0.547386
+TRACE [2018-12-09 11:35:11] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:35:14] Predicting long lived bug with svmRadial using threshold 448 and sampling cv52.
+TRACE [2018-12-09 11:38:43] Evaluating predicting: Balanced Accuracy: 0.541280
+TRACE [2018-12-09 11:38:43] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:38:45] Predicting long lived bug with svmRadial using threshold 480 and sampling cv52.
+TRACE [2018-12-09 11:41:54] Evaluating predicting: Balanced Accuracy: 0.535100
+TRACE [2018-12-09 11:41:54] Recording evaluation results on CSV file.
+TRACE [2018-12-09 11:41:56] Predicting long lived bug with svmRadial using threshold 512 and sampling cv52.
+TRACE [2018-12-09 11:44:50] Evaluating predicting: Balanced Accuracy: 0.528511
+TRACE [2018-12-09 11:44:50] Recording evaluation results on CSV file.
+There were 50 or more warnings (use warnings() to see the first 50)
+TRACE [2018-12-09 11:44:50] End of predicting long lived bug.
