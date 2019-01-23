@@ -1,0 +1,157 @@
+Loading required package: caret
+Loading required package: lattice
+Loading required package: ggplot2
+Loading required package: futile.logger
+Loading required package: klaR
+Loading required package: MASS
+Loading required package: doParallel
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: qdap
+Loading required package: qdapDictionaries
+Loading required package: qdapRegex
+
+Attaching package: ‘qdapRegex’
+
+The following object is masked from ‘package:ggplot2’:
+
+    %+%
+
+Loading required package: qdapTools
+Loading required package: RColorBrewer
+
+Attaching package: ‘qdap’
+
+The following object is masked from ‘package:base’:
+
+    Filter
+
+Warning message:
+package ‘qdap’ was built under R version 3.5.2 
+Loading required package: SnowballC
+Loading required package: tidyverse
+── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
+✔ tibble  2.0.0     ✔ purrr   0.2.5
+✔ tidyr   0.8.2     ✔ dplyr   0.7.8
+✔ readr   1.3.1     ✔ stringr 1.3.1
+✔ tibble  2.0.0     ✔ forcats 0.3.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ qdapRegex::%+%()    masks ggplot2::%+%()
+✖ purrr::accumulate() masks foreach::accumulate()
+✖ dplyr::explain()    masks qdapRegex::explain()
+✖ dplyr::filter()     masks stats::filter()
+✖ dplyr::id()         masks qdapTools::id()
+✖ dplyr::lag()        masks stats::lag()
+✖ purrr::lift()       masks caret::lift()
+✖ dplyr::select()     masks MASS::select()
+✖ purrr::when()       masks foreach::when()
+Warning message:
+package ‘tibble’ was built under R version 3.5.2 
+Loading required package: tidytext
+Loading required package: tm
+Loading required package: NLP
+
+Attaching package: ‘NLP’
+
+The following object is masked from ‘package:qdap’:
+
+    ngrams
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+
+Attaching package: ‘tm’
+
+The following objects are masked from ‘package:qdap’:
+
+    as.DocumentTermMatrix, as.TermDocumentMatrix
+
+NULL
+TRACE [2019-01-22 12:43:08] Script started...
+TRACE [2019-01-22 12:43:10] Ouput path: ~/Workspace/doctorate/experiments/long-lived-bug/scripts/output
+TRACE [2019-01-22 12:43:10] Bug reports file : ~/Workspace/doctorate/experiments/long-lived-bug/datasets/eclipse_bug_reports.csv
+TRACE [2019-01-22 12:43:10] Last evaluation file generated: ~/Workspace/doctorate/experiments/long-lived-bug/scripts/output/20190122082139-predicting-metrics.csv
+Parsed with column specification:
+cols(
+  .default = col_double(),
+  dataset = col_character(),
+  classifier = col_character(),
+  resampling = col_character(),
+  distribution = col_character(),
+  feature = col_character()
+)
+See spec(...) for full column specifications.
+TRACE [2019-01-22 12:43:10] Starting with parameter: 6
+Parsed with column specification:
+cols(
+  bug_id = col_character(),
+  creation_date = col_date(format = ""),
+  component_name = col_character(),
+  product_name = col_character(),
+  short_description = col_character(),
+  long_description = col_character(),
+  assignee_name = col_character(),
+  reporter_name = col_character(),
+  resolution_category = col_character(),
+  resolution_code = col_double(),
+  status_type = col_character(),
+  status_category = col_double(),
+  update_date = col_date(format = ""),
+  quantity_of_votes = col_double(),
+  quantity_of_comments = col_double(),
+  resolution_date = col_date(format = ""),
+  days_to_resolve = col_double(),
+  severity_category = col_character(),
+  severity_code = col_double()
+)
+Warning: 1 parsing failure.
+  row              col expected        actual                                                                                file
+10423 long_description          embedded null '~/Workspace/doctorate/experiments/long-lived-bug/datasets/eclipse_bug_reports.csv'
+
+TRACE [2019-01-22 12:44:33] Text mining: terms [200]
+TRACE [2019-01-22 12:45:34] Predicting: feature[long_description], threshold[24], classifier[knn], resampling[bootstrap]
+TRACE [2019-01-22 13:19:05] Testing:
+TRACE [2019-01-22 13:19:53] Evaluating: Bcc [0.502029], Acc0 [0.518834], Acc1 [0.485224]
+TRACE [2019-01-22 13:19:53] Recording evaluation results on CSV file.
+TRACE [2019-01-22 13:19:54] Predicting: feature[long_description], threshold[28], classifier[knn], resampling[bootstrap]
+TRACE [2019-01-22 13:52:49] Testing:
+TRACE [2019-01-22 13:53:38] Evaluating: Bcc [0.500891], Acc0 [0.508475], Acc1 [0.493308]
+TRACE [2019-01-22 13:53:38] Recording evaluation results on CSV file.
+TRACE [2019-01-22 13:53:38] Predicting: feature[long_description], threshold[4], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 13:57:39] Testing:
+TRACE [2019-01-22 13:58:27] Evaluating: Bcc [0.501740], Acc0 [0.521127], Acc1 [0.482353]
+TRACE [2019-01-22 13:58:27] Recording evaluation results on CSV file.
+TRACE [2019-01-22 13:58:27] Predicting: feature[long_description], threshold[8], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:02:29] Testing:
+TRACE [2019-01-22 14:03:17] Evaluating: Bcc [0.500891], Acc0 [0.508475], Acc1 [0.493308]
+TRACE [2019-01-22 14:03:17] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:03:17] Predicting: feature[long_description], threshold[12], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:07:18] Testing:
+TRACE [2019-01-22 14:08:06] Evaluating: Bcc [0.500929], Acc0 [0.507995], Acc1 [0.493862]
+TRACE [2019-01-22 14:08:06] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:08:06] Predicting: feature[long_description], threshold[16], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:12:04] Testing:
+TRACE [2019-01-22 14:12:52] Evaluating: Bcc [0.502433], Acc0 [0.512126], Acc1 [0.492741]
+TRACE [2019-01-22 14:12:52] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:12:52] Predicting: feature[long_description], threshold[20], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:16:51] Testing:
+TRACE [2019-01-22 14:17:40] Evaluating: Bcc [0.499518], Acc0 [0.494662], Acc1 [0.504373]
+TRACE [2019-01-22 14:17:40] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:17:40] Predicting: feature[long_description], threshold[24], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:21:40] Testing:
+TRACE [2019-01-22 14:22:28] Evaluating: Bcc [0.502000], Acc0 [0.520908], Acc1 [0.483092]
+TRACE [2019-01-22 14:22:28] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:22:28] Predicting: feature[long_description], threshold[28], classifier[knn], resampling[cv52]
+TRACE [2019-01-22 14:26:28] Testing:
+TRACE [2019-01-22 14:27:16] Evaluating: Bcc [0.500891], Acc0 [0.508475], Acc1 [0.493308]
+TRACE [2019-01-22 14:27:16] Recording evaluation results on CSV file.
+TRACE [2019-01-22 14:27:16] Predicting: feature[long_description], threshold[4], classifier[rf], resampling[bootstrap]
+TRACE [2019-01-22 18:34:03] Testing:
+TRACE [2019-01-22 18:34:03] Evaluating: Bcc [0.498904], Acc0 [0.563025], Acc1 [0.434783]
+TRACE [2019-01-22 18:34:03] Recording evaluation results on CSV file.
+TRACE [2019-01-22 18:34:04] Predicting: feature[long_description], threshold[8], classifier[rf], resampling[bootstrap]
+Lost warning messages
+Execution halted
