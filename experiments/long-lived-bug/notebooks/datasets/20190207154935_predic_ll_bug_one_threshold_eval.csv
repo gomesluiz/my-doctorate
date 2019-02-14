@@ -1,0 +1,2 @@
+dataset,classifier,resampling,distribution,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,feature,n_terms,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
+Eclipse,knn,none,mydownsample,8,3636,1818,1818,3634,1817,1817,long_description,200,873,807,944,1010,0.5196428571428572,0.48311156601842375,0.5013772115806405,0.5196428571428572,0.4636218799787573,0.490036486107213
