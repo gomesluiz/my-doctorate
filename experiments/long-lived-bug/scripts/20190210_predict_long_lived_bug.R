@@ -341,9 +341,6 @@ for (i in start.parameter:nrow(parameters)) {
       by.x = 'bug_id',
       by.y = 'bug_id'
     )
-#    terms.suffix = paste(parameter$feature, "-features", sep = "")
-#    terms.file  = format_file_name(output.path, terms.suffix)
-#    write_csv(reports.terms, terms.file)
     last.feature = parameter$feature
   }
 
@@ -352,18 +349,6 @@ for (i in start.parameter:nrow(parameters)) {
   short_liveds <- subset(reports.terms , days_to_resolve <= parameter$threshold)
   long_liveds  <- subset(reports.terms , long_lived == 1)
   all_reports  <- rbind(short_liveds, long_liveds)
-#  all_reports <- reports.terms
-# resampling:
-# bootstrap: train_control=(method="boot", number=5)
-# k-fold cv: train_control=(method="cv", number=5)
-# repeat k-fold cv: train_control=(method="repeatedcv", number=5, repeats=2)
-# leave one out cv: train_control=(method="LOOCV")
-# metric:
-# Accuracy and Kappa
-# method:
-# knn
-# svmRadial
-# rf
 
   set.seed(1234)
   flog.trace("Predicting: feature[%s], threshold[%s], classifier[%s], resampling[%s], balancing[%s]",
@@ -385,8 +370,11 @@ for (i in start.parameter:nrow(parameters)) {
   y_test  <- dataset[-in_train, class_label]
 
   flog.trace("Training model: ")
-  result <- choose_resampling(parameter$resampling)
-  fit_model <- train(x = X_train, y = y_train, method = parameter$classifier, trControl =  result )
+  control <- choose_resampling(parameter$resampling)
+  fit_model <- train(  x = X_train
+                     , y = y_train
+                     , method = parameter$classifier
+                     , trControl =  control)
 
   flog.trace("Testing model: ")
   y_hat <- predict(object = fit_model, X_test)
