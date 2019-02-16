@@ -32,8 +32,8 @@ library(tm)
 NONE <- "none"
 BOOTSTRAP <- "boot"
 CV <- "cv"
-LOOCV <- "loocv"
-LOGCV <- "logcv"
+LOOCV <- "LOOCV"
+LOGCV <- "LGOCV"
 REPEATEDCV <- "repeatedcv"
 
 # balancing methods
