@@ -1,2 +1,0 @@
-dataset,classifier,resampling,balancing,threshold,fixed_threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,feature,n_terms,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
-Eclipse,knn,boot,customsample,4,64,4094,2047,2047,1364,682,682,short_long_description,200,259,222,423,460,0.5384615384615384,0.47904869762174407,0.5087551180416412,0.5384615384615384,0.36022253129346316,0.4316666666666667
