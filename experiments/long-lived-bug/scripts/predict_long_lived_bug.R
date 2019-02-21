@@ -42,7 +42,7 @@ DOWNSAMPLE    <- "downsample"
 SMOTEMETHOD   <- "smote"
 CUSTOMMETHOD  <- "custom"
 
-SUFFIX <- "predicting-metrics"
+SUFFIX <- "predicting-metrics-netbeans"
 
 choose_resampling <- function(option) {
   #' Choose the caret resampling method control.
@@ -280,20 +280,15 @@ flog.trace("Ouput path: %s", output.path)
 
 metrics.file  <- get_last_evaluation_file(output.path)
 
-#feature    <- c("short_description", "long_description", "short_long_description")
-
-
 feature    <- c("short_long_description")
 resampling <- c(NONE, BOOTSTRAP, CV, LOOCV, LOGCV, REPEATEDCV)
-#classifier <- c("knn", "nb", "nnet", "rf", "svmRadial")
 classifier <- c("knn")
-#n_term     <- c(100, 200, 300, 400, 500)
 n_term     <- c(200)
 balancing  <- c(UNBALANCED, CUSTOMMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
 
-reports.file <- file.path(dataset.path, "20190207_eclipse_bug_reports.csv")
+reports.file <- file.path(dataset.path, "20190220_netbeans_bug_reports.csv")
 flog.trace("Bug reports file : %s", reports.file)
 
 
@@ -363,7 +358,7 @@ for (i in start.parameter:nrow(parameters)) {
   flog.trace("Partitioning dataset")
   in_train <- createDataPartition(dataset[, class_label], p = 0.75, list = FALSE)
 
-  X_train <- dataset[in_train, predictors ]
+  X_train <- dataset[in_train, predictors]
   y_train <- dataset[in_train, class_label]
 
   X_test  <- dataset[-in_train, predictors]
@@ -395,7 +390,7 @@ for (i in start.parameter:nrow(parameters)) {
   flog.trace("Evaluating: Bcc [%f], Acc0 [%f], Acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
   one.evaluation <-
     data.frame(
-      dataset = "Eclipse",
+      dataset = "Netbeans",
       classifier = parameter$classifier,
       resampling = parameter$resampling,
       balancing  = parameter$balancing,
