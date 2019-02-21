@@ -1,4 +1,4 @@
-# nohup Rscript ./20190210_predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
+# nohup Rscript ./predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
 
 #' Predict if a bug will be long-lived or not.
 #'
