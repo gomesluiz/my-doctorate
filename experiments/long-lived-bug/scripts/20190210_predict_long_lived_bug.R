@@ -44,33 +44,33 @@ CUSTOMMETHOD  <- "custom"
 
 SUFFIX <- "predicting-metrics"
 
-choose_resampling <- function(option) {
-  #' Choose the caret resampling method control.
+get_resampling_control <- function(option) {
+  #' Returns the caret resampling method control.
   #'
   #' @param method The method of resampling.
   #'
   #' @return The caret resampling method control.
 
   if (option == BOOTSTRAP) {
-    flog.trace("resampling chose: %s", BOOTSTRAP)
+    flog.trace("[get_resampling_control] resampling control: %s", BOOTSTRAP)
     result <- trainControl(method = option)
   } else if (option == CV) {
-    flog.trace("resampling chose: %s", CV)
+    flog.trace("resampling control: %s", CV)
     result <- trainControl(method = option, number = 5)
   } else if (option == REPEATEDCV) {
-    flog.trace("resampling chose: %s", REPEATEDCV)
+    flog.trace("resampling control: %s", REPEATEDCV)
     result <- trainControl(method = option, number = 5, repeats = 2)
   } else {
-    flog.trace("resampling chose: %s", option)
+    flog.trace("resampling control: %s", option)
     result <- trainControl(method = option)
   }
   return (result)
 }
 
-down_sample <- function(x, class) {
-  #' Apply down sampling balacing method over a dataset.
+manual_down_sample <- function(x, class) {
+  #' Applies down sampling balacing method over a dataset.
   #'
-  #' @param x       The undataset
+  #' @param x       The unbalanced dataset
   #' @param class   The class attribute
   #'
   #' @return A balanced dataset.
