@@ -29,39 +29,36 @@ library(tidytext)
 library(tm)
 
 # resampling methods
-NONE <- "none"
-BOOTSTRAP <- "boot"
-CV <- "cv"
-LOOCV <- "LOOCV"
-LOGCV <- "LGOCV"
-REPEATEDCV <- "repeatedcv"
+NONE        <- "none"
+BOOTSTRAP   <- "boot"
+CV          <- "cv"
+LOOCV       <- "LOOCV"
+LOGCV       <- "LGOCV"
+REPEATEDCV  <- "repeatedcv"
 
 # balancing methods
 UNBALANCED    <- "unbalanced"
 DOWNSAMPLE    <- "downsample"
 SMOTEMETHOD   <- "smote"
-CUSTOMMETHOD  <- "custom"
+MANUALMETHOD  <- "manual"
 
 SUFFIX <- "predicting-metrics-netbeans"
 
-get_resampling_control <- function(option) {
+choose_resampling <- function(option) {
   #' Returns the caret resampling method control.
   #'
   #' @param method The method of resampling.
   #'
   #' @return The caret resampling method control.
 
-  if (option == BOOTSTRAP) {
-    flog.trace("[get_resampling_control] resampling control: %s", BOOTSTRAP)
-    result <- trainControl(method = option)
-  } else if (option == CV) {
-    flog.trace("resampling control: %s", CV)
+  if (option == CV) {
+    flog.trace("[get_resampling_control]: resampling control: %s", CV)
     result <- trainControl(method = option, number = 5)
   } else if (option == REPEATEDCV) {
-    flog.trace("resampling control: %s", REPEATEDCV)
+    flog.trace("[get_resampling_control]: resampling control: %s", REPEATEDCV)
     result <- trainControl(method = option, number = 5, repeats = 2)
   } else {
-    flog.trace("resampling control: %s", option)
+    flog.trace("[get_resampling_control]: resampling control: %s", option)
     result <- trainControl(method = option)
   }
   return (result)
@@ -91,19 +88,18 @@ manual_down_sample <- function(x, class) {
 }
 
 format_file_name <- function(path=".", suffix) {
-  # Format evaluation files name.
-  #
-  # Args:
-  #   path: place where evaluation files are stored.
-  #
-  # Returns:
-  #   The file name formatted.
+  #' Format evaluation files name.
+  #'
+  #' @param path The place where evaluation files are stored.
+  #'
+  #' @return The file name formatted.
+  #'
   name  <- file.path(path, "%s-%s.csv")
   name  <- sprintf(name, format(Sys.time(), "%Y%m%d%H%M%S"), suffix)
   return(name)
 }
 
-get_last_evaluation_file <- function(folder="."){
+get_last_evaluation_file <- function(folder=".", suffix){
   # Gets the last evaluation file processed.
   #
   # Args:
@@ -113,7 +109,7 @@ get_last_evaluation_file <- function(folder="."){
   #   The full name of the last evalution file.
   current.folder = getwd()
   setwd(folder)
-  file_pattern <- paste("\\-", SUFFIX, ".csv$", sep="")
+  file_pattern <- paste("\\-", suffix, ".csv$", sep="")
   files <- list.files(pattern = file_pattern)
   files <- files[sort.list(files, decreasing = TRUE)]
   setwd(current.folder)
@@ -222,17 +218,17 @@ balance_dataset <- function(x, label, fnc) {
   keep <- !(names(x) %in% c("bug_id", "days_to_resolve"))
 
   if (fnc == UNBALANCED) {
-    flog.trace("Balancing: %s", UNBALANCED)
+    flog.trace("[balance_dataset]: balancing method: %s", UNBALANCED)
     result <- x[, keep]
-  } else if (fnc == CUSTOMMETHOD) {
-    flog.trace("Balancing: %s", CUSTOMMETHOD)
+  } else if (fnc == MANUALMETHOD) {
+    flog.trace("[balance_dataset]: balancing method: %s", MANUALMETHOD)
     result <- down_sample(x[, keep], label)
   } else if (fnc == DOWNSAMPLE) {
-    flog.trace("Balancing: %s", DOWNSAMPLE)
+    flog.trace("[balance_dataset]: balancing method: %s", DOWNSAMPLE)
     keep <- !(names(x) %in% c("bug_id", "days_to_resolve", label))
     result <- downSample(x[, keep], y = x[, label], yname = label)
   } else if (fnc == SMOTEMETHOD) {
-    flog.trace("Balancing: %s", SMOTEMETHOD)
+    flog.trace("[balance_dataset]: balancing method: %s", SMOTEMETHOD)
     keep <- !(names(x) %in% c("bug_id", "days_to_resolve", label))
     colnames(x)[colnames(x) == "class"] <- "Class"
     colnames(x)[colnames(x) == "target"] <- "Target"
@@ -278,7 +274,7 @@ dataset.path  <- file.path(root.path, "notebooks", "datasets")
 output.path   <- file.path(root.path, "notebooks", "datasets")
 flog.trace("Ouput path: %s", output.path)
 
-metrics.file  <- get_last_evaluation_file(output.path)
+metrics.file  <- get_last_evaluation_file(output.path, SUFFIX)
 
 feature    <- c("short_long_description")
 resampling <- c(NONE, BOOTSTRAP, CV, LOOCV, LOGCV, REPEATEDCV)
@@ -351,7 +347,6 @@ for (i in start.parameter:nrow(parameters)) {
              parameter$balancing)
 
   flog.trace("Balancing dataset")
-
   dataset = balance_dataset(all_reports, class_label, parameter$balancing)
   predictors <- !(names(dataset) %in% c(class_label))
 
