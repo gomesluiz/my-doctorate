@@ -222,7 +222,7 @@ balance_dataset <- function(x, label, fnc) {
     result <- x[, keep]
   } else if (fnc == MANUALMETHOD) {
     flog.trace("[balance_dataset]: balancing method: %s", MANUALMETHOD)
-    result <- down_sample(x[, keep], label)
+    result <- manual_down_sample(x[, keep], label)
   } else if (fnc == DOWNSAMPLE) {
     flog.trace("[balance_dataset]: balancing method: %s", DOWNSAMPLE)
     keep <- !(names(x) %in% c("bug_id", "days_to_resolve", label))
