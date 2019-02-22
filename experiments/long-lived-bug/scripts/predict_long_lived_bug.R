@@ -280,7 +280,7 @@ feature    <- c("short_long_description")
 resampling <- c(NONE, BOOTSTRAP, CV, LOOCV, LOGCV, REPEATEDCV)
 classifier <- c("knn")
 n_term     <- c(200)
-balancing  <- c(UNBALANCED, CUSTOMMETHOD, DOWNSAMPLE, SMOTEMETHOD)
+balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
 
