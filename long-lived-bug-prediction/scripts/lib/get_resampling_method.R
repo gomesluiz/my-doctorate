@@ -12,15 +12,19 @@ get_resampling_method <- function(.method) {
   #' @param method The method of resampling.
   #'
   #' @return The caret resampling method control.
+  #' 
   
   if (.method == resampling_methods[["cv"]]) {
     result <- trainControl(method = .method, number = 5)
   } else if (.method == resampling_methods[["repeatedcv"]]) {
     result <- trainControl(method = .method, number = 5, repeats = 2)
-  } else if (.method %in% c("none", "boot", "LOOCV", "LGOCV")) {
+  } else if (.method %in% c(resampling_methods[["none"]]
+                            , resampling_methods[["boot"]]
+                            , resampling_methods[["loocv"]]
+                            , resampling_methods[["lgocv"]])) {
     result <- trainControl(method = .method)
   } else {
-    message("")  
+    message("Invalid resampling method!")  
   }
   return (result)
 }

@@ -8,10 +8,15 @@
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
+BASEDIR <- file.path("~","Workspace", "doctorate", "long-lived-bug-prediction")
+SRCDIR  <- file.path(BASEDIR,"scripts")
+LIBDIR  <- file.path(SRCDIR,"lib")
+DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
+
 if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
-if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
-if (!require("klaR")) install.packages("klaR", dependencies = TRUE) # naive bayes package.
 if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
+if (!require('e1071')) install.packages("e1071", dependencies = c("Depends", "Suggests"))
+if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
 if (!require("qdap")) install.packages("qdap", dependencies = TRUE)
 if (!require("SnowballC")) install.packages("Snowballc", dependencies = TRUE)
 if (!require("tidyverse")) install.packages("tidyverse", dependencies = TRUE)
@@ -20,276 +25,57 @@ if (!require("tm")) install.packages("tm", dependencies = TRUE)
 if (!require('smotefamily')) install.packages('smotefamily', dependencies = TRUE)
 
 library(caret)
+library(doParallel)
+library(e1071)
 library(futile.logger)
 library(qdap)
-library(doParallel)
 library(SnowballC)
+library(smotefamily)
 library(tidyverse)
 library(tidytext)
 library(tm)
 
-# resampling methods
-NONE        <- "none"
-BOOTSTRAP   <- "boot"
-CV          <- "cv"
-LOOCV       <- "LOOCV"
-LOGCV       <- "LGOCV"
-REPEATEDCV  <- "repeatedcv"
+source(file.path(LIBDIR, "balance_dataset.R"))
+source(file.path(LIBDIR, "clean_corpus.R"))
+source(file.path(LIBDIR, "clean_text.R"))
+source(file.path(LIBDIR, "do_down_sampling.R"))
+source(file.path(LIBDIR, "format_file_name.R"))
+source(file.path(LIBDIR, "get_last_evaluation_file.R"))
+source(file.path(LIBDIR, "get_next_n_parameter.R"))
+source(file.path(LIBDIR, "get_resampling_method.R"))
+source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
+source(file.path(LIBDIR, "make_dtm.R"))
 
-# balancing methods
-UNBALANCED    <- "unbalanced"
-DOWNSAMPLE    <- "downsample"
-SMOTEMETHOD   <- "smote"
-MANUALMETHOD  <- "manual"
-
-SUFFIX <- "predicting-metrics-netbeans"
-
-choose_resampling <- function(option) {
-  #' Returns the caret resampling method control.
-  #'
-  #' @param method The method of resampling.
-  #'
-  #' @return The caret resampling method control.
-
-  if (option == CV) {
-    flog.trace("[get_resampling_control]: resampling control: %s", CV)
-    result <- trainControl(method = option, number = 5)
-  } else if (option == REPEATEDCV) {
-    flog.trace("[get_resampling_control]: resampling control: %s", REPEATEDCV)
-    result <- trainControl(method = option, number = 5, repeats = 2)
-  } else {
-    flog.trace("[get_resampling_control]: resampling control: %s", option)
-    result <- trainControl(method = option)
-  }
-  return (result)
-}
-
-manual_down_sample <- function(x, class) {
-  #' Applies down sampling balacing method over a dataset.
-  #'
-  #' @param x       The unbalanced dataset
-  #' @param class   The class attribute
-  #'
-  #' @return A balanced dataset.
-  #'
-  set.seed(1234)
-
-  class.0 <- x[which(x[, class] == 0), ]
-  class.1 <- x[which(x[, class] == 1), ]
-
-  size = min(nrow(class.0), nrow(class.1))
-
-  sample.class.0 <- sample_n(class.0, size, replace = FALSE)
-  sample.class.1 <- sample_n(class.1, size, replace = FALSE)
-
-  result <- rbind(sample.class.0, sample.class.1)
-
-  return(result)
-}
-
-format_file_name <- function(path=".", suffix) {
-  #' Format evaluation files name.
-  #'
-  #' @param path The place where evaluation files are stored.
-  #'
-  #' @return The file name formatted.
-  #'
-  name  <- file.path(path, "%s-%s.csv")
-  name  <- sprintf(name, format(Sys.time(), "%Y%m%d%H%M%S"), suffix)
-  return(name)
-}
-
-get_last_evaluation_file <- function(folder=".", suffix){
-  # Gets the last evaluation file processed.
-  #
-  # Args:
-  #   folder: place where evaluation files are stored.
-  #
-  # Returns:
-  #   The full name of the last evalution file.
-  current.folder = getwd()
-  setwd(folder)
-  file_pattern <- paste("\\-", suffix, ".csv$", sep="")
-  files <- list.files(pattern = file_pattern)
-  files <- files[sort.list(files, decreasing = TRUE)]
-  setwd(current.folder)
-
-  if (is.na(files[1])) return(NA)
-
-  return(file.path(folder, files[1]))
-}
-
-insert_one_evaluation_data <- function(evaluation.file, one.evaluation) {
-  # Insert one evaluation data metrics
-  #
-  # Args:
-  #   evaluation.file: name of evaluation file.
-  #   one.evaluation : evaluation dataframe.
-  #
-  # Returns:
-  #   nothing.
-  #
-  if (file.exists(evaluation.file)) {
-    all.evaluations <- read_csv(evaluation.file)
-    all.evaluations <- rbind(all.evaluations , one.evaluation)
-  } else {
-    all.evaluations <- one.evaluation
-  }
-
-  write_csv( all.evaluations , evaluation.file)
-}
-
-clean_text <- function(text){
-  # Clean a text replacing abbreviations, contractions and symbols. Furthermore,
-  # this function, converts the text to lower case.
-  #
-  # Args:
-  #   text: text to be cleanned.
-  #
-  # Returns:
-  #   The text cleanned.
-  text <- replace_abbreviation(text, ignore.case = TRUE)
-  text <- replace_contraction(text, ignore.case = TRUE)
-  text <- replace_symbol(text)
-  text <- tolower(text)
-  return(text)
-}
-
-clean_corpus <- function(source) {
-  # Clean a corpus of documents.
-  #
-  #
-  # Args:
-  #   source: a corpus source.
-  #
-  # Returns:
-  #   The corpus cleanned.
-  #
-  names(source) <- c('doc_id', 'text')
-  source <- DataframeSource(source)
-  corpus <- VCorpus(source)
-
-  toSpace <- content_transformer(function(x, pattern) {return (gsub(pattern, " ", x))})
-  corpus <- tm_map(corpus, toSpace, "/|@|\\|")
-  corpus <- tm_map(corpus, toSpace, "[.]")
-  corpus <- tm_map(corpus, toSpace, "<.*?>")
-  corpus <- tm_map(corpus, toSpace, "-")
-  corpus <- tm_map(corpus, toSpace, ":")
-  corpus <- tm_map(corpus, toSpace, "'")
-  corpus <- tm_map(corpus, toSpace, " -")
-
-  corpus <-  tm_map(corpus, content_transformer(tolower))
-  corpus <-  tm_map(corpus, removePunctuation)
-  corpus <-  tm_map(corpus, removeNumbers)
-  corpus <-  tm_map(corpus, removeWords, c(stopwords("en")))
-  corpus <-  tm_map(corpus, stripWhitespace)
-
-  corpus <- tm_map(corpus, stemDocument)
-  corpus <- tm_map(corpus, stripWhitespace)
-  return(corpus)
-}
-
-make_dtm <- function(corpus, n = 100){
-  # makes a document term matrix from a corpus.
-  #
-  #
-  # Args:
-  #   corpus: The document corpus.
-  #   n     : The number of terms of document matrix.
-  #
-  # Returns:
-  #   The document matrix from corpus with n terms.
-  dtm           <- DocumentTermMatrix(corpus, control = list(weighting = weightTfIdf))
-
-  freq <- colSums(as.matrix(dtm))
-  freq <- order(freq, decreasing = TRUE)
-
-  return(dtm[, freq[1:n]])
-}
-
-balance_dataset <- function(x, label, fnc) {
-  #
-  #
-  # Args:
-  #
-  #
-  # Returns:
-  #
-  keep <- !(names(x) %in% c("bug_id", "days_to_resolve"))
-
-  if (fnc == UNBALANCED) {
-    flog.trace("[balance_dataset]: balancing method: %s", UNBALANCED)
-    result <- x[, keep]
-  } else if (fnc == MANUALMETHOD) {
-    flog.trace("[balance_dataset]: balancing method: %s", MANUALMETHOD)
-    result <- manual_down_sample(x[, keep], label)
-  } else if (fnc == DOWNSAMPLE) {
-    flog.trace("[balance_dataset]: balancing method: %s", DOWNSAMPLE)
-    keep <- !(names(x) %in% c("bug_id", "days_to_resolve", label))
-    result <- downSample(x[, keep], y = x[, label], yname = label)
-  } else if (fnc == SMOTEMETHOD) {
-    flog.trace("[balance_dataset]: balancing method: %s", SMOTEMETHOD)
-    keep <- !(names(x) %in% c("bug_id", "days_to_resolve", label))
-    colnames(x)[colnames(x) == "class"] <- "Class"
-    colnames(x)[colnames(x) == "target"] <- "Target"
-    result <- SMOTE(x[, keep], as.numeric(x[, label]), K = 3, dup_size = 0)$data
-    colnames(result)[colnames(result) == "class"] <- label
-    result[, label] = as.factor(as.numeric(result[, label]) - 1)
-  } else {
-    stop("balance_dataset: balanced function unknown!")
-  }
-  return(result)
-}
-
-get_next_n_parameter <- function(all.lines, parameters)
-{
-  last.line <- all.lines[nrow(all.lines), ]
-  start.parameter <- which(parameters$feature      == last.line$feature
-                           & parameters$classifier == last.line$classifier
-                           & parameters$resampling == last.line$resampling
-                           & parameters$threshold  == last.line$threshold
-                           & parameters$n_term     == last.line$n_term
-                           & parameters$balancing  == last.line$balancing)
-
-  if (is.na(start.parameter) | (start.parameter > nrow(parameters))) {
-    start.parameter  <- 1
-  } else {
-    start.parameter <- start.parameter + 1
-  }
-  return(start.parameter)
-}
 # main function
-flog.threshold(TRACE)
-flog.trace("Script started...")
 r_cluster <- makePSOCKcluster(4)
 registerDoParallel(r_cluster)
 
-class_label       <- "long_lived"
-fixed.threshold   <- 64
-last.feature      <- ""
+timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
+dataset.name    <- "eclipse"
+metrics.mask    <- sprintf("%s_result_metrics.csv", dataset.name)
+models.mask     <- sprintf("%s_final_model.rds", dataset.name)
+class_label     <- "long_lived"
+fixed.threshold <- 64
 
-
-root.path     <- file.path("~","Workspace", "doctorate", "experiments", "long-lived-bug")
-dataset.path  <- file.path(root.path, "notebooks", "datasets")
-output.path   <- file.path(root.path, "notebooks", "datasets")
-flog.trace("Ouput path: %s", output.path)
-
-metrics.file  <- get_last_evaluation_file(output.path, SUFFIX)
+metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
 
 feature    <- c("short_long_description")
-resampling <- c(NONE, BOOTSTRAP, CV, LOOCV, LOGCV, REPEATEDCV)
+resampling <- unlist(resampling_methods)
 classifier <- c("knn")
 n_term     <- c(200)
 balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
 
-reports.file <- file.path(dataset.path, "20190220_netbeans_bug_reports.csv")
+reports.file <- file.path(DATADIR, "20190207_eclipse_bug_reports.csv")
+
+flog.threshold(TRACE)
+flog.trace("Script started...")
+flog.trace("Ouput path: %s", DATADIR)
 flog.trace("Bug reports file : %s", reports.file)
 
-
 if (is.na(metrics.file)) {
-  metrics.file = format_file_name(output.path, SUFFIX)
+  metrics.file = format_file_name(DATADIR, timestamp, metrics.mask)
   flog.trace("Current Evaluation file: %s", metrics.file)
   start.parameter  <- 1
 } else {
@@ -297,7 +83,7 @@ if (is.na(metrics.file)) {
   all.lines <- read_csv(metrics.file)
   start.parameter <- get_next_n_parameter(all.lines, parameters)
   if (start.parameter == 1) {
-    metrics.file  <- format_file_name(output.path, metrics.suffix)
+    metrics.file  <- format_file_name(DATADIR, timestamp, metrics.mask)
     flog.trace("New evaluation file generated: %s", metrics.file)
   }
 }
@@ -313,6 +99,10 @@ flog.trace("Clean text features")
 reports$short_description <- clean_text(reports$short_description)
 reports$long_description  <- clean_text(reports$long_description)
 reports$short_long_description <- paste(reports$short_description, reports$long_description, sep=" ")
+
+greatest_balanced_acc <- 0
+last.feature <- "@"
+model.file   <- format_file_name(DATADIR , timestamp , models.mask)
 
 for (i in start.parameter:nrow(parameters)) {
   parameter = parameters[i, ]
@@ -360,11 +150,10 @@ for (i in start.parameter:nrow(parameters)) {
   y_test  <- dataset[-in_train, class_label]
 
   flog.trace("Training model: ")
-  control <- choose_resampling(parameter$resampling)
   fit_model <- train(  x = X_train
                      , y = y_train
                      , method = parameter$classifier
-                     , trControl =  control)
+                     , trControl =  get_resampling_method(parameter$resampling))
 
   flog.trace("Testing model: ")
   y_hat <- predict(object = fit_model, X_test)
@@ -381,11 +170,16 @@ for (i in start.parameter:nrow(parameters)) {
   acc_class_0 <- tp / (tp + fp)
   acc_class_1 <- tn / (tn + fn)
   balanced_acc <- (acc_class_0 + acc_class_1) / 2
+  
+  if (balanced_acc > greatest_balanced_acc){
+    saveRDS(fit_model, model.file)
+    greatest_balanced_acc <- balanced_acc
+  }
 
   flog.trace("Evaluating: Bcc [%f], Acc0 [%f], Acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
   one.evaluation <-
     data.frame(
-      dataset = "Netbeans",
+      dataset = dataset.name,
       classifier = parameter$classifier,
       resampling = parameter$resampling,
       balancing  = parameter$balancing,
