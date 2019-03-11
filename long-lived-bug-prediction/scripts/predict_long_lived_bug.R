@@ -51,6 +51,7 @@ r_cluster <- makePSOCKcluster(4)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
+oss.projects    <- c("eclipse", "freedesktop", "gnome", "kernel", "mozilla", "netbeans", "winehq")
 dataset.name    <- "eclipse"
 metrics.mask    <- sprintf("%s_result_metrics.csv", dataset.name)
 models.mask     <- sprintf("%s_final_model.rds", dataset.name)
@@ -67,7 +68,7 @@ balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
 
-reports.file <- file.path(DATADIR, "20190207_eclipse_bug_reports.csv")
+reports.file <- file.path(DATADIR, sprintf("20190309_%_bug_reports.csv", dataset.name))
 
 flog.threshold(TRACE)
 flog.trace("Script started...")
