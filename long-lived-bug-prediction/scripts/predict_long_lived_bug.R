@@ -68,7 +68,7 @@ balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
 
-reports.file <- file.path(DATADIR, sprintf("20190309_%_bug_reports.csv", dataset.name))
+reports.file <- file.path(DATADIR, sprintf("20190309_%s_bug_report_data.csv", dataset.name))
 
 flog.threshold(TRACE)
 flog.trace("Script started...")
