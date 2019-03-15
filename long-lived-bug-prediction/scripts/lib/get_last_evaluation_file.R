@@ -8,7 +8,7 @@ get_last_evaluation_file <- function(folder=".", suffix){
   #   The full name of the last evalution file.
   current.folder = getwd()
   setwd(folder)
-  file_pattern <- paste("\\-", suffix, sep="")
+  file_pattern <- paste("\\_", suffix, sep="")
   files <- list.files(pattern = file_pattern)
   files <- files[sort.list(files, decreasing = TRUE)]
   setwd(current.folder)
