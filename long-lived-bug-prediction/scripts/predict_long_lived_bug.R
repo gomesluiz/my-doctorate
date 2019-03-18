@@ -52,7 +52,7 @@ registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 oss.projects    <- c("eclipse", "freedesktop", "gnome", "kernel", "mozilla", "netbeans", "winehq")
-dataset.name    <- "eclipse"
+dataset.name    <- "winehq"
 metrics.mask    <- sprintf("%s_result_metrics.csv", dataset.name)
 models.mask     <- sprintf("%s_final_model.rds", dataset.name)
 class_label     <- "long_lived"
