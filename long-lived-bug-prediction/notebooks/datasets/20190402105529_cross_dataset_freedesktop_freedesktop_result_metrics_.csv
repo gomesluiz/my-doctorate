@@ -1,0 +1,2 @@
+dataset.one,dataset.two,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
+freedesktop,freedesktop,7573,4974,2599,4429,1906,545,693,0.6991318074191002,0.44022617124394187,0.5696789893315211,0.6991318074191002,0.8647012885591566,0.7731517849349743

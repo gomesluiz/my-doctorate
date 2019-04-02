@@ -1,0 +1,2 @@
+dataset.one,dataset.two,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
+mozilla,mozilla,2098,1438,660,1174,327,264,333,0.782145236508994,0.44221105527638194,0.612178145892688,0.782145236508994,0.7790311877903119,0.7805851063829786

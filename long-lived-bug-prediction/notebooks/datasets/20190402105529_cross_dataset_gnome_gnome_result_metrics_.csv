@@ -1,0 +1,2 @@
+dataset.one,dataset.two,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
+gnome,gnome,4777,2876,1901,2262,624,614,1277,0.7837837837837838,0.3246959280803807,0.5542398559320822,0.7837837837837838,0.6391636055382877,0.704124513618677
