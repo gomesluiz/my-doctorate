@@ -1,8 +1,8 @@
 resampling_methods = list(
-  none = "none",
-  boot = "boot",
-  cv   = "cv",
-  loocv = "LOOCV",
+  #none = "none",
+  #boot = "boot",
+  #cv   = "cv",
+  #loocv = "LOOCV",
   lgocv = "LGOCV",
   repeatedcv = "repeatedcv"
 )

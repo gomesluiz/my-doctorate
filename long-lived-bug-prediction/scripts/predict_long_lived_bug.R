@@ -51,7 +51,7 @@ r_cluster <- makePSOCKcluster(4)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-oss.projects    <- c("eclipse", "freedesktop", "gnome", "kernel", "mozilla", "netbeans", "winehq")
+oss.projects    <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 dataset.name    <- "winehq"
 metrics.mask    <- sprintf("%s_result_metrics.csv", dataset.name)
 models.mask     <- sprintf("%s_final_model.rds", dataset.name)
@@ -62,18 +62,16 @@ metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
 
 feature    <- c("short_long_description")
 resampling <- unlist(resampling_methods)
-classifier <- c("knn")
-n_term     <- c(200)
-balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
+classifier <- c("knn", "svmRadial", "nb", "rf")
+n_term     <- c(100, 200, 300, 400, 500)
+#balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
+balancing  <- c(UNBALANCED)
 threshold  <- seq(4, fixed.threshold, by = 4)
-parameters <- crossing(feature, classifier, resampling, threshold, n_term, balancing)
-
-reports.file <- file.path(DATADIR, sprintf("20190309_%s_bug_report_data.csv", dataset.name))
+parameters <- crossing(oss.projects, n_term, classifier, resampling, balancing, feature, threshold)
 
 flog.threshold(TRACE)
 flog.trace("Script started...")
 flog.trace("Ouput path: %s", DATADIR)
-flog.trace("Bug reports file : %s", reports.file)
 
 if (is.na(metrics.file)) {
   metrics.file = format_file_name(DATADIR, timestamp, metrics.mask)
@@ -90,25 +88,33 @@ if (is.na(metrics.file)) {
 }
 flog.trace("Starting with parameter: %d", start.parameter)
 
-# cleaning data
-reports <- read_csv(reports.file, na  = c("", "NA"))
-reports <- reports[, c('bug_id', 'short_description', 'long_description', 'days_to_resolve')]
-reports <- reports[complete.cases(reports), ]
-reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
-
-flog.trace("Clean text features")
-reports$short_description <- clean_text(reports$short_description)
-reports$long_description  <- clean_text(reports$long_description)
-reports$short_long_description <- paste(reports$short_description, reports$long_description, sep=" ")
-
 greatest_balanced_acc <- 0
-last.feature <- "@"
+last.feature          <- "@"
+last.oss.project      <- "@"
+last.n_term           <- 0
 model.file   <- format_file_name(DATADIR , timestamp , models.mask)
 
 for (i in start.parameter:nrow(parameters)) {
   parameter = parameters[i, ]
-
-  if (parameter$feature != last.feature) {
+  
+  if (parameter$oss.project != last.oss.project)
+    reports.file <- file.path(DATADIR, sprintf("20190309_%s_bug_report_data.csv", parameter$oss.project))
+    flog.trace("Bug reports file : %s", reports.file)
+    
+    # cleaning data
+    reports <- read_csv(reports.file, na  = c("", "NA"))
+    reports <- reports[, c('bug_id', 'short_description', 'long_description', 'days_to_resolve')]
+    reports <- reports[complete.cases(reports), ]
+    reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
+    
+    flog.trace("Clean text features")
+    reports$short_description <- clean_text(reports$short_description)
+    reports$long_description  <- clean_text(reports$long_description)
+    reports$short_long_description <- paste(reports$short_description, reports$long_description, sep=" ")
+    
+    last.oss.project = parameter$oss.project
+  }
+  if (parameter$n_term != last.n_term) {
     flog.trace("Text mining: extracting %d terms", parameter$n_term)
     source <- reports[, c('bug_id', parameters$feature)]
     corpus <- clean_corpus(source)
@@ -123,7 +129,7 @@ for (i in start.parameter:nrow(parameters)) {
       by.x = 'bug_id',
       by.y = 'bug_id'
     )
-    last.feature = parameter$feature
+    last.n_term  = parameter$n_term 
   }
 
   reports.terms$long_lived <- as.factor(ifelse(reports.terms$days_to_resolve <= fixed.threshold, 0, 1))
@@ -180,7 +186,7 @@ for (i in start.parameter:nrow(parameters)) {
   flog.trace("Evaluating: Bcc [%f], Acc0 [%f], Acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
   one.evaluation <-
     data.frame(
-      dataset = dataset.name,
+      dataset = parameter$oss.project,
       classifier = parameter$classifier,
       resampling = parameter$resampling,
       balancing  = parameter$balancing,
