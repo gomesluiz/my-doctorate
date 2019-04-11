@@ -47,7 +47,7 @@ source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(4)
+r_cluster <- makePSOCKcluster(8)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
