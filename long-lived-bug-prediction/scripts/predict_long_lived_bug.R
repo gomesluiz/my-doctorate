@@ -177,11 +177,11 @@ for (project.name in projects){
     fn <- cm$table[2, 2]
 
     precision <- tp / (tp + fp)
-    recall <- tp / (tp + fn)
-    fmeasure <- (2 * recall * precision) / (recall + precision)
-    acc_class_0 <- tp / (tp + fp)
-    acc_class_1 <- tn / (tn + fn)
-    balanced_acc <- (acc_class_0 + acc_class_1) / 2
+    recall    <- tp / (tp + fn)
+    fmeasure  <- (2 * recall * precision) / (recall + precision)
+    acc_class_0   <- tp / (tp + fp)
+    acc_class_1   <- tn / (tn + fn)
+    balanced_acc  <- (acc_class_0 + acc_class_1) / 2
   
     # if (balanced_acc > greatest_balanced_acc){
     #   saveRDS(fit_model, model.file)
