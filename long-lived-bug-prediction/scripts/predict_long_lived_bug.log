@@ -2166,3 +2166,27 @@ TRACE [2019-04-16 07:32:32] Balancing dataset
 TRACE [2019-04-16 07:32:32] [balance_dataset]: balancing method: unbalanced
 TRACE [2019-04-16 07:32:32] Partitioning dataset
 TRACE [2019-04-16 07:32:32] Training model: 
+TRACE [2019-04-16 11:27:06] Testing model: 
+TRACE [2019-04-16 11:27:07] Evaluating: Bcc [0.858449], Acc0 [0.716898], Acc1 [1.000000]
+TRACE [2019-04-16 11:27:07] Recording evaluation results on CSV file.
+TRACE [2019-04-16 11:27:07] Predicting: feature[short_long_description], threshold[56], classifier[rf], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-04-16 11:27:07] Balancing dataset
+TRACE [2019-04-16 11:27:07] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-04-16 11:27:07] Partitioning dataset
+TRACE [2019-04-16 11:27:07] Training model: 
+TRACE [2019-04-16 15:39:04] Testing model: 
+TRACE [2019-04-16 15:39:04] Evaluating: Bcc [NaN], Acc0 [0.719846], Acc1 [NaN]
+TRACE [2019-04-16 15:39:04] Recording evaluation results on CSV file.
+TRACE [2019-04-16 15:39:04] Predicting: feature[short_long_description], threshold[60], classifier[rf], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-04-16 15:39:04] Balancing dataset
+TRACE [2019-04-16 15:39:04] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-04-16 15:39:04] Partitioning dataset
+TRACE [2019-04-16 15:39:05] Training model: 
+TRACE [2019-04-16 19:56:30] Testing model: 
+TRACE [2019-04-16 19:56:30] Evaluating: Bcc [NaN], Acc0 [0.722132], Acc1 [NaN]
+TRACE [2019-04-16 19:56:30] Recording evaluation results on CSV file.
+TRACE [2019-04-16 19:56:30] Predicting: feature[short_long_description], threshold[64], classifier[rf], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-04-16 19:56:30] Balancing dataset
+TRACE [2019-04-16 19:56:30] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-04-16 19:56:30] Partitioning dataset
+TRACE [2019-04-16 19:56:31] Training model: 
