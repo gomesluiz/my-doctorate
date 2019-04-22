@@ -14,15 +14,15 @@ DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
 if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
 if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
-if (!require("klaR")) install.packages("klaR", dependencies = TRUE) # naive bayes package.
+if (!require("klaR")) install.packages("klaR", dependencies = c("Depends", "Suggests")) # naive bayes package.
 if (!require('e1071')) install.packages("e1071", dependencies = c("Depends", "Suggests"))
-if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
-if (!require("qdap")) install.packages("qdap", dependencies = TRUE)
-if (!require("SnowballC")) install.packages("Snowballc", dependencies = TRUE)
-if (!require("tidyverse")) install.packages("tidyverse", dependencies = TRUE)
-if (!require('tidytext')) install.packages('tidytext')
-if (!require("tm")) install.packages("tm", dependencies = TRUE)
-if (!require('smotefamily')) install.packages('smotefamily', dependencies = TRUE)
+if (!require("futile.logger")) install.packages("futile.logger", dependencies = c("Depends", "Suggests"))
+if (!require("qdap")) install.packages("qdap", dependencies = c("Depends", "Suggests"))
+if (!require("SnowballC")) install.packages("SnowballC", dependencies = c("Depends", "Suggests"))
+if (!require("tidyverse")) install.packages("tidyverse")
+if (!require('tidytext')) install.packages('tidytext', dependencies = c("Depends", "Suggests"))
+if (!require("tm")) install.packages("tm", dependencies = c("Depends", "Suggests"))
+if (!require('smotefamily')) install.packages('smotefamily', dependencies = c("Depends", "Suggests"))
 
 library(caret)
 library(doParallel)
@@ -51,7 +51,8 @@ r_cluster <- makePSOCKcluster(8)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+#projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+projects        <- c("eclipse", "freedesktop", "gnome")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
