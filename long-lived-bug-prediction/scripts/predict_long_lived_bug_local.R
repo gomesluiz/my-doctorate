@@ -12,17 +12,17 @@ SRCDIR  <- file.path(BASEDIR,"scripts")
 LIBDIR  <- file.path(SRCDIR,"lib")
 DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
-if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
-if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
-if (!require("klaR")) install.packages("klaR", dependencies = TRUE) # naive bayes package.
-if (!require('e1071')) install.packages("e1071", dependencies = c("Depends", "Suggests"))
-if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
-if (!require("qdap")) install.packages("qdap", dependencies = TRUE)
-if (!require("SnowballC")) install.packages("Snowballc", dependencies = TRUE)
-if (!require("tidyverse")) install.packages("tidyverse", dependencies = TRUE)
-if (!require('tidytext')) install.packages('tidytext')
-if (!require("tm")) install.packages("tm", dependencies = TRUE)
-if (!require('smotefamily')) install.packages('smotefamily', dependencies = TRUE)
+#if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
+#if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
+#if (!require("klaR")) install.packages("klaR", dependencies = TRUE) # naive bayes package.
+#if (!require('e1071')) install.packages("e1071", dependencies = c("Depends", "Suggests"))
+#if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
+#if (!require("qdap")) install.packages("qdap", dependencies = TRUE)
+#if (!require("SnowballC")) install.packages("Snowballc", dependencies = TRUE)
+#if (!require("tidyverse")) install.packages("tidyverse", dependencies = TRUE)
+#if (!require('tidytext')) install.packages('tidytext')
+#if (!require("tm")) install.packages("tm", dependencies = TRUE)
+#if (!require('smotefamily')) install.packages('smotefamily', dependencies = TRUE)
 
 library(caret)
 library(doParallel)
@@ -47,7 +47,7 @@ source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(4)
+r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")

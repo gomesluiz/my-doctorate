@@ -47,12 +47,12 @@ source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(8)
+r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 #projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-projects        <- c("freedesktop", "gnome")
+projects        <- c("gnome")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
