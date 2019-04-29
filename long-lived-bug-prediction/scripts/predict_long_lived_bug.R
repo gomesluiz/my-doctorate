@@ -52,7 +52,7 @@ registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 #projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-projects        <- c("gnome")
+projects        <- c("winehq")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
