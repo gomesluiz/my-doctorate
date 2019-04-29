@@ -1632,3 +1632,19 @@ TRACE [2019-04-29 03:45:28] Balancing dataset
 TRACE [2019-04-29 03:45:28] [balance_dataset]: balancing method: unbalanced
 TRACE [2019-04-29 03:45:28] Partitioning dataset
 TRACE [2019-04-29 03:45:28] Training model: 
+TRACE [2019-04-29 06:21:42] Testing model: 
+TRACE [2019-04-29 06:21:43] Evaluating: Bcc [0.604115], Acc0 [0.708229], Acc1 [0.500000]
+TRACE [2019-04-29 06:21:43] Recording evaluation results on CSV file.
+TRACE [2019-04-29 06:21:43] Predicting: feature[short_long_description], threshold[56], classifier[rf], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-04-29 06:21:43] Balancing dataset
+TRACE [2019-04-29 06:21:43] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-04-29 06:21:43] Partitioning dataset
+TRACE [2019-04-29 06:21:43] Training model: 
+TRACE [2019-04-29 09:04:18] Testing model: 
+TRACE [2019-04-29 09:04:18] Evaluating: Bcc [0.855296], Acc0 [0.710591], Acc1 [1.000000]
+TRACE [2019-04-29 09:04:18] Recording evaluation results on CSV file.
+TRACE [2019-04-29 09:04:19] Predicting: feature[short_long_description], threshold[60], classifier[rf], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-04-29 09:04:19] Balancing dataset
+TRACE [2019-04-29 09:04:19] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-04-29 09:04:19] Partitioning dataset
+TRACE [2019-04-29 09:04:19] Training model: 
