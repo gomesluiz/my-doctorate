@@ -51,8 +51,8 @@ r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-#projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-projects        <- c("eclipse")
+projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+#projects        <- c("eclipse")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
@@ -158,11 +158,15 @@ for (project.name in projects){
     in_train <- createDataPartition(dataset[, class_label], p = 0.75, list = FALSE)
 
     # normalize dataset between 0 and 1
-    X_train <- preProcess(dataset[in_train, predictors], method=c("range"))
+    X_train <- dataset[in_train, predictors]
+    X_train_pre_processed <- preProcess(X_train, method=c("range"))
+    X_train <- predict(X_train_pre_processed, X_train)
     y_train <- dataset[in_train, class_label]
 
     # normalize dataset between 0 and 1
-    X_test  <- preProcess(dataset[-in_train, predictors], method=c("range"))
+    X_test  <- dataset[-in_train, predictors]
+    X_test_pre_processed  <- preProcess(X_test, method=c("range"))
+    X_test <- predict(X_test_pre_processed, X_test)
     y_test  <- dataset[-in_train, class_label]
 
     flog.trace("Training model: ")
