@@ -8,7 +8,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 BASEDIR <- file.path("~","Workspace", "doctorate", "long-lived-bug-prediction")
-SRCDIR  <- file.path(BASEDIR,"scripts")
+SRCDIR  <- file.path(BASEDIR,"R")
 LIBDIR  <- file.path(SRCDIR,"lib")
 DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
@@ -50,7 +50,8 @@ r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-projects        <- c("freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+projects        <- c("netbeans", "winehq")
+#projects        <- c("freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 #projects        <- c("eclipse")
 class_label     <- "long_lived"
 fixed.threshold <- 64
