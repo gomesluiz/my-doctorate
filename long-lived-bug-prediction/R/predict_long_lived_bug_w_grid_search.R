@@ -8,7 +8,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 BASEDIR <- file.path("~","Workspace", "doctorate", "long-lived-bug-prediction")
-SRCDIR  <- file.path(BASEDIR,"RScripts")
+SRCDIR  <- file.path(BASEDIR,"R")
 LIBDIR  <- file.path(SRCDIR,"lib")
 DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
@@ -34,16 +34,17 @@ library(tidyverse)
 library(tidytext)
 library(tm)
 
-#source(file.path(LIBDIR, "balance_dataset.R"))
+source(file.path(LIBDIR, "balance_dataset.R"))
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
-#source(file.path(LIBDIR, "do_down_sampling.R"))
+# source(file.path(LIBDIR, "do_down_sampling.R"))
 source(file.path(LIBDIR, "format_file_name.R"))
 source(file.path(LIBDIR, "get_last_evaluation_file.R"))
 source(file.path(LIBDIR, "get_next_n_parameter.R"))
 source(file.path(LIBDIR, "get_resampling_method.R"))
 source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
+source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
 r_cluster <- makePSOCKcluster(5)
@@ -158,13 +159,13 @@ for (project.name in projects){
     X_test <- predict(X_test_pre_processed, X_test)
     y_test  <- dataset[-in_train, class_label]
 
-    flog.trace("Training model: ")
+    flog.trace("Training model with ")
+    control <- get_resampling_method(parameter$resampling)
+    fit_model <- train_with (.x=X_train, 
+                             .y=y_train, 
+                             .classifier=parameter$classifier,
+                             .control=control)
     
-    fit_model <- train(  x = X_train
-                       , y = y_train
-                       , method = parameter$classifier
-                       , trControl =  get_resampling_method(parameter$resampling))
-
     flog.trace("Testing model: ")
     y_hat <- predict(object = fit_model, X_test)
 

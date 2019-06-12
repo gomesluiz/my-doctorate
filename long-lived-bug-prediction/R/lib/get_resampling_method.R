@@ -1,3 +1,6 @@
+
+library(futile.logger)
+
 resampling_methods = list(
   none = "none",
   boot = "boot",
@@ -22,6 +25,8 @@ get_resampling_method <- function(.method) {
                             , resampling_methods[["boot"]]
                             , resampling_methods[["loocv"]]
                             , resampling_methods[["lgocv"]])) {
+        
+    flog.trace("[get_resampling_method] Resampling model %s", .method) 
     result <- caret::trainControl(method = .method)
   } else {
     stop("Invalid resampling method!", call. = FALSE)  

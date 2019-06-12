@@ -1,9 +1,14 @@
+
+library(futile.logger)
+
 KNN  <- "knn"
 NB   <- "nb"
 NNET <- "nn"
 RF   <- "rf"
 SVM  <- "svm"
 
+train_classifiers <- c(KNN, NB, NNET, RF, SVM)
+names(train_classifiers) <- train_classifiers
 DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, search = "grid")
 
 #' Training model with SVM RBF
@@ -12,8 +17,11 @@ DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, 
 #' @param .y A dataframe with dependable variable
 #' @param .control A control Caret parameter
 #'
-#' @return A trained svm model.
+#' @return A trained model.
 train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  
+  flog.trace("[train_with_svm] Training model with SVM")
+  
   grid <- expand.grid(
     C = c(
       2**(-5), 2**(0), 2**(5), 2**(10)
@@ -23,7 +31,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     )
   )
   
-  model <- train(
+  result <- train(
     x = .x,
     y = .y,
     method    = "svmRadial",
@@ -31,7 +39,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     tuneGrid  = grid
   )
 
-  return(model)
+  return(result)
 }
 
 #' Training model with neural network.
@@ -40,14 +48,16 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .y A dataframe with dependable variable
 #' @param .control A control Caret parameter
 #'
-#' @return A trained neural network model.
+#' @return A trained model.
 train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  flog.trace("[train_with_nnet] Training model with NNET")
+  
   grid <- expand.grid(
     size  = c(10, 20, 30, 40), 
     decay = (0.5)
   )
   
-  model <- train(
+  result <- train(
     x = .x,
     y = .y,
     method = "nnet",
@@ -57,7 +67,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
     verbose   = FALSE
   )
   
-  return(model)
+  return(result)
 }
 
 #' Training model with neural network.
@@ -66,13 +76,15 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .y A dataframe with dependable variable
 #' @param .control A control Caret parameter
 #'
-#' @return A trained neural network model.
+#' @return A trained model.
 train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  flog.trace("[train_with_rf] Training model with RF")
+  
   grid <- expand.grid(
     mtry = c(10, 15, 20, 25)
   )
 
-  model <- train(
+  result <- train(
     x = .x,
     y = .y,
     method = "rf",
@@ -82,7 +94,7 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
     verbose = FALSE
   )
   
-  return(model)
+  return(result)
 }
 
 #' Training model with knn. 
@@ -93,6 +105,8 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #'
 #' @return A trained knn.
 train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  flog.trace("[train_with_knn] Training model with KNN")
+  
   grid <- expand.grid(
     k = c(1, 5, 11, 15, 21, 25)
   )
@@ -114,8 +128,10 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .y A dataframe with dependable variable
 #' @param .control A control Caret parameter
 #'
-#' @return A trained knn.
+#' @return A trained model.
 train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  
+  flog.trace("[train_with_nb] Training model with NB")
   
   grid <- expand.grid(
     fL        = c(0, 0.5, 1.0),
@@ -142,7 +158,11 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL) {
+  if (!.classifier %in% train_classifiers)
+  {
+    stop(sprintf("% unknown classifier!", .classifier))
+  }
   if (classifier == KNN) {
     return(train_with_knn(.x, .y, .control))
   } else if (classifier == NB) {
