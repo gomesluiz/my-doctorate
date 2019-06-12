@@ -1,6 +1,6 @@
 # nohup Rscript ./predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
 
-#' Predict if a bug will be long-lived or not.
+#' Predict if a bug will be long-lived or not using grid search and  normalization.
 #'
 #' @author Luiz Alberto (gomes.luiz@gmail.com)
 #'
@@ -8,7 +8,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 BASEDIR <- file.path("~","Workspace", "doctorate", "long-lived-bug-prediction")
-SRCDIR  <- file.path(BASEDIR,"scripts")
+SRCDIR  <- file.path(BASEDIR,"RScripts")
 LIBDIR  <- file.path(SRCDIR,"lib")
 DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
@@ -30,15 +30,14 @@ library(e1071)
 library(futile.logger)
 library(qdap)
 library(SnowballC)
-library(smotefamily)
 library(tidyverse)
 library(tidytext)
 library(tm)
 
-source(file.path(LIBDIR, "balance_dataset.R"))
+#source(file.path(LIBDIR, "balance_dataset.R"))
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
-source(file.path(LIBDIR, "do_down_sampling.R"))
+#source(file.path(LIBDIR, "do_down_sampling.R"))
 source(file.path(LIBDIR, "format_file_name.R"))
 source(file.path(LIBDIR, "get_last_evaluation_file.R"))
 source(file.path(LIBDIR, "get_next_n_parameter.R"))
@@ -51,55 +50,47 @@ r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-projects        <- c("freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-#projects        <- c("eclipse")
+projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
 feature    <- c("short_long_description")
-#resampling <- unlist(resampling_methods)
 resampling <- c("LGOCV")
 classifier <- c("knn", "svmRadial", "nb", "rf")
 n_term     <- c(100, 200, 300, 400, 500)
-#balancing  <- c(UNBALANCED, MANUALMETHOD, DOWNSAMPLE, SMOTEMETHOD)
 balancing  <- c(UNBALANCED)
 threshold  <- seq(4, fixed.threshold, by = 4)
 parameters <- crossing(n_term, classifier, resampling, balancing, feature, threshold)
 
 flog.threshold(TRACE)
-flog.trace("Script started...")
-flog.trace("Ouput path: %s", DATADIR)
+flog.trace("Long Live Prediction Started...")
+flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
-  flog.trace(">>> PROJECT NAME : %s", project.name)
+  flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s__result_metrics_normalized.csv", project.name)
+  metrics.mask  <- sprintf("%s__result_metrics_grided.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
-  
+ 
+  # get last parameter number and metrics file. 
   if (is.na(metrics.file)) {
     metrics.file = format_file_name(DATADIR, timestamp, metrics.mask)
-    flog.trace("Current Evaluation file: %s", metrics.file)
-    start.parameter  <- 1
+    flog.trace("Current evaluation file: %s", metrics.file)
+    parameter.number  <- 1
   } else {
-    flog.trace("Last evaluation file generated: %s", metrics.file)
+    flog.trace("Last evaluation file : %s", metrics.file)
     all.lines <- read_csv(metrics.file)
-    start.parameter <- get_next_n_parameter(all.lines, parameters)
-    if (start.parameter == 1) {
+    parameter.number <- get_next_n_parameter(all.lines, parameters)
+    if (parameter.number == 1) {
       metrics.file  <- format_file_name(DATADIR, timestamp, metrics.mask)
-      flog.trace("New evaluation file generated: %s", metrics.file)
+      flog.trace("New evaluation file: %s", metrics.file)
     }
   }
   
-  flog.trace("Starting with parameter: %d", start.parameter)
-
-  #greatest_balanced_acc <- 0
-  #last.feature          <- "@"
-  #last.oss.project      <- "@"
-  
-  #model.file   <- format_file_name(DATADIR , timestamp , models.mask)
+  flog.trace("Current parameter number: %d", parameter.number)
 
   reports.file <- file.path(DATADIR, sprintf("20190309_%s_bug_report_data.csv", project.name))
-  flog.trace("Bug reports file : %s", reports.file)
+  flog.trace("Bug report file name: %s", reports.file)
   
   # cleaning data
   reports <- read_csv(reports.file, na  = c("", "NA"))
@@ -112,31 +103,28 @@ for (project.name in projects){
   reports$long_description  <- clean_text(reports$long_description)
   reports$short_long_description <- paste(reports$short_description, reports$long_description, sep=" ")
   
-  #last.oss.project = parameter$oss.project
-  
-  last.n_term           <- 0
-  
-  for (i in start.parameter:nrow(parameters)) {
+  last.n_term <- 0
+  for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
-  
-    set.seed(1234)
     
     if (parameter$n_term != last.n_term) {
-      flog.trace("Text mining: extracting %d terms", parameter$n_term)
+      flog.trace("Extracting %d terms", parameter$n_term)
+  
+      ## reports.terms <- extract_feature_matrix(reports.data, feature.name, terms.number)    
       source <- reports[, c('bug_id', parameters$feature)]
       corpus <- clean_corpus(source)
-
-      dtm  <- tidy(make_dtm(corpus, parameter$n_term))
-      names(dtm) <- c("bug_id", "term", "count")
-      term.matrix <- dtm %>% spread(key = term, value = count, fill = 0)
-
+      dtm    <- tidy(make_dtm(corpus, parameter$n_term))
+      names(dtm)    <- c("bug_id", "term", "count")
+      term.matrix   <- dtm %>% spread(key = term, value = count, fill = 0)
       reports.terms <- merge(
         x = reports[, c('bug_id', 'days_to_resolve')],
         y = term.matrix,
         by.x = 'bug_id',
         by.y = 'bug_id'
       )
-      flog.trace("Text mining: extracted %d terms", ncol(reports.terms) - 2)
+      ##
+      
+      flog.trace("Extracted %d terms", ncol(reports.terms) - 2)
       last.n_term  = parameter$n_term 
     }
     
@@ -155,6 +143,7 @@ for (project.name in projects){
     predictors <- !(names(dataset) %in% c(class_label))
 
     flog.trace("Partitioning dataset")
+    set.seed(1234)
     in_train <- createDataPartition(dataset[, class_label], p = 0.75, list = FALSE)
 
     # normalize dataset between 0 and 1
@@ -170,6 +159,7 @@ for (project.name in projects){
     y_test  <- dataset[-in_train, class_label]
 
     flog.trace("Training model: ")
+    
     fit_model <- train(  x = X_train
                        , y = y_train
                        , method = parameter$classifier

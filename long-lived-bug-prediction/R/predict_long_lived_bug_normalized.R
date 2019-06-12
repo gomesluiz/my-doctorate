@@ -1,4 +1,4 @@
-# nohup Rscript ./predict_long_lived_bug_local.R > predict_long_lived_bug_local.log 2>&1 &
+# nohup Rscript ./predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
 
 #' Predict if a bug will be long-lived or not.
 #'
@@ -14,15 +14,15 @@ DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
 
 #if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
 #if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
-#if (!require("klaR")) install.packages("klaR", dependencies = TRUE) # naive bayes package.
+#if (!require("klaR")) install.packages("klaR", dependencies = c("Depends", "Suggests")) # naive bayes package.
 #if (!require('e1071')) install.packages("e1071", dependencies = c("Depends", "Suggests"))
-#if (!require("futile.logger")) install.packages("futile.logger", dependencies = TRUE)
-#if (!require("qdap")) install.packages("qdap", dependencies = TRUE)
-#if (!require("SnowballC")) install.packages("Snowballc", dependencies = TRUE)
-#if (!require("tidyverse")) install.packages("tidyverse", dependencies = TRUE)
-#if (!require('tidytext')) install.packages('tidytext')
-#if (!require("tm")) install.packages("tm", dependencies = TRUE)
-#if (!require('smotefamily')) install.packages('smotefamily', dependencies = TRUE)
+#if (!require("futile.logger")) install.packages("futile.logger", dependencies = c("Depends", "Suggests"))
+#if (!require("qdap")) install.packages("qdap", dependencies = c("Depends", "Suggests"))
+#if (!require("SnowballC")) install.packages("SnowballC", dependencies = c("Depends", "Suggests"))
+#if (!require("tidyverse")) install.packages("tidyverse")
+#if (!require('tidytext')) install.packages('tidytext', dependencies = c("Depends", "Suggests"))
+#if (!require("tm")) install.packages("tm", dependencies = c("Depends", "Suggests"))
+#if (!require('smotefamily')) install.packages('smotefamily', dependencies = c("Depends", "Suggests"))
 
 library(caret)
 library(doParallel)
@@ -30,7 +30,6 @@ library(e1071)
 library(futile.logger)
 library(qdap)
 library(SnowballC)
-library(smotefamily)
 library(tidyverse)
 library(tidytext)
 library(tm)
@@ -51,8 +50,8 @@ r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-#projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-projects        <- c("netbeans")
+projects        <- c("freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+#projects        <- c("eclipse")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
@@ -73,7 +72,7 @@ flog.trace("Ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace(">>> PROJECT NAME : %s", project.name)
   
-  metrics.mask  <- sprintf("%s__result_metrics.csv", project.name)
+  metrics.mask  <- sprintf("%s__result_metrics_normalized.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   if (is.na(metrics.file)) {
@@ -136,9 +135,10 @@ for (project.name in projects){
         by.x = 'bug_id',
         by.y = 'bug_id'
       )
+      flog.trace("Text mining: extracted %d terms", ncol(reports.terms) - 2)
       last.n_term  = parameter$n_term 
     }
-
+    
     reports.terms$long_lived <- as.factor(ifelse(reports.terms$days_to_resolve <= fixed.threshold, 0, 1))
 
     short_liveds <- subset(reports.terms , days_to_resolve <= parameter$threshold)
@@ -156,10 +156,16 @@ for (project.name in projects){
     flog.trace("Partitioning dataset")
     in_train <- createDataPartition(dataset[, class_label], p = 0.75, list = FALSE)
 
+    # normalize dataset between 0 and 1
     X_train <- dataset[in_train, predictors]
+    X_train_pre_processed <- preProcess(X_train, method=c("range"))
+    X_train <- predict(X_train_pre_processed, X_train)
     y_train <- dataset[in_train, class_label]
 
+    # normalize dataset between 0 and 1
     X_test  <- dataset[-in_train, predictors]
+    X_test_pre_processed  <- preProcess(X_test, method=c("range"))
+    X_test <- predict(X_test_pre_processed, X_test)
     y_test  <- dataset[-in_train, class_label]
 
     flog.trace("Training model: ")
@@ -184,11 +190,6 @@ for (project.name in projects){
     acc_class_1   <- tn / (tn + fn)
     balanced_acc  <- (acc_class_0 + acc_class_1) / 2
   
-    # if (balanced_acc > greatest_balanced_acc){
-    #   saveRDS(fit_model, model.file)
-    #   greatest_balanced_acc <- balanced_acc
-    # }
-
     flog.trace("Evaluating: Bcc [%f], Acc0 [%f], Acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
     one.evaluation <-
       data.frame(
