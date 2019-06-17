@@ -50,7 +50,7 @@ r_cluster <- makePSOCKcluster(5)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-projects        <- c("netbeans", "winehq")
+projects        <- c("winehq")
 #projects        <- c("freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 #projects        <- c("eclipse")
 class_label     <- "long_lived"
