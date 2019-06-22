@@ -7,10 +7,11 @@
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
-BASEDIR <- file.path("~","Workspace", "doctorate", "long-lived-bug-prediction")
-SRCDIR  <- file.path(BASEDIR,"R")
-LIBDIR  <- file.path(SRCDIR,"lib")
-DATADIR <- file.path(BASEDIR, "notebooks", "datasets")
+BASEDIR <- file.path("~","Workspace", "doctorate")
+LIBDIR  <- file.path(BASEDIR, "lib", "R")
+PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
+SRCDIR  <- file.path(PRJDIR, "R")
+DATADIR <- file.path(PRJDIR, "notebooks", "datasets")
 
 #if (!require('caret')) install.packages("caret", dependencies = c("Depends", "Suggests"))
 #if (!require('doParallel')) install.packages("doParallel", dependencies = c("Depends", "Suggests"))
@@ -48,7 +49,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(5)
+r_cluster <- makePSOCKcluster(4)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
@@ -58,7 +59,7 @@ fixed.threshold <- 64
 
 feature    <- c("short_long_description")
 resampling <- c("LGOCV")
-classifier <- c(SVM)
+classifier <- c(KNN)
 #classifier <- c("svmRadial", "nb", "knn")
 n_term     <- c(100, 200, 300, 400, 500)
 balancing  <- c(UNBALANCED)
@@ -72,7 +73,7 @@ flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s__result_metrics_grided.csv", project.name)
+  metrics.mask  <- sprintf("%s_knn_result_metrics_grided.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
