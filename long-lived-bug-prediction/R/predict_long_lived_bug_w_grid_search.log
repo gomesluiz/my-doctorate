@@ -337,3 +337,14 @@ TRACE [2019-06-22 01:56:44] Partitioning dataset
 TRACE [2019-06-22 01:56:46] Training model with 
 TRACE [2019-06-22 01:56:46] [get_resampling_method] Resampling model LGOCV
 TRACE [2019-06-22 01:56:46] [train_with_knn] Training model with KNN
+TRACE [2019-06-22 02:04:04] Testing model: 
+TRACE [2019-06-22 02:04:13] Evaluating: Bcc [0.650935], Acc0 [0.700908], Acc1 [0.600962]
+TRACE [2019-06-22 02:04:13] Recording evaluation results on CSV file.
+TRACE [2019-06-22 02:04:13] Predicting: feature[short_long_description], threshold[32], classifier[knn], resampling[LGOCV], balancing[unbalanced]
+TRACE [2019-06-22 02:04:13] Balancing dataset
+TRACE [2019-06-22 02:04:13] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-06-22 02:04:13] Partitioning dataset
+TRACE [2019-06-22 02:04:15] Training model with 
+TRACE [2019-06-22 02:04:15] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-06-22 02:04:15] [train_with_knn] Training model with KNN
+TRACE [2019-06-22 02:10:08] Testing model: 
