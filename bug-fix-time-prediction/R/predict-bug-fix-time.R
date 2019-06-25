@@ -92,14 +92,17 @@ reports_data <- clean_reports_data(reports_data)
 flog.trace("[main] Making document term matrix")
 reports_data_dtm <- make_reports_data_dtm(reports_data, 100)
 
-
 flog.trace("[main] Predicting bug-fix time")
 set.seed(1234)
 target_label <- 'days_to_resolve'
+condition <- reports_data_dtm$days_to_resolve > 0
+reports_data_dtm$days_to_resolve[condition] <- log(reports_data_dtm$days_to_resolve[condition], base = 10)
 predictors   <- !(names(reports_data_dtm) %in% c('bug_id', target_label))
 
+flog.trace("[main] Partitioning data")
 in_train <- createDataPartition(reports_data_dtm[, target_label], p = 0.75, list = FALSE)
 
+flog.trace("[main] Pre-processing data")
 X_train <- reports_data_dtm[in_train, predictors]
 X_train_pre_processed <- preProcess(X_train, method=c("range"))
 X_train <- predict(X_train_pre_processed, X_train)
@@ -110,25 +113,25 @@ X_test_pre_processed  <- preProcess(X_test, method=c("range"))
 X_test <- predict(X_test_pre_processed, X_test)
 y_test  <- reports_data_dtm[-in_train, target_label]
 
-# Simple Least Squares
+flog.trace("[main] Training model usig LM method")
 control  <- trainControl(method = "cv", number = 10)
-#model    <- train(x = X_train, y = y_train, method = "lm", trControl = control)
+model    <- train(x = X_train, y = y_train, method = "lm", trControl = control)
 #xyplot(X_train ~ predict(model), type = c("p", "g"), xlab = "Predicted",  ylab = "Observed")
 
 # Robust Linear Model
 #model    <- train(x = X_train, y = y_train, method = "rlm", trControl = control)
 
 # Robust Linear Model with PCA
-# model    <- train(x = X_train, 
-#                   y = y_train, 
+#model    <- train(x = X_train, 
+#                  y = y_train, 
 #                  method     = "rlm",
-#                   preProcess = "pca",
-#                   trControl  = control)
+#                  preProcess = "pca",
+#                  trControl  = control)
 
 # Robust Linear Model with PCA
-model    <- train(x = X_train, 
-                  y = y_train, 
-                  method     = "pls",
-                  tuneLength = 20,
-                  preProcess = c("center", "scale"),
-                  trControl  = control)
+#model    <- train(x = X_train, 
+#                  y = y_train, 
+#                  method     = "pls",
+#                  tuneLength = 20,
+#                  preProcess = c("center", "scale"),
+#                  trControl  = control)

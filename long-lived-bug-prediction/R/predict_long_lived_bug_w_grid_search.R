@@ -39,7 +39,6 @@ library(tm)
 source(file.path(LIBDIR, "balance_dataset.R"))
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
-# source(file.path(LIBDIR, "do_down_sampling.R"))
 source(file.path(LIBDIR, "format_file_name.R"))
 source(file.path(LIBDIR, "get_last_evaluation_file.R"))
 source(file.path(LIBDIR, "get_next_n_parameter.R"))
@@ -49,7 +48,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(4)
+r_cluster <- makePSOCKcluster(8)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
@@ -59,8 +58,7 @@ fixed.threshold <- 64
 
 feature    <- c("short_long_description")
 resampling <- c("LGOCV")
-classifier <- c(KNN)
-#classifier <- c("svmRadial", "nb", "knn")
+classifier <- c(KNN, NB, RF, SVM)
 n_term     <- c(100, 200, 300, 400, 500)
 balancing  <- c(UNBALANCED)
 threshold  <- seq(4, fixed.threshold, by = 4)
@@ -73,7 +71,7 @@ flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s_knn_result_metrics_grided.csv", project.name)
+  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
@@ -126,7 +124,6 @@ for (project.name in projects){
         by.x = 'bug_id',
         by.y = 'bug_id'
       )
-      ##
       
       flog.trace("Extracted %d terms", ncol(reports.terms) - 2)
       last.n_term  = parameter$n_term 
