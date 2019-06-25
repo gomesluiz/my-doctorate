@@ -108,7 +108,9 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
   flog.trace("[train_with_knn] Training model with KNN")
   
   grid <- expand.grid(
-    k = c(2, 3, 5, 8, 11, 13, 15, 21, 25, 30)
+    k = c(  2, 3, 5, 6, 8, 7, 9, 10, 11, 12, 13, 14, 15
+          , 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
+          , 27, 28, 29, 30)
   )
 
   result <- train(
