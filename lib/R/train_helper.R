@@ -115,7 +115,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
     x = .x,
     y = .y,
     method = "knn",
-    #trControl = .control,
+    trControl = .control,
     tuneGrid  = grid
   )
 
