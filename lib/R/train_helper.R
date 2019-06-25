@@ -61,7 +61,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
     x = .x,
     y = .y,
     method = "nnet",
-    trControl = control,
+    trControl = .control,
     tuneGrid  = grid,
     MaxNWts   = 5000,
     verbose   = FALSE
@@ -115,7 +115,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
     x = .x,
     y = .y,
     method = "knn",
-    trControl = control,
+    trControl = .control,
     tuneGrid  = grid
   )
 
@@ -163,15 +163,15 @@ train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL) {
   {
     stop(sprintf("% unknown classifier!", .classifier))
   }
-  if (classifier == KNN) {
+  if (.classifier == KNN) {
     return(train_with_knn(.x, .y, .control))
-  } else if (classifier == NB) {
+  } else if (.classifier == NB) {
     return(train_with_nb(.x, .y, .control))
-  } else if (classifier == NNET) {
+  } else if (.classifier == NNET) {
     return(train_with_nnet(.x, .y, .control))
-  } else if (classifier == RF) {
+  } else if (.classifier == RF) {
     return(train_with_rf(.x, .y, .control))
-  } else if (classifier == SVM) {
+  } else if (.classifier == SVM) {
     return(train_with_svm(.x, .y, .control))
   }
 }
