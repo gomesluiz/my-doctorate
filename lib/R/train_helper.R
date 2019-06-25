@@ -7,7 +7,7 @@ NNET <- "nn"
 RF   <- "rf"
 SVM  <- "svm"
 
-train_classifiers <- c(KNN, NB, NNET, RF, SVM)
+train_classifiers <- c(KNN, NB, RF, SVM)
 names(train_classifiers) <- train_classifiers
 DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, search = "grid")
 
