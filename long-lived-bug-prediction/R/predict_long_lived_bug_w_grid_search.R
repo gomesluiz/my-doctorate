@@ -71,7 +71,7 @@ flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years.csv", project.name)
+  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years_1.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
