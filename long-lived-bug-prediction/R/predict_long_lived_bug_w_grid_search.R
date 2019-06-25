@@ -108,12 +108,16 @@ for (project.name in projects){
   
   last.n_term <- 0
   for (i in parameter.number:nrow(parameters)) {
+    set.seed(1234)
     parameter = parameters[i, ]
     
+    flog.trace("Current parameters: feature[%s], threshold[%s], classifier[%s], resampling[%s], balancing[%s]"
+             , parameter$feature, parameter$threshold, parameter$classifier
+             , parameter$resampling, parameter$balancing)
+
     if (parameter$n_term != last.n_term) {
-      flog.trace("Extracting %d terms", parameter$n_term)
+      flog.trace("Text mining: extracting %d terms", parameter$n_term)
   
-      ## reports.terms <- extract_feature_matrix(reports.data, feature.name, terms.number)    
       source <- reports[, c('bug_id', parameters$feature)]
       corpus <- clean_corpus(source)
       dtm    <- tidy(make_dtm(corpus, parameter$n_term))
@@ -126,7 +130,7 @@ for (project.name in projects){
         by.y = 'bug_id'
       )
       
-      flog.trace("Extracted %d terms", ncol(reports.terms) - 2)
+      flog.trace("Text mining: extracted %d terms", ncol(reports.terms) - 2)
       last.n_term  = parameter$n_term 
     }
     
@@ -136,16 +140,11 @@ for (project.name in projects){
     long_liveds  <- subset(reports.terms , long_lived == 1)
     all_reports  <- rbind(short_liveds, long_liveds)
 
-    flog.trace("Predicting: feature[%s], threshold[%s], classifier[%s], resampling[%s], balancing[%s]",
-             parameter$feature, parameter$threshold, parameter$classifier, parameter$resampling,
-             parameter$balancing)
-
-    flog.trace("Balancing dataset")
+    flog.trace("Training model: balancing dataset")
     dataset = balance_dataset(all_reports, class_label, parameter$balancing)
     predictors <- !(names(dataset) %in% c(class_label))
 
-    flog.trace("Partitioning dataset")
-    set.seed(1234)
+    flog.trace("Training model: partitioning dataset")
     in_train <- createDataPartition(dataset[, class_label], p = 0.75, list = FALSE)
 
     # normalize dataset between 0 and 1
@@ -160,12 +159,12 @@ for (project.name in projects){
     X_test <- predict(X_test_pre_processed, X_test)
     y_test  <- dataset[-in_train, class_label]
 
-    flog.trace("Training model with ")
-    control <- get_resampling_method(parameter$resampling)
-    fit_model <- train_with (.x=X_train, 
-                             .y=y_train, 
-                             .classifier=parameter$classifier,
-                             .control=control)
+    flog.trace("Training model: ")
+    fit_control <- get_resampling_method(parameter$resampling)
+    fit_model   <- train_with (.x=X_train, 
+                               .y=y_train, 
+                               .classifier=parameter$classifier,
+                               .control=fit_control)
     
     flog.trace("Testing model: ")
     y_hat <- predict(object = fit_model, X_test)
@@ -183,7 +182,7 @@ for (project.name in projects){
     acc_class_1   <- tn / (tn + fn)
     balanced_acc  <- (acc_class_0 + acc_class_1) / 2
   
-    flog.trace("Evaluating: Bcc [%f], Acc0 [%f], Acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
+    flog.trace("Evaluating model: bcc [%f], acc0 [%f], acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
     one.evaluation <-
       data.frame(
         dataset = project.name,
