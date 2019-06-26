@@ -48,7 +48,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(8)
+r_cluster <- makePSOCKcluster(4)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
@@ -98,7 +98,7 @@ for (project.name in projects){
   reports <- read_csv(reports.file, na  = c("", "NA"))
   reports <- reports[, c('bug_id', 'short_description', 'long_description', 'days_to_resolve')]
   reports <- reports[complete.cases(reports), ]
-  reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
+  #reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
   
   flog.trace("Clean text features")
   reports$short_description <- clean_text(reports$short_description)
