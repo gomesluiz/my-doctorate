@@ -58,6 +58,7 @@ fixed.threshold <- 64
 
 feature    <- c("short_long_description")
 resampling <- c("LGOCV")
+#resampling <- c("repeatedcv")
 classifier <- c(KNN, NB, RF, SVM)
 n_term     <- c(100, 200, 300, 400, 500)
 balancing  <- c(UNBALANCED)
@@ -71,7 +72,7 @@ flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years_1.csv", project.name)
+  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years_2.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
