@@ -72,7 +72,7 @@ flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2_years_2.csv", project.name)
+  metrics.mask  <- sprintf("%s_result_metrics_grided_le_2y.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
@@ -99,7 +99,7 @@ for (project.name in projects){
   reports <- read_csv(reports.file, na  = c("", "NA"))
   reports <- reports[, c('bug_id', 'short_description', 'long_description', 'days_to_resolve')]
   reports <- reports[complete.cases(reports), ]
-  #reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
+  reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
   
   flog.trace("Clean text features")
   reports$short_description <- clean_text(reports$short_description)

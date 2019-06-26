@@ -145,7 +145,6 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     x = .x,
     y = .y,
     method = "nb",
-    metric = metric,
     trControl = .control,
     tuneGrid  = grid
   )
