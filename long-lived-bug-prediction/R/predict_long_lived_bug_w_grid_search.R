@@ -57,8 +57,8 @@ class_label     <- "long_lived"
 fixed.threshold <- 64
 
 feature    <- c("short_long_description")
-#resampling <- c("LGOCV")
-resampling <- c("repeatedcv")
+resampling <- c("LGOCV")
+#resampling <- c("repeatedcv")
 classifier <- c(KNN, NB, RF, SVM)
 n_term     <- c(100, 200, 300, 400, 500)
 balancing  <- c(UNBALANCED)
