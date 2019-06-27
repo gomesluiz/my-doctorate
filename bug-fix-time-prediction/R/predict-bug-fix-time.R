@@ -55,7 +55,7 @@ clean_reports_data <- function(.data){
   result$short_long_description <- paste(.data$short_description,  .data$long_description, sep=" ")
 
   result <- result[complete.cases(result), ]
-  result <- result %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
+  #result <- result %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
   
   result$short_long_description <- clean_text(result$short_long_description)
   return (result)

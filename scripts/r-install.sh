@@ -1,4 +1,3 @@
-sudo apt install default-jdk
 sudo apt install git
 git config --global user.name "Luiz Alberto"
 git config --global user.email "gomes.luiz@gmail.com"
