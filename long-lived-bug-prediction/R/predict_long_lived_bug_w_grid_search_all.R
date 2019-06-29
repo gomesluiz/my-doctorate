@@ -182,7 +182,7 @@ for (project.name in projects){
     acc_class_0   <- tp / (tp + fp)
     acc_class_1   <- tn / (tn + fn)
     balanced_acc  <- (acc_class_0 + acc_class_1) / 2
-  stop("Exited")
+
     flog.trace("Evaluating model: bcc [%f], acc0 [%f], acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
     one.evaluation <-
       data.frame(
