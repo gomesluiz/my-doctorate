@@ -8,15 +8,27 @@
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
-library(caret)
 library(doParallel)
-library(e1071)
 library(futile.logger)
+
 library(qdap)
 library(SnowballC)
 library(tidyverse)
 library(tidytext)
 library(tm)
+
+library(caret)            # knn
+library(elasticnet)       # elasticnet 
+library(earth)            # earth 
+library(gbm)              # gbm
+library(kernlab)          # svm 
+library(MASS)             # rlm  
+library(nnet)             # nnet and avNNet
+library(pls)              # pls
+library(plyr)             # plyr
+library(rpart)            # rpart2 
+library(RWeka)            # M5 
+library(randomForest)     # rf 
 
 BASEDIR <- file.path("~","Workspace", "doctorate")
 DATADIR <- file.path(BASEDIR, "datasets")
@@ -27,6 +39,7 @@ SRCDIR  <- file.path(PROJDIR,"R")
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
+source(file.path(LIBDIR, "train_regression_helper.R"))
 
 project_name <- "eclipse"
 
@@ -82,6 +95,18 @@ make_reports_data_dtm <- function(.data, .nterms){
   return(result)
 }
 
+measure_performance <- function(.model, .x, .y){
+    library(MLmetrics)
+    predicted <- predict(.model, .x)
+    mse       <- MSE(predicted, .y)
+    mae       <- MAE(predicted, .y)
+    rmse      <- RMSE(predicted, .y)
+    r2        <- R2_Score(predicted, .y)
+    result    <- data.frame(MSE=mse, RMSE=rmse, R2=r2, MAE=mae)
+    
+    return(result)
+}
+
 flog.threshold(TRACE)
 flog.trace("[main] Bug Fix Time Prediction Started")
 reports_data <- read_reports_file(DATADIR, project_name)
@@ -92,36 +117,46 @@ reports_data <- clean_reports_data(reports_data)
 flog.trace("[main] Making document term matrix")
 reports_data_dtm <- make_reports_data_dtm(reports_data, 100)
 
-flog.trace("[main] Predicting bug-fix time")
-set.seed(1234)
 target_label <- 'days_to_resolve'
-condition <- reports_data_dtm$days_to_resolve > 0
-reports_data_dtm$days_to_resolve[condition] <- log(reports_data_dtm$days_to_resolve[condition], base = 10)
+#condition <- reports_data_dtm$days_to_resolve > 0
+#reports_data_dtm$days_to_resolve[condition] <- log(reports_data_dtm$days_to_resolve[condition], base = 10)
 predictors   <- !(names(reports_data_dtm) %in% c('bug_id', target_label))
 
 flog.trace("[main] Partitioning data")
+set.seed(100)
 in_train <- createDataPartition(reports_data_dtm[, target_label], p = 0.75, list = FALSE)
 
 flog.trace("[main] Pre-processing data")
-X_train <- reports_data_dtm[in_train, predictors]
-X_train_pre_processed <- preProcess(X_train, method=c("range"))
-X_train <- predict(X_train_pre_processed, X_train)
-y_train <- reports_data_dtm[in_train, target_label]
+preProc = preProcess(reports_data_dtm[, predictors], method = c(  "zv"
+                                                                , "medianImpute"
+                                                                , "center"
+                                                                , "scale"
+                                                                , "pca")
+                     )
+preProc = predict(preProc, reports_data_dtm[, predictors])
+X_train <- preProc[in_train, ]
+X_test  <- preProc[-in_train, ]
 
-X_test  <- reports_data_dtm[-in_train, predictors]
-X_test_pre_processed  <- preProcess(X_test, method=c("range"))
-X_test <- predict(X_test_pre_processed, X_test)
+y_train <- reports_data_dtm[in_train, target_label]
 y_test  <- reports_data_dtm[-in_train, target_label]
 
-flog.trace("[main] Training model usig LM method")
-control  <- trainControl(method = "cv", number = 10)
-model    <- train(x = X_train, y = y_train, method = "lm", trControl = control)
+method = KNN
+flog.trace("[main] Training regressor model usig %s method", method)
+model <- train_regressor_with(.x = X_train, .y = y_train, .regressor = method)
+
+flog.trace("[main] Testing regressor")
+measure <- measure_performance(.model=model, .x=X_test, .y=y_test)
+cat(" MAE:", measure$MAE, "\n"
+    , "MSE:", measure$MSE, "\n"
+    , "RMSE:", measure$RMSE, "\n"
+    , "R-squared:", measure$R2)
+
 #xyplot(X_train ~ predict(model), type = c("p", "g"), xlab = "Predicted",  ylab = "Observed")
 
 # Robust Linear Model
 #model    <- train(x = X_train, y = y_train, method = "rlm", trControl = control)
 
-# Robust Linear Model with PCA
+# Robust Linear Model with PC A
 #model    <- train(x = X_train, 
 #                  y = y_train, 
 #                  method     = "rlm",
