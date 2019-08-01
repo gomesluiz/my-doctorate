@@ -48,33 +48,35 @@ source(file.path(LIBDIR, "get_resampling_method.R"))
 source(file.path(LIBDIR, "insert_one_evaluation_data.R"))
 source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
+set.seed(144)
 
 # main function
-r_cluster <- makePSOCKcluster(4)
+r_cluster <- makePSOCKcluster(3)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-projects        <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 class_label     <- "long_lived"
 fixed.threshold <- 64
 
-feature    <- c("short_description", "long_description")
+projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
+n_term     <- c(100, 200, 300, 400, 500)
+classifier <- c(KNN, NB, RF, SVM)
+#feature    <- c("short_description", "long_description", "short_long_description")
+feature    <- c("short_long_description")
+threshold  <- seq(4, fixed.threshold, by = 4)
+balancing  <- c(UNBALANCED)
 resampling <- c("LGOCV")
 #resampling <- c("repeatedcv")
-classifier <- c(KNN, NB, RF, SVM)
-n_term     <- c(100, 200, 300, 400, 500)
-balancing  <- c(UNBALANCED)
-threshold  <- seq(4, fixed.threshold, by = 4)
-parameters <- crossing(n_term, classifier, resampling, balancing, feature, threshold)
+parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling,)
 
 flog.threshold(TRACE)
-flog.trace("Long Live Prediction Started...")
+flog.trace("Long live prediction started with Grid Search, and Short, Long and Short+Long Description")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
-  metrics.mask  <- sprintf("%s_result_metrics_grided_all_by_features.csv", project.name)
+  metrics.mask  <- sprintf("%s_result_metrics_grided_all_w_features_separated.csv", project.name)
   metrics.file  <- get_last_evaluation_file(DATADIR, metrics.mask)
  
   # get last parameter number and metrics file. 
@@ -101,7 +103,6 @@ for (project.name in projects){
   reports <- read_csv(reports.file, na  = c("", "NA"))
   reports <- reports[, c('bug_id', 'short_description', 'long_description', 'days_to_resolve')]
   reports <- reports[complete.cases(reports), ]
-  #reports <- reports %>% filter((days_to_resolve) >= 0 & (days_to_resolve <= 730))
   
   flog.trace("Clean text features")
   reports$short_description <- clean_text(reports$short_description)
@@ -110,12 +111,15 @@ for (project.name in projects){
   
   last.n_term <- 0
   for (i in parameter.number:nrow(parameters)) {
-    set.seed(1234)
     parameter = parameters[i, ]
     
-    flog.trace("Current parameters: feature[%s], threshold[%s], classifier[%s], resampling[%s], balancing[%s]"
-             , parameter$feature, parameter$threshold, parameter$classifier
-             , parameter$resampling, parameter$balancing)
+    flog.trace("Current parameters: n_terms [%d], classifier [%s] feature [%s], threshold [%s], balancing [%s], resampling [%s]"
+             , parameter$n_term
+             , parameter$classifier
+             , parameter$feature
+             , parameter$threshold
+             , parameter$balancing
+             , parameter$resampling)
 
     if (parameter$n_term != last.n_term) {
       flog.trace("Text mining: extracting %d terms", parameter$n_term)
@@ -136,8 +140,9 @@ for (project.name in projects){
       last.n_term  = parameter$n_term 
     }
     
-    reports.terms$long_lived <- as.factor(ifelse(reports.terms$days_to_resolve <= fixed.threshold, 0, 1))
-
+    ## REPENSAR
+    reports.terms$long_lived <- as.factor(ifelse(reports.terms$days_to_resolve <= fixed.threshold, "0", "1"))
+    
     short_liveds <- subset(reports.terms , days_to_resolve <= parameter$threshold)
     long_liveds  <- subset(reports.terms , long_lived == 1)
     all_reports  <- rbind(short_liveds, long_liveds)
@@ -171,50 +176,61 @@ for (project.name in projects){
     flog.trace("Testing model: ")
     y_hat <- predict(object = fit_model, X_test)
 
-    cm <- confusionMatrix(data = y_hat, reference = y_test, mode = "prec_recall")
-    tp <- cm$table[1, 1]
-    fp <- cm$table[1, 2]
-    tn <- cm$table[2, 1]
-    fn <- cm$table[2, 2]
-
-    precision <- tp / (tp + fp)
-    recall    <- tp / (tp + fn)
-    fmeasure  <- (2 * recall * precision) / (recall + precision)
-    acc_class_0   <- tp / (tp + fp)
-    acc_class_1   <- tn / (tn + fn)
-    balanced_acc  <- (acc_class_0 + acc_class_1) / 2
-  stop("Exited")
-    flog.trace("Evaluating model: bcc [%f], acc0 [%f], acc1 [%f]", balanced_acc, acc_class_0, acc_class_1)
+    cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "1")
+    tn <- cm$table[1, 1]
+    fn <- cm$table[1, 2]
+    tp <- cm$table[2, 2]
+    fp <- cm$table[2, 1]
+    
+    prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "1")
+    prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "0")
+    prediction_precision     <- precision(data = y_hat, reference = y_test)
+    prediction_recall        <- recall(data = y_hat, reference = y_test)
+    prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
+    prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
+    
+    
+    #precision <- tp / (tp + fp)
+    #recall    <- tp / (tp + fn)
+    #fmeasure  <- (2 * recall * precision) / (recall + precision)
+    
+    
+    #acc_class_0   <- tp / (tp + fp)
+    #acc_class_1   <- tn / (tn + fn)
+    
+    flog.trace("Evaluating model: bcc [%f], sensitivity [%f], specificity [%f]"
+               , prediction_balanced_acc, prediction_sensitivity, prediction_specificity)
     one.evaluation <-
       data.frame(
         dataset = project.name,
+        n_term = parameter$n_term,
         classifier = parameter$classifier,
-        resampling = parameter$resampling,
-        balancing  = parameter$balancing,
+        feature = parameter$feature,
         threshold  = parameter$threshold,
+        balancing  = parameter$balancing,
+        resampling = parameter$resampling,
         fixed_threshold   = fixed.threshold,
         train_size = nrow(X_train),
-        train_size_class_0 = length(subset(y_train, y_train == 0)),
-        train_size_class_1 = length(subset(y_train, y_train == 1)),
+        train_size_class_0 = length(subset(y_train, y_train == "0")),
+        train_size_class_1 = length(subset(y_train, y_train == "1")),
         test_size = nrow(X_test),
-        test_size_class_0 = length(subset(y_test, y_test == 0)),
-        test_size_class_1 = length(subset(y_test, y_test == 1)),
-        feature = parameter$feature,
-        n_term = parameter$n_term,
+        test_size_class_0 = length(subset(y_test, y_test == "0")),
+        test_size_class_1 = length(subset(y_test, y_test == "1")),
         tp = tp,
         fp = fp,
         tn = tn,
         fn = fn,
-        acc_class_0 = acc_class_0,
-        acc_class_1 = acc_class_1,
-        balanced_acc = balanced_acc,
-        precision = precision,
-        recall = recall,
-        fmeasure = fmeasure
+        sensitivity = prediction_sensitivity,
+        specificity = prediction_specificity,
+        balanced_acc = prediction_balanced_acc,
+        precision = prediction_precision,
+        recall = prediction_recall,
+        fmeasure = prediction_fmeasure
       )
 
       flog.trace("Recording evaluation results on CSV file.")
       insert_one_evaluation_data(metrics.file, one.evaluation)
+      stop("exit")
   }
 }
 flog.trace("End of predicting long lived bug.")

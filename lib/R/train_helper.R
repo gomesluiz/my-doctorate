@@ -7,8 +7,14 @@ NNET <- "nn"
 RF   <- "rf"
 SVM  <- "svm"
 
-train_classifiers <- c(KNN, NB, RF, SVM)
+train_classifiers <- c(
+  KNN, 
+  NB, 
+  RF, 
+  SVM
+)
 names(train_classifiers) <- train_classifiers
+
 DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, search = "grid")
 
 #' Training model with SVM RBF
@@ -107,11 +113,7 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
 train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
   flog.trace("[train_with_knn] Training model with KNN")
   
-  grid <- expand.grid(
-    k = c(  2, 3, 5, 6, 8, 7, 9, 10, 11, 12, 13, 14, 15
-          , 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
-          , 27, 28, 29, 30)
-  )
+  grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
 
   result <- train(
     x = .x,

@@ -1,0 +1,3 @@
+dataset,n_term,classifier,feature,threshold,balancing,resampling,fixed_threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,precision,recall,fmeasure
+eclipse,100,knn,short_long_description,4,unbalanced,LGOCV,64,4161,2030,2131,1386,676,710,452,378,298,258,0.6366197183098592,0.4408284023668639,0.5387240603383615,0.5359712230215827,0.4408284023668639,0.48376623376623373
+eclipse,100,knn,short_long_description,8,unbalanced,LGOCV,64,4646,2515,2131,1548,838,710,294,311,527,416,0.4140845070422535,0.6288782816229117,0.5214813943325827,0.5588547189819725,0.6288782816229117,0.5918023582257159
