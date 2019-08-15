@@ -1,0 +1,186 @@
+nohup: ignoring input
+Loading required package: lattice
+Loading required package: ggplot2
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: MASS
+
+Attaching package: ‘kernlab’
+
+The following object is masked from ‘package:ggplot2’:
+
+    alpha
+
+Loading required package: qdapDictionaries
+Loading required package: qdapRegex
+
+Attaching package: ‘qdapRegex’
+
+The following object is masked from ‘package:ggplot2’:
+
+    %+%
+
+Loading required package: qdapTools
+Loading required package: RColorBrewer
+
+Attaching package: ‘qdap’
+
+The following object is masked from ‘package:base’:
+
+    Filter
+
+randomForest 4.6-14
+Type rfNews() to see new features/changes/bug fixes.
+
+Attaching package: ‘randomForest’
+
+The following object is masked from ‘package:ggplot2’:
+
+    margin
+
+── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
+✔ tibble  2.1.3     ✔ purrr   0.3.2
+✔ tidyr   0.8.3     ✔ dplyr   0.8.1
+✔ readr   1.3.1     ✔ stringr 1.4.0
+✔ tibble  2.1.3     ✔ forcats 0.4.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ qdapRegex::%+%()       masks ggplot2::%+%()
+✖ purrr::accumulate()    masks foreach::accumulate()
+✖ kernlab::alpha()       masks ggplot2::alpha()
+✖ dplyr::combine()       masks randomForest::combine()
+✖ purrr::cross()         masks kernlab::cross()
+✖ dplyr::explain()       masks qdapRegex::explain()
+✖ dplyr::filter()        masks stats::filter()
+✖ dplyr::id()            masks qdapTools::id()
+✖ dplyr::lag()           masks stats::lag()
+✖ purrr::lift()          masks caret::lift()
+✖ randomForest::margin() masks ggplot2::margin()
+✖ dplyr::select()        masks MASS::select()
+✖ purrr::when()          masks foreach::when()
+Loading required package: NLP
+
+Attaching package: ‘NLP’
+
+The following object is masked from ‘package:qdap’:
+
+    ngrams
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+
+Attaching package: ‘tm’
+
+The following objects are masked from ‘package:qdap’:
+
+    as.DocumentTermMatrix, as.TermDocumentMatrix
+
+NULL
+TRACE [2019-08-02 01:49:16] Long live prediction started with Grid Search, and Short, Long and Short+Long Description
+TRACE [2019-08-02 01:49:16] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
+TRACE [2019-08-02 01:49:16] Current project name : eclipse
+TRACE [2019-08-02 01:49:16] Last evaluation file : ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190801144444_eclipse_result_metrics_grided_all_w_features_separated.csv
+TRACE [2019-08-02 01:49:16] Current parameter number: 17
+TRACE [2019-08-02 01:49:16] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190309_eclipse_bug_report_data.csv
+TRACE [2019-08-02 01:49:16] Clean text features
+TRACE [2019-08-02 01:50:02] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [4], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 01:50:02] Text mining: extracting 100 terms
+TRACE [2019-08-02 01:50:36] Text mining: extracted 100 terms
+TRACE [2019-08-02 01:50:36] Training model: balancing dataset
+TRACE [2019-08-02 01:50:36] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 01:50:36] Training model: partitioning dataset
+TRACE [2019-08-02 01:50:38] Training model: 
+TRACE [2019-08-02 01:50:38] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 01:50:38] [train_with_nb] Training model with NB
+TRACE [2019-08-02 02:07:02] Testing model: 
+TRACE [2019-08-02 02:07:18] Evaluating model: bcc [0.522569], sensitivity [0.808451], specificity [0.236686]
+TRACE [2019-08-02 02:07:18] Recording evaluation results on CSV file.
+TRACE [2019-08-02 02:07:18] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [8], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 02:07:18] Training model: balancing dataset
+TRACE [2019-08-02 02:07:19] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 02:07:19] Training model: partitioning dataset
+TRACE [2019-08-02 02:07:19] Training model: 
+TRACE [2019-08-02 02:07:19] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 02:07:19] [train_with_nb] Training model with NB
+TRACE [2019-08-02 02:23:12] Testing model: 
+TRACE [2019-08-02 02:23:30] Evaluating model: bcc [0.512019], sensitivity [0.618310], specificity [0.405728]
+TRACE [2019-08-02 02:23:30] Recording evaluation results on CSV file.
+TRACE [2019-08-02 02:23:30] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [12], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 02:23:30] Training model: balancing dataset
+TRACE [2019-08-02 02:23:30] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 02:23:30] Training model: partitioning dataset
+TRACE [2019-08-02 02:23:31] Training model: 
+TRACE [2019-08-02 02:23:31] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 02:23:31] [train_with_nb] Training model with NB
+TRACE [2019-08-02 06:45:00] Testing model: 
+TRACE [2019-08-02 06:45:19] Evaluating model: bcc [0.524151], sensitivity [0.625352], specificity [0.422951]
+TRACE [2019-08-02 06:45:19] Recording evaluation results on CSV file.
+TRACE [2019-08-02 06:45:19] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [16], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 06:45:19] Training model: balancing dataset
+TRACE [2019-08-02 06:45:19] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 06:45:19] Training model: partitioning dataset
+TRACE [2019-08-02 06:45:19] Training model: 
+TRACE [2019-08-02 06:45:19] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 06:45:19] [train_with_nb] Training model with NB
+TRACE [2019-08-02 07:01:43] Testing model: 
+TRACE [2019-08-02 07:02:02] Evaluating model: bcc [0.518456], sensitivity [0.450704], specificity [0.586207]
+TRACE [2019-08-02 07:02:02] Recording evaluation results on CSV file.
+TRACE [2019-08-02 07:02:02] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [20], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 07:02:03] Training model: balancing dataset
+TRACE [2019-08-02 07:02:03] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 07:02:03] Training model: partitioning dataset
+TRACE [2019-08-02 07:02:03] Training model: 
+TRACE [2019-08-02 07:02:03] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 07:02:03] [train_with_nb] Training model with NB
+TRACE [2019-08-02 07:19:18] Testing model: 
+TRACE [2019-08-02 07:19:39] Evaluating model: bcc [0.514984], sensitivity [0.274648], specificity [0.755319]
+TRACE [2019-08-02 07:19:39] Recording evaluation results on CSV file.
+TRACE [2019-08-02 07:19:39] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [24], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 07:19:39] Training model: balancing dataset
+TRACE [2019-08-02 07:19:39] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 07:19:39] Training model: partitioning dataset
+TRACE [2019-08-02 07:19:39] Training model: 
+TRACE [2019-08-02 07:19:39] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 07:19:39] [train_with_nb] Training model with NB
+TRACE [2019-08-02 07:37:31] Testing model: 
+TRACE [2019-08-02 07:37:51] Evaluating model: bcc [0.501115], sensitivity [0.160563], specificity [0.841667]
+TRACE [2019-08-02 07:37:51] Recording evaluation results on CSV file.
+TRACE [2019-08-02 07:37:51] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [28], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 07:37:51] Training model: balancing dataset
+TRACE [2019-08-02 07:37:51] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 07:37:51] Training model: partitioning dataset
+TRACE [2019-08-02 07:37:52] Training model: 
+TRACE [2019-08-02 07:37:52] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 07:37:52] [train_with_nb] Training model with NB
+TRACE [2019-08-02 07:56:15] Testing model: 
+TRACE [2019-08-02 07:56:36] Evaluating model: bcc [0.509860], sensitivity [0.133803], specificity [0.885918]
+TRACE [2019-08-02 07:56:36] Recording evaluation results on CSV file.
+TRACE [2019-08-02 07:56:36] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [32], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 07:56:36] Training model: balancing dataset
+TRACE [2019-08-02 07:56:36] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 07:56:36] Training model: partitioning dataset
+TRACE [2019-08-02 07:56:37] Training model: 
+TRACE [2019-08-02 07:56:37] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 07:56:37] [train_with_nb] Training model with NB
+TRACE [2019-08-02 08:15:21] Testing model: 
+TRACE [2019-08-02 08:15:43] Evaluating model: bcc [0.497425], sensitivity [0.104225], specificity [0.890625]
+TRACE [2019-08-02 08:15:43] Recording evaluation results on CSV file.
+TRACE [2019-08-02 08:15:43] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [36], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 08:15:43] Training model: balancing dataset
+TRACE [2019-08-02 08:15:43] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 08:15:43] Training model: partitioning dataset
+TRACE [2019-08-02 08:15:43] Training model: 
+TRACE [2019-08-02 08:15:43] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 08:15:43] [train_with_nb] Training model with NB
+TRACE [2019-08-02 08:34:50] Testing model: 
+TRACE [2019-08-02 08:35:12] Evaluating model: bcc [0.496326], sensitivity [0.076056], specificity [0.916596]
+TRACE [2019-08-02 08:35:12] Recording evaluation results on CSV file.
+TRACE [2019-08-02 08:35:12] Current parameters: n_terms [100], classifier [nb] feature [short_long_description], threshold [40], balancing [unbalanced], resampling [LGOCV]
+TRACE [2019-08-02 08:35:12] Training model: balancing dataset
+TRACE [2019-08-02 08:35:12] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-08-02 08:35:12] Training model: partitioning dataset
+TRACE [2019-08-02 08:35:13] Training model: 
+TRACE [2019-08-02 08:35:13] [get_resampling_method] Resampling model LGOCV
+TRACE [2019-08-02 08:35:13] [train_with_nb] Training model with NB

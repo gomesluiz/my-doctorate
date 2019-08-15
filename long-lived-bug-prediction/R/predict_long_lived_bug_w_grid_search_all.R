@@ -174,8 +174,9 @@ for (project.name in projects){
     cm <- confusionMatrix(data = y_hat, reference = y_test, mode = "prec_recall")
     tp <- cm$table[1, 1]
     fp <- cm$table[1, 2]
-    tn <- cm$table[2, 1]
-    fn <- cm$table[2, 2]
+    #tn <- cm$table[2, 1]
+    fn <- cm$table[2, 1]
+    tn <- cm$table[2, 2]
 
     precision <- tp / (tp + fp)
     recall    <- tp / (tp + fn)

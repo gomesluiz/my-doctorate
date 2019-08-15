@@ -1,4 +1,4 @@
-# nohup Rscript ./predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
+#nohup Rscript ./predict_long_lived_bug.R > predict_long_lived_bug.log 2>&1 &
 
 #' Predict if a bug will be long-lived or not using grid search and  normalization.
 #'
@@ -142,7 +142,10 @@ for (project.name in projects){
     
     ## REPENSAR
     reports.terms$long_lived <- as.factor(ifelse(reports.terms$days_to_resolve <= fixed.threshold, "0", "1"))
-    
+   
+    ## adult_incomes %>%
+    ##  mutate(new_workclass = ifelse(worclass=="Federal-goc", 1 , 0))
+    ## new_data <- dummyVars("~gender", data = adult_incomes)
     short_liveds <- subset(reports.terms , days_to_resolve <= parameter$threshold)
     long_liveds  <- subset(reports.terms , long_lived == 1)
     all_reports  <- rbind(short_liveds, long_liveds)
@@ -179,6 +182,7 @@ for (project.name in projects){
     cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "1")
     tn <- cm$table[1, 1]
     fn <- cm$table[1, 2]
+    
     tp <- cm$table[2, 2]
     fp <- cm$table[2, 1]
     
@@ -188,7 +192,7 @@ for (project.name in projects){
     prediction_recall        <- recall(data = y_hat, reference = y_test)
     prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
     prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
-    
+    manual_balanced_acc <- (tp/(tp+fp) + tn/(tn+fn)) / 2  
     
     #precision <- tp / (tp + fp)
     #recall    <- tp / (tp + fn)
@@ -223,6 +227,7 @@ for (project.name in projects){
         sensitivity = prediction_sensitivity,
         specificity = prediction_specificity,
         balanced_acc = prediction_balanced_acc,
+        manual_balanced_acc = manual_balanced_acc,
         precision = prediction_precision,
         recall = prediction_recall,
         fmeasure = prediction_fmeasure
@@ -230,7 +235,7 @@ for (project.name in projects){
 
       flog.trace("Recording evaluation results on CSV file.")
       insert_one_evaluation_data(metrics.file, one.evaluation)
-      stop("exit")
+      #stop("exit")
   }
 }
 flog.trace("End of predicting long lived bug.")
