@@ -1,2 +1,0 @@
-dataset.one,dataset.two,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
-winehq,winehq,6167,2869,3298,1996,1455,873,1843,0.5783830773688786,0.32142857142857145,0.44990582439872506,0.5783830773688786,0.5199270643396718,0.5475994513031551

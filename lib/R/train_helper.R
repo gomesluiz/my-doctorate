@@ -76,7 +76,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
   return(result)
 }
 
-#' Training model with neural network.
+#' Training model with random forest (ranger).
 #'
 #' @param .x A dataframe with independable variables
 #' @param .y A dataframe with dependable variable
@@ -87,13 +87,15 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
   flog.trace("[train_with_rf] Training model with RF")
   
   grid <- expand.grid(
-    mtry = c(10, 15, 20, 25)
+    mtry = c(25, 50, 75, 100),
+    splitrule = c("gini", "extratrees"),
+    min.node.size = c(100, 150, 200, 250)
   )
 
   result <- train(
     x = .x,
     y = .y,
-    method = "rf",
+    method = "ranger",
     trControl = .control,
     tuneGrid  = grid,
     ntree   = 200,

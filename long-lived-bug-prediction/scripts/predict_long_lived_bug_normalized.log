@@ -1,2 +1,0 @@
-nohup: ignoring input
-Fatal error: cannot open file './long-lived-bug-prediction/scripts/predict_long_lived_bug_normalized.R': No such file or directory

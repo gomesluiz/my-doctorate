@@ -1,2 +1,0 @@
-dataset.one,dataset.two,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,acc_class_0,acc_class_1,balanced_acc,precision,recall,fmeasure
-netbeans,netbeans,6624,4745,1879,4122,1168,623,711,0.7792060491493383,0.46701649175412296,0.6231112704517306,0.7792060491493383,0.8528864059590316,0.814383088017386
