@@ -87,15 +87,13 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
   flog.trace("[train_with_rf] Training model with RF")
   
   grid <- expand.grid(
-    mtry = c(25, 50, 75, 100),
-    splitrule = c("gini", "extratrees"),
-    min.node.size = c(100, 150, 200, 250)
+    mtry = c(25, 50, 75, 100)
   )
 
   result <- train(
     x = .x,
     y = .y,
-    method = "ranger",
+    method = "rf",
     trControl = .control,
     tuneGrid  = grid,
     ntree   = 200,

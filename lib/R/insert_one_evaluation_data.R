@@ -8,9 +8,14 @@ insert_one_evaluation_data <- function(evaluation.file, one.evaluation) {
   # Returns:
   #   nothing.
   #
-  if (file.exists(evaluation.file)) {
+  
+  if (file.exists(evaluation.file)){
     all.evaluations <- read_csv(evaluation.file)
-    all.evaluations <- rbind(all.evaluations , one.evaluation)
+    if (nrow(all.evaluations) > 0) {
+       all.evaluations <- rbind(all.evaluations , one.evaluation)
+    } else {
+      all.evaluations <- one.evaluation
+    }
   } else {
     all.evaluations <- one.evaluation
   }
