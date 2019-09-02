@@ -42,6 +42,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method    = "svmRadial",
     trControl = .control,
+    #metric = "ROC",
     tuneGrid  = grid
   )
 
@@ -68,6 +69,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method = "nnet",
     trControl = .control,
+    #metric = "ROC" ,
     tuneGrid  = grid,
     MaxNWts   = 5000,
     verbose   = FALSE
@@ -95,6 +97,7 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method = "rf",
     trControl = .control,
+    #metric = "ROC" ,
     tuneGrid  = grid,
     ntree   = 200,
     verbose = FALSE
@@ -120,6 +123,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method = "knn",
     trControl = .control,
+    #metric = "ROC" ,
     tuneGrid  = grid
   )
 
@@ -148,6 +152,7 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method = "nb",
     trControl = .control,
+    #metric = "ROC" ,
     tuneGrid  = grid
   )
 

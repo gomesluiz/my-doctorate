@@ -29,9 +29,9 @@ balance_dataset <- function(.x, .label, .out, .fnc) {
     keep <- !(names(.x) %in% c(.out, .label))
     colnames(.x)[colnames(.x) == "class"] <- "Class"
     colnames(.x)[colnames(.x) == "target"] <- "Target"
-    result <- SMOTE(.x[, keep], as.numeric(.x[, .label]), K = 3, dup_size = 0)$data
+    result <- SMOTE(.x[, keep], .x[, .label], K = 3, dup_size = 0)$data
     colnames(result)[colnames(result) == "class"] <- .label
-    result[, .label] = as.factor(as.numeric(result[, .label]) - 1)
+    #result[, .label] = as.factor(as.numeric(result[, .label]) - 1)
   } else {
     stop("balance_dataset: balanced function unknown!")
   }

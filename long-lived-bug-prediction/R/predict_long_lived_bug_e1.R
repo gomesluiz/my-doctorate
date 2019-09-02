@@ -64,7 +64,7 @@ set.seed(144)
 r_cluster <- makePSOCKcluster(3)
 registerDoParallel(r_cluster)
 
-timestamp       <- format(Sys.time(), "%Y%m%d")
+timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 class_label     <- "long_lived"
 
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
@@ -86,7 +86,7 @@ for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("%s_predict_long_lived_rq3e1_evaluation_metrics.csv", project.name)
+  metrics.mask      <- sprintf("%s_predict_long_lived_metrics_rq3e1.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
@@ -109,7 +109,7 @@ for (project.name in projects){
   
   flog.trace("Starting in parameter number: %d", parameter.number)
 
-  reports.file <- file.path(DATADIR, sprintf("20190824_%s_bug_report_data.csv", project.name))
+  reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
   # cleaning data
@@ -126,8 +126,9 @@ for (project.name in projects){
   reports$short_description <- clean_text(reports$short_description)
   reports$long_description  <- clean_text(reports$long_description)
  
-  last.n_term  <- 0
-  last.feature <- ""
+  last.n_term   <- 0
+  last.feature  <- ""
+  best.accuracy <- 0
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
     
@@ -155,50 +156,74 @@ for (project.name in projects){
       last.feature = parameter$feature
     }
     
-    ## REPENSAR
-    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, 0, 1))
-   
-    flog.trace("Balancing dataset")
-    balanced.dataset = balance_dataset(reports.dataset, class_label, c("bug_id", "bug_fix_time"), parameter$balancing)
-    predictors <- !(names(balanced.dataset) %in% c(class_label))
+    flog.trace("Partitioning dataset in training and testing")
+    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
+    in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
+    train.dataset <- reports.dataset[in_train, ]
+    test.dataset  <- reports.dataset[-in_train, ]
+    names(test.dataset)[names(test.dataset) == "class"] <- "Class"
+     
+    flog.trace("Balancing training dataset")
+    balanced.dataset = balance_dataset(train.dataset
+                                       , class_label
+                                       , c("bug_id", "bug_fix_time")
+                                       , parameter$balancing)
+    
+    names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
+    X_train <- subset(balanced.dataset, select=-c(long_lived))
+    if (parameter$balancing != SMOTEMETHOD){
+      # "center": subtract mean from values.
+      # "scale" : divide values by standard deviation.
+      # ("center", "scale"): combining the scale and center transforms will 
+      # standarize your data. Attributes will have a mean value of 0 and standard
+      # deviation of 1.
+      # "range" : normalize values. Data values can be scaled in the range of [0, 1]
+      # which is called normalization.
+      X_train_pre_processed <- preProcess(X_train, method=c("range"))
+      X_train <- predict(X_train_pre_processed, X_train)
+    }
+    
+    y_train <- balanced.dataset[, class_label]
+    X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
+    if (parameter$balancing != SMOTEMETHOD){
+      X_test_pre_processed  <- preProcess(X_test, method=c("range"))
+      X_test <- predict(X_test_pre_processed, X_test)
+    }
+    y_test  <- test.dataset[, class_label]
 
-    flog.trace("Partitioning dataset")
-    in_train <- createDataPartition(balanced.dataset[, class_label], p = 0.75, list = FALSE)
-
-    X_train <- balanced.dataset[in_train, predictors]
-    #X_train_pre_processed <- preProcess(X_train, method=c("range"))
-    #X_train <- predict(X_train_pre_processed, X_train)
-    y_train <- balanced.dataset[in_train, class_label]
-
-    X_test  <- balanced.dataset[-in_train, predictors]
-    #X_test_pre_processed  <- preProcess(X_test, method=c("range"))
-    #X_test <- predict(X_test_pre_processed, X_test)
-    y_test  <- balanced.dataset[-in_train, class_label]
-
-    flog.trace("Training model: ")
+    flog.trace("Training model ")
     fit_control <- get_resampling_method(parameter$resampling)
+    # fit_control <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, 
+    #                             summaryFunction = twoClassSummary,
+    #                             search = "grid")
     fit_model   <- train_with (.x=X_train, 
                                .y=y_train, 
                                .classifier=parameter$classifier,
                                .control=fit_control)
     
-    flog.trace("Testing model: ")
+    flog.trace("Testing model ")
     y_hat <- predict(object = fit_model, X_test)
 
-    cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "1")
+    cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
     tn <- cm$table[1, 1]
     fn <- cm$table[1, 2]
     
     tp <- cm$table[2, 2]
     fp <- cm$table[2, 1]
     
-    prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "1")
-    prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "0")
+    prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
+    prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
     prediction_precision     <- precision(data = y_hat, reference = y_test)
     prediction_recall        <- recall(data = y_hat, reference = y_test)
     prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
     prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
-    manual_balanced_acc <- (tp/(tp+fp) + tn/(tn+fn)) / 2  
+    manual_balanced_acc <- (ifelse((tp+fp) == 0, 0, tp/(tp+fp)) + ifelse((tn+fn) == 0, 0, tn/(tn+fn))) / 2  
+    
+    if (prediction_balanced_acc > best.accuracy){
+      test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
+      write_csv( test.result , file.path(DATADIR, sprintf("%s_%s_test_results_rq3e1.csv", timestamp, project.name)))
+      best.accuracy = prediction_balanced_acc
+    }
     
     flog.trace("Evaluating model: bcc [%f], sensitivity [%f], specificity [%f]"
                , prediction_balanced_acc, prediction_sensitivity, prediction_specificity)
@@ -212,11 +237,11 @@ for (project.name in projects){
         balancing  = parameter$balancing,
         resampling = parameter$resampling,
         train_size = nrow(X_train),
-        train_size_class_0 = length(subset(y_train, y_train == "0")),
-        train_size_class_1 = length(subset(y_train, y_train == "1")),
+        train_size_class_0 = length(subset(y_train, y_train == "N")),
+        train_size_class_1 = length(subset(y_train, y_train == "Y")),
         test_size = nrow(X_test),
-        test_size_class_0 = length(subset(y_test, y_test == "0")),
-        test_size_class_1 = length(subset(y_test, y_test == "1")),
+        test_size_class_0 = length(subset(y_test, y_test == "N")),
+        test_size_class_1 = length(subset(y_test, y_test == "Y")),
         tp = tp,
         fp = fp,
         tn = tn,
@@ -229,11 +254,8 @@ for (project.name in projects){
         recall = prediction_recall,
         fmeasure = prediction_fmeasure
       )
-
       flog.trace("Recording evaluation results on CSV file.")
       insert_one_evaluation_data(metrics.file, one.evaluation)
       flog.trace("Evaluation results recorded on CSV file.")
-      #stop("exit")
   }
 }
-flog.trace("End of predicting long lived bug.")
