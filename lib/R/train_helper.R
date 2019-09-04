@@ -6,12 +6,15 @@ NB   <- "nb"
 NNET <- "nn"
 RF   <- "rf"
 SVM  <- "svm"
+XB   <- "xgbTree"
 
 train_classifiers <- c(
   KNN, 
-  NB, 
+  NB,
+  NNET,
   RF, 
-  SVM
+  SVM,
+  XB 
 )
 names(train_classifiers) <- train_classifiers
 
@@ -42,7 +45,6 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     y = .y,
     method    = "svmRadial",
     trControl = .control,
-    #metric = "ROC",
     tuneGrid  = grid
   )
 
@@ -60,8 +62,8 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
   flog.trace("[train_with_nnet] Training model with NNET")
   
   grid <- expand.grid(
-    size  = c(10, 20, 30, 40), 
-    decay = (0.5)
+    size  = c(10, 20, 30, 40),  # Hidden units 
+    decay = (0.5)               # Weight decay
   )
   
   result <- train(
@@ -159,6 +161,38 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
   return(result)
 }
 
+#' Training model with XgBoost. 
+#'
+#' @param .x A dataframe with independable variables
+#' @param .y A dataframe with dependable variable
+#' @param .control A control Caret parameter
+#'
+#' @return A trained model.
+train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL) {
+  
+  flog.trace("[train_with_nb] Training model with XgBoost")
+  
+  grid <- expand.grid(
+    nrounds = c(100, 200, 300, 400), # Boosting iterations
+    max_depth = c(3:7),              # Max tree depth
+    eta = c(0.05, 1),                # Shrinkage
+    gamma = c(0.01),                 # Minimum loss reduction 
+    colsample_bytree = c(0.75),      # Subsamble ratio of columns
+    subsample = c(0.50),             # Subsample percentage
+    min_child_weight = c(0)          # Minimum sum of instance weight
+  )
+
+  result <- train(
+    x = .x,
+    y = .y,
+    method = "xgbTree",
+    trControl = .control,
+    #metric = "ROC" ,
+    tuneGrid  = grid
+  )
+
+  return(result)
+}
 #' Training model with a classifier pass as parameter. 
 #'
 #' @param .x A dataframe with independable variables
@@ -169,7 +203,7 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
 train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL) {
   if (!.classifier %in% train_classifiers)
   {
-    stop(sprintf("% unknown classifier!", .classifier))
+    stop(sprintf("%s unknown classifier!", .classifier))
   }
   if (.classifier == KNN) {
     return(train_with_knn(.x, .y, .control))
@@ -181,5 +215,7 @@ train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL) {
     return(train_with_rf(.x, .y, .control))
   } else if (.classifier == SVM) {
     return(train_with_svm(.x, .y, .control))
+  } else if (.classifier == XB) {
+    return(train_with_xb(.x, .y, .control))
   }
 }

@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
+IN_DEBUG_MODE <- FALSE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -26,6 +26,7 @@ if (!require('e1071')) install.packages("e1071")
 if (!require("klaR")) install.packages("klaR") # naive bayes package.
 if (!require("kernlab")) install.packages("kernlab")
 if (!require("futile.logger")) install.packages("futile.logger")
+if (!require("nnet")) install.packages("nnet")
 if (!require("qdap")) install.packages("qdap")
 if (!require("randomForest")) install.packages("randomForest")
 if (!require("SnowballC")) install.packages("SnowballC")
@@ -33,6 +34,7 @@ if (!require('smotefamily')) install.packages('smotefamily')
 if (!require("tidyverse")) install.packages("tidyverse")
 if (!require('tidytext')) install.packages('tidytext')
 if (!require("tm")) install.packages("tm")
+#if (!require("xgboost")) install.packages("xgboost")
 
 library(caret)
 library(dplyr)
@@ -41,6 +43,7 @@ library(e1071)
 library(klaR)
 library(kernlab)
 library(futile.logger)
+library(nnet)
 library(qdap)
 library(randomForest)
 library(SnowballC)
@@ -71,7 +74,7 @@ class_label     <- "long_lived"
 
 projects   <- c("eclipse")
 n_term     <- c(100)
-classifier <- c(KNN, NB, RF, SVM)
+classifier <- c(KNN, NB, RF, SVM, NNET)
 feature    <- c("short_description", "long_description")
 threshold  <- c(365)
 balancing  <- c(UNBALANCED, SMOTEMETHOD)
