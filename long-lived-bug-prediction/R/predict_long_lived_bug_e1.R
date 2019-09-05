@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- FALSE
+IN_DEBUG_MODE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -34,7 +34,7 @@ if (!require('smotefamily')) install.packages('smotefamily')
 if (!require("tidyverse")) install.packages("tidyverse")
 if (!require('tidytext')) install.packages('tidytext')
 if (!require("tm")) install.packages("tm")
-#if (!require("xgboost")) install.packages("xgboost")
+if (!require("xgboost")) install.packages("xgboost")
 
 library(caret)
 library(dplyr)
@@ -64,7 +64,7 @@ source(file.path(LIBDIR, "train_helper.R"))
 set.seed(144)
 
 # main function
-r_cluster <- makePSOCKcluster(3)
+r_cluster <- makePSOCKcluster(8)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
@@ -74,7 +74,7 @@ class_label     <- "long_lived"
 
 projects   <- c("eclipse")
 n_term     <- c(100)
-classifier <- c(KNN, NB, RF, SVM, NNET)
+classifier <- c(KNN, NB, RF, SVM, NNET, XB)
 feature    <- c("short_description", "long_description")
 threshold  <- c(365)
 balancing  <- c(UNBALANCED, SMOTEMETHOD)
@@ -89,7 +89,7 @@ for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("%s_predict_long_lived_metrics_rq3e1.csv", project.name)
+  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
@@ -115,14 +115,14 @@ for (project.name in projects){
   reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
-  # cleaning data
   reports <- read_csv(reports.file, na  = c("", "NA"))
   if (IN_DEBUG_MODE){
     flog.trace("DEBUG_MODE: Sample bug reports dataset")
-    reports <- sample_n(reports, 1000) 
+    reports <- sample_n(reports, 5000) 
   }
-  reports <- reports[, c('bug_id', 'short_description', 'long_description'
-                         , 'bug_fix_time')]
+
+  # feature engineering. 
+  reports <- reports[, c('bug_id', 'short_description', 'long_description' , 'bug_fix_time')]
   reports <- reports[complete.cases(reports), ]
   
   flog.trace("Clean text features")
