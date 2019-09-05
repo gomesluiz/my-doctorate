@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
+IN_DEBUG_MODE <- FALSE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -112,7 +112,7 @@ for (project.name in projects){
   
   flog.trace("Starting in parameter number: %d", parameter.number)
 
-  reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data.csv", project.name))
+  reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data_small.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
   reports <- read_csv(reports.file, na  = c("", "NA"))
