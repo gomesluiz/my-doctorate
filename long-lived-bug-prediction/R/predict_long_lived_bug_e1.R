@@ -64,7 +64,7 @@ source(file.path(LIBDIR, "train_helper.R"))
 set.seed(144)
 
 # main function
-r_cluster <- makePSOCKcluster(3)
+r_cluster <- makePSOCKcluster(8)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
