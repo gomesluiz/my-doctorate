@@ -578,3 +578,25 @@ TRACE [2019-09-06 00:28:25] [balance_dataset]: balancing method: smote
 TRACE [2019-09-06 00:28:29] Training model 
 TRACE [2019-09-06 00:28:29] [get_resampling_method] Resampling model repeatedcv
 TRACE [2019-09-06 00:28:29] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-06 03:48:41] Testing model 
+TRACE [2019-09-06 03:48:41] Evaluating model: bcc [0.509743], sensitivity [0.074866], specificity [0.944620]
+TRACE [2019-09-06 03:48:41] Recording evaluation results on CSV file.
+TRACE [2019-09-06 03:48:41] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 03:48:41] Current parameters:
+ N.Terms...: [100]
+ Classifier: [xgbTree]
+ Feature...: [short_description]
+ Threshold.: [365]
+ Balancing.: [unbalanced]
+ Resampling: [repeatedcv]
+TRACE [2019-09-06 03:48:41] Partitioning dataset in training and testing
+TRACE [2019-09-06 03:48:41] Balancing training dataset
+TRACE [2019-09-06 03:48:41] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 03:48:42] Training model 
+TRACE [2019-09-06 03:48:42] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 03:48:42] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-06 06:46:09] Testing model 
+TRACE [2019-09-06 06:46:09] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 06:46:09] Recording evaluation results on CSV file.
+TRACE [2019-09-06 06:46:09] Evaluation results recorded on CSV file.
+There were 21 warnings (use warnings() to see them)
