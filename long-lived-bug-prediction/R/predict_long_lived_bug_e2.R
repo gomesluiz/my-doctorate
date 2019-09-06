@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
+IN_DEBUG_MODE <- FALSE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -72,23 +72,23 @@ class_label     <- "long_lived"
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 
 projects   <- c("eclipse")
-n_term     <- c(100)
-classifier <- c(KNN, NB, RF, SVM, NNET, XB)
-feature    <- c("short_description", "long_description")
+n_term     <- c(100, 150, 200, 250, 300)
+classifier <- c(NNET)
+feature    <- c("short_description")
 threshold  <- c(365)
-balancing  <- c(UNBALANCED, SMOTEMETHOD)
+balancing  <- c(SMOTEMETHOD)
 resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
 
 flog.threshold(TRACE)
-flog.trace("Long live prediction started with Grid Search, and Short, Long and Short+Long Description")
+flog.trace("Long live prediction - RQ3 - Experiment 2")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics.csv", project.name)
+  metrics.mask      <- sprintf("rq3e2_%s_predict_long_lived_metrics.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
@@ -128,8 +128,6 @@ for (project.name in projects){
   reports$short_description <- clean_text(reports$short_description)
   reports$long_description  <- clean_text(reports$long_description)
  
-  last.n_term   <- 0
-  last.feature  <- ""
   best.accuracy <- 0
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
@@ -138,28 +136,24 @@ for (project.name in projects){
              , parameter$n_term , parameter$classifier , parameter$feature
              , parameter$threshold , parameter$balancing , parameter$resampling)
 
-    if ((parameter$n_term != last.n_term) || (parameter$feature != last.feature)){
-      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-  
-      source <- reports[, c('bug_id', parameters$feature)]
-      corpus <- clean_corpus(source)
-      dtm    <- tidy(make_dtm(corpus, parameter$n_term))
-      names(dtm)      <- c("bug_id", "term", "count")
-      term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-      reports.dataset <- merge(
-        x = reports[, c('bug_id', 'bug_fix_time')],
-        y = term.matrix,
+    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+
+    source <- reports[, c('bug_id', parameters$feature)]
+    corpus <- clean_corpus(source)
+    dtm    <- tidy(make_dtm(corpus, parameter$n_term))
+    names(dtm)      <- c("bug_id", "term", "count")
+    term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
+    reports.dataset <- merge(
+      x = reports[, c('bug_id', 'bug_fix_time')],
+      y = term.matrix,
         by.x = 'bug_id',
         by.y = 'bug_id'
-      )
-      # replace the SMOTE reserved words.
-      colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
-      colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
+    )
       
-      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
-      last.n_term  = parameter$n_term
-      last.feature = parameter$feature
-    }
+    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+    # replace the SMOTE reserved words.
+    colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
+    colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
     
     flog.trace("Partitioning dataset in training and testing")
     reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
@@ -169,17 +163,11 @@ for (project.name in projects){
     train.dataset <- reports.dataset[in_train, ]
     test.dataset  <- reports.dataset[-in_train, ]
     
-    # replace the SMOTE reserved words.
-    colnames(test.dataset)[colnames(test.dataset) == "class"]  <- "Class"
-    colnames(test.dataset)[colnames(test.dataset) == "target"] <- "Target"
-     
     flog.trace("Balancing training dataset")
     balanced.dataset = balance_dataset(train.dataset
                                        , class_label
                                        , c("bug_id", "bug_fix_time")
                                        , parameter$balancing)
-    
-    names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
     
     X_train <- subset(balanced.dataset, select=-c(long_lived))
     if (parameter$balancing != SMOTEMETHOD){
@@ -190,7 +178,6 @@ for (project.name in projects){
       # deviation of 1.
       # "range" : normalize values. Data values can be scaled in the range of [0, 1]
       # which is called normalization.
-      flog.trace("Normalizing X_train")
       X_train_pre_processed <- preProcess(X_train, method=c("range"))
       X_train <- predict(X_train_pre_processed, X_train)
     }
@@ -198,7 +185,6 @@ for (project.name in projects){
     y_train <- balanced.dataset[, class_label]
     X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
     if (parameter$balancing != SMOTEMETHOD){
-      flog.trace("Normalizing X_test")
       X_test_pre_processed  <- preProcess(X_test, method=c("range"))
       X_test <- predict(X_test_pre_processed, X_test)
     }
@@ -218,13 +204,16 @@ for (project.name in projects){
     flog.trace("Testing model ")
     y_hat <- predict(object = fit_model, X_test)
 
+    flog.trace("Testing model ")
     cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
     tn <- cm$table[1, 1]
     fn <- cm$table[1, 2]
     
+    flog.trace("Testing model ")
     tp <- cm$table[2, 2]
     fp <- cm$table[2, 1]
     
+    flog.trace("Testing model ")
     prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
     prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
     prediction_precision     <- precision(data = y_hat, reference = y_test)
@@ -232,10 +221,14 @@ for (project.name in projects){
     prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
     prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
     manual_balanced_acc <- (ifelse((tp+fp) == 0, 0, tp/(tp+fp)) + ifelse((tn+fn) == 0, 0, tn/(tn+fn))) / 2  
-    
+   
+    flog.trace("Testing model ")
+     
+    flog.trace("Verifing the best test results")
     if (prediction_balanced_acc > best.accuracy){
+      flog.trace("Recording the best test results")
       test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
-      write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e1_%s_test_results.csv", timestamp, project.name)))
+      write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e2_%s_test_results_rq3e1.csv", timestamp, project.name)))
       best.accuracy = prediction_balanced_acc
     }
     

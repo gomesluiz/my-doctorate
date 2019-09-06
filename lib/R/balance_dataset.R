@@ -27,11 +27,9 @@ balance_dataset <- function(.x, .label, .out, .fnc) {
   } else if (.fnc == SMOTEMETHOD) {
     flog.trace("[balance_dataset]: balancing method: %s", SMOTEMETHOD)
     keep <- !(names(.x) %in% c(.out, .label))
-    colnames(.x)[colnames(.x) == "class"] <- "Class"
-    colnames(.x)[colnames(.x) == "target"] <- "Target"
     result <- SMOTE(.x[, keep], .x[, .label], K = 3, dup_size = 0)$data
     colnames(result)[colnames(result) == "class"] <- .label
-    #result[, .label] = as.factor(as.numeric(result[, .label]) - 1)
+    result[, .label] = as.factor(result[, .label])
   } else {
     stop("balance_dataset: balanced function unknown!")
   }
