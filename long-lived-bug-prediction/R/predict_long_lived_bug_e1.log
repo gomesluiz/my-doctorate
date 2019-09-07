@@ -104,499 +104,515 @@ The following object is masked from ‘package:dplyr’:
     slice
 
 NULL
-TRACE [2019-09-05 14:12:44] Long live prediction started with Grid Search, and Short, Long and Short+Long Description
-TRACE [2019-09-05 14:12:44] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
-TRACE [2019-09-05 14:12:45] Current project name : eclipse
-TRACE [2019-09-05 14:12:45] New Evaluation file: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190905141244_rq3e1_eclipse_predict_long_lived_metrics.csv
-TRACE [2019-09-05 14:12:45] Starting in parameter number: 1
-TRACE [2019-09-05 14:12:45] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190830_eclipse_bug_report_data_small.csv
-TRACE [2019-09-05 14:12:45] Clean text features
-TRACE [2019-09-05 14:13:25] Current parameters:
+TRACE [2019-09-06 17:22:48] Long live prediction started with Grid Search, and Short, Long and Short+Long Description
+TRACE [2019-09-06 17:22:48] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
+TRACE [2019-09-06 17:22:48] Current project name : eclipse
+TRACE [2019-09-06 17:22:48] New Evaluation file: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190906172247_rq3e1_eclipse_predict_long_lived_metrics.csv
+TRACE [2019-09-06 17:22:48] Starting in parameter number: 1
+TRACE [2019-09-06 17:22:48] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190830_eclipse_bug_report_data_small.csv
+TRACE [2019-09-06 17:22:48] Clean text features
+TRACE [2019-09-06 17:23:29] Current parameters:
  N.Terms...: [100]
  Classifier: [knn]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:13:25] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 14:13:56] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 14:13:56] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:13:56] Balancing training dataset
-TRACE [2019-09-05 14:13:56] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:14:00] Training model 
-TRACE [2019-09-05 14:14:00] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:14:00] [train_with_knn] Training model with KNN
-TRACE [2019-09-05 14:16:42] Testing model 
-TRACE [2019-09-05 14:16:52] Evaluating model: bcc [0.513630], sensitivity [0.454545], specificity [0.572715]
-TRACE [2019-09-05 14:16:52] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:16:52] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:16:52] Current parameters:
+TRACE [2019-09-06 17:23:29] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 17:23:58] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 17:23:58] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:23:58] Balancing training dataset
+TRACE [2019-09-06 17:23:58] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:24:02] Training model 
+TRACE [2019-09-06 17:24:02] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:24:02] [train_with_knn] Training model with KNN
+TRACE [2019-09-06 17:26:55] Testing model 
+TRACE [2019-09-06 17:27:12] Evaluating model: bcc [0.513405], sensitivity [0.454545], specificity [0.572265]
+TRACE [2019-09-06 17:27:12] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:27:12] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:27:12] Current parameters:
  N.Terms...: [100]
  Classifier: [knn]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:16:52] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:16:52] Balancing training dataset
-TRACE [2019-09-05 14:16:52] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:16:53] Training model 
-TRACE [2019-09-05 14:16:53] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:16:53] [train_with_knn] Training model with KNN
-TRACE [2019-09-05 14:17:27] Testing model 
-TRACE [2019-09-05 14:17:30] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 14:17:30] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:17:30] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:17:30] Current parameters:
+TRACE [2019-09-06 17:27:12] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:27:12] Balancing training dataset
+TRACE [2019-09-06 17:27:12] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 17:27:13] Normalizing X_train
+TRACE [2019-09-06 17:27:13] Normalizing X_test
+TRACE [2019-09-06 17:27:13] Training model 
+TRACE [2019-09-06 17:27:13] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:27:13] [train_with_knn] Training model with KNN
+TRACE [2019-09-06 17:28:03] Testing model 
+TRACE [2019-09-06 17:28:07] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 17:28:07] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:28:07] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:28:07] Current parameters:
  N.Terms...: [100]
  Classifier: [knn]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:17:30] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-05 14:17:59] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-05 14:17:59] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:17:59] Balancing training dataset
-TRACE [2019-09-05 14:17:59] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:18:02] Training model 
-TRACE [2019-09-05 14:18:02] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:18:02] [train_with_knn] Training model with KNN
-TRACE [2019-09-05 14:20:43] Testing model 
-TRACE [2019-09-05 14:20:51] Evaluating model: bcc [0.558042], sensitivity [0.529412], specificity [0.586673]
-TRACE [2019-09-05 14:20:51] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:20:51] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:20:51] Current parameters:
+TRACE [2019-09-06 17:28:07] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-06 17:28:34] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-06 17:28:34] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:28:34] Balancing training dataset
+TRACE [2019-09-06 17:28:34] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:28:37] Training model 
+TRACE [2019-09-06 17:28:37] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:28:37] [train_with_knn] Training model with KNN
+TRACE [2019-09-06 17:31:30] Testing model 
+TRACE [2019-09-06 17:31:47] Evaluating model: bcc [0.513405], sensitivity [0.454545], specificity [0.572265]
+TRACE [2019-09-06 17:31:47] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:31:47] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:31:47] Current parameters:
  N.Terms...: [100]
  Classifier: [knn]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:20:51] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:20:51] Balancing training dataset
-TRACE [2019-09-05 14:20:51] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:20:51] Training model 
-TRACE [2019-09-05 14:20:51] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:20:51] [train_with_knn] Training model with KNN
-TRACE [2019-09-05 14:21:26] Testing model 
-TRACE [2019-09-05 14:21:29] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 14:21:29] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:21:29] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:21:29] Current parameters:
+TRACE [2019-09-06 17:31:47] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:31:47] Balancing training dataset
+TRACE [2019-09-06 17:31:47] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 17:31:47] Normalizing X_train
+TRACE [2019-09-06 17:31:47] Normalizing X_test
+TRACE [2019-09-06 17:31:47] Training model 
+TRACE [2019-09-06 17:31:47] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:31:47] [train_with_knn] Training model with KNN
+TRACE [2019-09-06 17:32:39] Testing model 
+TRACE [2019-09-06 17:32:43] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 17:32:43] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:32:43] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:32:43] Current parameters:
  N.Terms...: [100]
  Classifier: [nb]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:21:29] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 14:21:57] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 14:21:57] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:21:57] Balancing training dataset
-TRACE [2019-09-05 14:21:57] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:22:00] Training model 
-TRACE [2019-09-05 14:22:00] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:22:00] [train_with_nb] Training model with NB
-TRACE [2019-09-05 14:26:13] Testing model 
-TRACE [2019-09-05 14:26:33] Evaluating model: bcc [0.496453], sensitivity [0.989305], specificity [0.003602]
-TRACE [2019-09-05 14:26:33] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:26:33] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:26:33] Current parameters:
+TRACE [2019-09-06 17:32:43] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 17:33:10] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 17:33:10] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:33:10] Balancing training dataset
+TRACE [2019-09-06 17:33:10] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:33:13] Training model 
+TRACE [2019-09-06 17:33:13] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:33:13] [train_with_nb] Training model with NB
+TRACE [2019-09-06 17:37:30] Testing model 
+TRACE [2019-09-06 17:37:51] Evaluating model: bcc [0.498705], sensitivity [0.989305], specificity [0.008104]
+TRACE [2019-09-06 17:37:51] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:37:51] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:37:51] Current parameters:
  N.Terms...: [100]
  Classifier: [nb]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:26:33] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:26:33] Balancing training dataset
-TRACE [2019-09-05 14:26:33] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:26:34] Training model 
-TRACE [2019-09-05 14:26:34] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:26:34] [train_with_nb] Training model with NB
-TRACE [2019-09-05 14:28:56] Testing model 
-TRACE [2019-09-05 14:29:17] Evaluating model: bcc [0.508531], sensitivity [0.048128], specificity [0.968933]
-TRACE [2019-09-05 14:29:17] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:29:17] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:29:17] Current parameters:
+TRACE [2019-09-06 17:37:51] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:37:51] Balancing training dataset
+TRACE [2019-09-06 17:37:51] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 17:37:51] Normalizing X_train
+TRACE [2019-09-06 17:37:51] Normalizing X_test
+TRACE [2019-09-06 17:37:51] Training model 
+TRACE [2019-09-06 17:37:51] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:37:51] [train_with_nb] Training model with NB
+TRACE [2019-09-06 17:40:16] Testing model 
+TRACE [2019-09-06 17:40:37] Evaluating model: bcc [0.498483], sensitivity [0.032086], specificity [0.964881]
+TRACE [2019-09-06 17:40:37] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:40:37] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:40:37] Current parameters:
  N.Terms...: [100]
  Classifier: [nb]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:29:17] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-05 14:29:45] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-05 14:29:45] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:29:45] Balancing training dataset
-TRACE [2019-09-05 14:29:45] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:29:48] Training model 
-TRACE [2019-09-05 14:29:48] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:29:48] [train_with_nb] Training model with NB
-TRACE [2019-09-05 14:34:01] Testing model 
-TRACE [2019-09-05 14:34:21] Evaluating model: bcc [0.500675], sensitivity [1.000000], specificity [0.001351]
-TRACE [2019-09-05 14:34:21] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:34:21] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:34:21] Current parameters:
+TRACE [2019-09-06 17:40:37] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-06 17:41:04] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-06 17:41:04] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:41:04] Balancing training dataset
+TRACE [2019-09-06 17:41:04] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:41:07] Training model 
+TRACE [2019-09-06 17:41:07] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:41:07] [train_with_nb] Training model with NB
+TRACE [2019-09-06 17:45:22] Testing model 
+TRACE [2019-09-06 17:45:42] Evaluating model: bcc [0.498705], sensitivity [0.989305], specificity [0.008104]
+TRACE [2019-09-06 17:45:42] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:45:42] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:45:42] Current parameters:
  N.Terms...: [100]
  Classifier: [nb]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:34:21] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:34:22] Balancing training dataset
-TRACE [2019-09-05 14:34:22] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:34:22] Training model 
-TRACE [2019-09-05 14:34:22] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:34:22] [train_with_nb] Training model with NB
-TRACE [2019-09-05 14:36:45] Testing model 
-TRACE [2019-09-05 14:37:06] Evaluating model: bcc [0.495304], sensitivity [0.037433], specificity [0.953174]
-TRACE [2019-09-05 14:37:06] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:37:06] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:37:06] Current parameters:
+TRACE [2019-09-06 17:45:42] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:45:42] Balancing training dataset
+TRACE [2019-09-06 17:45:42] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 17:45:42] Normalizing X_train
+TRACE [2019-09-06 17:45:43] Normalizing X_test
+TRACE [2019-09-06 17:45:43] Training model 
+TRACE [2019-09-06 17:45:43] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:45:43] [train_with_nb] Training model with NB
+TRACE [2019-09-06 17:48:10] Testing model 
+TRACE [2019-09-06 17:48:31] Evaluating model: bcc [0.498483], sensitivity [0.032086], specificity [0.964881]
+TRACE [2019-09-06 17:48:31] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:48:31] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:48:31] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:37:06] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 14:37:33] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 14:37:33] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:37:33] Balancing training dataset
-TRACE [2019-09-05 14:37:33] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:37:36] Training model 
-TRACE [2019-09-05 14:37:36] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:37:36] [train_with_nnet] Training model with NNET
-# weights:  3061
-initial  value 10465.988443 
-iter  10 value 8447.798097
-iter  20 value 8177.475100
-iter  30 value 8055.226469
-iter  40 value 7869.023028
-iter  50 value 7735.914306
-iter  60 value 7611.137080
-iter  70 value 7539.159413
-iter  80 value 7490.796589
-iter  90 value 7450.145353
-iter 100 value 7415.697548
-final  value 7415.697548 
+TRACE [2019-09-06 17:48:31] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 17:48:59] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 17:48:59] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:48:59] Balancing training dataset
+TRACE [2019-09-06 17:48:59] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:49:02] Training model 
+TRACE [2019-09-06 17:49:02] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:49:02] [train_with_nnet] Training model with NNET
+# weights:  2041
+initial  value 9546.580103 
+iter  10 value 8242.663569
+iter  20 value 8076.713604
+iter  30 value 8051.067741
+iter  40 value 8002.799153
+iter  50 value 7847.289450
+iter  60 value 7672.920053
+iter  70 value 7557.245786
+iter  80 value 7499.155227
+iter  90 value 7450.227083
+iter 100 value 7417.051999
+final  value 7417.051999 
 stopped after 100 iterations
-TRACE [2019-09-05 14:43:22] Testing model 
-TRACE [2019-09-05 14:43:22] Evaluating model: bcc [0.565942], sensitivity [0.438503], specificity [0.693381]
-TRACE [2019-09-05 14:43:22] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:43:22] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:43:22] Current parameters:
+TRACE [2019-09-06 17:54:11] Testing model 
+TRACE [2019-09-06 17:54:11] Evaluating model: bcc [0.530732], sensitivity [0.368984], specificity [0.692481]
+TRACE [2019-09-06 17:54:11] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:54:11] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:54:11] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:43:22] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:43:22] Balancing training dataset
-TRACE [2019-09-05 14:43:22] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:43:23] Training model 
-TRACE [2019-09-05 14:43:23] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:43:23] [train_with_nnet] Training model with NNET
+TRACE [2019-09-06 17:54:11] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:54:11] Balancing training dataset
+TRACE [2019-09-06 17:54:11] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 17:54:11] Normalizing X_train
+TRACE [2019-09-06 17:54:12] Normalizing X_test
+TRACE [2019-09-06 17:54:12] Training model 
+TRACE [2019-09-06 17:54:12] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:54:12] [train_with_nnet] Training model with NNET
 # weights:  1021
-initial  value 5968.388797 
-iter  10 value 1972.427383
-iter  20 value 1946.812758
-iter  30 value 1944.755935
-iter  40 value 1944.372905
-iter  50 value 1944.143268
-iter  60 value 1944.035050
-iter  70 value 1944.018538
-iter  80 value 1943.993765
-iter  90 value 1943.954943
-iter 100 value 1943.940386
-final  value 1943.940386 
-stopped after 100 iterations
-TRACE [2019-09-05 14:46:34] Testing model 
-TRACE [2019-09-05 14:46:34] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 14:46:34] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:46:34] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:46:34] Current parameters:
+initial  value 3304.851182 
+iter  10 value 1961.423920
+iter  20 value 1939.765831
+iter  30 value 1939.447918
+iter  40 value 1939.339035
+iter  50 value 1939.320808
+iter  60 value 1939.317223
+final  value 1939.312326 
+converged
+TRACE [2019-09-06 17:56:52] Testing model 
+TRACE [2019-09-06 17:56:52] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 17:56:52] Recording evaluation results on CSV file.
+TRACE [2019-09-06 17:56:52] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 17:56:52] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:46:34] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-05 14:47:02] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-05 14:47:02] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:47:02] Balancing training dataset
-TRACE [2019-09-05 14:47:02] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:47:05] Training model 
-TRACE [2019-09-05 14:47:05] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:47:05] [train_with_nnet] Training model with NNET
-# weights:  4081
-initial  value 9819.198811 
-iter  10 value 8510.518957
-iter  20 value 8236.500739
-iter  30 value 8035.827155
-iter  40 value 7883.570740
-iter  50 value 7777.627191
-iter  60 value 7666.022168
-iter  70 value 7580.473804
-iter  80 value 7523.518631
-iter  90 value 7478.588130
-iter 100 value 7459.954892
-final  value 7459.954892 
+TRACE [2019-09-06 17:56:52] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-06 17:57:20] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-06 17:57:20] Partitioning dataset in training and testing
+TRACE [2019-09-06 17:57:20] Balancing training dataset
+TRACE [2019-09-06 17:57:20] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 17:57:23] Training model 
+TRACE [2019-09-06 17:57:23] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 17:57:23] [train_with_nnet] Training model with NNET
+# weights:  2041
+initial  value 9546.580103 
+iter  10 value 8242.663569
+iter  20 value 8076.713604
+iter  30 value 8051.067741
+iter  40 value 8002.799153
+iter  50 value 7847.289450
+iter  60 value 7672.920053
+iter  70 value 7557.245786
+iter  80 value 7499.155227
+iter  90 value 7450.227083
+iter 100 value 7417.051999
+final  value 7417.051999 
 stopped after 100 iterations
-TRACE [2019-09-05 14:53:10] Testing model 
-TRACE [2019-09-05 14:53:10] Evaluating model: bcc [0.570839], sensitivity [0.449198], specificity [0.692481]
-TRACE [2019-09-05 14:53:10] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:53:10] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:53:10] Current parameters:
+TRACE [2019-09-06 18:02:26] Testing model 
+TRACE [2019-09-06 18:02:26] Evaluating model: bcc [0.530732], sensitivity [0.368984], specificity [0.692481]
+TRACE [2019-09-06 18:02:26] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:02:26] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:02:26] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:53:10] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:53:10] Balancing training dataset
-TRACE [2019-09-05 14:53:10] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 14:53:11] Training model 
-TRACE [2019-09-05 14:53:11] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:53:11] [train_with_nnet] Training model with NNET
+TRACE [2019-09-06 18:02:26] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:02:26] Balancing training dataset
+TRACE [2019-09-06 18:02:26] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 18:02:26] Normalizing X_train
+TRACE [2019-09-06 18:02:26] Normalizing X_test
+TRACE [2019-09-06 18:02:26] Training model 
+TRACE [2019-09-06 18:02:26] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:02:26] [train_with_nnet] Training model with NNET
 # weights:  1021
-initial  value 2091.417767 
-iter  10 value 1957.906259
-iter  20 value 1939.620368
-iter  30 value 1939.471422
-iter  40 value 1939.348641
-iter  50 value 1939.251224
-iter  60 value 1939.160321
-iter  70 value 1939.129762
-iter  80 value 1939.111034
-iter  90 value 1939.101215
-iter 100 value 1939.097149
-final  value 1939.097149 
-stopped after 100 iterations
-TRACE [2019-09-05 14:56:21] Testing model 
-TRACE [2019-09-05 14:56:21] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 14:56:21] Recording evaluation results on CSV file.
-TRACE [2019-09-05 14:56:21] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 14:56:21] Current parameters:
+initial  value 3304.851182 
+iter  10 value 1961.423920
+iter  20 value 1939.765831
+iter  30 value 1939.447918
+iter  40 value 1939.339035
+iter  50 value 1939.320808
+iter  60 value 1939.317223
+final  value 1939.312326 
+converged
+TRACE [2019-09-06 18:05:04] Testing model 
+TRACE [2019-09-06 18:05:04] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 18:05:04] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:05:04] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:05:04] Current parameters:
  N.Terms...: [100]
  Classifier: [rf]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 14:56:21] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 14:56:48] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 14:56:48] Partitioning dataset in training and testing
-TRACE [2019-09-05 14:56:48] Balancing training dataset
-TRACE [2019-09-05 14:56:48] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 14:56:52] Training model 
-TRACE [2019-09-05 14:56:52] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 14:56:52] [train_with_rf] Training model with RF
-TRACE [2019-09-05 15:02:46] Testing model 
-TRACE [2019-09-05 15:02:46] Evaluating model: bcc [0.514048], sensitivity [0.069519], specificity [0.958577]
-TRACE [2019-09-05 15:02:46] Recording evaluation results on CSV file.
-TRACE [2019-09-05 15:02:46] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 15:02:46] Current parameters:
+TRACE [2019-09-06 18:05:04] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 18:05:31] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 18:05:31] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:05:31] Balancing training dataset
+TRACE [2019-09-06 18:05:31] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 18:05:34] Training model 
+TRACE [2019-09-06 18:05:34] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:05:34] [train_with_rf] Training model with RF
+TRACE [2019-09-06 18:11:16] Testing model 
+TRACE [2019-09-06 18:11:16] Evaluating model: bcc [0.530513], sensitivity [0.106952], specificity [0.954075]
+TRACE [2019-09-06 18:11:16] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:11:16] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:11:16] Current parameters:
  N.Terms...: [100]
  Classifier: [rf]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 15:02:46] Partitioning dataset in training and testing
-TRACE [2019-09-05 15:02:46] Balancing training dataset
-TRACE [2019-09-05 15:02:46] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 15:02:46] Training model 
-TRACE [2019-09-05 15:02:46] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 15:02:46] [train_with_rf] Training model with RF
-TRACE [2019-09-05 15:07:34] Testing model 
-TRACE [2019-09-05 15:07:34] Evaluating model: bcc [0.501323], sensitivity [0.005348], specificity [0.997299]
-TRACE [2019-09-05 15:07:34] Recording evaluation results on CSV file.
-TRACE [2019-09-05 15:07:34] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 15:07:34] Current parameters:
+TRACE [2019-09-06 18:11:16] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:11:16] Balancing training dataset
+TRACE [2019-09-06 18:11:16] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 18:11:16] Normalizing X_train
+TRACE [2019-09-06 18:11:17] Normalizing X_test
+TRACE [2019-09-06 18:11:17] Training model 
+TRACE [2019-09-06 18:11:17] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:11:17] [train_with_rf] Training model with RF
+TRACE [2019-09-06 18:16:02] Testing model 
+TRACE [2019-09-06 18:16:02] Evaluating model: bcc [0.501323], sensitivity [0.005348], specificity [0.997299]
+TRACE [2019-09-06 18:16:02] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:16:02] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:16:02] Current parameters:
  N.Terms...: [100]
  Classifier: [rf]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 15:07:34] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-05 15:08:03] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-05 15:08:03] Partitioning dataset in training and testing
-TRACE [2019-09-05 15:08:03] Balancing training dataset
-TRACE [2019-09-05 15:08:03] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 15:08:06] Training model 
-TRACE [2019-09-05 15:08:06] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 15:08:06] [train_with_rf] Training model with RF
-TRACE [2019-09-05 15:13:58] Testing model 
-TRACE [2019-09-05 15:13:58] Evaluating model: bcc [0.517172], sensitivity [0.074866], specificity [0.959478]
-TRACE [2019-09-05 15:13:58] Recording evaluation results on CSV file.
-TRACE [2019-09-05 15:13:58] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 15:13:58] Current parameters:
+TRACE [2019-09-06 18:16:02] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-06 18:16:29] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-06 18:16:29] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:16:29] Balancing training dataset
+TRACE [2019-09-06 18:16:29] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 18:16:32] Training model 
+TRACE [2019-09-06 18:16:32] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:16:32] [train_with_rf] Training model with RF
+TRACE [2019-09-06 18:22:16] Testing model 
+TRACE [2019-09-06 18:22:16] Evaluating model: bcc [0.530513], sensitivity [0.106952], specificity [0.954075]
+TRACE [2019-09-06 18:22:16] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:22:16] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:22:16] Current parameters:
  N.Terms...: [100]
  Classifier: [rf]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 15:13:58] Partitioning dataset in training and testing
-TRACE [2019-09-05 15:13:58] Balancing training dataset
-TRACE [2019-09-05 15:13:58] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 15:13:59] Training model 
-TRACE [2019-09-05 15:13:59] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 15:13:59] [train_with_rf] Training model with RF
-TRACE [2019-09-05 15:19:10] Testing model 
-TRACE [2019-09-05 15:19:10] Evaluating model: bcc [0.498424], sensitivity [0.000000], specificity [0.996848]
-TRACE [2019-09-05 15:19:10] Recording evaluation results on CSV file.
-TRACE [2019-09-05 15:19:10] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 15:19:10] Current parameters:
+TRACE [2019-09-06 18:22:16] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:22:16] Balancing training dataset
+TRACE [2019-09-06 18:22:16] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 18:22:16] Normalizing X_train
+TRACE [2019-09-06 18:22:16] Normalizing X_test
+TRACE [2019-09-06 18:22:16] Training model 
+TRACE [2019-09-06 18:22:16] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:22:16] [train_with_rf] Training model with RF
+TRACE [2019-09-06 18:27:02] Testing model 
+TRACE [2019-09-06 18:27:02] Evaluating model: bcc [0.501323], sensitivity [0.005348], specificity [0.997299]
+TRACE [2019-09-06 18:27:02] Recording evaluation results on CSV file.
+TRACE [2019-09-06 18:27:02] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 18:27:02] Current parameters:
  N.Terms...: [100]
  Classifier: [svm]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 15:19:10] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 15:19:37] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 15:19:37] Partitioning dataset in training and testing
-TRACE [2019-09-05 15:19:37] Balancing training dataset
-TRACE [2019-09-05 15:19:37] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 15:19:41] Training model 
-TRACE [2019-09-05 15:19:41] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 15:19:41] [train_with_svm] Training model with SVM
-TRACE [2019-09-05 16:26:23] Testing model 
-TRACE [2019-09-05 16:26:25] Evaluating model: bcc [0.503886], sensitivity [0.032086], specificity [0.975687]
-TRACE [2019-09-05 16:26:25] Recording evaluation results on CSV file.
-TRACE [2019-09-05 16:26:25] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 16:26:25] Current parameters:
+TRACE [2019-09-06 18:27:02] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 18:27:29] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 18:27:29] Partitioning dataset in training and testing
+TRACE [2019-09-06 18:27:29] Balancing training dataset
+TRACE [2019-09-06 18:27:29] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 18:27:32] Training model 
+TRACE [2019-09-06 18:27:32] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 18:27:32] [train_with_svm] Training model with SVM
+TRACE [2019-09-06 19:30:13] Testing model 
+TRACE [2019-09-06 19:30:15] Evaluating model: bcc [0.510501], sensitivity [0.058824], specificity [0.962179]
+TRACE [2019-09-06 19:30:15] Recording evaluation results on CSV file.
+TRACE [2019-09-06 19:30:15] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 19:30:15] Current parameters:
  N.Terms...: [100]
  Classifier: [svm]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 16:26:25] Partitioning dataset in training and testing
-TRACE [2019-09-05 16:26:25] Balancing training dataset
-TRACE [2019-09-05 16:26:26] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 16:26:26] Training model 
-TRACE [2019-09-05 16:26:26] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 16:26:26] [train_with_svm] Training model with SVM
-TRACE [2019-09-05 16:45:04] Testing model 
-TRACE [2019-09-05 16:45:06] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 16:45:06] Recording evaluation results on CSV file.
-TRACE [2019-09-05 16:45:06] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 16:45:06] Current parameters:
+TRACE [2019-09-06 19:30:15] Partitioning dataset in training and testing
+TRACE [2019-09-06 19:30:15] Balancing training dataset
+TRACE [2019-09-06 19:30:15] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 19:30:15] Normalizing X_train
+TRACE [2019-09-06 19:30:16] Normalizing X_test
+TRACE [2019-09-06 19:30:16] Training model 
+TRACE [2019-09-06 19:30:16] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 19:30:16] [train_with_svm] Training model with SVM
+TRACE [2019-09-06 19:48:19] Testing model 
+TRACE [2019-09-06 19:48:21] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 19:48:21] Recording evaluation results on CSV file.
+TRACE [2019-09-06 19:48:21] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 19:48:21] Current parameters:
  N.Terms...: [100]
  Classifier: [svm]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 16:45:06] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-05 16:45:36] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-05 16:45:36] Partitioning dataset in training and testing
-TRACE [2019-09-05 16:45:36] Balancing training dataset
-TRACE [2019-09-05 16:45:36] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 16:45:39] Training model 
-TRACE [2019-09-05 16:45:39] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 16:45:39] [train_with_svm] Training model with SVM
-TRACE [2019-09-05 17:52:42] Testing model 
-TRACE [2019-09-05 17:52:43] Evaluating model: bcc [0.502733], sensitivity [0.037433], specificity [0.968032]
-TRACE [2019-09-05 17:52:43] Recording evaluation results on CSV file.
-TRACE [2019-09-05 17:52:43] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 17:52:43] Current parameters:
+TRACE [2019-09-06 19:48:21] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-06 19:48:49] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-06 19:48:49] Partitioning dataset in training and testing
+TRACE [2019-09-06 19:48:49] Balancing training dataset
+TRACE [2019-09-06 19:48:49] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 19:48:52] Training model 
+TRACE [2019-09-06 19:48:52] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 19:48:52] [train_with_svm] Training model with SVM
+TRACE [2019-09-06 20:52:12] Testing model 
+TRACE [2019-09-06 20:52:13] Evaluating model: bcc [0.510501], sensitivity [0.058824], specificity [0.962179]
+TRACE [2019-09-06 20:52:13] Recording evaluation results on CSV file.
+TRACE [2019-09-06 20:52:13] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 20:52:13] Current parameters:
  N.Terms...: [100]
  Classifier: [svm]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 17:52:43] Partitioning dataset in training and testing
-TRACE [2019-09-05 17:52:43] Balancing training dataset
-TRACE [2019-09-05 17:52:43] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 17:52:44] Training model 
-TRACE [2019-09-05 17:52:44] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 17:52:44] [train_with_svm] Training model with SVM
-TRACE [2019-09-05 18:11:08] Testing model 
-TRACE [2019-09-05 18:11:10] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-05 18:11:10] Recording evaluation results on CSV file.
-TRACE [2019-09-05 18:11:10] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 18:11:10] Current parameters:
+TRACE [2019-09-06 20:52:13] Partitioning dataset in training and testing
+TRACE [2019-09-06 20:52:13] Balancing training dataset
+TRACE [2019-09-06 20:52:13] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-06 20:52:13] Normalizing X_train
+TRACE [2019-09-06 20:52:14] Normalizing X_test
+TRACE [2019-09-06 20:52:14] Training model 
+TRACE [2019-09-06 20:52:14] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 20:52:14] [train_with_svm] Training model with SVM
+TRACE [2019-09-06 21:10:17] Testing model 
+TRACE [2019-09-06 21:10:19] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-06 21:10:19] Recording evaluation results on CSV file.
+TRACE [2019-09-06 21:10:19] Evaluation results recorded on CSV file.
+TRACE [2019-09-06 21:10:19] Current parameters:
  N.Terms...: [100]
  Classifier: [xgbTree]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 18:11:10] Text mining: extracting 100 terms from long_description
-TRACE [2019-09-05 18:11:43] Text mining: extracted 100 terms from long_description
-TRACE [2019-09-05 18:11:43] Partitioning dataset in training and testing
-TRACE [2019-09-05 18:11:43] Balancing training dataset
-TRACE [2019-09-05 18:11:43] [balance_dataset]: balancing method: smote
-TRACE [2019-09-05 18:11:46] Training model 
-TRACE [2019-09-05 18:11:46] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 18:11:46] [train_with_nb] Training model with XgBoost
-TRACE [2019-09-05 21:31:28] Testing model 
-TRACE [2019-09-05 21:31:28] Evaluating model: bcc [0.533527], sensitivity [0.133690], specificity [0.933363]
-TRACE [2019-09-05 21:31:28] Recording evaluation results on CSV file.
-TRACE [2019-09-05 21:31:28] Evaluation results recorded on CSV file.
-TRACE [2019-09-05 21:31:28] Current parameters:
+TRACE [2019-09-06 21:10:19] Text mining: extracting 100 terms from long_description
+TRACE [2019-09-06 21:10:48] Text mining: extracted 100 terms from long_description
+TRACE [2019-09-06 21:10:48] Partitioning dataset in training and testing
+TRACE [2019-09-06 21:10:48] Balancing training dataset
+TRACE [2019-09-06 21:10:48] [balance_dataset]: balancing method: smote
+TRACE [2019-09-06 21:10:51] Training model 
+TRACE [2019-09-06 21:10:51] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-06 21:10:51] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-07 00:28:39] Testing model 
+TRACE [2019-09-07 00:28:39] Evaluating model: bcc [0.501666], sensitivity [0.069519], specificity [0.933814]
+TRACE [2019-09-07 00:28:39] Recording evaluation results on CSV file.
+TRACE [2019-09-07 00:28:39] Evaluation results recorded on CSV file.
+TRACE [2019-09-07 00:28:39] Current parameters:
  N.Terms...: [100]
  Classifier: [xgbTree]
  Feature...: [long_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-05 21:31:28] Partitioning dataset in training and testing
-TRACE [2019-09-05 21:31:28] Balancing training dataset
-TRACE [2019-09-05 21:31:28] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-05 21:31:29] Training model 
-TRACE [2019-09-05 21:31:29] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-05 21:31:29] [train_with_nb] Training model with XgBoost
-TRACE [2019-09-06 00:27:49] Testing model 
-TRACE [2019-09-06 00:27:49] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-06 00:27:49] Recording evaluation results on CSV file.
-TRACE [2019-09-06 00:27:49] Evaluation results recorded on CSV file.
-TRACE [2019-09-06 00:27:49] Current parameters:
+TRACE [2019-09-07 00:28:39] Partitioning dataset in training and testing
+TRACE [2019-09-07 00:28:39] Balancing training dataset
+TRACE [2019-09-07 00:28:39] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-07 00:28:39] Normalizing X_train
+TRACE [2019-09-07 00:28:40] Normalizing X_test
+TRACE [2019-09-07 00:28:40] Training model 
+TRACE [2019-09-07 00:28:40] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-07 00:28:40] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-07 03:23:51] Testing model 
+TRACE [2019-09-07 03:23:51] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-07 03:23:51] Recording evaluation results on CSV file.
+TRACE [2019-09-07 03:23:51] Evaluation results recorded on CSV file.
+TRACE [2019-09-07 03:23:51] Current parameters:
  N.Terms...: [100]
  Classifier: [xgbTree]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-06 00:27:49] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-06 00:28:25] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-06 00:28:25] Partitioning dataset in training and testing
-TRACE [2019-09-06 00:28:25] Balancing training dataset
-TRACE [2019-09-06 00:28:25] [balance_dataset]: balancing method: smote
-TRACE [2019-09-06 00:28:29] Training model 
-TRACE [2019-09-06 00:28:29] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-06 00:28:29] [train_with_nb] Training model with XgBoost
-TRACE [2019-09-06 03:48:41] Testing model 
-TRACE [2019-09-06 03:48:41] Evaluating model: bcc [0.509743], sensitivity [0.074866], specificity [0.944620]
-TRACE [2019-09-06 03:48:41] Recording evaluation results on CSV file.
-TRACE [2019-09-06 03:48:41] Evaluation results recorded on CSV file.
-TRACE [2019-09-06 03:48:41] Current parameters:
+TRACE [2019-09-07 03:23:51] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-07 03:24:26] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-07 03:24:26] Partitioning dataset in training and testing
+TRACE [2019-09-07 03:24:27] Balancing training dataset
+TRACE [2019-09-07 03:24:27] [balance_dataset]: balancing method: smote
+TRACE [2019-09-07 03:24:30] Training model 
+TRACE [2019-09-07 03:24:30] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-07 03:24:30] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-07 06:43:15] Testing model 
+TRACE [2019-09-07 06:43:15] Evaluating model: bcc [0.501666], sensitivity [0.069519], specificity [0.933814]
+TRACE [2019-09-07 06:43:15] Recording evaluation results on CSV file.
+TRACE [2019-09-07 06:43:15] Evaluation results recorded on CSV file.
+TRACE [2019-09-07 06:43:15] Current parameters:
  N.Terms...: [100]
  Classifier: [xgbTree]
  Feature...: [short_description]
  Threshold.: [365]
  Balancing.: [unbalanced]
  Resampling: [repeatedcv]
-TRACE [2019-09-06 03:48:41] Partitioning dataset in training and testing
-TRACE [2019-09-06 03:48:41] Balancing training dataset
-TRACE [2019-09-06 03:48:41] [balance_dataset]: balancing method: unbalanced
-TRACE [2019-09-06 03:48:42] Training model 
-TRACE [2019-09-06 03:48:42] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-09-06 03:48:42] [train_with_nb] Training model with XgBoost
-TRACE [2019-09-06 06:46:09] Testing model 
-TRACE [2019-09-06 06:46:09] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
-TRACE [2019-09-06 06:46:09] Recording evaluation results on CSV file.
-TRACE [2019-09-06 06:46:09] Evaluation results recorded on CSV file.
+TRACE [2019-09-07 06:43:15] Partitioning dataset in training and testing
+TRACE [2019-09-07 06:43:15] Balancing training dataset
+TRACE [2019-09-07 06:43:15] [balance_dataset]: balancing method: unbalanced
+TRACE [2019-09-07 06:43:15] Normalizing X_train
+TRACE [2019-09-07 06:43:17] Normalizing X_test
+TRACE [2019-09-07 06:43:17] Training model 
+TRACE [2019-09-07 06:43:17] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-07 06:43:17] [train_with_nb] Training model with XgBoost
+TRACE [2019-09-07 09:37:43] Testing model 
+TRACE [2019-09-07 09:37:43] Evaluating model: bcc [0.500000], sensitivity [0.000000], specificity [1.000000]
+TRACE [2019-09-07 09:37:43] Recording evaluation results on CSV file.
+TRACE [2019-09-07 09:37:43] Evaluation results recorded on CSV file.
 There were 21 warnings (use warnings() to see them)
