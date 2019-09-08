@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- FALSE
+IN_DEBUG_MODE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -81,7 +81,7 @@ resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
 
 flog.threshold(TRACE)
-flog.trace("Long live prediction started with Grid Search, and Short, Long and Short+Long Description")
+flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
@@ -117,6 +117,7 @@ for (project.name in projects){
   reports <- read_csv(reports.file, na  = c("", "NA"))
   if (IN_DEBUG_MODE){
     flog.trace("DEBUG_MODE: Sample bug reports dataset")
+    set.seed(144)
     reports <- sample_n(reports, 1000) 
   }
 
@@ -128,8 +129,6 @@ for (project.name in projects){
   reports$short_description <- clean_text(reports$short_description)
   reports$long_description  <- clean_text(reports$long_description)
  
-  last.n_term   <- 0
-  last.feature  <- ""
   best.accuracy <- 0
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
@@ -138,49 +137,38 @@ for (project.name in projects){
              , parameter$n_term , parameter$classifier , parameter$feature
              , parameter$threshold , parameter$balancing , parameter$resampling)
 
-    if ((parameter$n_term != last.n_term) || (parameter$feature != last.feature)){
-      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-  
-      source <- reports[, c('bug_id', parameters$feature)]
-      corpus <- clean_corpus(source)
-      dtm    <- tidy(make_dtm(corpus, parameter$n_term))
-      names(dtm)      <- c("bug_id", "term", "count")
-      term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-      reports.dataset <- merge(
-        x = reports[, c('bug_id', 'bug_fix_time')],
-        y = term.matrix,
-        by.x = 'bug_id',
-        by.y = 'bug_id'
-      )
-      # replace the SMOTE reserved words.
-      colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
-      colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
+    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+
+    source <- reports[, c('bug_id', parameters$feature)]
+    corpus <- clean_corpus(source)
+    dtm    <- tidy(make_dtm(corpus, parameter$n_term))
+    names(dtm)      <- c("bug_id", "term", "count")
+    term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
+    reports.dataset <- merge(
+      x = reports[, c('bug_id', 'bug_fix_time')],
+      y = term.matrix,
+      by.x = 'bug_id',
+      by.y = 'bug_id'
+    )
       
-      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
-      last.n_term  = parameter$n_term
-      last.feature = parameter$feature
-    }
+    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
     
     flog.trace("Partitioning dataset in training and testing")
-    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
-    
     set.seed(144)
+    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
     in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
     train.dataset <- reports.dataset[in_train, ]
     test.dataset  <- reports.dataset[-in_train, ]
-    
+     
+    flog.trace("Balancing training dataset")
     # replace the SMOTE reserved words.
     colnames(test.dataset)[colnames(test.dataset) == "class"]  <- "Class"
     colnames(test.dataset)[colnames(test.dataset) == "target"] <- "Target"
-     
-    flog.trace("Balancing training dataset")
-    balanced.dataset = balance_dataset(train.dataset
-                                       , class_label
+    balanced.dataset = balance_dataset(train.dataset , class_label
                                        , c("bug_id", "bug_fix_time")
                                        , parameter$balancing)
     
-    names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
-    
+    #names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
     X_train <- subset(balanced.dataset, select=-c(long_lived))
     if (parameter$balancing != SMOTEMETHOD){
       # "center": subtract mean from values.
@@ -218,10 +206,10 @@ for (project.name in projects){
     flog.trace("Testing model ")
     y_hat <- predict(object = fit_model, X_test)
 
+    flog.trace("Calculating evaluating metrics")
     cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
     tn <- cm$table[1, 1]
     fn <- cm$table[1, 2]
-    
     tp <- cm$table[2, 2]
     fp <- cm$table[2, 1]
     
