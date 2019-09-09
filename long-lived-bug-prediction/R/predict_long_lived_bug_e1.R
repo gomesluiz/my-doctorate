@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
+IN_DEBUG_MODE <- FALSE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
