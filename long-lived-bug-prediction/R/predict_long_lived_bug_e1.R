@@ -158,7 +158,6 @@ for (project.name in projects){
   reports$short_description <- clean_text(reports$short_description)
   reports$long_description  <- clean_text(reports$long_description)
  
-  flog.trace("Converting dataframe to term matrix")
   last.feature  <- "" 
   best.accuracy <- 0
   for (i in parameter.number:nrow(parameters)) {
@@ -169,6 +168,7 @@ for (project.name in projects){
              , parameter$threshold , parameter$balancing , parameter$resampling)
 
     if (parameter$feature != last.feature){
+      flog.trace("Converting dataframe to term matrix")
       flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
       reports.dataset <- convert_dataset_to_term_matrix(reports, parameter$feature, parameter$n_term)
       flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
