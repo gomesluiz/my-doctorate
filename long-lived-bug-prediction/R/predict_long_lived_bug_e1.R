@@ -80,6 +80,35 @@ balancing  <- c(UNBALANCED, SMOTEMETHOD)
 resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
 
+#' @description 
+#' Convert a report dataset to document term matrix using the feature parameter.
+#' 
+#' @author 
+#' Luiz Alberto (gomes.luiz@gmail.com)
+#' 
+#' @param .dataset a bug report dataset
+#' @param .feature a textual feature
+#' @param .nterms  a number of matrix terms 
+#' 
+convert_dataset_to_term_matrix <- function(.dataset, .feature, .nterms){
+  source <- .dataset[, c('bug_id', .feature)]
+  corpus <- clean_corpus(source)
+  dtm    <- tidy(make_dtm(corpus, .nterms))
+  names(dtm)      <- c("bug_id", "term", "count")
+  term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
+  result.dataset  <- merge(
+    x = .dataset[, c('bug_id', 'bug_fix_time')],
+    y = term.matrix,
+    by.x = 'bug_id',
+    by.y = 'bug_id'
+  )
+  # replace the SMOTE reserved words.
+  colnames(result.dataset)[colnames(result.dataset) == "class"]  <- "Class"
+  colnames(result.dataset)[colnames(result.dataset) == "target"] <- "Target"
+  
+  return (result.dataset)
+}
+
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
@@ -129,6 +158,8 @@ for (project.name in projects){
   reports$short_description <- clean_text(reports$short_description)
   reports$long_description  <- clean_text(reports$long_description)
  
+  flog.trace("Converting dataframe to term matrix")
+  last.feature  <- "" 
   best.accuracy <- 0
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
@@ -137,21 +168,12 @@ for (project.name in projects){
              , parameter$n_term , parameter$classifier , parameter$feature
              , parameter$threshold , parameter$balancing , parameter$resampling)
 
-    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-
-    source <- reports[, c('bug_id', parameters$feature)]
-    corpus <- clean_corpus(source)
-    dtm    <- tidy(make_dtm(corpus, parameter$n_term))
-    names(dtm)      <- c("bug_id", "term", "count")
-    term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-    reports.dataset <- merge(
-      x = reports[, c('bug_id', 'bug_fix_time')],
-      y = term.matrix,
-      by.x = 'bug_id',
-      by.y = 'bug_id'
-    )
-      
-    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+    if (parameter$feature != last.feature){
+      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+      reports.dataset <- convert_dataset_to_term_matrix(reports, parameter$feature, parameter$n_term)
+      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+      last.feature = parameter$feature
+    }
     
     flog.trace("Partitioning dataset in training and testing")
     set.seed(144)
@@ -161,14 +183,11 @@ for (project.name in projects){
     test.dataset  <- reports.dataset[-in_train, ]
      
     flog.trace("Balancing training dataset")
-    # replace the SMOTE reserved words.
-    colnames(test.dataset)[colnames(test.dataset) == "class"]  <- "Class"
-    colnames(test.dataset)[colnames(test.dataset) == "target"] <- "Target"
     balanced.dataset = balance_dataset(train.dataset , class_label
                                        , c("bug_id", "bug_fix_time")
                                        , parameter$balancing)
     
-    #names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
+    names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
     X_train <- subset(balanced.dataset, select=-c(long_lived))
     if (parameter$balancing != SMOTEMETHOD){
       # "center": subtract mean from values.
