@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- FALSE
+IN_DEBUG_MODE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -139,26 +139,24 @@ for (project.name in projects){
 
     if (parameter$n_term != last.n_term)
     {
-      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-  
-      source <- reports[, c('bug_id', parameters$feature)]
-      corpus <- clean_corpus(source)
-      dtm    <- tidy(make_dtm(corpus, parameter$n_term))
-      names(dtm)      <- c("bug_id", "term", "count")
-      term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-      reports.dataset <- merge(
-        x = reports[, c('bug_id', 'bug_fix_time')],
-        y = term.matrix,
-        by.x = 'bug_id',
-        by.y = 'bug_id'
-      )
-        
-      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
-      # replace the SMOTE reserved words.
-      colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
-      colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
-      last.n_term = parameter$n_term
-    }
+        flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+        source <- reports[, c('bug_id', parameters$feature)]
+        corpus <- clean_corpus(source)
+        dtm    <- tidy(make_dtm(corpus, parameter$n_term))
+        names(dtm)      <- c("bug_id", "term", "count")
+        term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
+        reports.dataset <- merge(
+          x = reports[, c('bug_id', 'bug_fix_time')],
+          y = term.matrix,
+          by.x = 'bug_id',
+          by.y = 'bug_id'
+        )
+        flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+        # replace the SMOTE reserved words.
+        colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
+        colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
+        last.n_term = parameter$n_term
+     }
     
     flog.trace("Partitioning dataset in training and testing")
     reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
@@ -219,13 +217,20 @@ for (project.name in projects){
     fp <- cm$table[2, 1]
     
     flog.trace("Testing model ")
+    # sensitivity e recall: corresponde a taxa de acerto na classe positiva. Também 
+    #                       é chamada de taxa de verdadeiros positivos. (TP/(TP+FN))
+    # specificity: corresponde a taxa de acerto na classe negativa. (TN/(TN+FP))
+    # balanced accuracy:
+    # precision:  proporção de exemplos positivos classificados corretamente entre
+    #             todos aqueles preditos como positivos. (TP/(TP+FP))
+    # fmeasure:
     prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
     prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
     prediction_precision     <- precision(data = y_hat, reference = y_test)
     prediction_recall        <- recall(data = y_hat, reference = y_test)
     prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
     prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
-    manual_balanced_acc <- (ifelse((tp+fp) == 0, 0, tp/(tp+fp)) + ifelse((tn+fn) == 0, 0, tn/(tn+fn))) / 2  
+    manual_balanced_acc <- (ifelse((tp+fn) == 0, 0, tp/(tp+fn)) + ifelse((tn+fp) == 0, 0, tn/(tn+fp))) / 2  
    
     flog.trace("Testing model ")
      
