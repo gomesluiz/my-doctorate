@@ -71,11 +71,12 @@ class_label     <- "long_lived"
 
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 
-projects   <- c("eclipse")
+projects   <- c("winehq")
 n_term     <- c(300)
 classifier <- c(NNET, RF)
 feature    <- c("long_description")
-threshold  <- c(8, 63, 108, 365)
+#threshold  <- c(8, 63, 108, 365)
+threshold  <- c(21, 211, 365, 703)
 balancing  <- c(SMOTEMETHOD)
 resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
@@ -111,7 +112,7 @@ for (project.name in projects){
   
   flog.trace("Starting in parameter number: %d", parameter.number)
 
-  reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data_small.csv", project.name))
+  reports.file <- file.path(DATADIR, sprintf("20190912_%s_bug_report_data_small.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
   reports <- read_csv(reports.file, na  = c("", "NA"))
