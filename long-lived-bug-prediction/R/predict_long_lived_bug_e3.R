@@ -209,29 +209,31 @@ for (project.name in projects){
     y_hat <- predict(object = fit_model, X_test)
 
     flog.trace("Testing model ")
-    cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
-    tn <- cm$table[1, 1]
-    fn <- cm$table[1, 2]
-    
-    flog.trace("Testing model ")
-    tp <- cm$table[2, 2]
-    fp <- cm$table[2, 1]
-    
-    flog.trace("Testing model ")
-    # sensitivity e recall: corresponde a taxa de acerto na classe positiva. Também 
-    #                       é chamada de taxa de verdadeiros positivos. (TP/(TP+FN))
-    # specificity: corresponde a taxa de acerto na classe negativa. (TN/(TN+FP))
-    # balanced accuracy:
-    # precision:  proporção de exemplos positivos classificados corretamente entre
-    #             todos aqueles preditos como positivos. (TP/(TP+FP))
-    # fmeasure:
-    prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
-    prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
-    prediction_precision     <- precision(data = y_hat, reference = y_test)
-    prediction_recall        <- recall(data = y_hat, reference = y_test)
-    prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
-    prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
-    manual_balanced_acc <- (ifelse((tp+fn) == 0, 0, tp/(tp+fn)) + ifelse((tn+fp) == 0, 0, tn/(tn+fp))) / 2  
+    calculate_evaluation_metrics <- function(y_hat, y_test) {
+      cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
+      tn <- cm$table[1, 1]
+      fn <- cm$table[1, 2]
+      
+      flog.trace("Testing model ")
+      tp <- cm$table[2, 2]
+      fp <- cm$table[2, 1]
+      
+      flog.trace("Testing model ")
+      # sensitivity e recall: corresponde a taxa de acerto na classe positiva. Também 
+      #                       é chamada de taxa de verdadeiros positivos. (TP/(TP+FN))
+      # specificity: corresponde a taxa de acerto na classe negativa. (TN/(TN+FP))
+      # balanced accuracy:
+      # precision:  proporção de exemplos positivos classificados corretamente entre
+      #             todos aqueles preditos como positivos. (TP/(TP+FP))
+      # fmeasure:
+      prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
+      prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
+      prediction_precision     <- precision(data = y_hat, reference = y_test)
+      prediction_recall        <- recall(data = y_hat, reference = y_test)
+      prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
+      prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
+      manual_balanced_acc <- (ifelse((tp+fn) == 0, 0, tp/(tp+fn)) + ifelse((tn+fp) == 0, 0, tn/(tn+fp))) / 2
+    }  
    
     flog.trace("Testing model ")
      

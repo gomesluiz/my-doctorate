@@ -13,7 +13,7 @@ rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 
 # setup project folders.
-IN_DEBUG_MODE <- FALSE
+IN_DEBUG_MODE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -52,6 +52,8 @@ library(tidytext)
 library(tm)
 
 source(file.path(LIBDIR, "balance_dataset.R"))
+source(file.path(LIBDIR, "calculate_metrics.R"))
+source(file.path(LIBDIR, "convert_to_term_matrix.R"))
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
 source(file.path(LIBDIR, "format_file_name.R"))
@@ -63,7 +65,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(8)
+r_cluster <- makePSOCKcluster(3)
 registerDoParallel(r_cluster)
 
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
@@ -73,41 +75,16 @@ class_label     <- "long_lived"
 
 projects   <- c("eclipse")
 n_term     <- c(100)
-classifier <- c(KNN, NB, RF, SVM, NNET, XB)
-feature    <- c("short_description", "long_description")
+#classifier <- c(KNN, NB, NNET, RF, SVM, XB)
+classifier <- c(RF)
+#feature    <- c("short_description", "long_description")
+feature    <- c("short_description")
 threshold  <- c(365)
-balancing  <- c(UNBALANCED, SMOTEMETHOD)
+#balancing  <- c(UNBALANCED, SMOTEMETHOD)
+balancing  <- c(SMOTEMETHOD)
 resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
 
-#' @description 
-#' Convert a report dataset to document term matrix using the feature parameter.
-#' 
-#' @author 
-#' Luiz Alberto (gomes.luiz@gmail.com)
-#' 
-#' @param .dataset a bug report dataset
-#' @param .feature a textual feature
-#' @param .nterms  a number of matrix terms 
-#' 
-convert_dataset_to_term_matrix <- function(.dataset, .feature, .nterms){
-  source <- .dataset[, c('bug_id', .feature)]
-  corpus <- clean_corpus(source)
-  dtm    <- tidy(make_dtm(corpus, .nterms))
-  names(dtm)      <- c("bug_id", "term", "count")
-  term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-  result.dataset  <- merge(
-    x = .dataset[, c('bug_id', 'bug_fix_time')],
-    y = term.matrix,
-    by.x = 'bug_id',
-    by.y = 'bug_id'
-  )
-  # replace the SMOTE reserved words.
-  colnames(result.dataset)[colnames(result.dataset) == "class"]  <- "Class"
-  colnames(result.dataset)[colnames(result.dataset) == "target"] <- "Target"
-  
-  return (result.dataset)
-}
 
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
@@ -170,7 +147,7 @@ for (project.name in projects){
     if (parameter$feature != last.feature){
       flog.trace("Converting dataframe to term matrix")
       flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-      reports.dataset <- convert_dataset_to_term_matrix(reports, parameter$feature, parameter$n_term)
+      reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
       flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
       last.feature = parameter$feature
     }
@@ -183,24 +160,12 @@ for (project.name in projects){
     test.dataset  <- reports.dataset[-in_train, ]
      
     flog.trace("Balancing training dataset")
-    balanced.dataset = balance_dataset(train.dataset , class_label
-                                       , c("bug_id", "bug_fix_time")
-                                       , parameter$balancing)
+    balanced.dataset = balance_dataset(train.dataset, 
+                                       class_label, 
+                                       c("bug_id", "bug_fix_time"), 
+                                       parameter$balancing)
     
-    names(balanced.dataset)[names(balanced.dataset) == "class"] <- "Class"
     X_train <- subset(balanced.dataset, select=-c(long_lived))
-    if (parameter$balancing != SMOTEMETHOD){
-      # "center": subtract mean from values.
-      # "scale" : divide values by standard deviation.
-      # ("center", "scale"): combining the scale and center transforms will 
-      # standarize your data. Attributes will have a mean value of 0 and standard
-      # deviation of 1.
-      # "range" : normalize values. Data values can be scaled in the range of [0, 1]
-      # which is called normalization.
-      flog.trace("Normalizing X_train")
-      X_train_pre_processed <- preProcess(X_train, method=c("range"))
-      X_train <- predict(X_train_pre_processed, X_train)
-    }
     
     y_train <- balanced.dataset[, class_label]
     X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
@@ -221,34 +186,32 @@ for (project.name in projects){
                                .y=y_train, 
                                .classifier=parameter$classifier,
                                .control=fit_control)
+    # saving model plot to file 
+    plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s.png", timestamp, project.name
+                             , parameter$classifier, parameter$balancing, parameter$feature
+                             , parameter$n_term)
+    plot_file_name_path = file.path(DATADIR, plot_file_name)
+    jpeg(plot_file_name_path)
+    plot(fit_model)
+    dev.off()
     
     flog.trace("Testing model ")
     y_hat <- predict(object = fit_model, X_test)
 
     flog.trace("Calculating evaluating metrics")
-    cm <- confusionMatrix(data = y_hat, reference = y_test, positive = "Y")
-    tn <- cm$table[1, 1]
-    fn <- cm$table[1, 2]
-    tp <- cm$table[2, 2]
-    fp <- cm$table[2, 1]
+    metrics <- calculate_metrics(y_hat, y_test)
     
-    prediction_sensitivity   <- sensitivity(data = y_hat, reference = y_test, positive = "Y")
-    prediction_specificity   <- sensitivity(data = y_hat, reference = y_test, positive = "N")
-    prediction_precision     <- precision(data = y_hat, reference = y_test)
-    prediction_recall        <- recall(data = y_hat, reference = y_test)
-    prediction_fmeasure      <- F_meas(data = y_hat, reference = y_test)
-    prediction_balanced_acc  <- (prediction_sensitivity + prediction_specificity) / 2
-    manual_balanced_acc <- (ifelse((tp+fp) == 0, 0, tp/(tp+fp)) + ifelse((tn+fn) == 0, 0, tn/(tn+fn))) / 2  
-    
-    if (prediction_balanced_acc > best.accuracy){
+    flog.trace("Evaluating metrics calculated!")
+    if (metrics$balanced_acc > best.accuracy){
       test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
       write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e1_%s_test_results.csv", timestamp, project.name)))
-      best.accuracy = prediction_balanced_acc
+      best.accuracy = metrics$balanced_acc
     }
     
-    flog.trace("Evaluating model: bcc [%f], sensitivity [%f], specificity [%f]"
-               , prediction_balanced_acc, prediction_sensitivity, prediction_specificity)
-    one.evaluation <-
+    flog.trace("Metrics: sensitivity [%f], specificity [%f], b_acc [%f]"
+                , metrics$sensitivity, metrics$specificity, metrics$balanced_acc)
+    
+    metrics.record<-
       data.frame(
         dataset = project.name,
         n_term = parameter$n_term,
@@ -263,20 +226,20 @@ for (project.name in projects){
         test_size = nrow(X_test),
         test_size_class_0 = length(subset(y_test, y_test == "N")),
         test_size_class_1 = length(subset(y_test, y_test == "Y")),
-        tp = tp,
-        fp = fp,
-        tn = tn,
-        fn = fn,
-        sensitivity = prediction_sensitivity,
-        specificity = prediction_specificity,
-        balanced_acc = prediction_balanced_acc,
-        manual_balanced_acc = manual_balanced_acc,
-        precision = prediction_precision,
-        recall = prediction_recall,
-        fmeasure = prediction_fmeasure
+        tp = metrics$tp,
+        fp = metrics$fp,
+        tn = metrics$tn,
+        fn = metrics$fn,
+        sensitivity = metrics$sensitivity,
+        specificity = metrics$specificity,
+        balanced_acc = metrics$balanced_acc,
+        balanced_acc_manual = metrics$balanced_acc_manual,
+        precision = metrics$precision,
+        recall = metrics$recall,
+        fmeasure = metrics$fmeasure
       )
       flog.trace("Recording evaluation results on CSV file.")
-      insert_one_evaluation_data(metrics.file, one.evaluation)
+      insert_one_evaluation_data(metrics.file, metrics.record)
       flog.trace("Evaluation results recorded on CSV file.")
   }
 }

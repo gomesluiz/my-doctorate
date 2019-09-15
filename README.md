@@ -1,2 +1,13 @@
-# issue-crawler
+# My Doctorate Project
 A crawler for issue extraction information from many issue tracking systems.
+
+## References 
+
+### Machine Learning
+1. [Naive Bayes Classifier](https://uc-r.github.io/naive_bayes)
+
+### R Programming 
+1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
+
+### Text Mining
+1. [Creating text features with bag-of-words, n-grams, parts-of-speach and more](http://uc-r.github.io/creating-text-features)
