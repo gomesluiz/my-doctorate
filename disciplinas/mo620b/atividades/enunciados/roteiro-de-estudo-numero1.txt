@@ -1,0 +1,24 @@
+Roteiro de Estudo -- Número 1 
+Profa. Cecília Rubira
+Engenharia de Software 
+
+Assunto: Introdução  à Engenharia  de Software, Modelos  de Processos,
+Engenharia de Requisitos.
+
+Referência principal:  Livro "Software Engineering",  Ian Sommerville,
+8th edition, 2007, Addison-Wesley.
+
+(1) Ler os capítulos abaixo descritos:
+
+Part 1 Overview
+Chapter 1 Introduction
+Chapter 2 Socio-technical Systems
+Chapter 3 Critical Systems
+Chapter 4 Software Processes
+
+Part 2 Requirements
+Chapter 6 Software Requirements
+Chapter 7 Requirements Engineering Processes
+Chapter 8 System Models
+
+(2) Fazer os exercícios propostos ao final de cada capítulo.

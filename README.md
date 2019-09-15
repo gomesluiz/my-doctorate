@@ -5,6 +5,7 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ### Machine Learning
 1. [Naive Bayes Classifier](https://uc-r.github.io/naive_bayes)
+2. [Caret Package - A Pratical Guide to Machine Learning](https://www.machinelearningplus.com/machine-learning/caret-package/)
 
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)

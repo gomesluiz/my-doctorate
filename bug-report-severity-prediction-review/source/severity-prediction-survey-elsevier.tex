@@ -1,0 +1,134 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage{bibentry}
+\nobibliography*
+\usepackage{booktabs}
+\usepackage{calc}
+%\usepackage{cite}
+\usepackage{color}
+\usepackage{doi}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{footnote}
+\usepackage{hyperref}
+\usepackage{doi}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{lipsum}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\modulolinenumbers[5]
+
+\journal{Information and Software Technology}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\ifComments
+
+% To turn comments OFF simply comment out the \Commentstrue line
+%\Commentstrue
+
+\ifComments
+\newcommand{\luiz}[1]{\noindent\textcolor{orange}{LUIZ: {#1}}}
+\newcommand{\mario}[1]{\noindent\textcolor{green}{MARIO: {#1}}}
+\newcommand{\ricardo}[1]{\noindent\textcolor{purple}{RICARDO: {#1}}}
+\newcommand{\rem}[1]{\noindent\textcolor{magenta}{REMOVED: {#1}}}
+\newcommand{\new}[1]{\noindent\textcolor{blue}{NEW: {#1}}}
+\newcommand{\edit}[1]{\noindent\textcolor{cyan}{EDIT: {#1}}}
+\else
+\newcommand{\luiz}[1]{}
+\newcommand{\mario}[1]{}
+\newcommand{\ricardo}[1]{}
+\newcommand{\rem}[1]{}
+\newcommand{\new}[1]{#1}
+\newcommand{\edit}[1]{#1}
+\fi
+\newcommand{\spacebtrows}[1]{\renewcommand{\arraystretch}{#1}}
+\hyphenation{}
+
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Bug Report Severity Level Prediction in Free Libre/Open Source Software: A Survey and New Perspectives}
+%\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+\author{Luiz Alberto Ferreira Gomes\fnref{gomes.luiz@ic.unicamp.br}}
+\author{Mario Lúcio Côrtes\fnref{rtorres@ic.unicamp.br}}
+\author{Ricardo Silva Torres\fnref{cortes@ic.unicamp.br}}
+\address{Institute of Computing, Campinas}
+\fntext[gomes.luiz@ic.unicamp.br]{gomes.luiz@ic.unicamp.br}
+\fntext[cortes@ic.unicamp.br]{cortes@ic.unicamp.br}
+\fntext[rtorres@ic.unicamp.br]{rtorres@ic.unicamp.br}
+
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Luiz Alberto Ferreira Gomes}
+%\ead[url]{www.elsevier.com}
+%
+%\author[mysecondaryaddress]{Global Customer Service\corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Corresponding author}
+%\ead{support@elsevier.com}
+%
+%\address[mymainaddress]{1600 John F Kennedy Boulevard, Philadelphia}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+
+\begin{abstract}
+  \input{abstract}  
+\end{abstract}
+
+\begin{keyword}
+  \input{keywords}  
+\end{keyword}
+
+\end{frontmatter}
+
+%\linenumbers
+
+\input{introduction}
+\input{background}
+\input{related-work}
+\input{methodology}
+\input{results}
+\input{discussions}
+\input{conclusions}
+\input{acknowledgment}
+
+\input{bibliography}
+
+\end{document}

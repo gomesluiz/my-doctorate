@@ -192,7 +192,7 @@ for (project.name in projects){
                              , parameter$n_term)
     plot_file_name_path = file.path(DATADIR, plot_file_name)
     jpeg(plot_file_name_path)
-    plot(fit_model)
+    print(plot(fit_model))
     dev.off()
     
     flog.trace("Testing model ")

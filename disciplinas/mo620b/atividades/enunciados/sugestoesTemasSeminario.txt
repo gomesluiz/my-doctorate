@@ -1,0 +1,88 @@
+MO620 --- Temas para Seminários
+
+Experimental Software Engineering: Evaluation & Assessment in Software 
+Engineering, empirical studies of software 
+engineering, including:
+
+    * experiments (laboratory and field)
+    * replications of empirical studies
+    * case studies
+    * surveys
+    * observational studies
+    * field studies
+    * action research
+    * methodological issues and practices
+    * systematic reviews, mapping studies and meta-analysis
+ (14th International Conference on Evaluation & Assessment in Software 
+Engineering (EASE 2012))
+
+Metodologias Ágeis
+- XP 
+- SCRUM 
+- feature-driven development 
+- Software Architecture and Agile Methods
+
+Desenvolvimento e Programação Orientada a Aspectos
+- AOP e requisitos não-funcionais
+- Aspect-Oriented Requirement and Design (early aspects)
+- AspectJ X CaeserJ
+- computational reflection X aop
+
+Arquitetura de Software: Componentes e Connectores
+- ADL (linguagens de descrição de arquiteturas)
+- Architecture Recovery 
+
+Linhas de Produtos de Software
+- Arquiteturas de software para Linhas de Produtos
+- Software Variability Evolution
+- Domain Specific Languages (DSL)
+
+Plataformas para Desenvolvimento baseado em Componentes
+- Java EE/EJB2.0, EJB3.O
+- .NET
+- component-oriented programming
+- component-oriented development process
+- relating architectural principles/approaches to component software
+- addressing variability requirements in component-based solutions
+
+Self-adaptive software systems: architecture and fault tolerance
+
+DBC e Repositórios de Componentes
+- Recuperação de Componentes em repositórios
+- Ontologias aplicadas a DBC
+
+Ontology Applications
+- Semantic Web
+- e-commerce, e-government, e-learning and e-science
+- information retrieval
+
+Evolução em Desenvolvimento baseado em Componentes
+
+Testes para Linhas de Produto de Software
+
+Desenvolvimento Orientado por Modelos (MDD e MDA) 
+
+Arquiteturas Orientadas a Serviços e "Web services"
+
+- composição e gerenciamento de serviços
+- metodologias de gerenciamento/implantação de serviços 
+- SOA e aspectos de segurança/transacionais
+- Web services for business process management
+
+Business Process Management and BPEL (Business Process Execution Languages)
+  "Business processes  have recently crossed  the boundaries of  a single
+  organization increasing  the demands for cooperative  processes.  As a
+  consequence,  new technologies  and  standards have  been proposed  to
+  allow the execution of inter-organizational business processes and the
+  development of applications based on the service-oriented paradigm."
+
+Business process management engines
+- tratamento de exceções em BPEL
+- Service-oriented architectures and business process management
+- Business Process and service composition
+- Electronic contracts
+- Business process and electronic services repositories
+- Ontologies for business process     
+- Security and transactional issues in business process management
+- Requirement engineering and business process
+

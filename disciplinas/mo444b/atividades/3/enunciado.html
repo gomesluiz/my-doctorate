@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Exercicio 3</title>
+</head>
+
+<body>
+<h1>Exercício 3</h1>
+
+<p><b>ATENCAO</b> Houve uma modificacao no enunciado na parte do
+tratamento de dados faltantes.
+
+</p><p> <b>Data de entrega: 24/10, as 7:00 (da manha).</b>
+
+</p><p> Use os dados do <a href="https://archive.ics.uci.edu/ml/datasets/SECOM">dataset SECOM do
+UCI </a> O arquivo secom.data contem os dados. O arquivo
+secom_labels.data contem (na 1a coluna) a classe de cada dado. 
+
+</p><p> Usando um 5-fold externo para calcular a accuracia, e um 3-fold
+interno para a escolha dos hyperparametros, determine qual algoritimo
+entre kNN, SVM com kernel RBF, redes neurais, Random Forest, e Gradient Boosting
+Machine tem a maior acuracia.
+
+</p><ol>
+  
+
+<li> Preprocesse os dados do arquivo: <b>Substitua os dados faltantes
+  pela media da coluna (imputação pela média)</b>.  Finalmente padronize as colunas para media 0 e desvio
+padrao 1.</li>
+
+<li> Para o kNN, faça um PCA que mantem 80% da variancia. Busque os
+valores do k entre os  valores  1, 5, 11, 15, 21, 25..</li>
+<li> Para o SVM RBF teste para C=2**(-5), 2**(0), 2**(5), 2**(10) e
+gamma= 2**(-15) 2**(-10) 2**(-5) 2**(0) 2**(5).</li>
+
+<li> Para a rede neural, teste com 10, 20, 30 e 40 neuronios na camada
+escondida.</li>
+
+<li> Para o RF, teste com mtry ou n_featrues = 10, 15, 20, 25 e ntrees
+= 100, 200, 300 e 400..</li>
+
+<li> Para o GBM (ou XGB) teste para numero de arvores = 30, 70, e 100,
+com learning rate de 0.1 e 0.05, e profundidade da arvore=5.Voce pode
+tanto usar alguma versao do gbm para R ou SKlearn, ou usar o XGBoost
+(para ambos). </li>
+
+<li> Voce nao precisam fazer os loops da validacao cruzada
+explicitamente. Pode usar as funcoes como tunegrid (do caret) ou
+tuneParams (do mlr) ou GridSearchCV do SKlearn..</li>
+
+<li> Reporte a acuracia de cada algoritmo calculada pelo 5-fold CV
+externo..</li>
+</ol>
+
+
+
+<h2> Detalhes R</h2>
+
+<p> Considere usar os pacotes <a href="http://topepo.github.io/caret/index.html">caret</a> ou <a href="https://github.com/mlr-org/mlr">mlr</a> para fazer os loops de validacao cruzada e usar os
+diferentes classificadores
+
+
+</p><hr>
+<address></address>
+<!-- hhmts start -->Last modified: Sun Oct 16 17:46:47 BRST 2016 <!-- hhmts end -->
+ 
+</body></html>

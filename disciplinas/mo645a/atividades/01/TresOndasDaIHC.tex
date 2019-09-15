@@ -1,0 +1,46 @@
+\documentclass[t, 				             
+			   final, 				         
+			   xcolor={usenames,dvipsnames}, 
+			   table]{beamer}
+
+% pacotes utilizados.
+\usepackage{amsmath}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage[alf]{abntex2cite}
+\usepackage{caption}
+
+
+\usepackage{todo}
+
+% configuração do tema
+\usetheme[pageofpages=de,
+          bullet=square,			
+          titleline=true,				
+          alternativetitlepage=true,			
+          titlepagelogo=imagens/logo-unicamp,	
+          watermarkheight=70px,		
+          watermarkheightmult=4	
+          ]{Torino}
+
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{bibliography item}[default]
+
+\usecolortheme{freewilly}
+
+\logo{\includegraphics[height=0.110\paperheight]{imagens/logo-ic}}
+
+\begin{document}
+    \include{Titulo}
+    \include{Capa}
+    \include{Agenda}  
+    \include{PrimeiraOnda}
+    \include{SegundaOnda}
+	\include{TerceiraOnda}
+	\include{AplicacaoExemplo}
+%    \include{Conclusoes}
+    \include{Citacoes}
+    \include{Bibliografia}
+\end{document}
+

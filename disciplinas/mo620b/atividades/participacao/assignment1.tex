@@ -1,0 +1,108 @@
+\documentclass[12pt]{exam}
+
+\usepackage[brazil]{babel}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+
+\extraheadheight{3cm}
+\extrafootheight{2cm}
+\extrawidth{2cm}
+\headrule
+\lhead {Universidade Estadual de Campinas 
+    \\ Instituto de Computação 
+    \\ \bfseries MO620 - Engenharia de Software II - Turma B 
+    \\ \textnormal{Aluno: Luiz Alberto Ferreira Gomes}}
+\rhead{
+    Assignment 1: Fault Tolerance  
+    \\  RA:007275}
+\footrule
+\footer{}{Página \thepage\ of \numpages}{}
+
+\printanswers
+
+\begin{document}
+  \begin{questions}
+    \question List the main funcional and non-functional requirements of SIFT system  
+    \begin{solution}
+        
+        The main \textbf{functional} requirement of SIFT is execute complex calculations for the control of an advanced commercial transport 
+        aircraft and its leading \textbf{non-functional }requirements are outlined below:
+        
+        \begin{enumerate}[(a)]
+          \item The system must achieve reliability in the the economic manner;
+          \item The system must be flexible as possible, so it can be easily adapted the changes in the problem specification;
+          \item The system must avoid invalid control signals to produce incorrect behavior in a nonfaulty unit; 
+          \item The system must ensure that bad data not cause the processor generate incorrect results;
+          \item The system must guarantee that te processing  of each iteration of the task will be completed within the "time frame" of that iteration;
+          \item The system must be imune to the failure of any one clock or processor, and to a accession of failures over a period of time;  
+          \item The system must be reliable in the face of the worst possible behavior of the failing component, even though that behavior may seem unrealistically malicious;
+          \item The probability of failure should be less than $10^{-9}$ hour in a flight of ten hours duration.
+        \end{enumerate}
+    \end{solution}
+
+    \question What kinds of faults does the system tolerate ?
+    \begin{solution}
+      
+    The SIFT system tolerates hardware faults by redundancy of processors and buses. Because the software components of its architecture are replicated and, therefore, the existing bugs also are replicated; it is unable to ensure software faults tolerance. 
+      
+    The GUARDS system, besides ensuring hardware faults tolerance by redundancy (processors and channels), offers some degree of software faults tolerance by variation of COTS operating systems that makes up its architecture.
+    
+    \end{solution}
+    
+    \question What happens with bug faults ?
+    \begin{solution}
+    
+      An bug fault (considered a design fault) is related to communication between software components and is also associated  with the component itself. Both SIFT and the GUARDS use the voting mechanism to choose de correct data from many replicated applications. However, in the SIFT system, the replication increases the probability which bug causes a fault, not only in one, but in all replicas. Consequently, as was answered in the previous question, the SIFT is not bug fault tolerant. In GUARDS system, in turn, this problem is mitigated by the using of variants (COTS operating systems).   
+      
+      It is important to note that besides of software tests and simulations techniques -- to try remove the all bugs during development time --, the teams chose to use formal methods to prove the correctness of each software component of the both systems.
+    \end{solution}    
+    
+    \question Give 2 examples where the principal of redundancy is applied.
+
+    \begin{solution}
+      The two examples where the principal of redundancy in the SIFT system is applied are:
+      \begin{enumerate}[(a)]
+	\item The number of processors executing a task can vary with the task, and can be different for the same task 
+	  at different times; 
+	\item Each copy of data is obtained from a different memory over different memory over a different bus, and 
+	  processor use majority voting to obtain a correct version of the data.
+      \end{enumerate}
+    
+      The two examples where the principal of redundancy in the GUARDS system is applied are:
+      \begin{enumerate}[(a)]
+	\item The fault-tolerance is based on active replication of application tasks over set of channels (two, three ou four). 
+	\item The error recovery is achieved primarily by error compensation, where by erroneous state contains enough redundancy 
+	  to enable its transformation into an error-free state. 
+      \end{enumerate}  
+     \end{solution}
+
+    \question The design solution assumes that one fault happens at a time. Describe a scenario where if this assumption is no longer true, the design goes wrong.
+    
+    \begin{solution}
+        
+        The SIFT system is only able to withstand a new failure \textbf{if there are enough non-faulty units remaining }after the system has been reconfigured
+	to prevent the faulty unit from having any further effect.
+        
+        The algorithm responsible to diagnose a channel as faulty (by a majority or if it accuses itself) in the GUARDS system, is correct and 
+        complete under \textbf{the assumption that no more than one channel at a time is accessed by fault-free channel}. However, due to the 
+        memory effect of alpha-count mechanism, this assumption can be violated if near-coincident faults occurs on different channels
+    \end{solution}
+
+    
+    
+    \question Explain how does the SIFT system implements the four phases of fault tolerance: (a) error detection, (b) damage confinement, (c) error recovery, and (d) fault treatment and continued service.
+    
+    \begin{solution}
+      \begin{enumerate}[(a)]
+       \item \textbf{Error detection}: This phase is implemented by voting. Iterative tasks are redundantly executed, and results of each iteration are voted upon before being used. Typically, the value is chosen by "two out of three" vote. If all copies of the output are not, then an error has occurred.
+       \item \textbf{Damage confinement}: This phase is provided at the boundaries between processing modules and buses. Protection against the corruption of data is provided by way in which units can communicate. A processing module can read data from any processing module's memory, but it can write only into into its own memory. Thus faulty processor can corrupt the data only in its own memory, and not in that of any other processing modules's memory.
+       \item \textbf{Error recovery}: This phase is provided by masking. This is accomplished by having the processor receive multiple copies data. Each copy is obtained from a different memory over a different bus, and the processor uses de majority voting to obtain correct version of the data.
+       \item \textbf{Fault treatment and continued service}: This phase is implemented by reconfiguration.  After identifying the faulty unit, the system will be reconfigured to prevent that unit from having any further effect. If the faulty unit is a processing module, then the tasks that were assigned to it will reassigned to the other modules. If it is a bus, then processors will request their data over other buses. After reconfiguration, the system will be able to withstand a new failure -assuming that there are enough non faulty unit remaining.
+      \end{enumerate}
+
+    \end{solution}
+
+    
+  \end{questions}
+
+\end{document}

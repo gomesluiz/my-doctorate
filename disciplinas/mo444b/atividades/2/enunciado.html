@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Exercicio 1</title>
+</head>
+
+<body>
+<h1>Exercício 1</h1>
+
+<p> <b>Data de entrega: 5/10, as 7:00 (da manha).</b>
+
+</p><p> Leia os dados do arquivo <a href="http://www.ic.unicamp.br/%7Ewainer/cursos/2s2016/ml/data1.csv">data1.csv</a> A
+classe de cada dado é o valor da última coluna (0 ou 1).
+
+</p><p> Treine um SVM com kernel RBF nos dados do arquivos.
+
+</p><p> A validação externa deve ser 5-fold estratificado.
+
+</p><p> Para cada conjunto de treino da validação externa faça um 3-fold
+para escolher os melhores hiperparametros para C (cost) e gamma.
+
+</p><p> Faça um grid search de para o C nos valores 2**-5, 2**-2, 2**0,
+2**2, e 2**5
+e gamma nos valores 2**-15, 2**-10, 2**-5, 2**0, e 2**5
+
+
+</p><p> 1) Qual a accuracia media (na validação de fora).
+
+</p><p> 2) Quais os valores de C e gamma a serem usados no classificador
+final (fazer o 3-fold no conjunto todo).
+
+</p><p> <b>NÃO</b> use funções prontas que ja fazer o grid search como
+<tt>GridSearchCV</tt> do sklearn ou o <tt>tune</tt> do pacote
+<tt>e1070</tt> do R. Neste exercicio eu quero que voces façam os
+loops explicitamente.
+
+
+</p><p> Gere um pdf com o código (R ou Python) e as respostas as
+perguntas.O exercicio deverá ser submetido via <a href="https://www.ggte.unicamp.br/ea/">Moodle</a>. 
+
+
+</p><h2> Detalhes R</h2>
+
+<p> K-fold estratificado em R é feito pela função <a href="https://www.rdocumentation.org/packages/caret/versions/6.0-71/topics/createDataPartition"><tt>createFolds</tt></a>
+do pacote<tt>caret</tt>
+
+</p><p> a função <a href="https://www.rdocumentation.org/packages/e1071/versions/1.6-7/topics/svm"><tt>svm</tt></a>
+do pacote <tt>e1070</tt> implementa o SVM. O default é o SVM
+RBF (<tt>kernel="radial"</tt>
+
+
+</p><h2>Detalhes Python</h2>
+
+<p>Stratified k-fold em sklear é a função <a href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedKFold.html"><tt>StratifiedKFold</tt></a>,
+&gt;p&gt; SVM é implementado por <a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html"><tt>SVC</tt>
+</a> 
+
+
+
+</p><hr>
+<address></address>
+<!-- hhmts start -->Last modified: Tue Sep 20 23:26:52 BRT 2016 <!-- hhmts end -->
+ 
+</body></html>

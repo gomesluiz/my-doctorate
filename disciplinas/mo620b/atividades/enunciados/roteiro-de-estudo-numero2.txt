@@ -1,0 +1,16 @@
+Roteiro de Estudo -- Número 2 
+Profa, Cecília Rubira
+
+Assunto: Introdução  ao Modelo de Objetos, Modelos de Casos de Uso,
+Modelagem Estática.
+
+Referência principal: Apostila "Análise  Orientada a Objetos e Projeto
+Arquitetural", C.M.F.Rubira, Instituto de Computação, UNICAMP, 2014.
+
+(1) Ler os capítulos abaixo descritos:
+
+Capítulo 1 Introdução
+Capítulo 2 Modelagem de Casos de Uso
+Capítulo 3 Modelagem Estática.
+
+(2) Fazer os exercícios propostos ao final de cada capítulo.

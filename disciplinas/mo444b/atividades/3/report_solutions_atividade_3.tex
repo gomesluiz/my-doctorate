@@ -1,0 +1,115 @@
+\documentclass[10pt, a4paper]{exam} 
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{textcomp}
+
+\lstset{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{blue},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  %frame=no,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  %Ttitle=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{black},      % keyword style
+  commentstyle=\color{OliveGreen},   % comment style
+  stringstyle=\color{YellowOrange},      % string literal style
+  %escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  extendedchars=true,
+  upquote=true,
+  otherkeywords={\%}
+} 
+
+
+\extraheadheight{2cm}
+\extrawidth{2cm}
+\noaddpoints
+
+\begin{document}
+	\renewcommand{\solutiontitle}{\noindent\textbf{Solução:}\enspace}
+	\qformat{\textbf{Questão \thequestion:}\hfill}
+	\hqword{Questões} 			
+	\hpgword{Páginas} 			
+	%\addpoints
+	\bracketedpoints
+	\setlength\linefillheight{.6cm} %distância entre linhas
+	
+%	\pagestyle{headandfoot}
+%
+%	\lhead[]{}
+%	\chead[]{}
+%	\rhead[]{}
+%	
+%	\headrule
+%	\footrule
+%	\lfoot{}
+%	\cfoot{Página \thepage\ de \numpages{}}
+%	\rfoot{}
+\pagestyle{headandfoot}
+\lhead{\bf Universidade Estadual de Campinas - Instituto de Computação (IC/Unicamp)\\Disciplina Aprendizado de Máquina (MO444)\\ Professor: Jacques Wainer, PhD. \\Atividade 3, \today}
+\chead{}
+\rhead{\bf Aluno: Luiz Alberto Ferreira Gomes\\ RA:007275}
+
+\lfoot{}
+\cfoot{Página \thepage\ de \numpages{}}
+\rfoot{}
+	\vspace{0.1in}
+	\printanswers
+	
+	\begin{questions}	    
+	    \question
+	    Determine a acurácia dos algoritmos kNN, SVM com RBF, redes neurais (Nnet), Random Forest (RF) e Gradient Boosting Machine (GBM).
+	    \begin{solution}
+	    
+	    A tabela abaixo reporta as acurácias calculadas pelo script em R(ver anexo I) por meio do um 5-fold	externo. De acordo com essa tabela, o algoritmos RF apresentou a acurácia ligeiramente melhor do que os outros durante os testes.
+		\begin{center}
+	
+			\begin{tabular}{@{} p{2cm}  p{2cm}@{}}
+      			\toprule
+	  			\textbf{Classificador} & \textbf{Acurária} \\ 
+	  			\midrule
+				kNN & 0.93589\\  
+				\midrule
+				SVM & 0.93589\\ 
+				\midrule
+				Nnet & 0.92307\\ 
+				\midrule
+				RF & 0.93590\\
+				\midrule
+				GBM & 0.93269\\
+	  			\bottomrule
+      		\end{tabular}
+		\end{center}	
+		
+		\end{solution}
+	  
+	  
+		\paragraph{Anexo I: Script fonte em R}
+		\paragraph{}
+		\lstinputlisting[language=R]{solutions.R}
+
+		\end{questions}
+		
+\end{document}

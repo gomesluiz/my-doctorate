@@ -1,0 +1,50 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{TERMINOLOGY AND BACKGROUND}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Bug Tracking System \(BTS\)}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Bug Report}{subsection.2.1}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Machine Learning}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.1}{ML algorithms}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Feature Selection Methods}{subsection.2.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Evaluation measures}{subsection.2.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Sampling methods}{subsection.2.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.2.5}{Statistical tests}{subsection.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.3}{Text Mining}{section.2}% 11
+\BOOKMARK [1][-]{section.3}{RELATED WORK}{}% 12
+\BOOKMARK [1][-]{section.4}{Research method}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Research questions}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Paper selection}{section.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Terms and search string}{subsection.4.2}% 16
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Sources}{subsection.4.2}% 17
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Inclusion and exclusion criteria}{subsection.4.2}% 18
+\BOOKMARK [3][-]{subsubsection.4.2.4}{Data storage}{subsection.4.2}% 19
+\BOOKMARK [3][-]{subsubsection.4.2.5}{Assessment}{subsection.4.2}% 20
+\BOOKMARK [2][-]{subsection.4.3}{Data extraction and synthesis}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.4}{Limitations of this mapping}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.5}{Categorization scheme}{section.4}% 23
+\BOOKMARK [3][-]{subsubsection.4.5.1}{FLOSS software type \(RQ2\)}{subsection.4.5}% 24
+\BOOKMARK [3][-]{subsubsection.4.5.2}{Severity prediction problem \(RQ3\)}{subsection.4.5}% 25
+\BOOKMARK [3][-]{subsubsection.4.5.3}{Feature data types \(RQ4\)}{subsection.4.5}% 26
+\BOOKMARK [3][-]{subsubsection.4.5.4}{Feature selection methods \(RQ5\)}{subsection.4.5}% 27
+\BOOKMARK [3][-]{subsubsection.4.5.5}{Text mining feature representations \(RQ6\)}{subsection.4.5}% 28
+\BOOKMARK [3][-]{subsubsection.4.5.6}{ML algorithms categories \(RQ7\)}{subsection.4.5}% 29
+\BOOKMARK [3][-]{subsubsection.4.5.7}{Evaluation measures categories \(RQ8\)}{subsection.4.5}% 30
+\BOOKMARK [3][-]{subsubsection.4.5.8}{Sampling techniques \(RQ9\)}{subsection.4.5}% 31
+\BOOKMARK [3][-]{subsubsection.4.5.9}{Statistical Tests \(RQ10\)}{subsection.4.5}% 32
+\BOOKMARK [3][-]{subsubsection.4.5.10}{Experiment software tools \(RQ11\)}{subsection.4.5}% 33
+\BOOKMARK [1][-]{section.5}{Results}{}% 34
+\BOOKMARK [2][-]{subsection.5.1}{When and where have the studies been published? \(RQ1\)}{section.5}% 35
+\BOOKMARK [2][-]{subsection.5.2}{What FLOSS are the most used as experiment target for bug report severity prediction \(RQ2\)?}{section.5}% 36
+\BOOKMARK [2][-]{subsection.5.3}{Was bug report severity prediction most addressed as either a fine-grained label or coarse-grained label prediction problem \(RQ3\)?}{section.5}% 37
+\BOOKMARK [2][-]{subsection.5.4}{What are the most common features used for bug report severity prediction \(RQ4\)?}{section.5}% 38
+\BOOKMARK [2][-]{subsection.5.5}{What are the most common features selection methods employed for bug report severity prediction \(RQ5\)?}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.6}{What are the most used text mining methods for bug report severity prediction \(RQ6\)?}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.7}{What are the most used machine learning algorithms for bug report severity prediction \(RQ7\)?}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.8}{What are the measures used to evaluate ML algorithms performance for bug report severity prediction \(RQ8\)?}{section.5}% 42
+\BOOKMARK [2][-]{subsection.5.9}{Which sampling techniques are applied most frequently to generate more reliable predictive performance estimates in severity prediction of a bug report \(RQ9\)?}{section.5}% 43
+\BOOKMARK [2][-]{subsection.5.10}{Which statistical tests were used to compare the performance between two or more ML algorithms for bug report severity prediction \(RQ10\)?}{section.5}% 44
+\BOOKMARK [2][-]{subsection.5.11}{Which software tools were used to run bug report severity prediction experiments \(RQ11\)?}{section.5}% 45
+\BOOKMARK [2][-]{subsection.5.12}{Which solution types were proposed for bug report severity prediction problem \(RQ12\)?}{section.5}% 46
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 47
+\BOOKMARK [1][-]{section.7}{Conclusions and Research Directions}{}% 48
+\BOOKMARK [1][-]{section*.38}{References}{}% 49
+\BOOKMARK [1][-]{section.8}{IDEIAS E D\332VIDAS}{}% 50

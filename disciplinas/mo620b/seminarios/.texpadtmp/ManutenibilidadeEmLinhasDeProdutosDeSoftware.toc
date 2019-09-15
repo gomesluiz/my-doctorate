@@ -1,0 +1,11 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Conceitua\IeC {\c c}\IeC {\~a}o B\IeC {\'a}sica}{2}{0}{1}
+\beamer@sectionintoc {2}{Desafios da \IeC {\'A}rea de Estudo}{9}{0}{2}
+\beamer@sectionintoc {3}{Artigos Estudados}{12}{0}{3}
+\beamer@subsectionintoc {3}{1}{Artigo 1}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Artigo 2}{20}{0}{3}
+\beamer@subsectionintoc {3}{3}{Artigo 3}{24}{0}{3}
+\beamer@sectionintoc {4}{Consolida\IeC {\c c}\IeC {\~a}o dos Resultados}{28}{0}{4}
+\beamer@sectionintoc {5}{Discuss\IeC {\~a}o dos Artigos}{30}{0}{5}
+\beamer@sectionintoc {6}{Conclus\IeC {\~a}o}{34}{0}{6}

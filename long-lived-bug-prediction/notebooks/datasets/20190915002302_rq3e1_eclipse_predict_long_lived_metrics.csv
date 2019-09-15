@@ -1,0 +1,2 @@
+dataset,n_term,classifier,feature,threshold,balancing,resampling,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
+eclipse,100,rf,short_description,365,smote,repeatedcv,1164,592,572,214,197,17,0,10,187,17,0,0.949238578680203,0.4746192893401015,0.4746192893401015,0.9166666666666666,0.949238578680203,0.9326683291770573

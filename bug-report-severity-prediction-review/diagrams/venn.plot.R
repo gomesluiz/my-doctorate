@@ -1,0 +1,21 @@
+ven.plot <- venn.diagram(x=papers.all, 
+                         category.names = categories, 
+                         filename = NULL,
+                         output = TRUE ,
+                         height = 400 , 
+                         width = 400 , 
+                         resolution = 300,
+                         compression = "lzw",
+                         lwd = 2,
+                         lty = 1,
+                         #fill = fill.colors,
+                         cex = 0.65,
+                         #fontface = "bold",
+                         cat.cex = 0.65,
+                         #cat.fontface = "bold",
+                         cat.default.pos = "text",
+                         #cat.pos = c(-27, 27, 135),
+                         #cat.dist = c(0.055, 0.055, 0.085),
+                         rotation = 1
+)
+grid.arrange(grobTree(ven.plot), nrow=1)

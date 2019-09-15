@@ -1,0 +1,14 @@
+Roteiro de Estudo -- Número 3
+Profa, Cecília Rubira
+
+Assunto: Conceitos Avançados do Modelo de Objetos
+
+Referência principal: capítulo 4
+Apostila "Análise  Orientada a Objetos e Projeto
+Arquitetural", C.M.F.Rubira, Instituto de Computação, UNICAMP, 2014.
+
+(1) Ler o capítulo abaixo descrito:
+
+Capítulo 4 : Modelagem EStrutural em UML
+
+(2) Fazer os exercícios propostos ao final do capítulo.

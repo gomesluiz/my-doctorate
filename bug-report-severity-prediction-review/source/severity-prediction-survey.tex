@@ -1,0 +1,115 @@
+% !TEX root = severity-prediction-survey.tex
+\documentclass[journal, onecolumn]{IEEEtran}
+
+\usepackage{bibentry}
+\nobibliography*
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{cite}
+\usepackage{color}
+\usepackage{doi}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{footnote}
+\usepackage{hyperref}
+\usepackage{doi}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{lipsum}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{url}
+
+\makesavenoteenv{tabular}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\newif\ifComments
+
+%\Commentstrue
+
+\ifComments
+\newcommand{\luiz}[1]{\noindent\textcolor{orange}{LUIZ: {#1}}}
+\newcommand{\mario}[1]{\noindent\textcolor{green}{MARIO: {#1}}}
+\newcommand{\ricardo}[1]{\noindent\textcolor{purple}{RICARDO: {#1}}}
+\newcommand{\rem}[1]{\noindent\textcolor{magenta}{REMOVED: {#1}}}
+\newcommand{\new}[1]{\noindent\textcolor{blue}{NEW: {#1}}}
+\newcommand{\edit}[1]{\noindent\textcolor{cyan}{EDIT: {#1}}}
+\else
+\newcommand{\luiz}[1]{}
+\newcommand{\mario}[1]{}
+\newcommand{\ricardo}[1]{}
+\newcommand{\rem}[1]{}
+\newcommand{\new}[1]{#1}
+\newcommand{\edit}[1]{#1}
+\fi
+
+\newcommand{\spacebtrows}[1]{\renewcommand{\arraystretch}{#1}}
+
+\hyphenation{}
+
+\begin{document}
+
+\title{
+  Bug Report Severity Level Prediction in Free Libre/Open Source Software: A Survey and New Perspectives
+}
+
+
+%\author{
+%	\IEEEauthorblockN{Luiz Alberto Ferreira Gomes}\\
+%	\IEEEauthorblockA{gomes.luiz@ic.unicamp.br}\\
+%	\and
+%	\IEEEauthorblockN{Ricardo da Silva Torres}\\
+%	\IEEEauthorblockA{rtorres@ic.unicamp.br}\\
+%	\and
+%	\IEEEauthorblockN{Mario Lúcio Côrtes}\\
+%	\IEEEauthorblockA{cortes@ic.unicamp.br\\University of Campinas\\Institute of Computing\\
+%	    Campinas, São Paulo, Brazil}
+%}
+%}
+
+
+\maketitle
+
+\begin{minipage}[t]{0.3\textwidth}
+	\centering
+	\textbf{Luiz Alberto Ferreira Gomes}\\
+    \textit{Institute of Computing (IC)\\ University of Campinas (UNICAMP)\\Campinas, Brazil\\
+	gomes.luiz@ic.unicamp.br}
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+	\centering
+	\textbf{Ricardo da Silva Torres}\\
+    \textit{Institute of Computing (IC)\\ University of Campinas (UNICAMP)\\Campinas, Brazil\\
+	rtorres@ic.unicamp.br}
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+	\centering
+	\textbf{Mario Lúcio Côrtes}\\
+    \textit{Institute of Computing (IC)\\ University of Campinas (UNICAMP)\\Campinas, Brazil\\
+	cortes@ic.unicamp.br}
+\end{minipage}
+\vspace{1cm}
+
+\input{abstract}
+
+\begin{IEEEkeywords}
+  \input{keywords}
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+  \input{introduction}
+  \input{background}
+  \input{related-work}
+  \input{methodology}
+  \input{results}
+  \input{discussions}
+  \input{conclusions}
+  \input{acknowledgment}
+  \input{bibliography}
+%  \input{ideas}
+\end{document}

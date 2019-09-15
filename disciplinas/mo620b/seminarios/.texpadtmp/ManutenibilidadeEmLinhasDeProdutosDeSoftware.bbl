@@ -1,0 +1,71 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.5 }
+
+\bibitem[Bagheri e Gasevic 2011]{Bagheri2011}
+\abntrefinfo{Bagheri e Gasevic}{BAGHERI; GASEVIC}{2011}
+{BAGHERI, E.; GASEVIC, D. Assessing the maintainability of software product
+  line feature models using structural metrics.
+\emph{Software Quality Journal}, v.~19, n.~3, p. 579--612, set. 2011.}
+
+\bibitem[Bennett e Rajlich 2000]{Bennett2000}
+\abntrefinfo{Bennett e Rajlich}{BENNETT; RAJLICH}{2000}
+{BENNETT, K.~H.; RAJLICH, V.~T. Software maintenance and evolution: a roadmap.
+ACM Press, p. 73--87, 2000.}
+
+\bibitem[Broy, Deissenboeck e Pizka 2006]{Broy2006}
+\abntrefinfo{Broy, Deissenboeck e Pizka}{BROY; DEISSENBOECK; PIZKA}{2006}
+{BROY, M.; DEISSENBOECK, F.; PIZKA, M. Demystifying {Maintainability}. In:
+  \emph{Proceedings of the 2006 {International} {Workshop} on {Software}
+  {Quality}}. New York, NY, USA: ACM, 2006.  ({WoSQ} '06), p. 21--26.}
+
+\bibitem[Cafeo et al. 2013]{Cafeo2013}
+\abntrefinfo{Cafeo et al.}{CAFEO et al.}{2013}
+{CAFEO, B. B.~P. et al. Towards indicators of instabilities in software product
+  lines: {An} empirical evaluation of metrics. In:  . [S.l.]: IEEE, 2013. p.
+  69--75.}
+
+\bibitem[Clements e Northrop 2002]{Clements2002}
+\abntrefinfo{Clements e Northrop}{CLEMENTS; NORTHROP}{2002}
+{CLEMENTS, P.; NORTHROP, L. \emph{Software product lines: practices and
+  patterns}. Boston: Addison-Wesley, 2002.  (The {SEI} series in software
+  engineering).
+ISBN 0201703327.}
+
+\bibitem[Coleman et al. 1994]{Coleman1994}
+\abntrefinfo{Coleman et al.}{COLEMAN et al.}{1994}
+{COLEMAN, D. et al. Using metrics to evaluate software system maintainability.
+\emph{Computer}, v.~27, n.~8, p. 44--49, Aug 1994.}
+
+\bibitem[Côrtes 2001]{Cortes2001}
+\abntrefinfo{Côrtes}{CôRTES}{2001}
+{CôRTES, M.~L. \emph{Modelos de qualidade de software.} Campinas: Ed. da
+  Unicamp, 2001.}
+
+\bibitem[Gomaa 2005]{Gomaa2005}
+\abntrefinfo{Gomaa}{GOMAA}{2005}
+{GOMAA, H. \emph{Designing software product lines with {UML}: from use cases to
+  pattern-based software architectures}. Boston: Addison-Wesley, 2005.
+ISBN 0201775956.}
+
+\bibitem[Hanafi e Abbel-Raouf 2015]{Hanafi2015}
+\abntrefinfo{Hanafi e Abbel-Raouf}{HANAFI; ABBEL-RAOUF}{2015}
+{HANAFI, M.; ABBEL-RAOUF, A. Software {Maintenance} from the {Change} {Theory}
+  {Perspective}.
+\emph{Recent Advances in Electrical and Computer Engineering}, 2015.}
+
+\bibitem[Sommervile 2011]{Sommerville2011}
+\abntrefinfo{Sommervile}{SOMMERVILE}{2011}
+{SOMMERVILE, I. \emph{Engenharia de Software}. 9a. ed. S{\~{a}}o Paulo: Pearson
+  Prentice Hall, 2011.}
+
+\bibitem[Vale et al. 2015]{Vale2015}
+\abntrefinfo{Vale et al.}{VALE et al.}{2015}
+{VALE, G. et al. Criteria and {Guidelines} to {Improve} {Software}
+  {Maintainability} in {Software} {Product} {Lines}. In:  . [S.l.]: IEEE, 2015.
+  p. 427--432.}
+
+\end{thebibliography}

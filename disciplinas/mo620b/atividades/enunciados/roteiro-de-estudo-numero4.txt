@@ -1,0 +1,17 @@
+Roteiro de Estudo -- Número 4
+Profa, Cecília Rubira
+Engenharia de Software 
+
+Assunto: Padrões de Projeto
+
+Referência principal: capítulo 7 pp 196-203 e capítulo 6
+
+Apostila "Análise  Orientada a Objetos e Projeto
+Arquitetural", C.M.F.Rubira, Instituto de Computação, UNICAMP, 2014.
+
+(1) Ler o capítulo abaixo descrito:
+
+Capítulo 7 : Transição da Análise para o Projeto
+
+(2) Fazer a  lista 2 sobre padrões de projeto,  considerando o sistema
+descrito no capitulo 6 da apostila.

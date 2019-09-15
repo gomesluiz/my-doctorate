@@ -1,0 +1,278 @@
+%% Object-Oriented Analysis and Design (OOAD): Use Cases (UC)
+%% Style File
+%%---------------------------------------------------------------------------
+%%
+%% Created by Roland Bruggmann (http://about.geogeek.ch)
+%% Downloadable at: https://gist.github.com/brugr9/5178487
+%% Date Modified: 28/03/2014
+%%
+%% Inspired by Tom Desair (see http://www.tomdesair.com/blog/2012/04/latex-template-for-use-cases/ )
+% 
+% This work may be distributed and/or modified under the conditions of the 
+% GNU General Public License version 3 GPLv3
+% (see http://www.gnu.org/licenses/gpl-3.0.html).
+% 
+% *****************************************************
+% Usage:
+%
+% \begin{usecase}{<name of use case>}
+%    \preconditions{
+%	    \item ...
+%	    \item ...
+%    }
+%    \postconditions{
+%	    \item ...
+%	    \item ...
+%    }
+%    \mainsuccess{
+%	    \item ...
+%	    \item ...
+%    }
+% ...
+% \end{usecase}
+%
+%
+%-------------------------------------------------------------------------------
+% Packages required
+%-------------------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+% \usepackage{ifthen}
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+% Here we go!
+% (Sometimes it is a good idea to put domain objects in \texttt{})
+%-------------------------------------------------------------------------------
+% 
+% 
+%-------------------------------------------------------------------------------
+% We need a counter:
+\newcounter{uc}
+% 
+%-------------------------------------------------------------------------------
+% 
+%-------------------------------------------------------------------------------
+% Scope: the system under design
+% - type: single line
+\newcommand\scope[1]{
+    \textit{Scope:} &#1 \\ 
+    [1ex] \hline \\ 
+    [-1.3ex] 
+}
+% 
+%-------------------------------------------------------------------------------
+% Level: "user-goal" or "subfunction" 
+% - type: single line
+\newcommand\level[1]{
+    \textit{Level:} &#1 \\ 
+    [1ex] \hline \\ 
+    [-1.3ex] 
+}
+% 
+%-------------------------------------------------------------------------------
+% Primary Actor: Calls on the system to deliver its services.
+% - type: single line
+\newcommand\primaryactor[1]{
+    \textit{Primary Actor:} &#1 \\ 
+    [1ex] \hline \\ 
+    [-1.3ex] 
+}
+% 
+%-------------------------------------------------------------------------------
+% Stakeholders and Interests
+% - type: itemized list
+\newcommand\stakeholders[1]{
+    \multicolumn{2}{l}{\textit{Stakeholders and Interests:}} \\
+    \multicolumn{2}{l}{
+      \begin{minipage}[t]{13.2cm}
+	  \begin{itemize} #1 \end{itemize}
+	  \vspace{1.5ex}
+      \end{minipage}
+    } \\
+    [1ex] \hline \\ 
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Precondition: What must be true on start and worth telling the reader?
+%
+% - type: single line
+\newcommand\precondition[1]{
+    \textit{Precondition:} &#1 \\ 
+    [1ex] \hline \\ 
+    [-1.3ex] 
+}
+% 
+% - type: itemized list
+\newcommand\preconditions[1]{
+    \multicolumn{2}{l}{\textit{Preconditions:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1   \end{itemize}
+	    \vspace{1.5ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Postconditions (success guarantee): What must be true on successful completion and worth telling the reader
+% 
+% - type: single line
+\newcommand\postcondition[1]{
+    \textit{Postcondition (success guarantee):} &#1 \\ 
+    [1ex] \hline \\ [-1.3ex] 
+}
+% 
+% - type: itemized list
+\newcommand\postconditions[1]{
+    \multicolumn{2}{l}{\textit{Postconditions (success guarantee):}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1   \end{itemize}
+	    \vspace{1.5ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Main Success Scenario: A typical, unconditional happy path scenario of success.
+% - type: enumerated list
+\newcommand\mainsuccess[1]{
+    \multicolumn{2}{l}{\textit{Main Success Scenario:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{enumerate} #1  \end{enumerate}
+  % 	  #1
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% \newcommand\step[2]{
+%   #1.~\label{step#1}\smallskip#2 \\
+% }
+% 
+%-------------------------------------------------------------------------------
+% Extensions (Alternative Flows): Alternate scenarios of success or failure.
+% - type: itemized list
+\newcommand\extensions[1]{
+    \multicolumn{2}{l}{\textit{Extensions (Alternative Flows):}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1 \end{itemize}
+  % 	  #1
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% \newcommand\extension[3]{
+%   \if#1=* #1.#2\else\hyperref[step#1]{#1.#2}\fi\smallskip#3
+% }
+% 
+%-------------------------------------------------------------------------------
+% Special Requirements
+% - type: itemized list
+\newcommand\requirements[1]{
+    \multicolumn{2}{l}{\textit{Special Requirements:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1 \end{itemize}
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Technology and Data Variations List
+% - type: enumerated list
+\newcommand\technology[1]{
+    \multicolumn{2}{l}{\textit{Technology and Data Variations List:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{enumerate} #1   \end{enumerate}
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Frequency of Occurrence
+% - type: single line
+\newcommand\frequency[1]{
+    \textit{Frequency of Occurrence:} &#1 \\ 
+    [1ex] \hline \\ 
+    [-1.3ex] 
+}
+% 
+%-------------------------------------------------------------------------------
+% Open Issues
+% - type: itemized list
+\newcommand\openissues[1]{
+    \multicolumn{2}{l}{\textit{Open Issues:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1   \end{itemize}
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% Miscellaneous
+% - type: itemized list
+\newcommand\miscellaneous[1]{
+    \multicolumn{2}{l}{\textit{Miscellaneous:}} \\
+    \multicolumn{2}{l}{
+	\begin{minipage}[t]{13.2cm}
+	    \begin{itemize} #1   \end{itemize}
+	    \vspace{1.3ex}
+	\end{minipage}
+    } \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+% 
+%-------------------------------------------------------------------------------
+% 
+% 
+% 
+%-------------------------------------------------------------------------------
+%                Definition of the use case environment
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+% Parameter: the title of the Use Case
+% 
+% Type: 	single line
+% Parameter: 	\usecase{<uctitle>} becomes ``UC<Number>: <uctitle>''
+% Annotations: 	The UC will be labelled as \label{uc:<uctitle>}.
+% Annotations: 	The UC will be added to the List of Tables.
+%-------------------------------------------------------------------------------
+\newenvironment{usecase}[1]{
+% Counter increment
+  \stepcounter{uc}
+% Entry in lot (List of Tables)
+  \addcontentsline{lot}{table}{UC\theuc: #1}
+% Begin:
+  \begin{longtable}{lp{5cm}}
+    \hline \\
+% Title and label
+    [-1.5ex] \textbf{UC\theuc: #1}~\label{uc:#1} \\
+    [1ex] \hline \\
+    [-1.5ex]
+}
+{\end{longtable}}

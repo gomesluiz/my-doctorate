@@ -1,0 +1,43 @@
+\section{Discussion}\label{sec:discussion}
+This section presents lessons learned from this systematic mapping study and recommends possible research directions for the bug severity prediction problem.
+
+% RQ2
+Researchers have concentrated their focus on few FLOSS, namely Eclipse and Mozilla, both hosted by Bugzilla. The main reason given by most researchers is benchmarking their results with Lamkanfi et al.\cite{Lamkanfi:2010, Lamkanfi:2011}, which are often considered the state-of-the-art in this research area. Notably, they have not considered relevant FLOSS projects like as Linux Kernel, Spark, MySQL, among others. Moreover, published research only marginally investigated two other bug trackers mentioned in reviewed papers: Jira and Google Issue Tracker. The first one tracks bugs for more than 80\% Apache Foundation's projects\footnote[18]{\url{http://www.apache.org/index.html\#projects-list} (As of September 2018).}, and the last one tracks bugs for many internal and external Google Inc. projects\footnote[19]{\url{https://developers.google.com/issue-tracker/} (As of September 2018).}. Surprisingly, for example, no paper investigated Github, another outstanding collaborative website which hosted more than 67 million projects (including many FLOSS)\footnote[20]{\url{https://octoverse.github.com/} (As of September 2018)}.
+
+From 14 FLOSS identified in this review, six are programming tools, four are system software, and four are application software. For former two, people who report bugs are typically technical users, and, for the latter, people are end-users. A bug report can be more or less detailed depending on who reports it\cite{Lamkanfi:2010}\cite{Lamkanfi:2011}. Therefore, the probability of writing more accurate bug reports is larger for technical users than end-users. 
+
+%RQ3
+Researchers considered the bug report severity prediction using five different approaches: three of them (SNS, SNSWB, and BNB) predict the severity level from two or three class (coarse-grained). Two other approaches (MC and MCWD) seem to be more complex than problems of the previous ones because the severity level may be predicted from five or six classes (fine-grained). 
+
+From another aspect, two categories (SNSWD and MCWD) did not consider the default severity level (in Bugzilla, often ``normal"). By doing so, they have argued that they would avoid noisy and unreliable data. Saha et al\cite{Saha:2015} confirmed that many bug reports in practice are not ``normal" and this misclassification can really affect the accuracy of ML algorithms.
+
+%RQ4  
+Most of the approaches proposed by researchers to predict bug report severity relied on unstructured text features (\textit{summary} and \textit{description}). Because of this, text mining techniques played, side by side with machine learning methods, an essential role in delivering appropriated solutions. Two other features (\textit{product} and \textit{component}) was also quite used in these approaches. That may indicate that bug reports collected from separate parts of a single FLOSS yield different ML algorithms outcomes.
+
+Regarding available feature data types in bug reports, more than half of them are qualitative. SVM and Neural Networks, two popular and essential ML algorithms in modern machine learning\cite{Marsland:2014}, do not work with qualitative data\cite{Flach:2012}. These two facts bring an extra challenge to use qualitative features for bug report severity prediction. When the input data set has qualitative data,  categorical, and ordinal values must be converted into numeric values before applying ML algorithms.
+
+%RQ5
+Despite a large number of features raised by the application of text mining activities (e.g., tokenizing, stop word removal and stemming) on \textit{summary} and \textit{description} and of its effectiveness in SNS and SNSWD problems\cite{Yang:2012}, few papers employed feature selection methods for bug severity prediction. Furthermore, these papers notably only investigated filter feature selection methods. Filter-based approaches have two drawbacks\cite{Flach:2012}: (i) they do not take into account redundancy between features, and (ii) they do not detect dependencies between them. 
+
+%RQ6 
+Most papers reported the use of unigram for feature extraction. However, few papers explicitly report the use of another text ming methods. Among these papers, the most used method feature vector weighting was TF-IDF and the most used method for verifying text similarity was BM25.
+
+
+%RQ7
+It seems that researchers have adopted a conservative approach regarding the use of ML algorithms. Most papers applied at least one of the following well-known and traditional supervised algorithms: k-NN, Näive Bayes, and its extension Näive Bayes Multinomial.
+
+%RQ8
+Researchers evaluated the performance of ML algorithms in their proposed approaches using precision, recall, and f-Measure. Three common measures employed in ML arena, but which may strongly skew in the imbalanced scenario\cite{Jeni:2013}. This characteristic is particularly critical in bug report repositories which are intrinsically imbalanced in practice\cite{Roy:2017}. To minimize such distortion, Tian et al.\cite{Tian:2016}, instead, recommend measuring performance using inter-rater agreement based metrics, such as Cohen's Kappa\cite{Ben-David:2008} or Krippendorff's Alpha\cite{Krippendorff:2011}. Despite its well-known issues in an imbalanced dataset\cite{Japkowicz:2011}, quite few papers still used accuracy to measure ML performance. AUC, an alternative used by few papers, seems more robust than accuracy in imbalanced data conditions. Like Kappa and Krippendorff's Alpha, AUC considers class distribution on performance evaluation of ML algorithms for bug report severity prediction.
+
+
+%RQ9
+Few papers reported the use of a resampling approach to improving the accuracy of ML algorithms. The papers only reported the use of simple resampling strategies, including, the most used, k-fold cross-validation. Only one paper used SMOTE, considered a ``de facto" resampling method in imbalanced data scenario\cite{Fernandez:2018}. Japkowicz et el.\cite{Japkowicz:2011} also suggest that experiments may achieve better results using multiple resampling methods, for example, repeated k-fold cross-validation.
+
+%R10
+It seems that most researchers compared the results yielded in their experiments with others observing only the means of measures applied. Few of them reported utilizing statistical tests to do that, which is a recommended practice in empirical software engineering\cite{Kitchenham:2017}. Most used statistical test was parametric.  This kind of test requires that samples follow a statistical distribution (e.g., normal), which is not guaranteed to occur in practice when comparing ML models\cite{Facelli:2015}. Besides, no paper investigated Analysis of Variance (ANOVA), a robust ranked-based test recommended by Kitchenham et al.\cite{Kitchenham:2017} for Empirical Sofware Engineering. 
+
+%R11
+Researchers preferred to use FLOSS tools to perform their analyses. Although, many papers have used a proprietary software named RapidMiner. Interestingly, researchers demonstrated a low interest in top-ranked ML tools based on R and Python programming languages.
+
+%R12
+It seems that most proposed solutions for bug report severity prediction were conceived to run in offline mode, just one paper claimed which the published solution is mature and fast enough to be embedded, for example, in a web browser. The need for a high number of labeled bug reports during the training phase\cite{Nigam:2012} is a problem intrinsic to supervised ML algorithms, which may make it difficult to turn these offline solutions to online. 

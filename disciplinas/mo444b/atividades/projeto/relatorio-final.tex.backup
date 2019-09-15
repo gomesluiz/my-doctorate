@@ -1,0 +1,506 @@
+\documentclass[11pt,twoside]{article}
+
+\usepackage[brazil]{babel}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{rotating}
+\usepackage{techrep-ic}
+\usepackage{tikz}
+
+\usepackage{textcomp}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\pgfplotstableset{
+     col sep=comma,
+     columns/N/.style={column name=\#, column type={r}, string type},
+     columns/Classifier/.style={column name=Classifier, column type={l}, string type},
+     columns/C/.style={column name=C, column type={r}, string type},
+     columns/Sigma/.style={column name=$\gamma$, column type={r}, string type},
+     columns/Mtry/.style={column name=Mtry, column type={r}, string type},
+     columns/Ntree/.style={int detect,column type=r,column name=Ntree},
+     columns/Size/.style={int detect,column type=r,column name=Size},
+     columns/Decay/.style={int detect,column type=r,column name=Decay},
+     columns/Depth/.style={int detect,column type=r,column name=Depth},
+     columns/Ntrees/.style={int detect,column type=r,column name=Ntrees},
+     columns/Shrinkage/.style={column name=Shrink, column type={r}, string type},     
+     columns/Nminobsinnode/.style={column name=Nminobs, column type={r}, string type},     
+     columns/SampleMethod/.style={column name=Sample, column type={l}, string type},
+     columns/Observations/.style={column name=n, column type={r}, string type},
+     columns/Accuracy/.style={fixed,fixed zerofill,precision=3,column type={r}, column name=Acc},
+     columns/Precision/.style={fixed,fixed zerofill,precision=3,column type={r}, column name=Precision},
+     columns/Recall/.style={fixed,fixed zerofill,precision=3,column type={r}},
+     columns/F1.Score/.style={fixed,fixed zerofill,precision=3,column type={r}, column name=F1Score},
+     columns/Mean/.style={fixed,fixed zerofill,precision=3,column type={r}, column name=Mean},
+     columns/TimeTaken/.style={column name=Time, fixed,fixed zerofill,precision=3,column type={r}},
+     every head row/.style={before row=\toprule,after row=\midrule},
+     every last row/.style={after row=\bottomrule},
+     empty cells with={--}
+}
+
+  \tikzstyle{activity} = [rectangle, rounded corners, minimum width=3cm, minimum 
+height=1cm,text centered, draw=black, fill=white]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{line} = [draw, -latex']
+
+\lstset{ %
+  language=R,                     % the language of the code
+  basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{blue},  % the style that is used for the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  %frame=no,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=t,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  %Ttitle=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{black},      % keyword style
+  commentstyle=\color{OliveGreen},   % comment style
+  stringstyle=\color{YellowOrange},      % string literal style
+  %escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  extendedchars=true,
+  upquote=true,
+  otherkeywords={\%}
+} 
+
+
+\begin{document}
+\TRNumber{45}
+\TRYear{16}  % Dois dígitos apenas
+\TRMonth{12} % Numérico, 01-12
+\TRAuthor{Luiz Alberto Ferreira Gomes}
+\TRTitle{Previsão de Mudança na Severidade da Prioridade de um Tíquete\\ Baseada 
+em Máquinas de Aprendizado}
+\TRMakeCover
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% O que segue é apenas uma sugestão - sinta-se à vontade para
+% usar seu formato predileto, desde que as margens tenham pelo
+% menos 25mm nos quatro lados, e o tamanho do fonte seja pelo menos
+% 11pt. Certifique-se também de que o título e lista de autores
+% estão reproduzidos na íntegra na página 1, a primeira depois da
+% página de capa.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nomes de autores ABREVIADOS e titulo ABREVIADO,
+% para cabeçalhos em cada página.
+%
+%\markboth{Goodbeer, Opps e Puma}{Cervejas Brasileiras}
+\pagestyle{myheadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TÍTULO e NOMES DOS AUTORES, completos, para a página 1.
+% Use "\\" para quebrar linhas, "\and" para separar autores.
+%
+\title{Previsão de Mudança na Severidade da Prioridade de um Tíquete\\ Baseada 
+em Máquinas de Aprendizado}
+
+\author{Luiz Alberto Ferreira Gomes\thanks{Instituto  de Computação, Universidade
+Estadual  de Campinas, 13081-970  Campinas,  SP.}}
+
+\date{}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract} 
+% TODO: completar o abstract.
+Este relatório técnico descreve o projeto escolha de um algoritmo de classificação para
+para uma máquina de aprendizado que seja capaz de prever, com um níveis adequados de confiança e precisão, as modificações na severidade na prioridade
+de um tíquete utilizados em \textit{Bug Tracking System}. Com base dos 
+fornecidos por esses sistemas,  a máquina de 
+aprendizado desenvolvida terá que responder às seguintes questões: (i) se um tíquete terá a sua prioridade modificada; (ii) se essa prioridade será modificada para uma 
+severidade maior ou menor e (iii) qual será a prioridade final de um tíquete ao final do seu ciclo de vida.
+
+O resultados das pesquisas realizadas durantes esse projeto, com base em cinco métricas de desempenho(\textit{accuracy}, \textit{precision}, 
+\textit{recall}, \textit{f1 score} e \textit{execution time}), apontou que para os classificadores ?,? e ? foram os mais adequados para responder as questões citadas
+acima.
+
+
+
+%  Este trabalho é um relatório técnico de um projeto temático 
+%  plurianual, visando o estudo comparativo de diversas espécies de
+%  cervejas nativas do sub-continente brasileiro.  A realização deste
+%  trabalho contou com o suporte financeiro do CNPq e FAPESP, e foi
+%  imensamente facilitada pela infraestrutura de pesquisa cervisíaca
+%  instalada no Campus da UNICAMP.
+%q
+%  Com base nessas pesquisas, determinamos que a altura da cerveja $h$q
+%  e a altura da espuma $e$ satifazem aproximadamente a inequação
+%  $(\sqrt{e^2 + h^2 + 2 h e})^3 \leq \exp(3 \log K_0^\ast)$, onde
+%  $K_0^\ast$ é a altura do copo.  Esta fórmula é válida,
+%  aparentemente, inclusive para espécies mais pigmentadas, como {\em
+%  Malzbier}.  Em vista disso, e dos resultados análogos obtidos por
+%  A. B. Stémio em experiências com {\em Guaraná} e $x$-{\em Cola},
+%  conjeturamos que a fórmula pode ser aplicada (com pequenas
+%  modificações) também a {\em Champagne} e outros líquidos de
+%  composição similar.
+\end{abstract}
+
+\section{Introdução}
+	Tíquetes(em inglês:\textit{issue}) são utilizados em \textit{Bug Tracking Systems}(BTS) para registrar requisições de modificação para um 
+	determinado produto de software. Tais pedidos podem contemplar a inclusão ou modificação de requisitos, a correção de \textit{bugs} encontrados 
+	e ou adaptações para uma nova plataforma operacional\cite{SOM}. Sendo que cada um, no momento da sua criação, recebe uma prioridade que varia 
+	em escala de severidade(\textit{blocker}, \textit{critical}, \textit{major}, \textit{minor} ou \textit{trivial}) que auxilia a equipe de manutenção 
+	no planejamento das suas atividades.
+	
+	No decorrer do ciclo de vida do tíquete (Figura \ref{fig:ciclo-de-vida}), a sua prioridade pode mudar $-$ tanto para uma severidade maior quanto para uma menor $-$. Tais mudanças afetam o planejamento da manutenção de um produto, fazendo com que a equipe responsável tenha que refazê-lo inúmeras vezes.
+
+	\begin{figure}[hbt!]  
+  \centering
+  \begin{tikzpicture}[node distance=1.5cm]
+    \node (a1) [activity] {Open};
+    \node (a2) [activity, below of=a1] {In Progress};
+    \node (a3) [activity, below of=a2] {Resolved};
+    \node (a4) [activity, below of=a3] {Closed};
+    \node (a5) [activity, below of=a4] {Reopened};
+    
+    \draw [arrow] (a1) -- (a2);
+    \draw [arrow] (a2) -- (a3);
+    \draw [arrow] (a3) -- (a4);
+    \draw [arrow] (a4) -- (a5);
+    \draw [arrow] (a5.east)  -- ++(1.5,0) |- (a1.east);
+    \draw [arrow] (a3.west)  -- ++(-1.5,0) |- (a5.west);
+  \end{tikzpicture}
+  \caption{Ciclo de vida de um tíquete\cite{SOM}.}
+  \label{fig:ciclo-de-vida}
+\end{figure}
+
+%  As propriedades lúdicas, mnemolíticas e catalógicas de 
+%  soluções fraca- e medianamente concentradas de 1-metil-metanol
+%  em hidróxido de hidrônio aquoso ($\rm H_3O^{+} HO^{-}\cdot {\mathit n}H_2O$)
+%  tem sido objeto de intensos estudos experimentais por
+%  cientistas no mundo todo~\cite{AHU,KNU}.
+%  
+%  Durante os últimos 20 anos, os autores coordenaram uma equipe
+%  multidiplinar de pesquisadores, na UNICAMP e em outras instituições,
+%  cujo objetivo derradeiro é elucidar e quantificar a relação entre...
+O contéudo relatado neste documento é parte de um trabalho de pesquisa de doutorado mais abrangente cujo objetivo é desenvolver um assistente 
+para manutenção de software livre baseado em máquinas de aprendizado.
+
+\section{Objetivos do projeto}
+Considerando o contexto acima, o objetivo deste projeto é selecionar, com base em métricas conhecidas\cite{JON}, classificadores para a construção de uma máquina de aprendizado $-$ baseada 
+em um modelo de dados extraído de repositórios de BTS $-$ que responda adequadamente às seguintes questões:
+	\begin{enumerate}[Q1.]
+  		\item A prioridade de um dado tíquete mudará durante o seu ciclo de vida?
+  		\item A prioridade de um dado tíquete mudará para uma severidade mais alta ou mais baixa durante o seu ciclo de vida?
+  		\item Qual será a prioridade de um dado tíquete ao final do seu ciclo de vida?
+	\end{enumerate}
+
+\section{Metodologia utilizada}
+O projeto descrito neste relatório técnico foi baseou-se nas descritas na Figura \ref{fig:metodologia}.
+
+
+\begin{figure}[hbt!]	
+	\centering
+	\begin{tikzpicture}[node distance=1.5cm]
+		\node (a1) [activity] {Elaboração do modelo de dados};
+		\node (a2) [activity, below of=a1] {Extração e pré-processamento de dados};
+		\node (a3) [activity, below of=a2] {Treinamento e testes da máquina de aprendizado};
+		\node (a4) [activity, below of=a3] {Análise dos Resultados};
+		
+		\draw [arrow] (a1) -- (a2);
+		\draw [arrow] (a2) -- (a3);
+		\draw [arrow] (a3) -- (a4);
+		\draw [arrow] (a4.east)  -- ++(2.5,0) |- (a1.east);
+	\end{tikzpicture}
+	\caption{Metodologia utilizada no projeto.}
+	\label{fig:metodologia}
+\end{figure}
+
+\section{Elaboração do modelo de dados}
+O processo de elaboração modelo de dados preliminar $-$ apresentado na Tabela 
+\ref{tab:modelo-preliminar} $-$ para satisfazer os requisitos do projeto 
+baseou-se nas seguintes atividades:
+\begin{enumerate}
+  \item \textbf{Análise dos dados dos tíquetes:} essa atividade baseou-se nos 
+  campos estruturados da base de dados do BTS\cite{ATL}. A partir dessa 
+análise os campos de 1 a 7 do modelo de dados foram definidos. 
+  \item \textbf{Análise dos termos do campo descrição}: essa atividade 
+baseou-se na mineração de termos relacionados à manutenção de software do texto 
+da descrição do tíquete\cite{ANT}. A biblioteca \texttt{TextMinning}\cite{WIL} 
+do linguagem R foi utilizada para a extração e visualização desses termos. A 
+partir dessa análise os campos de 8 a 21 do modelo de dados foram definidos. 
+% TODO: colocar o gráfico de termos.
+  \item \textbf{Análise do relacionamento entre tíquetes}: os relacionamentos 
+entre os tíquetes foram definidos a partir da análise dos \textit{hiperlinks} 
+$-$ para outros tíquetes $-$ escritos no texto da descrição de um tíquete. A 
+partir dessa análise os campos de 23 a 27 do modelo de dados foram definidos.
+  \item \textbf{Análise do histórico de mudanças dos tíquetes}: as mudanças na 
+  prioridade de cada tíquete foram analisadas com base no histórico de 
+mudanças de cada um. Essa análise derivou os campos de 28 e 29 do modelo de 
+dados.
+\end{enumerate}
+
+\begin{table}[ht]\centering
+  \tiny
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}llp{9cm}p{2cm}l@{}}\toprule
+    \#  &  Nome  &  Descrição  &  Tipo  &  Escala \\
+    \midrule 
+    1  &  IssueKey  &  Identificador do tíquete  &  Qualitativo  &  Nominal \\
+    2  &  Type  &  Tipo do tíquete: \textit{Bug} ,  \textit{New Feature} ,  \textit{Improvement} ,  \textit{Task} ,  \textit{Sub-task} ou \textit{Wish}  &  Qualitativo  &  Nominal \\
+    3  &  Priority  &  Prioridade(ou severidade) do tíquete: \textit{Blocker} ,  \textit{Critical} ,  \textit{Major} ,  \textit{Minor} ou \textit{Trivial}  &  Qualitativo  &  Nominal \\
+    4  &  DayToResolve  &  Quantidade de dias que foram utilizados para resolvê-lo  &  Quantitativo discreto  &  Racional \\
+    5  &  Resolution  &  Tipo de resolução dada: \textit{Fixed} ,  \textit{Duplicate} ,  \textit{Unresolved} ,  \textit{Won’t Fix} ,  \textit{Cannot Reproduce}, \textit{Not a Problem}, 
+    \textit{Later}, \textit{Invalid} ou \textit{Implemented} &  Qualitativo  &  Nominal\\
+	6 & Status & Situação do tíquete: \textit{Close} ou  \textit{Resolved}. & Qualitativo & Nominal\\
+	7 & QuantityOfComments & Quantidade de comentários feito sobre um tíquete. & Quantitativo discreto & Racional\\
+	8 & HasBlockWord & Indica se a palavra “\textit{block}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	9 & HasChangeWord & Indica se a palavra “\textit{change}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	10 & HasDebugWord & Indica se a palavra “\textit{debug}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	11 & HasErrorWord & Indica se a palavra “\textit{error}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	12 & HasExceptionWord & Indica se a palavra “\textit{exception}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	13 & HasFailWord & Indica se a palavra “\textit{fail}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	14 & HasFixWord & Indica se a palavra “\textit{fix}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	15 & HasIssueWord & Indica se a palavra “\textit{issue}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	16 & HasPatchWord & Indica se a palavra “\textit{patch}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	17 & HasProblemWord & Indica se a palavra “\textit{problem}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	18 & HasSupportWord & Indica se a palavra “\textit{support}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	19 & HasTestWord & Indica se a palavra “\textit{test}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	20 & HasThrowsWord & Indica se a palavra “\textit{throws}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	21 & HasWarnWord & Indica se a palavra “\textit{warn}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	23 & DepthOfTree & Profundidade da árvore onde se encontra o tíquete. & Quantitativo discreto & Racional\\
+	24 & QuantityOfChildren & Quantidade de filhos que o tíquete possui. & Quantitativo discreto & Racional\\
+	25 & WeightOfChildren & Peso total ponderado dos filhos que o tíquete possui. & Quantitativo contínuo & Racional\\
+	26 & QuantityOfParents & Quantidade de parentes que o tíquete possui. & Quantitativo discreto & Racional\\
+	27 & WeightOfParents & Peso total ponderado dos parentes que o tíquete possui. & Quantitativo contínuo & Racional\\
+	28 & ChangedInPriority & Indica se houve mudança na prioridade do tíquete(1) ou não houve(0)& Qualitativo & Nominal\\    
+	29 & ChangedInPriorityTo & Indica se houve mudança na prioridade do tíquete para baixo(1), para cima (2) ou não houve mudança (0)& Qualitativo & Nominal\\
+    \bottomrule 
+  \end{tabular}
+  \caption{Modelo de dados preliminar.}
+  \label{tab:modelo-preliminar}
+\end{table}
+\pagebreak
+\section{Extração e pre-processamento dos dados}
+A execução desta etapa produziu um arquivo no formato CSV $-$ tecnicamente correto e consistente\cite{JON} $-$ contendo o modelo de dados previamente apresentado, e foi codificada em dois módulos com responsabilidades distintas: o (i) de extração de dados e o (ii) de pré-processamento.
+
+O módulo de extração dos dados é constituído pelo programa, escrito na linguagem Java, \texttt{IssueBaseDataExtractor} e pelo \textit{script}, escrito na linguagem R, \texttt{IssueHistoryDataExtractor}. O primeiro tem a responsabilidade de extrair os dados básicos do tíquete a partir do repositório remoto do BTS Jira do software HADOOP $-$ utilizado como repositório de testes deste projeto $-$ que disponibiliza os dados no formato XML. O segundo tem a responsabilidade de capturar os histórico de mudanças de um tíquete e extrair a partir de uma tabela contendo as mudanças de prioridades ocorridas. Diferentemente dos dados básicos dos tíquetes, os dados do histórico de mudanças são disponibilizados pelo BTS Jira no formato HTML.
+
+O módulo de pré-processamento é constituído pelo script, escrito na linguagem R, \texttt{IssueDataPreProcessor} cujas responsabilidades são as seguintes: (i) mesclar os dados básicos dos tíquetes com o histórico de mudanças de prioridade; (ii) remover as colunas irrelevantes (como a coluna \texttt{IssueKey}, utilizada para a mesclagem do histórico); (iii) converter dados categóricos em numéricos(utilizando os métodos de conversão categórico ordinal para numérico ordinal (campo \texttt{Priority}) e o método \textit{one-hot} (campos \texttt{Type}, \texttt{Resolution} e \texttt{Status}); e (iv) normalizar os dados  
+
+%TODO: escrever sobre a normalização de dados.
+
+A Tabela \ref{tab:modelo-final} apresta o modelo final gerado pelos \textit{scripts} de  pré-processamento sobre os arquivos de dados extraídos da base de dados do BTS HADOOP.
+
+\begin{table}[ht]\centering
+  \tiny
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}llp{9cm}p{2cm}l@{}}\toprule
+    \#  &  Nome  &  Descrição  &  Tipo  &  Escala \\
+    \midrule 
+    1  &  Type\_Bug  &  Indica um \textit{Bug}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    2  &  Type\_Improvement  &  Indica um \textit{Improvement}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    3  &  Type\_NewFeature  &  Indica um \textit{NewFeature}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    4  &  Type\_Subtask  &  Indica um \textit{Subtask}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    5  &  Type\_Task  &  Indica um \textit{Task}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    6  &  Type\_Test  &  Indica um \textit{Test}(1) ou não(0). &  Qualitativo  &  Nominal \\
+	7  &  Type\_Wish  &  Indica um \textit{Wish}(1) ou não(0). &  Qualitativo  &  Nominal \\
+    8  &  DayToResolve  &  Quantidade de dias que foram utilizados para resolvê-lo  &  Quantitativo discreto  &  Racional \\
+    9  &  Resolution\_CannotReproduce  &  Indica um tipo de resolução \textit{CannotReproduce}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    10  &  Resolution\_Duplicate  &  Indica um tipo de resolução \textit{Duplicate}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    11  &  Resolution\_Fixed  &  Indica um tipo de resolução \textit{Fixed}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    12  &  Resolution\_Implemented  &  Indica um tipo de resolução \textit{Implemented}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    13  &  Resolution\_Incomplete  &  Indica um tipo de resolução \textit{Incomplete}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    14  &  Resolution\_Invalid  &  Indica um tipo de resolução \textit{Invalid}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+ 	15  &  Resolution\_Later  &  Indica um tipo de resolução \textit{Later}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    16  &  Resolution\_NotAProblem  &  Indica um tipo de resolução \textit{Not A Problem}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    17  &  Resolution\_Unresolved  &  Indica um tipo de resolução \textit{Unresolved}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    18  &  Resolution\_WontFix  &  Indica um tipo de resolução \textit{Wont Fix}(1) ou não(0)  &  Qualitativo  &  Nominal\\
+    
+	19 & Status\_Closed & Indica um \textit{Status} \textit{Closed} (1) ou não. & Qualitativo & Nominal\\
+	20 & Status\_Resolved & Indica um \textit{Status} \textit{Resolved} (1) ou não. & Qualitativo & Nominal\\
+	
+	
+	21 & QuantityOfComments & Quantidade de comentários feito sobre um tíquete. & Quantitativo discreto & Racional\\
+	22 & HasBlockWord & Indica se a palavra “\textit{block}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	23 & HasChangeWord & Indica se a palavra “\textit{change}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	24 & HasDebugWord & Indica se a palavra “\textit{debug}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	25 & HasErrorWord & Indica se a palavra “\textit{error}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	26 & HasExceptionWord & Indica se a palavra “\textit{exception}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	27 & HasFailWord & Indica se a palavra “\textit{fail}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	28 & HasFixWord & Indica se a palavra “\textit{fix}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	29 & HasIssueWord & Indica se a palavra “\textit{issue}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	30 & HasPatchWord & Indica se a palavra “\textit{patch}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	31 & HasProblemWord & Indica se a palavra “\textit{problem}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	32 & HasSupportWord & Indica se a palavra “\textit{support}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	33 & HasTestWord & Indica se a palavra “\textit{test}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	34 & HasThrowsWord & Indica se a palavra “\textit{throws}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	35 & HasWarnWord & Indica se a palavra “\textit{warn}” está na descrição do tíquete. & Qualitativo & Nominal\\
+	36 & DepthOfTree & Profundidade da árvore onde se encontra o tíquete. & Quantitativo discreto & Racional\\
+	37 & QuantityOfChildren & Quantidade de filhos que o tíquete possui. & Quantitativo discreto & Racional\\
+	38 & WeightOfChildren & Peso total ponderado dos filhos que o tíquete possui. & Quantitativo contínuo & Racional\\
+	39 & ChangedInPriority & Indica se houve mudança na prioridade do tíquete(1) ou não houve(0)& Qualitativo & Nominal\\    
+	40 & ChangedInPriorityTo & Indica se houve mudança na prioridade do tíquete para baixo(1), para cima (2) ou não houve mudança (0)& Qualitativo & Nominal\\
+	41  &  PriorityCode  &  Prioridade(ou severidade) do tíquete: \textit{Blocker}(5) ,  \textit{Critical}(4) ,  \textit{Major}(3) ,  \textit{Minor}(2) ou \textit{Trivial}(1)  &  Qualitativo  &  Nominal \\
+ 
+    \bottomrule 
+  \end{tabular}
+  \caption{Modelo de dados final.}
+  \label{tab:modelo-final}
+\end{table}
+
+
+\section{Treinamento e testes da máquina de aprendizado}
+A execução desta etapa produziu três arquivos no formato CSV contendo as métricas de desempenho, bem como os valores dos hiperparâmetros $-$ escolhidos apos o \textit{cross validation} 
+com 3-\textit{fold} $-$ utilizados pelos classificadores que foram implementados pelos \textit{scripts} \texttt{Predict-Q1.R}, \texttt{Predict-Q2.R} e \texttt{Predict-Q3.R}. O conteúdo 
+desses arquivos, apresentados nas Tabelas \ref{tab:desempenho-para-q1}, \ref{tab:desempenho-para-q1} e \ref{tab:desempenho-para-q3}, será analisado na próxima etapa com o objetivo de 
+selecionar o classificador mais adequado para responder, respectivamente, a cada  uma das questões de 
+pesquisa propostas neste documento. 
+
+A partir do arquivo gerado na etapa de pré-processamento, contendo o modelo e os dados propriamente ditos, cada um dos \textit{scripts} executou os algoritmos \textit{Gradiente Boosting Machine}(GBM), 
+\textit{Neural Networks}(NNet), \textit{Random Forest}(RF) e \textit{Support Vector Machine}(SVM) utlizando o pacote \texttt{Caret}\cite{CAR} da linguagem R. A Tabela \ref{tab:hiperparametros} apresenta 
+os hiperparâmetros avaliados durante a execução de cada um, cujos valores foram os mesmos sugeridos nas atividades desta disciplina.
+
+Por sua vez, cada classificador recebeu amostras de 1000 a 6000 tíquetes (em intervalos de 1000 elementos) em três ciclos de execução $-$ um para cada método de amostragem 
+empregado: (i) randômico (denominado de "\textit{random}") cujos elementos de cada classe da amostra são escolhidas aleatoriamente; (ii) partes iguais (denominado de "1/2")
+cujos elementos de cada classe da amostra são distribuídos em partes iguais; e o (iii) proporcional (denominado de "proportional") cujos elementos da amostra são distribuídos 
+proporcionalmente com relação ao conjunto de dados originais.
+
+\begin{table}[ht]\centering
+	\begin{tabular}{@{} p{3cm}  p{12cm}@{}}
+		\toprule
+		\textbf{Classificador} & \textbf{Hiperparâmetros} \\ 
+		\midrule
+    GBM & Número de árvores = 30, 70, e 100, Learning rate = 0.1 e 0.05 e 
+Profundidade das arvores = 5.\\ 
+		Nnet & Neurônios na camada escondida= 10, 20, 30 e 40.\\ 
+    RF & mtry = 10, 15, 20, 25 e ntrees = 100, 200, 300 e 400.\\
+		SVM & C=$2^{-5}$, $2^{0}$, $2^{5}$, $2^{10}$ e sigma= $2^{-15}$, $2^{-10}$, 
+$2^{-5}$, $2^{0}$, $2^5$.\\
+		\bottomrule
+	\end{tabular}
+	 \caption{Hiperpâmetros candidatos para classificadores.}
+  	 \label{tab:hiperparametros}
+\end{table}
+
+ \begin{sidewaystable}[ph!]
+  \begin{center}
+  \tiny
+  \pgfplotstableread{/Users/luiz/Workspace/issue-miner/data/csv/predict-q1-result.csv}{\loadedtable}
+  \pgfplotstabletypeset[]{\loadedtable}
+  \end{center}
+  \caption{Desempenho dos classificadores para a questão Q1.}
+  \label{tab:desempenho-para-q1	}
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+  
+  \begin{center}
+  \tiny
+  \pgfplotstableread{/Users/luiz/Workspace/issue-miner/data/csv/predict-q1-result.csv}{\loadedtable}
+  \pgfplotstabletypeset[]{\loadedtable}
+  \end{center}
+  \caption{Desempenho dos classificadores para a questão Q2.}
+  \label{tab:desempenho-para-q2	}
+\end{sidewaystable}
+
+\begin{sidewaystable}[ph!]
+  \begin{center}
+  \pgfplotstableread{/Users/luiz/Workspace/issue-miner/data/csv/predict-q1-result.csv}{\loadedtable}
+  \tiny
+  \pgfplotstabletypeset[]{\loadedtable}
+  \end{center}
+  \caption{Desempenho dos classificadores para a questão Q3.}
+  \label{tab:desempenho-para-q3	}
+\end{sidewaystable}
+
+
+\section{Análise dos resultados}
+A execução desta etapa resultou na escolha do classificador, do tamanho 
+da amostra e do método de amostragem mais apropriado para responder à 
+cada questões de pesquisa proposta neste projeto. Essa análise baseou-se nas 
+métricas de acurácia, precisão, \textit{recall} e F1 \textit{score}\cite{JAS} e
+no tempo de execução gasto por cada classificador para o aprendizado e teste de
+cada amostra.
+
+% TODO colocar gráficos gerados.
+
+A avaliação as métricas produzidas pelos classificadores de cada máquina de 
+aprendizado escritas para responder as questões propostas resultou em:
+
+\begin{enumerate}
+  \item o SVM apresentou a melhor média das métricas entre todos os 
+    classificadores utilizados. Isso ocorreu com amostra de tamanho igual a 
+    6000 elementos escolhida 
+    com o método proporcional. Entretanto, em razão do tempo gasto para sua 
+    execução o ....
+  \item o SVM apresentou a melhor média das métricas entre todos os 
+    classificadores utilizados. Isso ocorreu com amostra de tamanho igual a 
+    6000 elementos escolhida 
+    com o método proporcional. Entretanto, em razão do tempo gasto para sua 
+    execução o ....
+  \item o SVM apresentou a melhor média das métricas entre todos os 
+    classificadores utilizados. Isso ocorreu com amostra de tamanho igual a 
+    6000 elementos escolhida 
+    com o método proporcional. Entretanto, em razão do tempo gasto para sua 
+    execução o ....
+  % TODO: escolher o classificador para as questões 2 e 3.
+\end{enumerate}
+
+\section{Conclusão}
+
+\section{Códigos fontes}
+
+\lstinputlisting[language=R, caption=extract\_issues\_history.R, label=lst:extractissueshistory]{/Users/luiz/Workspace/issue-miner/scripts/extract_issues_history.R}
+
+\lstinputlisting[language=R, caption=extract\_history\_changes.R, label=lst:extracthistorychanges]{/Users/luiz/Workspace/issue-miner/scripts/extract_history_changes.R}
+
+\lstinputlisting[language=R, caption=preprocess\_issues\_data.R, label=lst:preprocessissuesdata]{/Users/luiz/Workspace/issue-miner/scripts/preprocess_issues_data.R}
+
+\lstinputlisting[language=R, caption=predict-q1.R, label=lst:predictq1]{/Users/luiz/Workspace/issue-miner/scripts/predict-q1.R}
+
+\lstinputlisting[language=R, caption=predict-q2.R, label=lst:predictq2]{/Users/luiz/Workspace/issue-miner/scripts/predict-q2.R}
+
+\lstinputlisting[language=R, caption=predict-q3.R, label=lst:predictq3]{/Users/luiz/Workspace/issue-miner/scripts/predict-q3.R}
+
+\lstinputlisting[language=R, caption=input\_output\_data.R, label=lst:inputoutputdata]{/Users/luiz/Workspace/issue-miner/scripts/lib/input_output_data.R}
+
+\lstinputlisting[language=R, caption=train\_predict\_data.R, label=lst:trainpredictdata.R]{/Users/luiz/Workspace/issue-miner/scripts/lib/train_predict_data.R}
+
+
+\begin{thebibliography}{99}
+\bibitem{ANT} ANTONIOL, G., et. al.  {\bf Is It a Bug or an Enhancement?: A Text-based Approach to Classify Change Requests.}. Proceedings of the 2008 Conference of the 
+Center for Advanced Studies on Collaborative Research: Meeting of Minds. Ontario(CDN):ACM, 2008.
+\bibitem{ATL} ATLASSIAN.  {\bf JIRA User's Guide}. Disponível em: https://confluence.atlassian.com/jira064/jira-user-s-guide-720416011.html.
+Acessado em 10 de novembro de 2016.
+\bibitem{CAR} CARET.  {\bf The Caret Package}. Disponível em: 
+http://topepo.github.io/caret/index.html.Acessado em 10 de novembro de 2016.
+\bibitem{JAS} BROWNLEE, J.  {\bf Classification Accuracy is Not Enough: More 
+Performance Measures You Can Use}. Disponível em: 
+http://machinelearningmastery.com/classification-accuracy-is-not-enough-more-per
+formance-measures-you-can-use/.Acessado em 10 de novembro de 2016.
+\bibitem{JON} JONGE, E., LOO, M. {\bf An Introduction do Data Cleaning with R}. Hague(NL): Statistics Netherlands, 2013.
+\bibitem{FAC} FACELLI, K. et.al. {\bf Inteligência Artificial: Uma Abordagem de Aprendizado de Máquina}. Rio de Janeiro: LTC, 2015.
+\bibitem{SOM} SOMMERVILLE, I. {\bf Engenharia de Software.} 9.ed. São Paulo: Pearson Prentice Hall, 2011.
+\bibitem{WIL} WILLIAMS, G. {\bf Hands-On Data Sciense with R Text Mining}. Disponível em: http://HandsOnDataScience.com/.
+Acessado em 15 de novembro de 2016. 
+
+\end{thebibliography}
+
+\end{document}

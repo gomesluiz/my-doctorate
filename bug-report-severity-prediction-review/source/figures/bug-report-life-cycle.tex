@@ -1,0 +1,51 @@
+\begin{tikzpicture}[node distance=2.5cm, scale=.6, every node/.style={transform shape}]
+    \node (unc) [activity] {Unconfirmed};
+    \node (new) [activity, below of=unc]{New};
+    \node (ass) [activity, below of=new]{Assigned};
+    \node (res) [activity, below of=ass]{Resolved};    
+    \node (ver) [activity, below of=res]{Verified};
+    \node (clo) [activity, below of=ver]{Closed};    
+    \node (reo) [activity, right of=res, xshift=5cm]{Reopen};
+    
+    \node[anchor=west,text width=2cm, text centered] (note1) at (-6.0,-7.7) {Resolutions of status RESOLVED};
+    
+    \node (sta) [state, left of=res, xshift=-2.5cm, yshift=-2.0cm, text width=2.0cm, text centered]
+    {Fixed
+      WontFix
+      WorksForme
+      Duplicate
+      Invalid};
+    
+    \put(0,0){hello};
+    
+    \coordinate[right = 1cm of reo] (midreo);
+    \coordinate[left = 1cm of res] (midres);
+    \coordinate[right = 1cm of new] (midnew);
+    
+    \draw [arrow] (unc) -- node[anchor=east]{Indeed a bug} (new);
+    \draw [arrow] (unc.west) node[anchor=east, xshift=-0.8cm, yshift=-3.5cm, text width=3cm, text centered]
+    {Developer has solved bug} -|  (midres) |-  (res.west);
+    
+    \draw [arrow] (new) -- node[anchor=east, text width=3cm, text centered]
+      {A developer takes possession of the bug} (ass);
+    
+    \draw [arrow] (ass) -- node[anchor=east, text width=3cm, text centered]
+      {The bug has been resolved} (res);
+    \draw [arrow] ([yshift=2mm]ass.east) -|  (midnew) |- node[anchor=west, yshift=-1cm, text width=2cm, text centered]
+    {Ownership changed} (new.east);
+    
+    \draw [arrow] (res) -- node[anchor=east]{Solution worked} (ver);
+    \draw [arrow] (res) -- node[anchor=south, pos=0.45, text width=2cm, text centered]{Solution is not satisfied} (reo);
+    
+    \draw [arrow] (ver) -- node[anchor=east, text width=3cm, text centered]{No ocurrence of the bug is reported} (clo);
+    \draw [arrow] (ver.east)   -| node[anchor=south, pos=0.25]{Bug is reopened} (reo.south);
+    
+    
+    \draw [arrow] (reo.north)  |- node[anchor=west, pos=0.25, text width=2cm, text centered]
+    {A developer takes possession of the bug} ([yshift=-2mm]ass.east);
+    
+    \draw [arrow] (clo)  -| node[anchor=south, pos=0.25]{Bug is reopened} (midreo) |- (reo.east);
+    
+    \draw [arrow, dotted] (sta) -- ([yshift=-4mm]res.west);
+    
+  \end{tikzpicture}

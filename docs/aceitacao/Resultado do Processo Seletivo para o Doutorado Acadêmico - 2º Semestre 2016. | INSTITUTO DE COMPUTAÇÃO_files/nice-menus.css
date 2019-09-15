@@ -1,0 +1,241 @@
+
+/******************************
+ Global CSS for ALL menu types
+******************************/
+
+@import url(https://fonts.googleapis.com/css?family=Verdana);
+
+ul.nice-menu,
+ul.nice-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 0px;
+}
+
+ul.nice-menu li {
+  border: 0px;
+  border-top: 0;
+  float: left; /* LTR */
+  background-color: #005a8c;
+}
+
+ul.nice-menu a {
+  padding: 0.3em 5px 0.3em 5px;
+}
+
+ul.nice-menu ul {
+  top: 1.8em;
+  left: -1px; /* LTR */
+  border: 0;
+  border-top: 0px;
+  margin-right: 0; /* LTR */
+}
+
+ul.nice-menu ul li {
+  width: 12.5em;
+}
+
+ul.nice-menu li a:hover { 
+    color: #000; 
+    background: silver;
+    text-decoration: none;
+    font-weight:normal;
+  }
+
+
+/******************************
+ VERTICAL (left/right) menus
+******************************/
+
+/* This is the default width of all vertical menus. */
+ul.nice-menu-right, ul.nice-menu-left,
+ul.nice-menu-right li, ul.nice-menu-left li {
+  width: 12.5em;
+}
+
+/* VERTICAL menus where submenus pop RIGHT (default). */
+ul.nice-menu-right ul {
+  width: 12.5em;
+  left: 12.5em;
+  top: -1px;
+}
+
+ul.nice-menu-right ul ul {
+  width: 12.5em;
+  left: 12.5em;
+  top: -1px;
+}
+
+ul.nice-menu-right li.menuparent,
+ul.nice-menu-right li li.menuparent {
+  background: #eee url(botao/arrow-right.png) right center no-repeat;
+}
+
+ul.nice-menu-right li.menuparent:hover,
+ul.nice-menu-right li li.menuparent:hover {
+  background: silver url(botao/arrow-right.png) right center no-repeat;
+}
+
+/* VERTICAL menus where submenus pop LEFT. */
+ul.nice-menu-left li ul {
+  width: 12.5em;
+  left: -12.65em;
+  top: -1px;
+}
+
+ul.nice-menu-left li ul li ul {
+  width: 12.5em;
+  left: -12.65em;
+  top: -1px;
+}
+
+ul.nice-menu-left li.menuparent,
+ul.nice-menu-left li li.menuparent {
+  background: #eee url(botao/arrow-left.png) left center no-repeat;
+}
+
+ul.nice-menu-left li.menuparent:hover,
+ul.nice-menu-left li li.menuparent:hover {
+  background: silver url(botao/arrow-left.png) left center no-repeat;
+}
+
+ul.nice-menu-left a, ul.nice-menu-left ul a {
+  padding-left: 14px;
+}
+
+/******************************
+ HORIZONTAL (down) menus ,, editado em 25/10/2012
+*****************************
+
+ul.nice-menu-down {
+  position:absolute;
+  list-style:none;
+  margin:0px;
+  border:0px;
+  width:1024px;
+}
+
+ul.nice-menu-down li {
+  display:inline
+}
+
+ul.nice-menu-down li a {
+  text-decoration:none;
+  padding:10px 0;
+  width:113.5px;
+  background:#005a8c;
+  color:#eee;
+  float:left;
+  text-align:center;
+  border-left: 0px;
+}
+
+ul.nice-menu-down li a:hover {
+  background:silver;
+  color:#eee
+}
+*/
+/******************************
+ NOVO HORIZONTAL (down) menus ,, última edição : 03/03/2016
+******************************/
+
+
+h1{font:5em 'Verdana'; text-align:center; margin:30px 0 0 0; background:silver; color:#fff; padding:12px; letter-spacing:-0.07em; text-shadow:0px 0px 5px black; width:1000px; }
+
+.nice-menu-down{z-index:2;}
+
+.nice-menu-down{list-style:none; margin:20px 0 0 350px; border:1px solid #fff; float:left; }
+
+.nice-menu-down li{position:relative; float:left; border-right:1px solid #c0c0c0;}
+
+.nice-menu-down li a{font-family:'Verdana';font-size:13.25px;  color:#fff; text-decoration:none; padding:5px 10px; display:block;}
+
+.nice-menu-down li a:hover{background:#333; color:#fff; -moz-box-shadow:0 3px 10px 0 #CCC; -webkit-box-shadow:0 3px 10px 0 #ccc; text-shadow:0px 0px 5px #fff; }
+
+.nice-menu-down li ul{position:absolute; top:23px; left:20px; background-color:#fff; display:none; }
+
+.nice-menu-down li:hover ul ul{display:none;}
+
+.nice-menu-down li:hover ul, .nice-menu-down li ul li:hover ul, .nice-menu-down li.over ul, .nice-menu-down li ul li.over ul{display:block;}
+
+.nice-menu-down li ul li{border:1px solid #c0c0c0; display:block; width:150px;}
+
+li.border0{border:0;}
+
+.nice-menu-down li ul li ul{z-index:900; top:0; left:110px; background:#eaeaea;}
+
+body {behavior:url(csshover.htc); } 
+
+
+/*Fix IE. Hide from IE Mac\*/
+* html .nice-menu-down {margin-left:175px; }
+/*End*/
+
+#nice-menu-1{
+position:relative;
+left:860px;
+top:1px;
+width:140px;
+height:25px;
+margin: 0 auto;
+padding: 0px 0px 0px 0px;
+
+}
+
+/******************************
+ Garland-specific CSS
+******************************/
+
+/**
+ * Global CSS for ALL menu types
+ */
+ul.nice-menu li {
+  margin: 0;
+  padding-left: 0; /* LTR */
+  background-image: none;
+}
+
+#header-region ul.nice-menu li {
+  margin: 0;
+  /* Padding rules are needed to deal with Garland's header line-height. */
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  background: #eee;
+}
+
+#header-region ul.nice-menu ul {
+  top: 1.8em;
+  left: -1px; /* LTR */
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-right: 0; /* LTR */
+}
+
+#header-region ul.nice-menu ul {
+  top: 1.7em;
+}
+
+/**
+ * HORIZONTAL (down) menus
+ */
+#header-region ul.nice-menu-down li ul li ul {
+  left: 12.5em; /* LTR */
+  top: -1px;
+}
+
+#header-region ul.nice-menu-down li.menuparent {
+  background: #eee url(botao/arrow-down.png) right center no-repeat; /* LTR */
+}
+
+#header-region ul.nice-menu-down li.menuparent:hover {
+  background: #ccc url(botao/arrow-down.png) right center no-repeat; /* LTR */
+}
+
+#header-region ul.nice-menu-down li li.menuparent {
+  background: #eee url(botao/arrow-right.png) right center no-repeat; /* LTR */
+}
+
+#header-region ul.nice-menu-down li li.menuparent:hover {
+  background: #ccc url(botao/arrow-right.png) right center no-repeat; /* LTR */
+}

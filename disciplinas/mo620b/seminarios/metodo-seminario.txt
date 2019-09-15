@@ -1,0 +1,63 @@
+MO620 -- Engenharia de Software II out/2014
+
+Método para Preparação do Seminário de Pesquisa
+================================================
+
+passo(1):  escolher um  tema  (pode  ser  abrangente) de  interesse.
+
+passo(2):   estabelecer    o   estado-da-arte    em   termos    de
+desafios/problemas em aberto.
+
+passo(3): focar um assunto específico dentro do tema escolhido.
+
+passo(3.1): escolher  3 artigos recentes (de  preferência em inglês),
+publicados  nos  últimos  5   anos.   Dê  preferência  para  trabalhos
+publicados   em  simpósios/conferências/workshops   IEEE  ou   ACM,  e
+periódicos internacionais.
+
+passo(3.2): classificar  os artigos  escolhidos: em  introdutórios e
+avançados, ordenando-os.
+
+passo(4): produzir como  artefato final um conjunto de transparências
+coeso e com integridade conceitual, 
+
+Uma sugestão de  formato
+========================
+
+(1) Titulo
+
+(2) Roteiro/Agenda
+
+(3) apresentar Conceitos Básicos
+
+(4) discutir Desafios do tema escolhido
+
+(3) apresentar idéias do 1o. artigo
+
+(4) apresentar idéias do 2o. artigo
+
+(5) apresentar idéias do 3o. artigo
+
+(6)  consolidar as idéias  apresentadas de  acordo com  a SUA
+visão (não com a visão  dos autores dos trabalhos): você concordou com
+tudo o que você leu? Quais as limitações existentes?
+
+(7) apresentar  SUAS conclusões  de tal forma  que a  sua contribuição
+original fique estabelecida para o seminário.
+
+(8) lista de referências utilizadas
+
+Critérios usados para avaliar sua apresentação
+==============================================
+
+(1) foco da apresentação
+(2) clareza da apresentação
+(3) estrutura das transparências produzidas
+(4) aderência ao formato proposto do seminário
+(5) correção dos conceitos empregados 
+(6) qualidade/didática das explicações
+(7) aderência ao tempo exato de 20 minutos
+(8) sua postura  em relação  à platéia:  linguagem  corporal, formal
+vs. informal
+(9) a apresentação pode ser feita em inglês
+

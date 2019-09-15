@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2018/Arch Linux)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: severity-prediction-survey.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Reallocated wiz_functions (elt_size=8) to 6000 items from 3000.
+Reallocated singl_function (elt_size=8) to 100 items from 50.
+Database file #1: references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing publisher in Sommerville:2010
+Warning--missing publisher in Williams:2011
+Warning--empty year in Krippendorff:2011
+
+Done.
+You've used 60 entries,
+            4087 wiz_defined-function locations,
+            1241 strings with 19811 characters,
+and the built_in function-call counts, 47329 in all, are:
+= -- 3669
+> -- 1166
+< -- 404
++ -- 631
+- -- 198
+* -- 2255
+:= -- 6765
+add.period$ -- 125
+call.type$ -- 60
+change.case$ -- 56
+chr.to.int$ -- 969
+cite$ -- 63
+duplicate$ -- 3397
+empty$ -- 4022
+format.name$ -- 249
+if$ -- 11226
+int.to.chr$ -- 0
+int.to.str$ -- 60
+missing$ -- 597
+newline$ -- 203
+num.names$ -- 64
+pop$ -- 1449
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 3633
+stack$ -- 0
+substring$ -- 2285
+swap$ -- 2774
+text.length$ -- 81
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 60
+warning$ -- 3
+while$ -- 216
+width$ -- 62
+write$ -- 579
+(There were 3 warnings)

@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {brazil}
+\beamer@sectionintoc {1}{Primeira Onda}{2}{0}{1}
+\beamer@sectionintoc {2}{Segunda Onda}{4}{0}{2}
+\beamer@sectionintoc {3}{Terceira Onda}{6}{0}{3}
+\beamer@sectionintoc {4}{Produto Exemplo}{8}{0}{4}
+\beamer@sectionintoc {5}{Bibliografia}{13}{0}{5}

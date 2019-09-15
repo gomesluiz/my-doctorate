@@ -1,0 +1,36 @@
+\begin{tikzpicture}[node distance=2cm, scale=.6, every node/.style={transform shape}]
+    \node (d1) [rounded] {Does bug blocks development and/or testing?};
+    \node (blocker) [squared, right of=d1, xshift=3cm] {Blocker};
+ 
+    \node (d2) [rounded, below of=d1] 
+        {Does bug cause crash, loss of data and severe memory leak?};
+    \node (critical) [squared, right of=d2, xshift=3cm] {Critical};
+ 
+    \node (d3) [rounded, below of=d2] 
+      {Does bug cause major loss function. For example, can not run on server?};
+    \node (major) [squared, right of=d3, xshift=3cm] {Major};
+ 
+    \node (d4) [rounded, below of=d3] 
+      {Does bug cause some loss of functionality under specific circumstances?};
+    \node (normal) [squared, right of=d4, xshift=3cm] {Normal};
+    
+    \node (d5) [rounded, below of=d4] 
+    {Does bug minor loss of function, or other problem where easy workaround is present?};
+    \node (minor) [squared, right of=d5, xshift=3cm] {Minor};
+    
+    \node (d6) [rounded, below of=d5] 
+    {Is bug cosmetic problem like misspelled words ou misaligned text?};
+    \node (trivial) [squared, right of=d6, xshift=3cm] {Trivial};
+    
+    \draw [->] (d1) -- node[anchor=south]{yes} (blocker);
+    \draw [->] (d1) -- node[anchor=east]{no} (d2);
+    \draw [->] (d2) -- node[anchor=south]{yes} (critical);
+    \draw [->] (d2) -- node[anchor=east]{no} (d3);
+    \draw [->] (d3) -- node[anchor=south]{yes} (major);
+    \draw [->] (d3) -- node[anchor=east]{no} (d4);
+    \draw [->] (d4) -- node[anchor=south]{yes} (normal);
+    \draw [->] (d4) -- node[anchor=east]{no} (d5);
+    \draw [->] (d5) -- node[anchor=south]{yes} (minor);
+    \draw [->] (d5) -- node[anchor=east]{no} (d6);
+    \draw [->] (d6) -- node[anchor=south]{yes} (trivial);
+  \end{tikzpicture}

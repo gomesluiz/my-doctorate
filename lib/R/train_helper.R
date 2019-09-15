@@ -20,7 +20,8 @@ names(train_classifiers) <- train_classifiers
 
 DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, search = "grid")
 
-DEFAULT_PREPROC <- c("BoxCox","center", "scale", "pca")
+# DEFAULT_PREPROC <- c("BoxCox","center", "scale", "pca")
+DEFAULT_PREPROC <- c("range", "pca")
 # "center": subtract mean from values.
 # "scale" : divide values by standard deviation.
 # ("center", "scale"): combining the scale and center transforms will 
