@@ -5,7 +5,7 @@
 #' Luiz Alberto (gomes.luiz@gmail.com)
 #'
 #' @usage: 
-#' $ nohup Rscript ./predict_long_lived_bug_experiment_1.R > predict_long_lived_bug_experiment_1.log 2>&1 &
+#' $ nohup Rscript ./predict_long_lived_bug_e1.R > predict_long_lived_bug_e1.log 2>&1 &
 #' 
 
 # clean R Studio session.
@@ -73,18 +73,15 @@ class_label     <- "long_lived"
 
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 
+# setup experimental parameters.
 projects   <- c("eclipse")
 n_term     <- c(100)
-#classifier <- c(KNN, NB, NNET, RF, SVM, XB)
-classifier <- c(RF)
-#feature    <- c("short_description", "long_description")
-feature    <- c("short_description")
+classifier <- c(KNN, NB, NNET, RF, SVM, XB)
+feature    <- c("short_description", "long_description")
 threshold  <- c(365)
-#balancing  <- c(UNBALANCED, SMOTEMETHOD)
-balancing  <- c(SMOTEMETHOD)
+balancing  <- c(UNBALANCED, SMOTEMETHOD)
 resampling <- c("repeatedcv")
 parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
-
 
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
@@ -169,11 +166,11 @@ for (project.name in projects){
     
     y_train <- balanced.dataset[, class_label]
     X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
-    if (parameter$balancing != SMOTEMETHOD){
-      flog.trace("Normalizing X_test")
-      X_test_pre_processed  <- preProcess(X_test, method=c("range"))
-      X_test <- predict(X_test_pre_processed, X_test)
-    }
+    #if (parameter$balancing != SMOTEMETHOD){
+    #  flog.trace("Normalizing X_test")
+    #  X_test_pre_processed  <- preProcess(X_test, method=c("range"))
+    #  X_test <- predict(X_test_pre_processed, X_test)
+    #}
     y_test  <- test.dataset[, class_label]
 
     flog.trace("Training model ")
