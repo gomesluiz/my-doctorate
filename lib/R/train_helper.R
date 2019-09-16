@@ -48,7 +48,8 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
     method = "knn",
     trControl = .control,
     tuneGrid  = grid,
-    preProcess = DEFAULT_PREPROC
+    preProc = DEFAULT_PREPROC,
+    metric="Kappa"
   )
 
   return(result)
@@ -83,7 +84,8 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     method = "nb",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC
+    preProc   = DEFAULT_PREPROC,
+    metric="Kappa"
   )
 
   return(result)
@@ -113,7 +115,8 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
     tuneGrid  = grid,
     MaxNWts   = 5000,
     verbose   = FALSE,
-    preProc   = DEFAULT_PREPROC
+    preProc   = DEFAULT_PREPROC,
+    metric = "Kappa"
   )
   
   return(result)
@@ -142,7 +145,8 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
     tuneGrid  = grid,
     ntree   = 200,
     verbose = FALSE,
-    preProc   = DEFAULT_PREPROC
+    preProc   = DEFAULT_PREPROC,
+    metric = "Kappa"
   )
   
   return(result)
@@ -174,7 +178,8 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     method    = "svmRadial",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC
+    preProc   = DEFAULT_PREPROC,
+    metric = "Kappa"
   )
 
   return(result)
@@ -207,7 +212,8 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     method = "xgbTree",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC
+    preProc   = DEFAULT_PREPROC,
+    metric = "Kappa"
   )
 
   return(result)

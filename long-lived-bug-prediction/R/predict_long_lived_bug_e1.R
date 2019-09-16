@@ -11,6 +11,7 @@
 # clean R Studio session.
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
+timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
 IN_DEBUG_MODE <- TRUE
@@ -65,10 +66,10 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(3)
+processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
-timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 class_label     <- "long_lived"
 
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
