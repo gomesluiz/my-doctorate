@@ -1,0 +1,5 @@
+project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
+eclipse,long_description,100,knn,smote,repeatedcv,Accuracy,365,1280,670,610,243,223,20,8,93,130,12,0.4,0.5829596412556054,0.4914798206278027,0.4914798206278027,0.9154929577464789,0.5829596412556054,0.7123287671232877
+eclipse,long_description,100,knn,smote,repeatedcv,Kappa,365,1280,670,610,243,223,20,8,93,130,12,0.4,0.5829596412556054,0.4914798206278027,0.4914798206278027,0.9154929577464789,0.5829596412556054,0.7123287671232877
+eclipse,long_description,100,knn,smote,repeatedcv,ROC,365,1280,670,610,243,223,20,8,93,130,12,0.4,0.5829596412556054,0.4914798206278027,0.4914798206278027,0.9154929577464789,0.5829596412556054,0.7123287671232877
+eclipse,long_description,100,knn,unbalanced,repeatedcv,Accuracy,365,731,670,61,243,223,20,0,0,223,20,0,1,0.5,0.5,0.9176954732510288,1,0.9570815450643778

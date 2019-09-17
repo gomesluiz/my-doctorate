@@ -14,7 +14,8 @@ options(readr.num_columns = 0)
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
+IN_DEBUG_MODE  <- TRUE
+FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -66,7 +67,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 8, 8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 8)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
@@ -75,14 +76,15 @@ class_label     <- "long_lived"
 #projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
 
 # setup experimental parameters.
-projects   <- c("eclipse")
-n_term     <- c(100)
-classifier <- c(KNN, NB, NNET, RF, SVM, XB)
-feature    <- c("short_description", "long_description")
-threshold  <- c(365)
-balancing  <- c(UNBALANCED, SMOTEMETHOD)
-resampling <- c("repeatedcv")
-parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
+projects    <- c("eclipse")
+n_term      <- c(100)
+classifier  <- c(KNN, NB, NNET, RF, SVM)
+feature     <- c("short_description", "long_description")
+threshold   <- c(365)
+balancing   <- c(UNBALANCED, SMOTEMETHOD)
+resampling  <- c("repeatedcv")
+metric.type <- c(ACC, KPP, ROC)
+parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
@@ -106,7 +108,8 @@ for (project.name in projects){
   }
  
   # A new metric file have to be generated. 
-  if (parameter.number == 1) {
+  if ((parameter.number == 1) || (FORCE_NEW_FILE == TRUE)) {
+    parameter.number = 1
     metrics.file <- format_file_name(DATADIR, timestamp, metrics.mask)
     flog.trace("New Evaluation file: %s", metrics.file)
   } else {
@@ -138,8 +141,8 @@ for (project.name in projects){
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
     
-    flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
-             , parameter$n_term , parameter$classifier , parameter$feature
+    flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Metric...: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
+             , parameter$n_term , parameter$classifier , parameter$metric.type, parameter$feature
              , parameter$threshold , parameter$balancing , parameter$resampling)
 
     if (parameter$feature != last.feature){
@@ -167,23 +170,17 @@ for (project.name in projects){
     
     y_train <- balanced.dataset[, class_label]
     X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
-    #if (parameter$balancing != SMOTEMETHOD){
-    #  flog.trace("Normalizing X_test")
-    #  X_test_pre_processed  <- preProcess(X_test, method=c("range"))
-    #  X_test <- predict(X_test_pre_processed, X_test)
-    #}
     y_test  <- test.dataset[, class_label]
 
     flog.trace("Training model ")
     fit_control <- get_resampling_method(parameter$resampling)
-    # fit_control <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, 
-    #                             summaryFunction = twoClassSummary,
-    #                             search = "grid")
+    
     set.seed(144)
     fit_model   <- train_with (.x=X_train, 
                                .y=y_train, 
                                .classifier=parameter$classifier,
-                               .control=fit_control)
+                               .control=fit_control,
+                               .metric=parameter$metric.type)
     # saving model plot to file 
     plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s.png", timestamp, project.name
                              , parameter$classifier, parameter$balancing, parameter$feature
@@ -211,13 +208,14 @@ for (project.name in projects){
     
     metrics.record<-
       data.frame(
-        dataset = project.name,
-        n_term = parameter$n_term,
+        project    = project.name,
+        feature    = parameter$feature,
+        n_term     = parameter$n_term,
         classifier = parameter$classifier,
-        feature = parameter$feature,
-        threshold  = parameter$threshold,
         balancing  = parameter$balancing,
         resampling = parameter$resampling,
+        metric     = parameter$metric.type,
+        threshold  = parameter$threshold,
         train_size = nrow(X_train),
         train_size_class_0 = length(subset(y_train, y_train == "N")),
         train_size_class_1 = length(subset(y_train, y_train == "Y")),

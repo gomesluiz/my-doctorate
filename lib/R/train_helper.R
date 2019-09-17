@@ -1,6 +1,7 @@
 
 library(futile.logger)
 
+# algorithms
 KNN  <- "knn"
 NB   <- "nb"
 NNET <- "nn"
@@ -17,6 +18,11 @@ train_classifiers <- c(
   XB 
 )
 names(train_classifiers) <- train_classifiers
+
+# metrics 
+ACC <- "Accuracy"
+KPP <- "Kappa"
+ROC <- "ROC"
 
 DEFAULT_CONTROL <- trainControl(method = "repeatedcv", number = 5, repeats = 2, search = "grid")
 DEFAULT_PREPROC <- c("BoxCox","center", "scale", "pca")
@@ -35,9 +41,9 @@ DEFAULT_PREPROC <- c("BoxCox","center", "scale", "pca")
 #' @param .control A control Caret parameter
 #'
 #' @return a trained model knn.
-train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_knn] Training model with KNN")
+  flog.trace("[train_with_knn] Training model with KNN and %s", .metric)
   
   grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
   # k: neighbors 
@@ -49,7 +55,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
     trControl = .control,
     tuneGrid  = grid,
     preProc = DEFAULT_PREPROC,
-    metric="Kappa"
+    metric=.metric
   )
 
   return(result)
@@ -62,9 +68,9 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_nb] Training model with NB")
+  flog.trace("[train_with_nb] Training model with NB and %s", .metric)
   
   #grid <- expand.grid(
   #  fL        = c(0, 0.5, 1.0), # laplace correction
@@ -85,7 +91,7 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     trControl = .control,
     tuneGrid  = grid,
     preProc   = DEFAULT_PREPROC,
-    metric="Kappa"
+    metric=.metric
   )
 
   return(result)
@@ -98,13 +104,13 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_nnet] Training model with NNET")
+  flog.trace("[train_with_nnet] Training model with NNET and %s", .metric)
   
   grid <- expand.grid(
-    size  = c(10, 20, 30, 40),  # Hidden units 
-    decay = (0.5)               # Weight decay
+    size  = c(30, 40, 50, 60, 70),  # Hidden units 
+    decay = (0.5)                   # Weight decay
   )
   
   result <- train(
@@ -116,7 +122,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
     MaxNWts   = 5000,
     verbose   = FALSE,
     preProc   = DEFAULT_PREPROC,
-    metric = "Kappa"
+    metric = .metric
   )
   
   return(result)
@@ -129,9 +135,9 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_rf] Training model with RF")
+  flog.trace("[train_with_rf] Training model with RF and %s", .metric)
   
   grid <- expand.grid(
     mtry = c(25, 50, 75, 100)
@@ -146,7 +152,7 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
     ntree   = 200,
     verbose = FALSE,
     preProc   = DEFAULT_PREPROC,
-    metric = "Kappa"
+    metric = .metric
   )
   
   return(result)
@@ -159,9 +165,9 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_svm] Training model with SVM")
+  flog.trace("[train_with_svm] Training model with SVM and %s", .metric)
   
   grid <- expand.grid(
     C = c(
@@ -179,7 +185,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
     trControl = .control,
     tuneGrid  = grid,
     preProc   = DEFAULT_PREPROC,
-    metric = "Kappa"
+    metric = .metric
   )
 
   return(result)
@@ -192,9 +198,9 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL) {
+train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
-  flog.trace("[train_with_xb] Training model with XgBoost")
+  flog.trace("[train_with_xb] Training model with XgBoost and %s", .metric)
   
   grid <- expand.grid(
     nrounds = c(100, 200, 300, 400), # Boosting iterations
@@ -213,7 +219,7 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL) {
     trControl = .control,
     tuneGrid  = grid,
     preProc   = DEFAULT_PREPROC,
-    metric = "Kappa"
+    metric = .metric
   )
 
   return(result)
@@ -225,22 +231,28 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL) {
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL) {
+train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL, .metric=ACC) {
   if (!.classifier %in% train_classifiers)
   {
     stop(sprintf("%s unknown classifier!", .classifier))
   }
+ 
+  if (.metric == ROC){ 
+    .control <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, 
+                                 summaryFunction = twoClassSummary, search = "grid")
+  }
+  
   if (.classifier == KNN) {
-    return(train_with_knn(.x, .y, .control))
+    return(train_with_knn(.x, .y, .control, .metric))
   } else if (.classifier == NB) {
-    return(train_with_nb(.x, .y, .control))
+    return(train_with_nb(.x, .y, .control, .metric))
   } else if (.classifier == NNET) {
-    return(train_with_nnet(.x, .y, .control))
+    return(train_with_nnet(.x, .y, .control, .metric))
   } else if (.classifier == RF) {
-    return(train_with_rf(.x, .y, .control))
+    return(train_with_rf(.x, .y, .control, .metric))
   } else if (.classifier == SVM) {
-    return(train_with_svm(.x, .y, .control))
+    return(train_with_svm(.x, .y, .control, .metric))
   } else if (.classifier == XB) {
-    return(train_with_xb(.x, .y, .control))
+    return(train_with_xb(.x, .y, .control, .metric))
   }
 }
