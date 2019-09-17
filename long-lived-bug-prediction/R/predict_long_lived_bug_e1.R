@@ -66,7 +66,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+processors <- ifelse(IN_DEBUG_MODE, 8, 8)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
