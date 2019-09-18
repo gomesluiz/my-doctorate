@@ -18,7 +18,7 @@ options(readr.num_columns = 0)
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
-IN_DEBUG_MODE  <- TRUE
+IN_DEBUG_MODE  <- FALSE
 FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
@@ -96,7 +96,7 @@ for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics_no_preproc.csv", project.name)
+  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
@@ -120,7 +120,7 @@ for (project.name in projects){
   
   flog.trace("Starting in parameter number: %d", parameter.number)
 
-  reports.file <- file.path(DATADIR, sprintf("20190916_%s_bug_report_data.csv", project.name))
+  reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
   reports <- read_csv(reports.file, na  = c("", "NA"))
@@ -184,7 +184,7 @@ for (project.name in projects){
                                .control=fit_control,
                                .metric=parameter$metric.type)
     # saving model plot to file 
-    plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s_%s_no_preproc.jpg", timestamp, project.name
+    plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s_%s.jpg", timestamp, project.name
                              , parameter$classifier, parameter$balancing, parameter$feature
                              , parameter$n_term, parameter$metric.type)
     plot_file_name_path = file.path(DATADIR, plot_file_name)
