@@ -199,12 +199,13 @@ for (project.name in projects){
     metrics <- calculate_metrics(y_hat, y_test)
     
     flog.trace("Evaluating metrics calculated!")
-    if (metrics$balanced_acc > best.accuracy){
-      test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
-      write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e1_%s_test_results.csv", timestamp, project.name)))
-      best.accuracy = metrics$balanced_acc
+    if (!is.na(metrics$balanced_acc)){
+      if (metrics$balanced_acc > best.accuracy){
+        test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
+        write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e1_%s_test_results.csv", timestamp, project.name)))
+        best.accuracy = metrics$balanced_acc
+      }
     }
-    
     flog.trace("Metrics: sensitivity [%f], specificity [%f], b_acc [%f]"
                 , metrics$sensitivity, metrics$specificity, metrics$balanced_acc)
     
