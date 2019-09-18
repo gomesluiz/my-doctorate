@@ -45,8 +45,8 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
   flog.trace("[train_with_knn] Training model with KNN and %s", .metric)
   
-  grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
   # k: neighbors 
+  grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
   
   result <- train(
     x = .x,
@@ -54,7 +54,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     method = "knn",
     trControl = .control,
     tuneGrid  = grid,
-    preProc = DEFAULT_PREPROC,
+    #preProc = DEFAULT_PREPROC,
     metric=.metric
   )
 
@@ -72,12 +72,6 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   
   flog.trace("[train_with_nb] Training model with NB and %s", .metric)
   
-  #grid <- expand.grid(
-  #  fL        = c(0, 0.5, 1.0), # laplace correction
-  #  usekernel = c(TRUE, FALSE)  # distribution type
-  #  adjust    = c(0, 0.5, 1.0)  # bandwidth adjustment
-  #)
-
   grid <- expand.grid(
     fL        = 0:5,               # laplace correction
     usekernel = c(TRUE, FALSE),    # distribution type
@@ -90,7 +84,7 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     method = "nb",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC,
+    #preProc   = DEFAULT_PREPROC,
     metric=.metric
   )
 
@@ -109,7 +103,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
   flog.trace("[train_with_nnet] Training model with NNET and %s", .metric)
   
   grid <- expand.grid(
-    size  = c(30, 40, 50, 60, 70),  # Hidden units 
+    size  = c(10, 20, 30, 40, 50),  # Hidden units 
     decay = (0.5)                   # Weight decay
   )
   
@@ -121,7 +115,7 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     tuneGrid  = grid,
     MaxNWts   = 5000,
     verbose   = FALSE,
-    preProc   = DEFAULT_PREPROC,
+    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
   
@@ -151,7 +145,7 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     tuneGrid  = grid,
     ntree   = 200,
     verbose = FALSE,
-    preProc   = DEFAULT_PREPROC,
+    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
   
@@ -184,7 +178,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     method    = "svmRadial",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC,
+    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
 
@@ -218,7 +212,7 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC) {
     method = "xgbTree",
     trControl = .control,
     tuneGrid  = grid,
-    preProc   = DEFAULT_PREPROC,
+    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
 
@@ -241,7 +235,6 @@ train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL, .metric=AC
     .control <- trainControl(method = "repeatedcv", repeats = 5, classProbs = TRUE, 
                                  summaryFunction = twoClassSummary, search = "grid")
   }
-  
   if (.classifier == KNN) {
     return(train_with_knn(.x, .y, .control, .metric))
   } else if (.classifier == NB) {

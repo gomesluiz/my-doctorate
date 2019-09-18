@@ -7,6 +7,10 @@
 #' @usage: 
 #' $ nohup Rscript ./predict_long_lived_bug_e1.R > predict_long_lived_bug_e1.log 2>&1 &
 #' 
+#' @details:
+#' 
+#'         17/09/2019 16:00 pre-process in the train method removed
+#' 
 
 # clean R Studio session.
 rm(list = ls(all.names = TRUE))
@@ -14,8 +18,8 @@ options(readr.num_columns = 0)
 timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
-IN_DEBUG_MODE  <- FALSE
-FORCE_NEW_FILE <- FALSE
+IN_DEBUG_MODE  <- TRUE
+FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -73,8 +77,6 @@ registerDoParallel(r_cluster)
 
 class_label     <- "long_lived"
 
-#projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-
 # setup experimental parameters.
 projects    <- c("eclipse")
 n_term      <- c(100)
@@ -94,7 +96,7 @@ for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics.csv", project.name)
+  metrics.mask      <- sprintf("rq3e1_%s_predict_long_lived_metrics_no_preproc.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
@@ -182,9 +184,9 @@ for (project.name in projects){
                                .control=fit_control,
                                .metric=parameter$metric.type)
     # saving model plot to file 
-    plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s.png", timestamp, project.name
+    plot_file_name = sprintf("%s_rq3e1_%s_%s_%s_%s_%s_%s_no_preproc.jpg", timestamp, project.name
                              , parameter$classifier, parameter$balancing, parameter$feature
-                             , parameter$n_term)
+                             , parameter$n_term, parameter$metric.type)
     plot_file_name_path = file.path(DATADIR, plot_file_name)
     jpeg(plot_file_name_path)
     print(plot(fit_model))
