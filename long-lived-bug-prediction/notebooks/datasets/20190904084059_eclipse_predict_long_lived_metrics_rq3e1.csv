@@ -1,5 +1,0 @@
-dataset,n_term,classifier,feature,threshold,balancing,resampling,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,manual_balanced_acc,precision,recall,fmeasure
-eclipse,100,xgbTree,long_description,365,smote,repeatedcv,1287,663,624,238,221,17,1,8,213,16,0.058823529411764705,0.9638009049773756,0.5113122171945701,0.5206210577389616,0.9301310043668122,0.9638009049773756,0.9466666666666667
-eclipse,100,xgbTree,long_description,365,unbalanced,repeatedcv,715,663,52,238,221,17,0,0,221,17,0,1,0.5,0.4642857142857143,0.9285714285714286,1,0.962962962962963
-eclipse,100,xgbTree,short_description,365,smote,repeatedcv,1287,663,624,238,221,17,0,14,207,17,0,0.9366515837104072,0.4683257918552036,0.46205357142857145,0.9241071428571429,0.9366515837104072,0.9303370786516854
-eclipse,100,xgbTree,short_description,365,unbalanced,repeatedcv,715,663,52,238,221,17,0,0,221,17,0,1,0.5,0.4642857142857143,0.9285714285714286,1,0.962962962962963
