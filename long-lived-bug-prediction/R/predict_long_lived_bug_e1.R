@@ -71,7 +71,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 8, 8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 8)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
@@ -85,7 +85,8 @@ feature     <- c("short_description", "long_description")
 threshold   <- c(365)
 balancing   <- c(UNBALANCED, SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(ACC, KPP, ROC)
+#metric.type <- c(ACC, KPP, ROC)
+metric.type <- c(DST)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
@@ -126,7 +127,7 @@ for (project.name in projects){
   reports <- read_csv(reports.file, na  = c("", "NA"))
   if (IN_DEBUG_MODE){
     flog.trace("DEBUG_MODE: Sample bug reports dataset")
-    set.seed(144)
+    set.seed(DEFAULT_SEED)
     reports <- sample_n(reports, 1000) 
   }
 
@@ -156,7 +157,7 @@ for (project.name in projects){
     }
     
     flog.trace("Partitioning dataset in training and testing")
-    set.seed(144)
+    set.seed(DEFAULT_SEED)
     reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
     in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
     train.dataset <- reports.dataset[in_train, ]
@@ -176,8 +177,6 @@ for (project.name in projects){
 
     flog.trace("Training model ")
     fit_control <- get_resampling_method(parameter$resampling)
-    
-    set.seed(144)
     fit_model   <- train_with (.x=X_train, 
                                .y=y_train, 
                                .classifier=parameter$classifier,
