@@ -7,10 +7,16 @@ A crawler for issue extraction information from many issue tracking systems.
 1. [Naive Bayes Classifier](https://uc-r.github.io/naive_bayes)
 2. [Caret Package - A Pratical Guide to Machine Learning](https://www.machinelearningplus.com/machine-learning/caret-package/)
 3. [Visualizing Machine Learning Thresholds to Make Better Business Decisions](https://blog.insightdatascience.com/visualizing-machine-learning-thresholds-to-make-better-business-decisions-4ab07f823415)
-4. [17 Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
+4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
+5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
 
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
 
 ### Text Mining
 1. [Creating text features with bag-of-words, n-grams, parts-of-speach and more](http://uc-r.github.io/creating-text-features)
+
+## Vídeos 
+
+### Caret R Package
+1. [Caret Package Webnar With Max Kuhn](https://www.youtube.com/watch?v=7Jbb2ItbTC4&list=WL&index=25)
