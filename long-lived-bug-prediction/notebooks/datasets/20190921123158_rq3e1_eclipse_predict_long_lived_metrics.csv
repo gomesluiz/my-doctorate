@@ -1,3 +1,0 @@
-project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
-eclipse,long_description,100,knn,smote,repeatedcv,Dist,365,1280,670,610,243,223,20,13,167,56,7,0.65,0.25112107623318386,0.4505605381165919,0.4505605381165919,0.07222222222222222,0.65,0.13
-eclipse,long_description,100,knn,unbalanced,repeatedcv,Dist,365,731,670,61,243,223,20,0,0,223,20,0,1,0.5,0.5,0,0,0
