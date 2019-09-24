@@ -13,6 +13,9 @@ A crawler for issue extraction information from many issue tracking systems.
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
 
+### Statistics 
+1. [How to Calculate Nonparametric Statistical Hypothesis Tests in Python](https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/  )
+
 ### Text Mining
 1. [Creating text features with bag-of-words, n-grams, parts-of-speach and more](http://uc-r.github.io/creating-text-features)
 

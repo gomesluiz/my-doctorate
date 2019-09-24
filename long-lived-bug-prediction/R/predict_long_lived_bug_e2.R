@@ -102,7 +102,7 @@ for (project.name in projects){
   }
  
   # A new metric file have to be generated. 
-  if (parameter.number == 1) {
+  if ((parameter.number == 1) || (FORCE_NEW_FILE == TRUE)) {
     metrics.file <- format_file_name(DATADIR, timestamp, metrics.mask)
     flog.trace("New Evaluation file: %s", metrics.file)
   } else {
@@ -110,8 +110,7 @@ for (project.name in projects){
   }
   
   flog.trace("Starting in parameter number: %d", parameter.number)
-
-  reports.file <- file.path(DATADIR, sprintf("20190830_%s_bug_report_data_small.csv", project.name))
+  reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
   flog.trace("Bug report file name: %s", reports.file)
   
   reports <- read_csv(reports.file, na  = c("", "NA"))
@@ -135,22 +134,16 @@ for (project.name in projects){
     flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
              , parameter$n_term , parameter$classifier , parameter$feature
              , parameter$threshold , parameter$balancing , parameter$resampling)
-
-    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-
-    source <- reports[, c('bug_id', parameters$feature)]
-    corpus <- clean_corpus(source)
-    dtm    <- tidy(make_dtm(corpus, parameter$n_term))
-    names(dtm)      <- c("bug_id", "term", "count")
-    term.matrix     <- dtm %>% spread(key = term, value = count, fill = 0)
-    reports.dataset <- merge(
-      x = reports[, c('bug_id', 'bug_fix_time')],
-      y = term.matrix,
-        by.x = 'bug_id',
-        by.y = 'bug_id'
-    )
-      
-    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+stop()
+    if (parameter$feature != last.feature)
+    {
+      flog.trace("Converting dataframe to term matrix")
+      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+      reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
+      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+      last.feature = parameter$feature
+    }
+    
     # replace the SMOTE reserved words.
     colnames(reports.dataset)[colnames(reports.dataset) == "class"]  <- "Class"
     colnames(reports.dataset)[colnames(reports.dataset) == "target"] <- "Target"
