@@ -80,14 +80,14 @@ class_label     <- "long_lived"
 # setup experimental parameters.
 projects    <- c("eclipse")
 n_term      <- c(100)
-classifier  <- c(NB)
+classifier  <- c(NNET)
 #classifier  <- c(KNN,NB, NNET, RF, SVM)
-feature     <- c("short_description")
+feature     <- c("long_description")
 threshold   <- c(365)
-balancing   <- c(UNBALANCED)
+balancing   <- c(SMOTEMETHOD)
 #balancing   <- c(UNBALANCED, SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(KPP)
+metric.type <- c(ACC)
 #metric.type <- c(ACC, DST, KPP, ROC)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
