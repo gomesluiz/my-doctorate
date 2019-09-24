@@ -11,9 +11,11 @@
 # clean R Studio session.
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
+timestamp <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
-IN_DEBUG_MODE <- FALSE
+IN_DEBUG_MODE  <- FALSE
+FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -63,22 +65,20 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-r_cluster <- makePSOCKcluster(8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
-timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
-class_label     <- "long_lived"
-
-#projects   <- c("eclipse", "freedesktop", "gnome", "mozilla", "netbeans", "winehq")
-
-projects   <- c("eclipse")
-n_term     <- c(100, 150, 200, 250, 300)
-classifier <- c(NNET, RF)
-feature    <- c("long_description")
-threshold  <- c(365)
-balancing  <- c(SMOTEMETHOD)
-resampling <- c("repeatedcv")
-parameters <- crossing(n_term, classifier, feature, threshold, balancing, resampling)
+balancing   <- c(SMOTEMETHOD)
+class_label <- "long_lived"
+classifier  <- c(NB, NNET)
+feature     <- c("long_description", "short_description")
+n_term      <- c(100, 150, 200, 250, 300)
+projects    <- c("eclipse")
+threshold   <- c(365)
+resampling  <- c("repeatedcv")
+metric.type <- c(KPP)
+parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
 flog.trace("Long live prediction - RQ3 - Experiment 2")
