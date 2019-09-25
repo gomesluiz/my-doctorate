@@ -81,7 +81,7 @@ class_label     <- "long_lived"
 projects    <- c("eclipse")
 n_term      <- c(100, 150, 200, 250, 300)
 classifier  <- c(NNET)
-feature     <- c("short_description")
+feature     <- c("long_description")
 threshold   <- c(365)
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
