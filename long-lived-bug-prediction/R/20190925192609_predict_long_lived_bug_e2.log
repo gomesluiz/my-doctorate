@@ -1,0 +1,171 @@
+nohup: ignoring input
+Loading required package: caret
+Loading required package: lattice
+Loading required package: ggplot2
+Loading required package: doParallel
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: e1071
+Loading required package: klaR
+Loading required package: MASS
+Loading required package: kernlab
+
+Attaching package: ‘kernlab’
+
+The following object is masked from ‘package:ggplot2’:
+
+    alpha
+
+Loading required package: futile.logger
+Loading required package: nnet
+Loading required package: qdap
+Loading required package: qdapDictionaries
+Loading required package: qdapRegex
+
+Attaching package: ‘qdapRegex’
+
+The following object is masked from ‘package:ggplot2’:
+
+    %+%
+
+Loading required package: qdapTools
+Loading required package: RColorBrewer
+Registered S3 methods overwritten by 'qdap':
+  method               from
+  t.DocumentTermMatrix tm  
+  t.TermDocumentMatrix tm  
+
+Attaching package: ‘qdap’
+
+The following object is masked from ‘package:base’:
+
+    Filter
+
+Loading required package: randomForest
+randomForest 4.6-14
+Type rfNews() to see new features/changes/bug fixes.
+
+Attaching package: ‘randomForest’
+
+The following object is masked from ‘package:ggplot2’:
+
+    margin
+
+Loading required package: SnowballC
+Loading required package: smotefamily
+Loading required package: tidyverse
+── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
+✔ tibble  2.1.3     ✔ purrr   0.3.2
+✔ tidyr   1.0.0     ✔ dplyr   0.8.3
+✔ readr   1.3.1     ✔ stringr 1.4.0
+✔ tibble  2.1.3     ✔ forcats 0.4.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ qdapRegex::%+%()       masks ggplot2::%+%()
+✖ purrr::accumulate()    masks foreach::accumulate()
+✖ kernlab::alpha()       masks ggplot2::alpha()
+✖ dplyr::combine()       masks randomForest::combine()
+✖ purrr::cross()         masks kernlab::cross()
+✖ dplyr::explain()       masks qdapRegex::explain()
+✖ dplyr::filter()        masks stats::filter()
+✖ dplyr::id()            masks qdapTools::id()
+✖ dplyr::lag()           masks stats::lag()
+✖ purrr::lift()          masks caret::lift()
+✖ randomForest::margin() masks ggplot2::margin()
+✖ dplyr::select()        masks MASS::select()
+✖ purrr::when()          masks foreach::when()
+Loading required package: tidytext
+Loading required package: tm
+Loading required package: NLP
+
+Attaching package: ‘NLP’
+
+The following object is masked from ‘package:qdap’:
+
+    ngrams
+
+The following object is masked from ‘package:ggplot2’:
+
+    annotate
+
+
+Attaching package: ‘tm’
+
+The following objects are masked from ‘package:qdap’:
+
+    as.DocumentTermMatrix, as.TermDocumentMatrix
+
+Loading required package: xgboost
+
+Attaching package: ‘xgboost’
+
+The following object is masked from ‘package:dplyr’:
+
+    slice
+
+NULL
+TRACE [2019-09-25 19:27:27] Long live prediction Research Question 3 - Experiment 2
+TRACE [2019-09-25 19:27:27] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
+TRACE [2019-09-25 19:27:27] Current project name : eclipse
+TRACE [2019-09-25 19:27:27] New Evaluation file: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190925192722_rq3e2_eclipse_predict_long_lived_metrics.csv
+TRACE [2019-09-25 19:27:27] Starting in parameter number: 1
+TRACE [2019-09-25 19:27:27] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190917_eclipse_bug_report_data.csv
+TRACE [2019-09-25 19:27:27] Clean text features
+TRACE [2019-09-25 19:27:58] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Accuracy]
+ Feature...: [short_description]
+ Threshold.: [365]
+ Balancing.: [function (X, target, K = 5, dup_size = 0) 
+{
+    ncD = ncol(X)
+    n_target = table(target)
+    classP = names(which.min(n_target))
+    P_set = subset(X, target == names(which.min(n_target)))[sample(min(n_target)), ]
+    N_set = subset(X, target != names(which.min(n_target)))
+    P_class = rep(names(which.min(n_target)), nrow(P_set))
+    N_class = target[target != names(which.min(n_target))]
+    sizeP = nrow(P_set)
+    sizeN = nrow(N_set)
+    knear = knearest(P_set, P_set, K)
+    sum_dup = n_dup_max(sizeP + sizeN, sizeP, sizeN, dup_size)
+    syn_dat = NULL
+    for (i in 1:sizeP) {
+        if (is.matrix(knear)) {
+            pair_idx = knear[i, ceiling(runif(sum_dup) * K)]
+        }
+        else {
+            pair_idx = rep(knear[i], sum_dup)
+        }
+        g = runif(sum_dup)
+        P_i = matrix(unlist(P_set[i, ]), sum_dup, ncD, byrow = TRUE)
+        Q_i = as.matrix(P_set[pair_idx, ])
+        syn_i = P_i + g * (Q_i - P_i)
+        syn_dat = rbind(syn_dat, syn_i)
+    }
+    P_set[, ncD + 1] = P_class
+    colnames(P_set) = c(colnames(X), "class")
+    N_set[, ncD + 1] = N_class
+    colnames(N_set) = c(colnames(X), "class")
+    rownames(syn_dat) = NULL
+    syn_dat = data.frame(syn_dat)
+    syn_dat[, ncD + 1] = rep(names(which.min(n_target)), nrow(syn_dat))
+    colnames(syn_dat) = c(colnames(X), "class")
+    NewD = rbind(P_set, syn_dat, N_set)
+    rownames(NewD) = NULL
+    D_result = list(data = NewD, syn_data = syn_dat, orig_N = N_set, orig_P = P_set, K = K, K_all = NULL, dup_size = sum_dup, outcast = NULL, eps = NULL, method = "SMOTE")
+    class(D_result) = "gen_data"
+    return(D_result)
+}]
+ Resampling: [repeatedcv]
+TRACE [2019-09-25 19:27:58] Converting dataframe to term matrix
+TRACE [2019-09-25 19:27:58] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-25 19:28:08] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-25 19:28:08] Partitioning dataset in training and testing
+TRACE [2019-09-25 19:28:08] Balancing training dataset
+Error in balance_dataset(train.dataset, class_label, c("bug_id", "bug_fix_time"),  : 
+  balance_dataset: balanced function unknown!
+In addition: Warning message:
+In weighting(x) : empty document(s): M2T-253463
+Execution halted
