@@ -80,15 +80,12 @@ class_label     <- "long_lived"
 # setup experimental parameters.
 projects    <- c("eclipse")
 n_term      <- c(100, 150, 200, 250, 300)
-classifier  <- c(NB)
-#classifier  <- c(KNN,NB, NNET, RF, SVM)
+classifier  <- c(NNET)
 feature     <- c("short_description")
 threshold   <- c(365)
-balancing   <- c(UNBALANCED)
-#balancing   <- c(UNBALANCED, SMOTEMETHOD)
+balancing   <- c(SMOTE)
 resampling  <- c("repeatedcv")
-metric.type <- c(KPP)
-#metric.type <- c(ACC, DST, KPP, ROC)
+metric.type <- c(ACC)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
