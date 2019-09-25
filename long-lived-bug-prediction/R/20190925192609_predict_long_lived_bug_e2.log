@@ -104,68 +104,64 @@ The following object is masked from ‘package:dplyr’:
     slice
 
 NULL
-TRACE [2019-09-25 19:27:27] Long live prediction Research Question 3 - Experiment 2
-TRACE [2019-09-25 19:27:27] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
-TRACE [2019-09-25 19:27:27] Current project name : eclipse
-TRACE [2019-09-25 19:27:27] New Evaluation file: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190925192722_rq3e2_eclipse_predict_long_lived_metrics.csv
-TRACE [2019-09-25 19:27:27] Starting in parameter number: 1
-TRACE [2019-09-25 19:27:27] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190917_eclipse_bug_report_data.csv
-TRACE [2019-09-25 19:27:27] Clean text features
-TRACE [2019-09-25 19:27:58] Current parameters:
+TRACE [2019-09-25 19:30:29] Long live prediction Research Question 3 - Experiment 2
+TRACE [2019-09-25 19:30:29] Evaluation metrics ouput path: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets
+TRACE [2019-09-25 19:30:29] Current project name : eclipse
+TRACE [2019-09-25 19:30:29] New Evaluation file: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190925193024_rq3e2_eclipse_predict_long_lived_metrics.csv
+TRACE [2019-09-25 19:30:29] Starting in parameter number: 1
+TRACE [2019-09-25 19:30:29] Bug report file name: ~/Workspace/doctorate/long-lived-bug-prediction/notebooks/datasets/20190917_eclipse_bug_report_data.csv
+TRACE [2019-09-25 19:30:29] Clean text features
+TRACE [2019-09-25 19:31:01] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
  Metric...: [Accuracy]
  Feature...: [short_description]
  Threshold.: [365]
- Balancing.: [function (X, target, K = 5, dup_size = 0) 
-{
-    ncD = ncol(X)
-    n_target = table(target)
-    classP = names(which.min(n_target))
-    P_set = subset(X, target == names(which.min(n_target)))[sample(min(n_target)), ]
-    N_set = subset(X, target != names(which.min(n_target)))
-    P_class = rep(names(which.min(n_target)), nrow(P_set))
-    N_class = target[target != names(which.min(n_target))]
-    sizeP = nrow(P_set)
-    sizeN = nrow(N_set)
-    knear = knearest(P_set, P_set, K)
-    sum_dup = n_dup_max(sizeP + sizeN, sizeP, sizeN, dup_size)
-    syn_dat = NULL
-    for (i in 1:sizeP) {
-        if (is.matrix(knear)) {
-            pair_idx = knear[i, ceiling(runif(sum_dup) * K)]
-        }
-        else {
-            pair_idx = rep(knear[i], sum_dup)
-        }
-        g = runif(sum_dup)
-        P_i = matrix(unlist(P_set[i, ]), sum_dup, ncD, byrow = TRUE)
-        Q_i = as.matrix(P_set[pair_idx, ])
-        syn_i = P_i + g * (Q_i - P_i)
-        syn_dat = rbind(syn_dat, syn_i)
-    }
-    P_set[, ncD + 1] = P_class
-    colnames(P_set) = c(colnames(X), "class")
-    N_set[, ncD + 1] = N_class
-    colnames(N_set) = c(colnames(X), "class")
-    rownames(syn_dat) = NULL
-    syn_dat = data.frame(syn_dat)
-    syn_dat[, ncD + 1] = rep(names(which.min(n_target)), nrow(syn_dat))
-    colnames(syn_dat) = c(colnames(X), "class")
-    NewD = rbind(P_set, syn_dat, N_set)
-    rownames(NewD) = NULL
-    D_result = list(data = NewD, syn_data = syn_dat, orig_N = N_set, orig_P = P_set, K = K, K_all = NULL, dup_size = sum_dup, outcast = NULL, eps = NULL, method = "SMOTE")
-    class(D_result) = "gen_data"
-    return(D_result)
-}]
+ Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-09-25 19:27:58] Converting dataframe to term matrix
-TRACE [2019-09-25 19:27:58] Text mining: extracting 100 terms from short_description
-TRACE [2019-09-25 19:28:08] Text mining: extracted 100 terms from short_description
-TRACE [2019-09-25 19:28:08] Partitioning dataset in training and testing
-TRACE [2019-09-25 19:28:08] Balancing training dataset
-Error in balance_dataset(train.dataset, class_label, c("bug_id", "bug_fix_time"),  : 
-  balance_dataset: balanced function unknown!
-In addition: Warning message:
-In weighting(x) : empty document(s): M2T-253463
-Execution halted
+TRACE [2019-09-25 19:31:01] Converting dataframe to term matrix
+TRACE [2019-09-25 19:31:01] Text mining: extracting 100 terms from short_description
+TRACE [2019-09-25 19:31:11] Text mining: extracted 100 terms from short_description
+TRACE [2019-09-25 19:31:11] Partitioning dataset in training and testing
+TRACE [2019-09-25 19:31:11] Balancing training dataset
+TRACE [2019-09-25 19:31:11] [balance_dataset]: balancing method: smote
+TRACE [2019-09-25 19:31:13] Training model 
+TRACE [2019-09-25 19:31:13] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-25 19:31:13] [train_with_nnet] Training model with NNET and Accuracy
+# weights:  3061
+initial  value 9949.598659 
+iter  10 value 7218.765561
+iter  20 value 6637.701818
+iter  30 value 6179.003139
+iter  40 value 5915.138822
+iter  50 value 5582.373289
+iter  60 value 5234.875610
+iter  70 value 4969.439886
+iter  80 value 4846.493325
+iter  90 value 4749.511844
+iter 100 value 4667.182063
+final  value 4667.182063 
+stopped after 100 iterations
+TRACE [2019-09-25 19:35:19] Testing model 
+TRACE [2019-09-25 19:35:19] Calculating evaluating metrics
+TRACE [2019-09-25 19:35:19] Evaluating metrics calculated!
+TRACE [2019-09-25 19:35:19] Metrics: sensitivity [0.216049], specificity [0.773614], b_acc [0.494832]
+TRACE [2019-09-25 19:35:19] Recording evaluation results on CSV file.
+TRACE [2019-09-25 19:35:19] Evaluation results recorded on CSV file.
+TRACE [2019-09-25 19:35:19] Current parameters:
+ N.Terms...: [150]
+ Classifier: [nn]
+ Metric...: [Accuracy]
+ Feature...: [short_description]
+ Threshold.: [365]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-09-25 19:35:19] Converting dataframe to term matrix
+TRACE [2019-09-25 19:35:19] Text mining: extracting 150 terms from short_description
+TRACE [2019-09-25 19:35:27] Text mining: extracted 150 terms from short_description
+TRACE [2019-09-25 19:35:27] Partitioning dataset in training and testing
+TRACE [2019-09-25 19:35:27] Balancing training dataset
+TRACE [2019-09-25 19:35:27] [balance_dataset]: balancing method: smote
+TRACE [2019-09-25 19:35:30] Training model 
+TRACE [2019-09-25 19:35:30] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-09-25 19:35:30] [train_with_nnet] Training model with NNET and Accuracy
