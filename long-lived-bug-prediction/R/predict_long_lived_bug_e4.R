@@ -78,14 +78,14 @@ registerDoParallel(r_cluster)
 class_label     <- "long_lived"
 
 # setup experimental parameters.
-project    <- c("eclipse", "gcc", "gnome", "freedesktop", "mozilla", "winehq")
+project     <- c("eclipse", "gcc", "gnome", "freedesktop", "mozilla", "winehq")
 n_term      <- c(100)
-classifier  <- c(NB)
-feature     <- c("short_description")
+classifier  <- c(NNET)
+feature     <- c("long_description")
 threshold   <- c(365) 
-balancing   <- c(UNBALANCED)
+balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(KPP)
+metric.type <- c(ACC)
 parameters  <- crossing(project, feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
