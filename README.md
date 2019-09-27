@@ -10,6 +10,9 @@ A crawler for issue extraction information from many issue tracking systems.
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
 5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
 
+### Pandas
+1. [Reshaping Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
+
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
 
