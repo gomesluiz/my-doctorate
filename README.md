@@ -22,6 +22,8 @@ A crawler for issue extraction information from many issue tracking systems.
 ### Text Mining
 1. [Creating text features with bag-of-words, n-grams, parts-of-speach and more](http://uc-r.github.io/creating-text-features)
 
+## Visualização de Dados
+1. [Become a Data Visualization Whiz with this Comprehensive Guide to Seaborn in Python](https://www.analyticsvidhya.com/blog/2019/09/comprehensive-data-visualization-guide-seaborn-python/)
 ## Vídeos 
 
 ### Caret R Package
