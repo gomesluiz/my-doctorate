@@ -31,6 +31,8 @@ if (!require("SnowballC")) install.packages("SnowballC")
 if (!require("tidyverse")) install.packages("tidyverse")
 if (!require('tidytext')) install.packages('tidytext')
 if (!require("tm")) install.packages("tm")
+if (!require("wordcloud")) install.packages("wordcloud")
+if (!require("RColorBrewer")) install.packages("RColorBrewer")
 
 library(dplyr)
 library(doParallel)
@@ -40,17 +42,23 @@ library(SnowballC)
 library(tidyverse)
 library(tidytext)
 library(tm)
+library(wordcloud)
+library(RColorBrewer)
 
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
 
+flog.threshold(TRACE)
+
 make_tdm <- function(.data, .n=100) {
   flog.trace("Converting dataframe to term matrix")
-  corpus  <- clean_corpous(.data)
+  corpus  <- clean_corpus(.data)
   tdm     <- TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
   tdm     <- as.matrix(tdm)
-  tdm     <- sort(rowSums(m), decreasing=TRUE)
+  tdm     <- sort(rowSums(tdm), decreasing=TRUE)
+  flog.trace("Converting dataframe to term matrix")
   tdm     <- data.frame(word=names(tdm), freq=tdm)
+  flog.trace("Converting dataframe to term matrix")
   return (head(tdm, n))
 }
 
@@ -62,8 +70,8 @@ registerDoParallel(r_cluster)
 reports.path <- file.path(DATADIR, "20190917_gcc_bug_report_data.csv")
 results.path <- file.path(DATADIR, "20190926143854_rq3e4_all_predict_long_lived_tests_balanced_acc.csv")
 
-reports.data <- read_csv(reports.file, na  = c("", "NA"))
-results.data <- read_csv(results.file, na  = c("", "NA"))
+reports.data <- read_csv(reports.path, na  = c("", "NA"))
+results.data <- read_csv(results.path, na  = c("", "NA"))
 
 if (IN_DEBUG_MODE){
   flog.trace("DEBUG_MODE: Sample bug reports dataset")
@@ -73,7 +81,7 @@ if (IN_DEBUG_MODE){
 }
 
 # merging reports and results dataframes.
-reports.merged = merge(reports.data, reports.result, by.x="bug_id", by.y="bug_id")
+reports.merged = merge(reports.data, results.data, by.x="bug_id", by.y="bug_id")
 
 # feature engineering. 
 reports.merged <- reports.merged[, c('bug_id', 'long_description', 'long_lived', 'y_hat')]
@@ -83,9 +91,10 @@ flog.trace("clean text features")
 reports.merged$long_description  <- clean_text(reports.merged$long_description)
 
 # filtering out long-lived correct predicted
-reports.merged        <- reports.merged[reports.merged['long_lived']=='Y'] 
-predicted.corrected   <- make_tdm(reports.merged[reports.merged['y_hat']=='Y', c('bug_id', 'long_description')], 100)
-predicted.incorrected <- make_tdm(reports.merged[reports.merged['y_hat']=='N', c('bug_id', 'long_description')], 100)
+flog.trace("clean corpus")
+reports.merged         <- subset(reports.merged, long_lived=='Y') 
+predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
+predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
 
 set.seed(144)
 wordcloud(words=predicted.corrected$word, freq=predicted.corrected$freq, min.freq=1,
