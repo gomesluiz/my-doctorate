@@ -51,15 +51,12 @@ source(file.path(LIBDIR, "clean_text.R"))
 flog.threshold(TRACE)
 
 make_tdm <- function(.data, .n=100) {
-  flog.trace("Converting dataframe to term matrix")
   corpus  <- clean_corpus(.data)
   tdm     <- TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
   tdm     <- as.matrix(tdm)
   tdm     <- sort(rowSums(tdm), decreasing=TRUE)
-  flog.trace("Converting dataframe to term matrix")
   tdm     <- data.frame(word=names(tdm), freq=tdm)
-  flog.trace("Converting dataframe to term matrix")
-  return (head(tdm, n))
+  return (head(tdm, .n))
 }
 
 # main function
@@ -97,18 +94,18 @@ predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(b
 predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
 
 set.seed(144)
-wordcloud(words=predicted.corrected$word, freq=predicted.corrected$freq, min.freq=1,
+wordcloud(words=predicted.corrected$word, freq=predicted.corrected$freq, min.freq=0,
           max.words=100, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 
 set.seed(144)
-wordcloud(words=predicted.incorrected$word, freq=predicted.incorrected$freq, min.freq=1,
+wordcloud(words=predicted.incorrected$word, freq=predicted.incorrected$freq, min.freq=0,
           max.words=100, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 
 # saving model plot to file 
 # plot_file_name = sprintf("%s_rq3e2_%s_%s_%s_%s_%s_%s.jpg", timestamp, project.name
-#                          , parameter$classifier, parameter$balancing, parameter$feature
+#                          , parameter$classifier, parameter$balancing, parameter$feat  ure
 #                          , parameter$n_term, parameter$metric.type)
 # plot_file_name_path = file.path(DATADIR, plot_file_name)
 # jpeg(plot_file_name_path)
