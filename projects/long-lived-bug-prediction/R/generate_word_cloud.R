@@ -1,19 +1,19 @@
 #' @description 
-#'
+#'    generate the word cloud from long description of a bug report.
+#'    
 #' @author: 
 #' Luiz Alberto (gomes.luiz@gmail.com)
 #'
 #' @usage: 
 #' 
 #' @details:
-#' 
-#'         17/09/2019 16:00 pre-process in the train method removed
+#'    2019-10-4    file created   gomes.luiz@gmail.com
 #' 
 
 # clean R Studio session.
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
-timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
+timestamp  <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
 IN_DEBUG_MODE  <- FALSE
@@ -49,9 +49,15 @@ source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
 
 flog.threshold(TRACE)
+processors <- ifelse(IN_DEBUG_MODE, 3, 3)
+r_cluster  <-  makePSOCKcluster(processors)
+registerDoParallel(r_cluster)
 
-make_tdm <- function(.data, .n=100) {
-  corpus  <- clean_corpus(.data)
+#' @description 
+#' Make a tdm with n terms from a text.
+#' 
+make_tdm <- function(.docs, .n=100) {
+  corpus  <- clean_corpus(.docs)
   tdm     <- TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
   tdm     <- as.matrix(tdm)
   tdm     <- sort(rowSums(tdm), decreasing=TRUE)
@@ -60,10 +66,7 @@ make_tdm <- function(.data, .n=100) {
 }
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
-r_cluster <-  makePSOCKcluster(processors)
-registerDoParallel(r_cluster)
-
+flog.trace("reading data files")
 reports.path <- file.path(DATADIR, "20190917_gcc_bug_report_data.csv")
 results.path <- file.path(DATADIR, "20190926143854_rq3e4_all_predict_long_lived_tests_balanced_acc.csv")
 
@@ -77,6 +80,7 @@ if (IN_DEBUG_MODE){
   results.data <- sample_n(results.data, 1000) 
 }
 
+flog.trace("merging data files")
 # merging reports and results dataframes.
 reports.merged = merge(reports.data, results.data, by.x="bug_id", by.y="bug_id")
 
@@ -84,30 +88,30 @@ reports.merged = merge(reports.data, results.data, by.x="bug_id", by.y="bug_id")
 reports.merged <- reports.merged[, c('bug_id', 'long_description', 'long_lived', 'y_hat')]
 reports.merged <- reports.merged[complete.cases(reports.merged), ]
   
-flog.trace("clean text features")
+flog.trace("cleaning text features")
 reports.merged$long_description  <- clean_text(reports.merged$long_description)
 
 # filtering out long-lived correct predicted
-flog.trace("clean corpus")
+flog.trace("making document term matrix for correct predicted bugs")
 reports.merged         <- subset(reports.merged, long_lived=='Y') 
 predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
+
+flog.trace("making document term matrix for incorrect predicted bugs")
 predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
 
+flog.trace("plotting wordcloud for correct predicted bugs")
 set.seed(144)
-wordcloud(words=predicted.corrected$word, freq=predicted.corrected$freq, min.freq=0,
+#png(file.path(DATADIR, "wordcloud-gcc-corrected-predicted-bugs.png"), width = 700, height = 700)
+#wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
+#          max.words=100, random.order=FALSE, rot.per=0.35,
+#          colors=brewer.pal(8, "Dark2"))
+#dev.off()
+
+flog.trace("plotting wordcloud for incorrect predicted bugs")
+set.seed(144)
+png(file.path(DATADIR, "wordcloud-gcc-incorrected-predicted-bugs.png"), width = 700, height = 700)
+wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
           max.words=100, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
-
-set.seed(144)
-wordcloud(words=predicted.incorrected$word, freq=predicted.incorrected$freq, min.freq=0,
-          max.words=100, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(8, "Dark2"))
-
-# saving model plot to file 
-# plot_file_name = sprintf("%s_rq3e2_%s_%s_%s_%s_%s_%s.jpg", timestamp, project.name
-#                          , parameter$classifier, parameter$balancing, parameter$feat  ure
-#                          , parameter$n_term, parameter$metric.type)
-# plot_file_name_path = file.path(DATADIR, plot_file_name)
-# jpeg(plot_file_name_path)
-# print(plot(fit_model))
-# dev.off()
+dev.off()
+flog.trace("processing finished")
