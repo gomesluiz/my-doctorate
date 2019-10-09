@@ -26,6 +26,7 @@ DATADIR <- file.path(PRJDIR, "notebooks", "datasets")
 if (!require('dplyr')) install.packages("dplyr")
 if (!require('doParallel')) install.packages("doParallel")
 if (!require("futile.logger")) install.packages("futile.logger")
+if (!require("ggplot2")) install.packages("futile.logger")
 if (!require("qdap")) install.packages("qdap")
 if (!require("SnowballC")) install.packages("SnowballC")
 if (!require("tidyverse")) install.packages("tidyverse")
@@ -44,6 +45,7 @@ library(tidytext)
 library(tm)
 library(wordcloud)
 library(RColorBrewer)
+library(ggplot2)
 
 source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
@@ -56,6 +58,11 @@ registerDoParallel(r_cluster)
 #' @description 
 #' Make a tdm with n terms from a text.
 #' 
+#' @param .docs The documents.
+#' @param .n    Number of matrix terms.
+#' 
+#' @return The Term Document Matrix
+#' 
 make_tdm <- function(.docs, .n=100) {
   corpus  <- clean_corpus(.docs)
   tdm     <- TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
@@ -66,52 +73,73 @@ make_tdm <- function(.docs, .n=100) {
 }
 
 # main function
-flog.trace("reading data files")
-reports.path <- file.path(DATADIR, "20190917_gcc_bug_report_data.csv")
-results.path <- file.path(DATADIR, "20190926143854_rq3e4_all_predict_long_lived_tests_balanced_acc.csv")
+for (project.name in c('eclipse', 'gcc'))
+{
+  flog.trace("reading data files of %s project", project.name)
+  reports.path <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
+  results.path <- file.path(DATADIR
+                            , sprintf("20190926143854_rq3e4_%s_predict_long_lived_tests_balanced_acc.csv"
+                                      , project.name
+                                      )
+                            )
 
-reports.data <- read_csv(reports.path, na  = c("", "NA"))
-results.data <- read_csv(results.path, na  = c("", "NA"))
-
-if (IN_DEBUG_MODE){
-  flog.trace("DEBUG_MODE: Sample bug reports dataset")
-  set.seed(144)
-  reports.data <- sample_n(reports.data, 1000) 
-  results.data <- sample_n(results.data, 1000) 
-}
-
-flog.trace("merging data files")
-# merging reports and results dataframes.
-reports.merged = merge(reports.data, results.data, by.x="bug_id", by.y="bug_id")
-
-# feature engineering. 
-reports.merged <- reports.merged[, c('bug_id', 'long_description', 'long_lived', 'y_hat')]
-reports.merged <- reports.merged[complete.cases(reports.merged), ]
+  reports.data <- read_csv(reports.path, na  = c("", "NA"))
+  results.data <- read_csv(results.path, na  = c("", "NA"))
   
-flog.trace("cleaning text features")
-reports.merged$long_description  <- clean_text(reports.merged$long_description)
+  if (IN_DEBUG_MODE){
+    flog.trace("DEBUG_MODE: Sample bug reports dataset")
+    set.seed(144)
+    reports.data <- sample_n(reports.data, 1000) 
+    results.data <- sample_n(results.data, 1000) 
+  }
 
-# filtering out long-lived correct predicted
-flog.trace("making document term matrix for correct predicted bugs")
-reports.merged         <- subset(reports.merged, long_lived=='Y') 
-predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
+  flog.trace("merging data files")
+  # merging reports and results dataframes.
+  reports.merged = merge(reports.data, results.data, by.x="bug_id", by.y="bug_id")
 
-flog.trace("making document term matrix for incorrect predicted bugs")
-predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
+  # feature engineering. 
+  reports.merged <- reports.merged[, c('bug_id', 'long_description', 'long_lived', 'y_hat')]
+  reports.merged <- reports.merged[complete.cases(reports.merged), ]
+  
+  flog.trace("cleaning text features")
+  reports.merged$long_description  <- clean_text(reports.merged$long_description)
+  
+  # filtering out long-lived correct predicted
+  flog.trace("making document term matrix for correct predicted bugs")
+  reports.merged         <- subset(reports.merged, long_lived=='Y') 
+  predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
 
-flog.trace("plotting wordcloud for correct predicted bugs")
-set.seed(144)
-#png(file.path(DATADIR, "wordcloud-gcc-corrected-predicted-bugs.png"), width = 700, height = 700)
-#wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
-#          max.words=100, random.order=FALSE, rot.per=0.35,
-#          colors=brewer.pal(8, "Dark2"))
-#dev.off()
+  flog.trace("making document term matrix for incorrect predicted bugs")
+  predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
+  
+  flog.trace("plotting wordcloud for correct predicted bugs")
+  set.seed(144)
+  png(file.path(DATADIR, sprintf("wordcloud-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
+            max.words=100, random.order=FALSE, rot.per=0.35,
+            colors=brewer.pal(8, "Dark2"))
+  dev.off()
 
-flog.trace("plotting wordcloud for incorrect predicted bugs")
-set.seed(144)
-png(file.path(DATADIR, "wordcloud-gcc-incorrected-predicted-bugs.png"), width = 700, height = 700)
-wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
+  flog.trace("plotting histogram for correct predicted bugs")
+  set.seed(144)
+  png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
+    geom_histogram()
+  dev.off()
+  
+  flog.trace("plotting wordcloud for incorrect predicted bugs")
+  set.seed(144)
+  png(file.path(DATADIR, sprintf("wordcloud-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
           max.words=100, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
-dev.off()
+  dev.off()
+  
+  flog.trace("plotting histogram for incorrect predicted bugs")
+  set.seed(144)
+  png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
+    geom_histogram()
+  dev.off()
+}
 flog.trace("processing finished")
