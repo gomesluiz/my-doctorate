@@ -16,7 +16,8 @@ options(readr.num_columns = 0)
 timestamp  <- format(Sys.time(), "%Y%m%d%H%M%S")
 
 # setup project folders.
-IN_DEBUG_MODE  <- FALSE
+IN_DEBUG_MODE   <- FALSE
+SEED_VALUE      <- FALSE
 BASEDIR <- file.path("~","Workspace", "doctorate", "projects")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
@@ -85,7 +86,7 @@ for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'win
     
     if (IN_DEBUG_MODE){
       flog.trace("DEBUG_MODE: Sample bug reports dataset")
-      set.seed(144)
+      set.seed(SEED_VALUE)
       reports.data <- sample_n(reports.data, 1000) 
     }
   
@@ -101,7 +102,7 @@ for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'win
     predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
     
     flog.trace("plotting wordcloud for correct predicted bugs")
-    set.seed(144)
+    set.seed(SEED_VALUE)
     png(file.path(DATADIR, sprintf("wordcloud-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
     wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
               max.words=100, random.order=FALSE, rot.per=0.35,
@@ -109,14 +110,14 @@ for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'win
     dev.off()
   
     flog.trace("plotting histogram for correct predicted bugs")
-    set.seed(144)
+    set.seed(SEED_VALUE)
     png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
     ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
       geom_histogram()
     dev.off()
     
     flog.trace("plotting wordcloud for incorrect predicted bugs")
-    set.seed(144)
+    set.seed(SEED_VALUE)
     png(file.path(DATADIR, sprintf("wordcloud-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
     wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
             max.words=100, random.order=FALSE, rot.per=0.35,
@@ -124,7 +125,7 @@ for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'win
     dev.off()
     
     flog.trace("plotting histogram for incorrect predicted bugs")
-    set.seed(144)
+    set.seed(SEED_VALUE)
     png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
     ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
       geom_histogram()
