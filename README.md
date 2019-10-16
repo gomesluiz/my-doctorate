@@ -15,6 +15,7 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
+2. [This R Data Import Tutorial Is Everything You Need](https://www.datacamp.com/community/tutorials/r-data-import-tutorial)
 
 ### Statistics 
 1. [How to Calculate Nonparametric Statistical Hypothesis Tests in Python](https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/  )
