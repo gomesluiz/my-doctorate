@@ -1,6 +1,7 @@
 sudo apt install git
 git config --global user.name "Luiz Alberto"
 git config --global user.email "gomes.luiz@gmail.com"
+sudo apt install default-jdk
 sudo apt install r-base
 sudo apt install libcurl4-openssl-dev
 sudo apt install libssl-dev
