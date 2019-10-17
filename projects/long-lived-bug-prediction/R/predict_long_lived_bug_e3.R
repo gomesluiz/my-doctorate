@@ -20,7 +20,7 @@ timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 # setup project folders.
 IN_DEBUG_MODE  <- FALSE
 FORCE_NEW_FILE <- TRUE
-BASEDIR <- file.path("~","Workspace", "doctorate")
+BASEDIR <- file.path("~","Workspace", "doctorate", "projects")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
 SRCDIR  <- file.path(PRJDIR, "R")
@@ -85,7 +85,7 @@ feature     <- c("long_description")
 threshold   <- c(1, 8, 63, 365)
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(ACC)
+metric.type <- c(KPP)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
