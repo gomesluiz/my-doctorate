@@ -85,7 +85,7 @@ feature     <- c("long_description")
 threshold   <- c(8) 
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(ACC)
+metric.type <- c(KPP)
 parameters  <- crossing(project, feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
