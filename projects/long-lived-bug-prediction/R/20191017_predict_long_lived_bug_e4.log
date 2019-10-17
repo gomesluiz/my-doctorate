@@ -104,27 +104,258 @@ The following object is masked from ‘package:dplyr’:
     slice
 
 NULL
-TRACE [2019-10-17 13:01:53] Long live prediction Research Question 3 - Experiment 4
-TRACE [2019-10-17 13:01:53] Evaluation metrics ouput path: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets
-TRACE [2019-10-17 13:01:53] New Evaluation file: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20191017130148_rq3e4_all_predict_long_lived_metrics.csv
-TRACE [2019-10-17 13:01:53] Current project name : eclipse
-TRACE [2019-10-17 13:01:53] Starting in parameter number: 1
-TRACE [2019-10-17 13:01:53] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_eclipse_bug_report_data.csv
-TRACE [2019-10-17 13:01:53] Clean text features
-TRACE [2019-10-17 13:02:29] Current parameters:
+TRACE [2019-10-17 13:07:44] Long live prediction Research Question 3 - Experiment 4
+TRACE [2019-10-17 13:07:44] Evaluation metrics ouput path: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets
+TRACE [2019-10-17 13:07:44] New Evaluation file: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20191017130740_rq3e4_all_predict_long_lived_metrics.csv
+TRACE [2019-10-17 13:07:44] Current project name : eclipse
+TRACE [2019-10-17 13:07:44] Starting in parameter number: 1
+TRACE [2019-10-17 13:07:44] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_eclipse_bug_report_data.csv
+TRACE [2019-10-17 13:07:45] Clean text features
+TRACE [2019-10-17 13:08:21] Current parameters:
  N.Terms...: [100]
  Classifier: [nn]
- Metric...: [Accuracy]
+ Metric...: [Kappa]
  Feature...: [long_description]
  Threshold.: [8]
  Balancing.: [smote]
  Resampling: [repeatedcv]
-TRACE [2019-10-17 13:02:29] Converting dataframe to term matrix
-TRACE [2019-10-17 13:02:29] Text mining: extracting 100 terms from long_description
-TRACE [2019-10-17 13:02:51] Text mining: extracted 100 terms from long_description
-TRACE [2019-10-17 13:02:51] Partitioning dataset in training and testing
-TRACE [2019-10-17 13:02:51] Balancing training dataset
-TRACE [2019-10-17 13:02:51] [balance_dataset]: balancing method: smote
-TRACE [2019-10-17 13:02:57] Training model 
-TRACE [2019-10-17 13:02:57] [get_resampling_method] Resampling model repeatedcv
-TRACE [2019-10-17 13:02:57] [train_with_nnet] Training model with NNET and Accuracy
+TRACE [2019-10-17 13:08:21] Converting dataframe to term matrix
+TRACE [2019-10-17 13:08:21] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:08:42] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:08:42] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:08:43] Balancing training dataset
+TRACE [2019-10-17 13:08:43] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:08:49] Training model 
+TRACE [2019-10-17 13:08:49] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:08:49] [train_with_nnet] Training model with NNET and Kappa
+# weights:  4081
+initial  value 5895.563229 
+iter  10 value 4987.336250
+iter  20 value 4922.840871
+iter  30 value 4913.333809
+iter  40 value 4912.220313
+iter  50 value 4911.768628
+iter  60 value 4911.133465
+iter  70 value 4910.746599
+iter  80 value 4910.481682
+iter  90 value 4910.344749
+iter 100 value 4910.262245
+final  value 4910.262245 
+stopped after 100 iterations
+TRACE [2019-10-17 13:11:29] Testing model 
+TRACE [2019-10-17 13:11:29] Calculating evaluating metrics
+TRACE [2019-10-17 13:11:29] Evaluating metrics calculated!
+TRACE [2019-10-17 13:11:29] Metrics: sensitivity [0.546058], specificity [0.506234], b_acc [0.526146]
+TRACE [2019-10-17 13:11:29] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:11:29] Evaluation results recorded on CSV file.
+TRACE [2019-10-17 13:11:29] Current project name : freedesktop
+TRACE [2019-10-17 13:11:29] Starting in parameter number: 2
+TRACE [2019-10-17 13:11:29] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_freedesktop_bug_report_data.csv
+TRACE [2019-10-17 13:11:29] Clean text features
+TRACE [2019-10-17 13:12:19] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Kappa]
+ Feature...: [long_description]
+ Threshold.: [8]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-10-17 13:12:19] Converting dataframe to term matrix
+TRACE [2019-10-17 13:12:19] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:12:38] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:12:38] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:12:38] Balancing training dataset
+TRACE [2019-10-17 13:12:38] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:12:41] Training model 
+TRACE [2019-10-17 13:12:41] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:12:41] [train_with_nnet] Training model with NNET and Kappa
+# weights:  1021
+initial  value 4181.855210 
+iter  10 value 3614.157187
+iter  20 value 3565.033139
+iter  30 value 3562.787051
+iter  40 value 3561.802504
+iter  50 value 3561.598704
+iter  60 value 3561.487291
+iter  70 value 3561.424529
+iter  80 value 3561.406717
+iter  90 value 3561.392643
+iter 100 value 3561.378809
+final  value 3561.378809 
+stopped after 100 iterations
+TRACE [2019-10-17 13:14:33] Testing model 
+TRACE [2019-10-17 13:14:33] Calculating evaluating metrics
+TRACE [2019-10-17 13:14:33] Evaluating metrics calculated!
+TRACE [2019-10-17 13:14:33] Metrics: sensitivity [0.943228], specificity [0.122172], b_acc [0.532700]
+TRACE [2019-10-17 13:14:33] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:14:33] Evaluation results recorded on CSV file.
+TRACE [2019-10-17 13:14:33] Current project name : gcc
+TRACE [2019-10-17 13:14:33] Starting in parameter number: 3
+TRACE [2019-10-17 13:14:33] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_gcc_bug_report_data.csv
+Warning: 2 parsing failures.
+ row              col expected        actual                                                                                                           file
+  87 long_description          embedded null '~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_gcc_bug_report_data.csv'
+6701 long_description          embedded null '~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_gcc_bug_report_data.csv'
+
+TRACE [2019-10-17 13:14:34] Clean text features
+TRACE [2019-10-17 13:23:26] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Kappa]
+ Feature...: [long_description]
+ Threshold.: [8]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-10-17 13:23:26] Converting dataframe to term matrix
+TRACE [2019-10-17 13:23:26] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:24:02] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:24:02] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:24:02] Balancing training dataset
+TRACE [2019-10-17 13:24:02] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:24:09] Training model 
+TRACE [2019-10-17 13:24:09] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:24:09] [train_with_nnet] Training model with NNET and Kappa
+# weights:  2041
+initial  value 8671.931496 
+iter  10 value 6179.115836
+iter  20 value 6016.745765
+iter  30 value 5974.718222
+iter  40 value 5967.672697
+iter  50 value 5963.146033
+iter  60 value 5960.509512
+iter  70 value 5959.267987
+iter  80 value 5958.537804
+iter  90 value 5958.175749
+iter 100 value 5957.973041
+final  value 5957.973041 
+stopped after 100 iterations
+TRACE [2019-10-17 13:27:04] Testing model 
+TRACE [2019-10-17 13:27:04] Calculating evaluating metrics
+TRACE [2019-10-17 13:27:04] Evaluating metrics calculated!
+TRACE [2019-10-17 13:27:04] Metrics: sensitivity [0.622043], specificity [0.617962], b_acc [0.620003]
+TRACE [2019-10-17 13:27:04] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:27:04] Evaluation results recorded on CSV file.
+TRACE [2019-10-17 13:27:04] Current project name : gnome
+TRACE [2019-10-17 13:27:04] Starting in parameter number: 4
+TRACE [2019-10-17 13:27:04] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_gnome_bug_report_data.csv
+TRACE [2019-10-17 13:27:04] Clean text features
+TRACE [2019-10-17 13:32:51] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Kappa]
+ Feature...: [long_description]
+ Threshold.: [8]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-10-17 13:32:51] Converting dataframe to term matrix
+TRACE [2019-10-17 13:32:51] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:33:14] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:33:14] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:33:15] Balancing training dataset
+TRACE [2019-10-17 13:33:15] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:33:19] Training model 
+TRACE [2019-10-17 13:33:19] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:33:19] [train_with_nnet] Training model with NNET and Kappa
+# weights:  1021
+initial  value 4659.329204 
+iter  10 value 3907.059022
+iter  20 value 3833.487174
+iter  30 value 3808.148474
+iter  40 value 3806.470488
+iter  50 value 3806.361311
+iter  60 value 3806.258273
+iter  70 value 3806.211756
+iter  80 value 3806.193912
+iter  90 value 3806.176177
+iter 100 value 3806.171079
+final  value 3806.171079 
+stopped after 100 iterations
+TRACE [2019-10-17 13:35:19] Testing model 
+TRACE [2019-10-17 13:35:19] Calculating evaluating metrics
+TRACE [2019-10-17 13:35:19] Evaluating metrics calculated!
+TRACE [2019-10-17 13:35:19] Metrics: sensitivity [0.925147], specificity [0.174707], b_acc [0.549927]
+TRACE [2019-10-17 13:35:19] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:35:19] Evaluation results recorded on CSV file.
+TRACE [2019-10-17 13:35:19] Current project name : mozilla
+TRACE [2019-10-17 13:35:19] Starting in parameter number: 5
+TRACE [2019-10-17 13:35:19] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_mozilla_bug_report_data.csv
+TRACE [2019-10-17 13:35:19] Clean text features
+TRACE [2019-10-17 13:35:43] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Kappa]
+ Feature...: [long_description]
+ Threshold.: [8]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-10-17 13:35:43] Converting dataframe to term matrix
+TRACE [2019-10-17 13:35:43] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:36:01] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:36:01] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:36:01] Balancing training dataset
+TRACE [2019-10-17 13:36:01] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:36:06] Training model 
+TRACE [2019-10-17 13:36:06] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:36:06] [train_with_nnet] Training model with NNET and Kappa
+# weights:  3061
+initial  value 7893.901206 
+iter  10 value 4564.003648
+iter  20 value 4516.445010
+iter  30 value 4510.557780
+iter  40 value 4507.774272
+iter  50 value 4505.977558
+iter  60 value 4505.140997
+iter  70 value 4504.796014
+iter  80 value 4504.500411
+iter  90 value 4504.327012
+iter 100 value 4504.217111
+final  value 4504.217111 
+stopped after 100 iterations
+TRACE [2019-10-17 13:38:39] Testing model 
+TRACE [2019-10-17 13:38:39] Calculating evaluating metrics
+TRACE [2019-10-17 13:38:39] Evaluating metrics calculated!
+TRACE [2019-10-17 13:38:39] Metrics: sensitivity [0.911053], specificity [0.228150], b_acc [0.569601]
+TRACE [2019-10-17 13:38:39] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:38:39] Evaluation results recorded on CSV file.
+TRACE [2019-10-17 13:38:39] Current project name : winehq
+TRACE [2019-10-17 13:38:39] Starting in parameter number: 6
+TRACE [2019-10-17 13:38:39] Bug report file name: ~/Workspace/doctorate/projects/long-lived-bug-prediction/notebooks/datasets/20190917_winehq_bug_report_data.csv
+TRACE [2019-10-17 13:38:39] Clean text features
+TRACE [2019-10-17 13:39:01] Current parameters:
+ N.Terms...: [100]
+ Classifier: [nn]
+ Metric...: [Kappa]
+ Feature...: [long_description]
+ Threshold.: [8]
+ Balancing.: [smote]
+ Resampling: [repeatedcv]
+TRACE [2019-10-17 13:39:01] Converting dataframe to term matrix
+TRACE [2019-10-17 13:39:01] Text mining: extracting 100 terms from long_description
+TRACE [2019-10-17 13:39:13] Text mining: extracted 100 terms from long_description
+TRACE [2019-10-17 13:39:13] Partitioning dataset in training and testing
+TRACE [2019-10-17 13:39:13] Balancing training dataset
+TRACE [2019-10-17 13:39:13] [balance_dataset]: balancing method: smote
+TRACE [2019-10-17 13:39:15] Training model 
+TRACE [2019-10-17 13:39:15] [get_resampling_method] Resampling model repeatedcv
+TRACE [2019-10-17 13:39:15] [train_with_nnet] Training model with NNET and Kappa
+# weights:  3061
+initial  value 6721.308164 
+iter  10 value 4336.408731
+iter  20 value 4213.026623
+iter  30 value 4206.857040
+iter  40 value 4203.063756
+iter  50 value 4200.247928
+iter  60 value 4198.259976
+iter  70 value 4197.278261
+iter  80 value 4196.302255
+iter  90 value 4195.730387
+iter 100 value 4195.390992
+final  value 4195.390992 
+stopped after 100 iterations
+TRACE [2019-10-17 13:41:45] Testing model 
+TRACE [2019-10-17 13:41:45] Calculating evaluating metrics
+TRACE [2019-10-17 13:41:45] Evaluating metrics calculated!
+TRACE [2019-10-17 13:41:45] Metrics: sensitivity [0.729469], specificity [0.496241], b_acc [0.612855]
+TRACE [2019-10-17 13:41:45] Recording evaluation results on CSV file.
+TRACE [2019-10-17 13:41:45] Evaluation results recorded on CSV file.
+There were 50 or more warnings (use warnings() to see the first 50)
