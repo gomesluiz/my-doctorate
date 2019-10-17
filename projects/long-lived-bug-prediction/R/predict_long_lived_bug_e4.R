@@ -20,7 +20,7 @@ timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
 # setup project folders.
 IN_DEBUG_MODE  <- FALSE
 FORCE_NEW_FILE <- TRUE
-BASEDIR <- file.path("~","Workspace", "doctorate")
+BASEDIR <- file.path("~","Workspace", "doctorate", "projects")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
 SRCDIR  <- file.path(PRJDIR, "R")
@@ -82,7 +82,7 @@ project     <- c("eclipse", "gcc", "gnome", "freedesktop", "mozilla", "winehq")
 n_term      <- c(100)
 classifier  <- c(NNET)
 feature     <- c("long_description")
-threshold   <- c(365) 
+threshold   <- c(8) 
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
 metric.type <- c(ACC)
