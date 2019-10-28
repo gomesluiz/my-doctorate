@@ -5,7 +5,8 @@
 #' Luiz Alberto (gomes.luiz@gmail.com)
 #'
 #' @usage: 
-#' $ nohup Rscript ./predict_long_lived_bug_e3.R > predict_long_lived_bug_e3.log 2>&1 &
+#' $ nohup Rscript ./predict_long_lived_bug_rq4e3.R
+#' > predict_long_lived_bug_rq4e3.log 2>&1 &
 #' 
 #' @details:
 #' 
@@ -82,14 +83,14 @@ projects    <- c("eclipse")
 n_term      <- c(100)
 classifier  <- c(NNET)
 feature     <- c("long_description")
-threshold   <- c(1, 8, 63, 365)
+threshold   <- c(8, 63, 108, 365)
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
 metric.type <- c(KPP)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
-flog.trace("Long live prediction Research Question 3 - Experiment 3")
+flog.trace("Long live prediction Research Question 4 - Experiment 3")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
