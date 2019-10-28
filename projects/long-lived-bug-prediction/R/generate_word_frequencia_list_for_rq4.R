@@ -108,38 +108,16 @@ for (project.name in c('eclipse', 'gcc'))
   flog.trace("making document term matrix for correct predicted bugs")
   reports.merged         <- subset(reports.merged, long_lived=='Y') 
   predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
+  predicted.corrected$status <- 'Corrected'
 
   flog.trace("making document term matrix for incorrect predicted bugs")
   predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
+  predicted.incorrected$status <- 'Incorrected'
   
-  flog.trace("plotting wordcloud for correct predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("wordcloud-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
-            max.words=100, random.order=FALSE, rot.per=0.35,
-            colors=brewer.pal(8, "Dark2"))
-  dev.off()
-
-  flog.trace("plotting histogram for correct predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
-    geom_histogram()
-  dev.off()
-  
-  flog.trace("plotting wordcloud for incorrect predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("wordcloud-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
-          max.words=100, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(8, "Dark2"))
-  dev.off()
-  
-  flog.trace("plotting histogram for incorrect predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
-    geom_histogram()
-  dev.off()
+  flog.trace("recording word frequency list")
+  frequency.list <- rbind(predicted.corrected, predicted.incorrected)
+  frequency.list$project <- project.name
+  frequency.path = file.path(DATADIR, sprintf("20191028_%s_frequency_word_list.csv", project.name))
+  write_csv(frequency.list , frequency.path)
 }
 flog.trace("processing finished")

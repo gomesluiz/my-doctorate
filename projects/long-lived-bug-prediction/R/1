@@ -72,7 +72,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 3)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
@@ -86,7 +86,7 @@ feature     <- c("long_description")
 threshold   <- c(8, 63, 108, 365)
 balancing   <- c(SMOTEMETHOD)
 resampling  <- c("repeatedcv")
-metric.type <- c(KPP)
+metric.type <- c(ACC)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
@@ -97,7 +97,7 @@ for (project.name in projects){
   flog.trace("Current project name : %s", project.name)
   
   parameter.number  <- 1
-  metrics.mask      <- sprintf("rq3e3_%s_predict_long_lived_metrics.csv", project.name)
+  metrics.mask      <- sprintf("rq4e3_%s_predict_long_lived_metrics.csv", project.name)
   metrics.file      <- get_last_evaluation_file(DATADIR, metrics.mask)
   
   # get last parameter number and metrics file. 
