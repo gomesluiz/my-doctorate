@@ -114,32 +114,32 @@ for (project.name in c('eclipse', 'gcc'))
   
   flog.trace("plotting wordcloud for correct predicted bugs")
   set.seed(144)
-  png(file.path(DATADIR, sprintf("wordcloud-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  png(file.path(DATADIR, sprintf("%s-wordcloud-%s-corrected-predicted-bugs.png", timestamp, project.name)), width = 700, height = 700)
   wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
             max.words=100, random.order=FALSE, rot.per=0.35,
             colors=brewer.pal(8, "Dark2"))
   dev.off()
 
-  flog.trace("plotting histogram for correct predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
-    geom_histogram()
-  dev.off()
+  #flog.trace("plotting histogram for correct predicted bugs")
+  #set.seed(144)
+  #png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  #ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
+  #  geom_histogram()
+  #dev.off()
   
   flog.trace("plotting wordcloud for incorrect predicted bugs")
   set.seed(144)
-  png(file.path(DATADIR, sprintf("wordcloud-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  png(file.path(DATADIR, sprintf("%s-wordcloud-%s-incorrected-predicted-bugs.png", timestamp, project.name)), width = 700, height = 700)
   wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
           max.words=100, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
   dev.off()
   
-  flog.trace("plotting histogram for incorrect predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-  ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
-    geom_histogram()
-  dev.off()
+  #flog.trace("plotting histogram for incorrect predicted bugs")
+  #set.seed(144)
+  #png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
+  #ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
+  #  geom_histogram()
+  #dev.off()
 }
 flog.trace("processing finished")

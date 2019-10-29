@@ -23,6 +23,7 @@ A crawler for issue extraction information from many issue tracking systems.
 ### Text Mining & Natural Language Processing
 1. [Creating text features with bag-of-words, n-grams, parts-of-speach and more](http://uc-r.github.io/creating-text-features)
 2. [Top Books on Natural Language Processing](https://machinelearningmastery.com/books-on-natural-language-processing/)
+3. [Generating WordClouds in Python](https://www.datacamp.com/community/tutorials/wordcloud-python)
 
 ## Visualização de Dados
 1. [Become a Data Visualization Whiz with this Comprehensive Guide to Seaborn in Python](https://www.analyticsvidhya.com/blog/2019/09/comprehensive-data-visualization-guide-seaborn-python/)

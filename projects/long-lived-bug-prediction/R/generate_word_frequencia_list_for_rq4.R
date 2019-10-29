@@ -117,7 +117,7 @@ for (project.name in c('eclipse', 'gcc'))
   flog.trace("recording word frequency list")
   frequency.list <- rbind(predicted.corrected, predicted.incorrected)
   frequency.list$project <- project.name
-  frequency.path = file.path(DATADIR, sprintf("20191028_%s_frequency_word_list.csv", project.name))
+  frequency.path = file.path(DATADIR, sprintf("%s_%s_frequency_word_list.csv", timestamp, project.name))
   write_csv(frequency.list , frequency.path)
 }
 flog.trace("processing finished")
