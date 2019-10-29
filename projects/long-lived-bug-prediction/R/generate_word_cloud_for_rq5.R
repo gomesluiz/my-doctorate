@@ -72,8 +72,11 @@ make_tdm <- function(.docs, .n=100) {
   return (head(tdm, .n))
 }
 
+#projects <- c('eclipse', 'gcc')
+projects <- c('gcc')
+
 # main function
-for (project.name in c('eclipse', 'gcc'))
+for (project.name in projects)
 {
   flog.trace("reading data files of %s project", project.name)
   reports.path <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
@@ -112,13 +115,13 @@ for (project.name in c('eclipse', 'gcc'))
   flog.trace("making document term matrix for incorrect predicted bugs")
   predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
   
-  flog.trace("plotting wordcloud for correct predicted bugs")
-  set.seed(144)
-  png(file.path(DATADIR, sprintf("%s-wordcloud-%s-corrected-predicted-bugs.png", timestamp, project.name)), width = 700, height = 700)
-  wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
-            max.words=100, random.order=FALSE, rot.per=0.35,
-            colors=brewer.pal(8, "Dark2"))
-  dev.off()
+  #flog.trace("plotting wordcloud for correct predicted bugs")
+  #set.seed(144)
+  #png(file.path(DATADIR, sprintf("%s-wordcloud-%s-corrected-predicted-bugs.png", timestamp, project.name)), width = 700, height = 700)
+  #wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
+  #          max.words=100, random.order=FALSE, rot.per=0.35,
+  #          colors=brewer.pal(8, "Dark2"))
+  #dev.off()
 
   #flog.trace("plotting histogram for correct predicted bugs")
   #set.seed(144)
@@ -129,10 +132,16 @@ for (project.name in c('eclipse', 'gcc'))
   
   flog.trace("plotting wordcloud for incorrect predicted bugs")
   set.seed(144)
-  png(file.path(DATADIR, sprintf("%s-wordcloud-%s-incorrected-predicted-bugs.png", timestamp, project.name)), width = 700, height = 700)
-  wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
-          max.words=100, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(8, "Dark2"))
+  png(file.path(DATADIR, sprintf("%s-wordcloud-%s-incorrected-predicted-bugs.png", timestamp, project.name)), width = 500, height = 500)
+  wordcloud(words=predicted.incorrected$word
+            , scale=c(5, .4)
+            , freq=predicted.incorrected$freq
+            , min.freq=0
+            , max.words=100
+            , random.order=FALSE
+            , rot.per=0.35
+            , colors=brewer.pal(8, "Dark2")
+  )
   dev.off()
   
   #flog.trace("plotting histogram for incorrect predicted bugs")
