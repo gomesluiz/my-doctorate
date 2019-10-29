@@ -110,12 +110,12 @@ for (project.name in c('eclipse', 'gcc'))
   predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
   predicted.corrected$status <- 'Corrected'
 
-  flog.trace("making document term matrix for incorrect predicted bugs")
-  predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
-  predicted.incorrected$status <- 'Incorrected'
+  flog.trace("making document term matrix for uncorrect predicted bugs")
+  predicted.uncorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
+  predicted.uncorrected$status <- 'Uncorrected'
   
   flog.trace("recording word frequency list")
-  frequency.list <- rbind(predicted.corrected, predicted.incorrected)
+  frequency.list <- rbind(predicted.corrected, predicted.uncorrected)
   frequency.list$project <- project.name
   frequency.path = file.path(DATADIR, sprintf("%s_%s_frequency_word_list.csv", timestamp, project.name))
   write_csv(frequency.list , frequency.path)
