@@ -23,6 +23,7 @@ LIBDIR  <- file.path(BASEDIR, "lib", "R")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
 SRCDIR  <- file.path(PRJDIR, "R")
 DATADIR <- file.path(PRJDIR, "notebooks", "datasets")
+FIGDIR <- file.path(PRJDIR, "notebooks", "datasets")
 
 if (!require('dplyr')) install.packages("dplyr")
 if (!require('doParallel')) install.packages("doParallel")
@@ -52,7 +53,7 @@ source(file.path(LIBDIR, "clean_corpus.R"))
 source(file.path(LIBDIR, "clean_text.R"))
 
 flog.threshold(TRACE)
-processors <- ifelse(IN_DEBUG_MODE, 3, 3)
+processors <- ifelse(IN_DEBUG_MODE, 4, 4)
 r_cluster  <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
@@ -76,59 +77,72 @@ make_tdm <- function(.docs, .n=100) {
 # main function
 for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'winehq'))
 {
+  flog.trace("reading data files of %s project", project.name)
+  reports.path <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
+
+  reports.data <- read_csv(reports.path, na  = c("", "NA"))
+
+  column.names <- c('bug_id', 'short_description', 'long_description', 'bug_fix_time')
+  reports.data <- subset(reports.data , bug_fix_time >= 0)[, column.names]
+  
+  if (IN_DEBUG_MODE){
+    flog.trace("DEBUG_MODE: Sample bug reports dataset")
+    set.seed(SEED_VALUE)
+    reports.data <- sample_n(reports.data, 1000) 
+  }
+  
   for (feature.name in c('short_description', 'long_description'))
   {
-    flog.trace("reading data files of %s project", project.name)
-    reports.path <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
   
-    reports.data <- read_csv(reports.path, na  = c("", "NA"))
-    reports.data <- subset(reports.data, bug_fix_time >= 0)[, c(feature.name)]
+    # feature engineering. 
+    reports.featured <- reports.data[, c('bug_id', feature.name, 'bug_fix_time')]
+    reports.featured <- reports.featured[complete.cases(reports.featured), ]
     
-    if (IN_DEBUG_MODE){
-      flog.trace("DEBUG_MODE: Sample bug reports dataset")
-      set.seed(SEED_VALUE)
-      reports.data <- sample_n(reports.data, 1000) 
-    }
-  
     flog.trace("cleaning text features")
-    reports.merged[feature.name]  <- clean_text(reports.merged[feature.name])
+    reports.featured[feature.name]  <- clean_text(reports.featured[feature.name])
     
-    # filtering out long-lived correct predicted
-    flog.trace("making document term matrix for correct predicted bugs")
-    reports.merged         <- subset(reports.merged, long_lived=='Y') 
-    predicted.corrected    <- make_tdm(subset(reports.merged, y_hat=='Y', select=c(bug_id, long_description)), 100)
+    set.seed(SEED_VALUE)
+    flog.trace("making document term matrix for short-lived bugs on %s of %s"
+               , feature.name
+               , project.name)
+    short.lived.bugs    <- subset(reports.featured, bug_fix_time <= 365) 
+    short.lived.dtm     <- make_tdm(short.lived.bugs[, c('bug_id', feature.name)])
   
-    flog.trace("making document term matrix for incorrect predicted bugs")
-    predicted.incorrected  <- make_tdm(subset(reports.merged, y_hat=='N', select=c(bug_id, long_description)), 100)
-    
-    flog.trace("plotting wordcloud for correct predicted bugs")
     set.seed(SEED_VALUE)
-    png(file.path(DATADIR, sprintf("wordcloud-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-    wordcloud(words=predicted.corrected$word, scale=c(5, .3), freq=predicted.corrected$freq, min.freq=0,
-              max.words=100, random.order=FALSE, rot.per=0.35,
-              colors=brewer.pal(8, "Dark2"))
+    flog.trace("making document term matrix for long-lived bugs on %s of %s"
+               , feature.name
+               , project.name)
+    long.lived.bugs <- subset(reports.featured, bug_fix_time > 365) 
+    long.lived.dtm   <- make_tdm(long.lived.bugs[, c('bug_id', feature.name)])
+    
+    set.seed(SEED_VALUE)
+    flog.trace("plotting wordcloud for short-lived bugs on %s of %s"
+               , feature.name
+               , project.name)
+    png(file.path(FIGDIR, sprintf("rq2-%s-wordcloud-%s-short-lived.png", project.name, feature.name))
+        , width = 700, height = 700)
+    wordcloud(words=short.lived.dtm$word
+              , scale=c(5, .3)
+              , freq=short.lived.dtm$freq
+              , min.freq=0
+              , max.words=100
+              , random.order=FALSE
+              , rot.per=0.35
+              , colors=brewer.pal(8, "Dark2"))
     dev.off()
   
-    flog.trace("plotting histogram for correct predicted bugs")
     set.seed(SEED_VALUE)
-    png(file.path(DATADIR, sprintf("histogram-%s-corrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-    ggplot(data=predicted.corrected, aes(x=predicted.corrected$freq)) +
-      geom_histogram()
-    dev.off()
-    
-    flog.trace("plotting wordcloud for incorrect predicted bugs")
-    set.seed(SEED_VALUE)
-    png(file.path(DATADIR, sprintf("wordcloud-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-    wordcloud(words=predicted.incorrected$word, scale=c(5, .3), freq=predicted.incorrected$freq, min.freq=0,
-            max.words=100, random.order=FALSE, rot.per=0.35,
-            colors=brewer.pal(8, "Dark2"))
-    dev.off()
-    
-    flog.trace("plotting histogram for incorrect predicted bugs")
-    set.seed(SEED_VALUE)
-    png(file.path(DATADIR, sprintf("histogram-%s-incorrected-predicted-bugs.png", project.name)), width = 700, height = 700)
-    ggplot(data=predicted.incorrected, aes(x=predicted.incorrected$freq)) +
-      geom_histogram()
+    flog.trace("plotting wordcloud for long-lived bugs on %s of %s", feature.name, project.name)
+    png(file.path(FIGDIR, sprintf("rq2-%s-wordcloud-%s-long-lived.png", project.name, feature.name))
+        , width = 700, height = 700)
+    wordcloud(words=long.lived.dtm$word
+              , scale=c(5, .3)
+              , freq=long.lived.dtm$freq
+              , min.freq=0
+              , max.words=100
+              , random.order=FALSE
+              , rot.per=0.35
+              , colors=brewer.pal(8, "Dark2"))
     dev.off()
   }
 }
