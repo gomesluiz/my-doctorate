@@ -67,7 +67,7 @@ registerDoParallel(r_cluster)
 #' 
 make_tdm <- function(.docs, .n=100) {
   corpus  <- clean_corpus(.docs)
-  tdm     <- TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
+  tdm     <- tm::TermDocumentMatrix(corpus, control=list(weighting=weightTfIdf)) 
   tdm     <- as.matrix(tdm)
   tdm     <- sort(rowSums(tdm), decreasing=TRUE)
   tdm     <- data.frame(word=names(tdm), freq=tdm)
@@ -101,19 +101,20 @@ for (project.name in c('eclipse', 'freedesktop', 'gnome', 'gcc', 'mozilla', 'win
     flog.trace("cleaning text features")
     reports.featured[feature.name]  <- clean_text(reports.featured[feature.name])
     
-    set.seed(SEED_VALUE)
-    flog.trace("making document term matrix for short-lived bugs on %s of %s"
-               , feature.name
-               , project.name)
-    short.lived.bugs    <- subset(reports.featured, bug_fix_time <= 365) 
-    short.lived.dtm     <- make_tdm(short.lived.bugs[, c('bug_id', feature.name)])
   
     set.seed(SEED_VALUE)
     flog.trace("making document term matrix for long-lived bugs on %s of %s"
                , feature.name
                , project.name)
     long.lived.bugs <- subset(reports.featured, bug_fix_time > 365) 
-    long.lived.dtm   <- make_tdm(long.lived.bugs[, c('bug_id', feature.name)])
+    long.lived.dtm   <- make_tdm(long.lived.bugs[, c('bug_id', feature.name)], 100)
+    
+    set.seed(SEED_VALUE)
+    flog.trace("making document term matrix for short-lived bugs on %s of %s"
+               , feature.name
+               , project.name)
+    short.lived.bugs    <- subset(reports.featured, bug_fix_time <= 365) 
+    short.lived.dtm     <- make_tdm(short.lived.bugs[, c('bug_id', feature.name)], 100)
     
     set.seed(SEED_VALUE)
     flog.trace("plotting wordcloud for short-lived bugs on %s of %s"
