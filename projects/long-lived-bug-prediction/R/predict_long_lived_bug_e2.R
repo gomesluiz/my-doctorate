@@ -71,7 +71,7 @@ source(file.path(LIBDIR, "make_dtm.R"))
 source(file.path(LIBDIR, "train_helper.R"))
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 3)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 
@@ -80,16 +80,16 @@ class_label     <- "long_lived"
 # setup experimental parameters.
 projects    <- c("eclipse")
 n_term      <- c(100, 150, 200, 250, 300)
-classifier  <- c(NNET)
-feature     <- c("long_description")
+classifier  <- c(NB)
+feature     <- c("short_description")
 threshold   <- c(365)
-balancing   <- c(SMOTEMETHOD)
+balancing   <- c(UNBALANCED)
 resampling  <- c("repeatedcv")
-metric.type <- c(KPP)
+metric.type <- c(ROC)
 parameters  <- crossing(feature, n_term, classifier, balancing, resampling, metric.type, threshold)
 
 flog.threshold(TRACE)
-flog.trace("Long live prediction Research Question 3 - Experiment 2")
+flog.trace("Long live prediction Research Question 4 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 for (project.name in projects){
