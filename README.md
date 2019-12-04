@@ -9,6 +9,7 @@ A crawler for issue extraction information from many issue tracking systems.
 3. [Visualizing Machine Learning Thresholds to Make Better Business Decisions](https://blog.insightdatascience.com/visualizing-machine-learning-thresholds-to-make-better-business-decisions-4ab07f823415)
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
 5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
+6. [How to Deploy Machine Learning](https://christophergs.github.io/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/)
 
 ### Pandas
 1. [Reshaping Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
