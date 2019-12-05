@@ -9,9 +9,14 @@ A crawler for issue extraction information from many issue tracking systems.
 3. [Visualizing Machine Learning Thresholds to Make Better Business Decisions](https://blog.insightdatascience.com/visualizing-machine-learning-thresholds-to-make-better-business-decisions-4ab07f823415)
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
 5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
+6. [How to Deploy Machine Learning](https://christophergs.github.io/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/)
 
 ### Pandas
 1. [Reshaping Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
+
+### Python Programming 
+1. [Complete Python Guideline](https://www.linkedin.com/posts/nabihbawazir_python-cheatsheet-ugcPost-6580312322152202240-eZCU)
+2. [Six steps to more professional data science](https://www.kaggle.com/rtatman/six-steps-to-more-professional-data-science-code?utm_medium=email&utm_source=intercom&utm_campaign=modular-code-event)
 
 ### R Programming 
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
@@ -36,3 +41,7 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ### Caret R Package
 1. [Caret Package Webnar With Max Kuhn](https://www.youtube.com/watch?v=7Jbb2ItbTC4&list=WL&index=25)
+
+### Python Programming
+2. [Six steps to more professional data science](https://www.youtube.com/watch?v=Trar7GZOPl8&feature=youtu.be&utm_medium=email&utm_source=intercom&utm_campaign=modular-code-event)
+
