@@ -13,6 +13,7 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ### Pandas
 1. [Reshaping Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
+2. [SettingwithCopyWarning: How to Fix This Warning in Pandas](https://www.dataquest.io/blog/settingwithcopywarning/)
 
 ### Python Programming 
 1. [Complete Python Guideline](https://www.linkedin.com/posts/nabihbawazir_python-cheatsheet-ugcPost-6580312322152202240-eZCU)
