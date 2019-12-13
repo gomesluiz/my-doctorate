@@ -98,7 +98,7 @@ for (project.name in c('eclipse', 'gcc'))
   flog.trace("reading data files of %s project", project.name)
   reports.path <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
   results.path <- file.path(DATADIR
-                            , sprintf("20190926143854_rq4e4_%s_tests_balanced_acc.csv"
+                            , sprintf("rq4e4_%s_test_results_balanced_acc.csv"
                                       , project.name
                                       )
                             )
@@ -127,7 +127,7 @@ for (project.name in c('eclipse', 'gcc'))
   # filtering out long-lived correct predicted
   flog.trace("making document term matrix for true positives predicted bugs")
   reports.merged         <- subset(reports.merged, long_lived=='Y')
-  predicted.corrected    <- make_detailed_tdm(subset(reports.merged, y_hat=='Y'
+  predicted.corrected    <- make_summarized_tdm(subset(reports.merged, y_hat=='Y'
                                             , select=c(bug_id, long_description)), 100)
   predicted.corrected$status_prediction <- 'True Positive'
   #ggplot(predicted.corrected, aes(as.factor(Docs), Terms, fill=log(value))) + 
@@ -137,7 +137,7 @@ for (project.name in c('eclipse', 'gcc'))
   #  theme(axis.text.x=element_blank(), axis.text.y=element_blank())
   
   flog.trace("making document term matrix for false negatives predicted bugs")
-  predicted.uncorrected  <- make_detailed_tdm(subset(reports.merged, y_hat=='N'
+  predicted.uncorrected  <- make_summarized_tdm(subset(reports.merged, y_hat=='N'
                                             , select=c(bug_id, long_description)), 100)
   predicted.uncorrected$status_prediction <- 'False Negative'
   #ggplot(predicted.uncorrected, aes(as.factor(Docs), Terms, fill=log(value))) + 
@@ -150,7 +150,7 @@ for (project.name in c('eclipse', 'gcc'))
   flog.trace("recording TDM")
   frequency.list <- rbind(predicted.corrected, predicted.uncorrected)
   frequency.list$project <- project.name
-  frequency.path = file.path(DATADIR, sprintf("%s_%s_tdm_detailed.csv", timestamp, project.name))
+  frequency.path = file.path(DATADIR, sprintf("%s_%s_tdm_summarized.csv", timestamp, project.name))
   write_csv(frequency.list , frequency.path)
 }
 flog.trace("processing finished")
