@@ -10,6 +10,7 @@ A crawler for issue extraction information from many issue tracking systems.
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
 5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
 6. [How to Deploy Machine Learning](https://christophergs.github.io/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/)
+7. [Jupiter and Data Science in Fedora](https://fedoramagazine.org/jupyter-and-data-science-in-fedora/)
 
 ### Pandas
 1. [Reshaping Pandas Dataframe](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
@@ -44,5 +45,5 @@ A crawler for issue extraction information from many issue tracking systems.
 1. [Caret Package Webnar With Max Kuhn](https://www.youtube.com/watch?v=7Jbb2ItbTC4&list=WL&index=25)
 
 ### Python Programming
-2. [Six steps to more professional data science](https://www.youtube.com/watch?v=Trar7GZOPl8&feature=youtu.be&utm_medium=email&utm_source=intercom&utm_campaign=modular-code-event)
+1. [Six steps to more professional data science](https://www.youtube.com/watch?v=Trar7GZOPl8&feature=youtu.be&utm_medium=email&utm_source=intercom&utm_campaign=modular-code-event)
 
