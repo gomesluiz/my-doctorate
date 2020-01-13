@@ -4,7 +4,7 @@ A crawler for issue extraction information from many issue tracking systems.
 ## References 
 
 ### Machine Learning
-1. [Naive Bayes Classifier](https://uc-r.github.io/naive_bayes)
+1. [Naive Bayes Classifier](http://uc-r.github.io/naive_bayes)
 2. [Caret Package - A Pratical Guide to Machine Learning](https://www.machinelearningplus.com/machine-learning/caret-package/)
 3. [Visualizing Machine Learning Thresholds to Make Better Business Decisions](https://blog.insightdatascience.com/visualizing-machine-learning-thresholds-to-make-better-business-decisions-4ab07f823415)
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 

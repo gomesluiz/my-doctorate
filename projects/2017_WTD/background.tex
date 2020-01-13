@@ -1,0 +1,17 @@
+\section{BACKGROUND} \label{sec:background} 
+ 
+
+This section briefly comments of basic concepts necessary to understand this research area, namely CR Systems, Text Mining, Machine Learning, and ML evaluation metrics.
+
+Data used in this research area are usually extracted from the so-called CR Systems, or Bug Tracking Systems. Popular CR Systems are Bugzilla, Jira, and Redmine \cite{Tian2012}. In this work, we extracted Cassandra, HADOOP and Spark datasets from Jira CR System. Additional information can be found in \cite{Pressman2009}.
+
+Two techniques are frequently used in this research area: Text Mining  \cite{Feldman2007} \cite{Williams2011} and Machine Learning (ML) \cite{Williams2011} \cite{Surya2016} \cite{Russell2010} \cite{Breiman2001}. Detailing of these techniques are outside the scope of this paper.
+
+Finally, it is worth mentioning the specific metrics we use for assessing prediction performance. The three most common performance measures for evaluating the accuracy of classification algorithms are precision, recall, and F-measure, described as follows \cite{Facelli2015} \cite{Zhao2013}:
+
+\textbf{Recall}. Recall is the number of True Positives (TP) divided by the number of True Positives (TP) and of False Negatives (FN), where the TP and FN values are derived from the confusion matrix. A low recall indicates many false negatives.
+
+\textbf{Precision}. Precision is the number of True Positives (TP) divided by the number of True Positives and False Positives (FP). A low precision can also indicate many false positives.
+
+\textbf{F-measure}. F-measure conveys the balance between precision and recall, and can be calculated as their harmonic mean. 
+

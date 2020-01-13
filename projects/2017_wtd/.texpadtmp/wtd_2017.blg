@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Users/luiz/Dropbox/luiz_gomes_doutorado_shared/2017_WTD/.texpadtmp/wtd_2017.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ../references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing publisher in Sommerville2010
+Warning--missing publisher in Pressman2009
+Warning--missing publisher in Williams2011
+Warning--missing publisher in Russell2010
+
+Done.
+You've used 22 entries,
+            4087 wiz_defined-function locations,
+            972 strings with 11493 characters,
+and the built_in function-call counts, 13776 in all, are:
+= -- 1073
+> -- 304
+< -- 102
++ -- 157
+- -- 52
+* -- 637
+:= -- 2121
+add.period$ -- 41
+call.type$ -- 22
+change.case$ -- 14
+chr.to.int$ -- 243
+cite$ -- 26
+duplicate$ -- 1003
+empty$ -- 1223
+format.name$ -- 67
+if$ -- 3209
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 165
+newline$ -- 95
+num.names$ -- 22
+pop$ -- 424
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1073
+stack$ -- 0
+substring$ -- 553
+swap$ -- 762
+text.length$ -- 21
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 22
+warning$ -- 4
+while$ -- 69
+width$ -- 24
+write$ -- 218
+(There were 4 warnings)
