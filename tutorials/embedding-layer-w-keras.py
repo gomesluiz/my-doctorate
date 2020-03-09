@@ -5,7 +5,7 @@ Created on Thu Mar  5 11:36:32 2020
 
 @author: luizgomes
 """
-from numpy import array
+
 from keras.preprocessing.text import one_hot
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
