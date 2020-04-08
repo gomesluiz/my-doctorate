@@ -34,7 +34,6 @@ print(encoded_docs)
 # pad documents to a max length of 4 words
 max_length  = 4
 
-
 padded_docs = pad_sequences(encoded_docs, maxlen=max_length, padding='post')
 print(padded_docs)
 
