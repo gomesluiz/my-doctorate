@@ -32,12 +32,15 @@ A crawler for issue extraction information from many issue tracking systems.
 2. [Top Books on Natural Language Processing](https://machinelearningmastery.com/books-on-natural-language-processing/)
 3. [Generating WordClouds in Python](https://www.datacamp.com/community/tutorials/wordcloud-python)
 4. [Text Analytics with Python: A Practical Real-World Approach to Gaining Actionable Insights from your Data](https://www.amazon.com/Text-Analytics-Python-Real-World-Actionable/dp/148422387X/ref=as_li_ss_tl?ie=UTF8&qid=1506457805&sr=8-1&keywords=text+analytics+with+python&linkCode=sl1&tag=edbholdings02-20&linkId=2b025608bbaa4e96327aa46b834c3900c5)
-5. [Text Mining in R](https://www.oreilly.com/library/view/text-mining-with/9781491981641/ch04.html) 
+5. [Text Mining in R](https://www.oreilly.com/library/view/text-mining-with/9781491981641/ch04.html) 
+6. [Intuitive guide to word embedding, RNN (SimpleRNN, LSTM) with step by step implementation in keras for spam detection](https://medium.com/@hemantranvir/spam-detection-using-rnn-simplernn-lstm-with-step-by-step-explanation-530367608071) 
+
 
 ## Visualização de Dados
 1. [Become a Data Visualization Whiz with this Comprehensive Guide to Seaborn in Python](https://www.analyticsvidhya.com/blog/2019/09/comprehensive-data-visualization-guide-seaborn-python/)
 2. [Textual Data Visualization](https://quanteda.io/articles/pkgdown/examples/plotting.html)
-2. [Creating a Word Cloud in R](https://rpubs.com/brandonkopp/creating-word-clouds-in-r)
+3. [Creating a Word Cloud in R](https://rpubs.com/brandonkopp/creating-word-clouds-in-r)
+4. [Keras Model visualization](https://keras.io/visualization/)
 
 ## Vídeos 
 

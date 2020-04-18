@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Mar  7 08:34:26 2020
+Created on Fri Apr 10 19:55:37 2020
 
-@author: luizgomes
+@author: gomes
 """
 import numpy as np
 from sklearn.datasets import load_iris
@@ -15,6 +15,4 @@ y = (iris.target == 0).astype(np.int)
 
 per_clf = Perceptron()
 per_clf.fit(X, y)
-
 y_pred = per_clf.predict([[2, 0.5]])
-print(y_pred)
