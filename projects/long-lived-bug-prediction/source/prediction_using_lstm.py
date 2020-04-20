@@ -152,12 +152,12 @@ def make_model(output_bias=None, input_dim=50000, output_dim=100,
 
 # constants
 cwd = os.getcwd()
-DATAFILE = cwd + '/datasets/20190917_eclipse_bug_report_data.csv'
+DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
 EMBEDDING_DIM = 100
-EPOCHS = 20
+EPOCHS = 5
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
@@ -173,7 +173,7 @@ tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
                       filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~',
                       lower=True)
 early_stopping = tf.keras.callbacks.EarlyStopping(
-    monitor='val_accuracy',
+    monitor='val_auc',
     verbose=1,
     patience=10,
     mode='max',
