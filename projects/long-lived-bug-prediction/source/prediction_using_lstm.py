@@ -1,6 +1,5 @@
 """Predict a long lived bug."""
 import os
-# import tempfile
 import re
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -16,6 +15,7 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow import keras
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 mpl.rcParams['figure.figsize'] = (12, 10)
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 nltk.download('stopwords')
