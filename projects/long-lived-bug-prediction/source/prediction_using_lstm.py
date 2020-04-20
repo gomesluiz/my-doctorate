@@ -190,10 +190,10 @@ for max_nb_terms in MAX_NB_TERMS:
     X = pad_sequences(X, maxlen=max_nb_terms)
     logging.info('Data tokenized')
     logging.info('Found {} unique tokens, using {} terms.'.format(len(word_index), max_nb_terms))
-    logging.info('Shape of data tensor:', X.shape)
+    logging.info('Shape of data tensor: {}'.format(X.shape))
 
     Y = pd.get_dummies(reports['class']).values
-    logging.info('Shape of label tensor:', Y.shape)
+    logging.info('Shape of label tensor: {}'.format(Y.shape))
     logging.info('Data pre-processed')
 
     logging.info('Spliting data started')
@@ -216,8 +216,9 @@ for max_nb_terms in MAX_NB_TERMS:
         epochs=5,
         validation_data=(X_val, Y_val),
         callbacks=[early_stopping],
-        verbose=0
+        verbose=1
     )
+    logging.info('Model built.')
     train_predictions_baseline = model.predict_classes(X_train
                                                    , batch_size=BATCH_SIZE)
     test_predictions_baseline  = model.predict_classes(X_test
@@ -225,11 +226,13 @@ for max_nb_terms in MAX_NB_TERMS:
 
     baseline_results = model.evaluate(X_test, Y_test, batch_size=BATCH_SIZE, verbose=0)
     for name, value in zip(model.metrics_names, baseline_results):
-        print(name, ': ', value)
+        logging.info('{}:{}'.format(name, value))
 
     cm = confusion_matrix(Y_test.argmax(axis=1), test_predictions_baseline > 0.5)
     balanced_accuracy=((cm[1][1]/(cm[1][1]+cm[1][0])) + (cm[0][0]/(cm[0][0]+cm[0][1])))/2
-    print('balanced accuracy : ', balanced_accuracy)
+    logging.info('balanced accuracy : {}'.format(balanced_accuracy))
+
+    logging.info('Model evaluated.')
 
     columns  = ['project', 'feature', 'classifier']
     columns += ['balancing', 'resampling', 'metric', 'threshold']
@@ -286,6 +289,7 @@ for max_nb_terms in MAX_NB_TERMS:
         'fmeasure': fmeasure
     }
     metrics = metrics.append(metric, ignore_index=True)
-    
+
+logging.info('Metricas recorded')
 metrics.to_csv('e1_metrics_results.csv', index_label='#')
 
