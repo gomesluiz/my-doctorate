@@ -24,6 +24,7 @@ COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 
+
 logging.info('Setup completed')
 
 def clean_text(text):
@@ -149,15 +150,14 @@ def make_model(output_bias=None, input_dim=50000, output_dim=100,
 
     return model
 
-
 # constants
 cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
-MAX_NB_TERMS = [100, 150, 200, 250, 300]
+MAX_NB_TERMS = [100, 150, 200, 250]
 EMBEDDING_DIM = 100
-EPOCHS = 5
+EPOCHS = 20 
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
@@ -182,7 +182,6 @@ early_stopping = tf.keras.callbacks.EarlyStopping(
 tf.autograph.experimental.do_not_convert(
     func=None
 )
-
 for max_nb_terms in MAX_NB_TERMS:
     tokenizer.fit_on_texts(reports['long_description'].values)
     word_index = tokenizer.index_word
@@ -200,8 +199,8 @@ for max_nb_terms in MAX_NB_TERMS:
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,
                                                     random_state=42)
     X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,
-                                                  test_size=0.2,
-                                                  random_state=42)
+                                                test_size=0.2,
+                                                random_state=42)
     logging.info('Training shape    : {} {}'.format(X_train.shape, Y_train.shape))
     logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
     logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
@@ -213,16 +212,16 @@ for max_nb_terms in MAX_NB_TERMS:
         X_train,
         Y_train,
         batch_size=BATCH_SIZE,
-        epochs=5,
+        epochs=EPOCH,
         validation_data=(X_val, Y_val),
         callbacks=[early_stopping],
         verbose=1
     )
     logging.info('Model built.')
     train_predictions_baseline = model.predict_classes(X_train
-                                                   , batch_size=BATCH_SIZE)
+                                                , batch_size=BATCH_SIZE)
     test_predictions_baseline  = model.predict_classes(X_test
-                                                   , batch_size=BATCH_SIZE)
+                                                , batch_size=BATCH_SIZE)
 
     baseline_results = model.evaluate(X_test, Y_test, batch_size=BATCH_SIZE, verbose=0)
     for name, value in zip(model.metrics_names, baseline_results):
@@ -233,7 +232,6 @@ for max_nb_terms in MAX_NB_TERMS:
     logging.info('balanced accuracy : {}'.format(balanced_accuracy))
 
     logging.info('Model evaluated.')
-
     columns  = ['project', 'feature', 'classifier']
     columns += ['balancing', 'resampling', 'metric', 'threshold']
     columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
