@@ -157,7 +157,7 @@ FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
 MAX_NB_TERMS = [100, 150, 200, 250]
 EMBEDDING_DIM = 100
-EPOCHS = 20 
+EPOCHS = 2
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
@@ -182,6 +182,7 @@ early_stopping = tf.keras.callbacks.EarlyStopping(
 tf.autograph.experimental.do_not_convert(
     func=None
 )
+metrics = None
 for max_nb_terms in MAX_NB_TERMS:
     tokenizer.fit_on_texts(reports['long_description'].values)
     word_index = tokenizer.index_word
@@ -232,15 +233,16 @@ for max_nb_terms in MAX_NB_TERMS:
     logging.info('balanced accuracy : {}'.format(balanced_accuracy))
 
     logging.info('Model evaluated.')
-    columns  = ['project', 'feature', 'classifier']
-    columns += ['balancing', 'resampling', 'metric', 'threshold']
-    columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
-    columns += ['val_size', 'val_size_class_0', 'val_size_class_1']
-    columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
-    columns += model.metrics_names
-    columns += ['sensitivity', 'specificity', 'balanced_acc']
-    columns += ['fmeasure']
-    metrics = pd.DataFrame(columns=columns)
+    if metrics is None:
+        columns  = ['project', 'feature', 'classifier']
+        columns += ['balancing', 'resampling', 'metric', 'threshold']
+        columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
+        columns += ['val_size', 'val_size_class_0', 'val_size_class_1']
+        columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
+        columns += model.metrics_names
+        columns += ['sensitivity', 'specificity', 'balanced_acc']
+        columns += ['fmeasure']
+        metrics = pd.DataFrame(columns=columns)
 
     loss = baseline_results[0] 
     tp = baseline_results[1]
