@@ -155,9 +155,9 @@ cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
-MAX_NB_TERMS = [100, 150, 200, 250]
+MAX_NB_TERMS = [100, 150, 200, 250, 300]
 EMBEDDING_DIM = 100
-EPOCHS = 2
+EPOCHS = 20
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
@@ -291,5 +291,5 @@ for max_nb_terms in MAX_NB_TERMS:
     metrics = metrics.append(metric, ignore_index=True)
 
 logging.info('Metricas recorded')
-metrics.to_csv('e1_metrics_results.csv', index_label='#')
+metrics.to_csv(cwd+'/results/e1_metrics_results.csv', index_label='#')
 

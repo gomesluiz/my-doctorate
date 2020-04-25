@@ -27,9 +27,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # -- install the sfsnet package and its dependences
-COPY install_requirements.sh requirements.txt prediction_using_lstm.py /root/
-COPY datasets/*.csv /root/datasets/
-WORKDIR /root
+COPY install_requirements.sh requirements.txt prediction_using_lstm.py /usr/src/app/
+COPY datasets/*.csv /usr/src/app/datasets/
+WORKDIR /usr/src/app/
 
 RUN pip install --upgrade pip && \
     sh install_requirements.sh && \
