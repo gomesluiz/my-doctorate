@@ -212,7 +212,7 @@ for max_nb_terms in MAX_NB_TERMS:
         X_train,
         Y_train,
         batch_size=BATCH_SIZE,
-        epochs=EPOCH,
+        epochs=EPOCHS,
         validation_data=(X_val, Y_val),
         callbacks=[early_stopping],
         verbose=1

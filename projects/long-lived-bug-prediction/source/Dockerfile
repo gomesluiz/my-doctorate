@@ -11,7 +11,7 @@ ENV LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 RUN apt-get update --fix-missing && \
     apt-get install -y \
-        wget bzip2 ca-certificates curl git apt-utils build-essential cmake pkg-config \
+        wget bzip2 ca-certificates curl git apt-utils build-essential cmake pkg-config vim \
         libsm6 libxrender1 libfontconfig1 libx11-dev libatlas-base-dev libgtk-3-dev libboost-python-dev && \
     apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache 
@@ -27,7 +27,8 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # -- install the sfsnet package and its dependences
-COPY install_requirements.sh requirements.txt /root/
+COPY install_requirements.sh requirements.txt prediction_using_lstm.py /root/
+COPY datasets/*.csv /root/datasets/
 WORKDIR /root
 
 RUN pip install --upgrade pip && \
