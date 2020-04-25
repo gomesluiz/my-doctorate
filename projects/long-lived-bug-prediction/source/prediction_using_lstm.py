@@ -1,7 +1,7 @@
 """Predict a long lived bug."""
 import os
-# import tempfile
 import re
+import logging
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import nltk
@@ -16,10 +16,16 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow import keras
 
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 mpl.rcParams['figure.figsize'] = (12, 10)
-COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 nltk.download('stopwords')
-print('1. Setup completed')
+COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+
+
+logging.info('Setup completed')
 
 def clean_text(text):
     """Clean a text.
@@ -144,31 +150,30 @@ def make_model(output_bias=None, input_dim=50000, output_dim=100,
 
     return model
 
-
 # constants
 cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
-MAX_NB_TERMS = [100, 150, 200, 250, 300]
+MAX_NB_TERMS = [100, 150, 200, 250]
 EMBEDDING_DIM = 100
-EPOCHS = 20
+EPOCHS = 20 
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
-print('2. Bug reports file read.')
+logging.info('Bug reports file read.')
 neg, pos = np.bincount(reports['class'])
 total = neg + pos
-print('2.1 Reports - Total: {} Positive: {} ({:.2f}% of total)'.format(
+logging.info('Reports - Total: {} Positive: {} ({:.2f}% of total)'.format(
     total, pos, 100 * pos / total))
 reports = clean_reports(reports, FEATURE)
-print('3. Bug reports {} cleaned.'.format(FEATURE))
+logging.info('Bug reports {} cleaned.'.format(FEATURE))
 
 tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
                       filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~',
                       lower=True)
 early_stopping = tf.keras.callbacks.EarlyStopping(
-    monitor='val_accuracy',
+    monitor='val_auc',
     verbose=1,
     patience=10,
     mode='max',
@@ -177,30 +182,29 @@ early_stopping = tf.keras.callbacks.EarlyStopping(
 tf.autograph.experimental.do_not_convert(
     func=None
 )
-
 for max_nb_terms in MAX_NB_TERMS:
     tokenizer.fit_on_texts(reports['long_description'].values)
     word_index = tokenizer.index_word
     X = tokenizer.texts_to_sequences(reports['long_description'].values)
     X = pad_sequences(X, maxlen=max_nb_terms)
-    print('4. Data tokenized')
-    print('4.1 Found {} unique tokens, using {} terms.'.format(len(word_index), max_nb_terms))
-    print('4.2 Shape of data tensor:', X.shape)
+    logging.info('Data tokenized')
+    logging.info('Found {} unique tokens, using {} terms.'.format(len(word_index), max_nb_terms))
+    logging.info('Shape of data tensor: {}'.format(X.shape))
 
     Y = pd.get_dummies(reports['class']).values
-    print('4.2 Shape of label tensor:', Y.shape)
-    print('5. Data pre-processed')
+    logging.info('Shape of label tensor: {}'.format(Y.shape))
+    logging.info('Data pre-processed')
 
-    print('6. Spliting data started')
+    logging.info('Spliting data started')
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,
                                                     random_state=42)
     X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,
-                                                  test_size=0.2,
-                                                  random_state=42)
-    print('Training shape    :', X_train.shape, Y_train.shape)
-    print('Validation shape  :', X_val.shape, Y_val.shape)
-    print('Test shape        :', X_test.shape, Y_test.shape)
-    print('7. Spliting data concluded')
+                                                test_size=0.2,
+                                                random_state=42)
+    logging.info('Training shape    : {} {}'.format(X_train.shape, Y_train.shape))
+    logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
+    logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
+    logging.info('Spliting data concluded')
 
     model   = make_model(input_length=X.shape[1], output_dim=max_nb_terms)
     model.layers[-1].bias.assign([0.0, 0.0])
@@ -208,27 +212,30 @@ for max_nb_terms in MAX_NB_TERMS:
         X_train,
         Y_train,
         batch_size=BATCH_SIZE,
-        epochs=5,
+        epochs=EPOCH,
         validation_data=(X_val, Y_val),
         callbacks=[early_stopping],
-        verbose=0
+        verbose=1
     )
+    logging.info('Model built.')
     train_predictions_baseline = model.predict_classes(X_train
-                                                   , batch_size=BATCH_SIZE)
+                                                , batch_size=BATCH_SIZE)
     test_predictions_baseline  = model.predict_classes(X_test
-                                                   , batch_size=BATCH_SIZE)
+                                                , batch_size=BATCH_SIZE)
 
     baseline_results = model.evaluate(X_test, Y_test, batch_size=BATCH_SIZE, verbose=0)
     for name, value in zip(model.metrics_names, baseline_results):
-        print(name, ': ', value)
+        logging.info('{}:{}'.format(name, value))
 
     cm = confusion_matrix(Y_test.argmax(axis=1), test_predictions_baseline > 0.5)
     balanced_accuracy=((cm[1][1]/(cm[1][1]+cm[1][0])) + (cm[0][0]/(cm[0][0]+cm[0][1])))/2
-    print('balanced accuracy : ', balanced_accuracy)
+    logging.info('balanced accuracy : {}'.format(balanced_accuracy))
 
+    logging.info('Model evaluated.')
     columns  = ['project', 'feature', 'classifier']
     columns += ['balancing', 'resampling', 'metric', 'threshold']
     columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
+    columns += ['val_size', 'val_size_class_0', 'val_size_class_1']
     columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
     columns += model.metrics_names
     columns += ['sensitivity', 'specificity', 'balanced_acc']
@@ -257,11 +264,14 @@ for max_nb_terms in MAX_NB_TERMS:
         'metric'     : 'val_acc',
         'threshold': 365,
         'train_size': Y_train.shape[0],
-        'train_size_class_0': Y_train.shape[0],
-        'train_size_class_1': Y_train.shape[0],
+        'train_size_class_0': (Y_train.argmax(axis=1) == 0).shape[0],
+        'train_size_class_1': (Y_train.argmax(axis=1) == 1).shape[0],
+        'val_size': Y_val.shape[0],
+        'val_size_class_0': (Y_val.argmax(axis=1) == 0).shape[0],
+        'val_size_class_1': (Y_val.argmax(axis=1) == 1).shape[0],
         'test_size': Y_test.shape[0],
-        'test_size_class_1': Y_test.shape[0],
-        'test_size_class_0': Y_test.shape[0],
+        'test_size_class_1': (Y_test.argmax(axis=1) == 0).shape[0],
+        'test_size_class_0': (Y_test.argmax(axis=1) == 1).shape[0],
         'loss': loss,
         'tp': tp,
         'fp': fp,
@@ -277,6 +287,7 @@ for max_nb_terms in MAX_NB_TERMS:
         'fmeasure': fmeasure
     }
     metrics = metrics.append(metric, ignore_index=True)
-    
-metrics.to_csv('lstm_metrics.csv', index_label='#')
+
+logging.info('Metricas recorded')
+metrics.to_csv('e1_metrics_results.csv', index_label='#')
 

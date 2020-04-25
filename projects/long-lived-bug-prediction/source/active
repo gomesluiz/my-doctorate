@@ -1,0 +1,23 @@
+int main(){
+int posicoes[10],i,n,pmenor=0,menor;
+printf("\nEncontre o menor elemento de um vetor de no maximo 10 posicoes\n");
+do{
+printf("\nDigite quantas posicoes o vetor tera:\t");
+scanf("%d",&n);
+if ((n < 0 ) || (n>10))
+printf("\nNumero do vetor deve ser de 0 a 10!\n");
+}while ((n < 0 ) || (n>10));
+for (i=0;i<n;i++){
+printf("\nDigite os numeros:\t");
+scanf("%d",&posicoes[i]);}
+menor=posicoes[0];
+pmenor=0;
+for (i=0;i<n;i++){
+if (menor<posicoes[i]){
+menor = posicoes[i];
+pmenor=i;
+
+}
+
+}
+printf("\nA posicao do menor numero eh %d",pmenor);
