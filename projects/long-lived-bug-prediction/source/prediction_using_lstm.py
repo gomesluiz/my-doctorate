@@ -189,8 +189,8 @@ tf.autograph.experimental.do_not_convert(
 metrics = None
 for max_nb_terms in MAX_NB_TERMS:
     keras_tokenizer.fit_on_texts(reports['long_description'].values)
-    word_index = tokenizer.index_word
-    X = keras_tokenizer.texts_to_sequences(reports['long_description'].values, mode='tfidf')
+    word_index = keras_tokenizer.index_word
+    X = keras_tokenizer.texts_to_sequences(reports['long_description'].values)
     X = pad_sequences(X, maxlen=max_nb_terms)
     Y = pd.get_dummies(reports['class']).values
     #tf_idf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
