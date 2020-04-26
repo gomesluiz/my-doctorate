@@ -158,7 +158,7 @@ cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
-MAX_NB_TERMS = [100, 150, 200, 250, 300]
+MAX_NB_TERMS = [100, 150, 200, 250, 250]
 EMBEDDING_DIM = 100
 EPOCHS = 20
 BATCH_SIZE = 1024
@@ -188,21 +188,20 @@ tf.autograph.experimental.do_not_convert(
 )
 metrics = None
 for max_nb_terms in MAX_NB_TERMS:
-    #keras_tokenizer.fit_on_texts(reports['long_description'].values)
-    # tokenizer.fit_on_texts(reports['long_description'].values)
-    # word_index = tokenizer.index_word
-    #X = keras_tokenizer.texts_to_matrix(reports['long_description'].values, mode='tfidf')
-    #X = pad_sequences(X, maxlen=max_nb_terms)
-    tf_idf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
-    vectorizer    = tf_idf.fit(reports['long_description'])
-    X = vectorizer.transform(reports['long_description']).toarray()
-    
+    keras_tokenizer.fit_on_texts(reports['long_description'].values)
+    word_index = tokenizer.index_word
+    X = keras_tokenizer.texts_to_sequences(reports['long_description'].values, mode='tfidf')
+    X = pad_sequences(X, maxlen=max_nb_terms)
+    Y = pd.get_dummies(reports['class']).values
+    #tf_idf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
+    #vectorizer    = tf_idf.fit(reports['long_description'])
+    #X = vectorizer.transform(reports['long_description']).toarray()
+
     logging.info('Data tokenized using {} terms'.format(max_nb_terms))
     logging.info('Shape of data tensor : {}'.format(X.shape))
-
-    Y = pd.get_dummies(reports['class']).values
     logging.info('Shape of label tensor: {}'.format(Y.shape))
     logging.info('Data pre-processed')
+    
     logging.info('Spliting data started')
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,random_state=42)
     X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,test_size=0.2,random_state=42)
