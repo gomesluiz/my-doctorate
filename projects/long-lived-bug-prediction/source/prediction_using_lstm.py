@@ -10,22 +10,25 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow import keras
 
-
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 mpl.rcParams['figure.figsize'] = (12, 10)
 nltk.download('stopwords')
+nltk.download('punkt')
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
-
-
 logging.info('Setup completed')
+
+def tokenizer(text):
+    words = nltk.word_tokenize(text)
+    return words
 
 def clean_text(text):
     """Clean a text.
@@ -49,8 +52,7 @@ def clean_text(text):
     text = text.lower()
     text = replace_by_space.sub(' ', text)
     text = replace_bad_symbols.sub('', text)
-    text = ' '.join(word for word in text.split()
-                    if word not in english_stopwords)
+    text = ' '.join(word for word in text.split() if word not in english_stopwords)
     return text
 
 
@@ -165,14 +167,15 @@ reports = read_reports(DATAFILE)
 logging.info('Bug reports file read.')
 neg, pos = np.bincount(reports['class'])
 total = neg + pos
-logging.info('Reports - Total: {} Positive: {} ({:.2f}% of total)'.format(
-    total, pos, 100 * pos / total))
+logging.info('Reports - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
 reports = clean_reports(reports, FEATURE)
 logging.info('Bug reports {} cleaned.'.format(FEATURE))
 
-tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
+keras_tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
                       filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~',
                       lower=True)
+
+
 early_stopping = tf.keras.callbacks.EarlyStopping(
     monitor='val_auc',
     verbose=1,
@@ -185,29 +188,31 @@ tf.autograph.experimental.do_not_convert(
 )
 metrics = None
 for max_nb_terms in MAX_NB_TERMS:
-    tokenizer.fit_on_texts(reports['long_description'].values)
-    word_index = tokenizer.index_word
-    X = tokenizer.texts_to_sequences(reports['long_description'].values)
+    keras_tokenizer.fit_on_texts(reports['long_description'].values)
+    # tokenizer.fit_on_texts(reports['long_description'].values)
+    # word_index = tokenizer.index_word
+    X = keras_tokenizer.texts_to_matrix(reports['long_description'].values, mode='tfidf')
     X = pad_sequences(X, maxlen=max_nb_terms)
-    logging.info('Data tokenized')
-    logging.info('Found {} unique tokens, using {} terms.'.format(len(word_index), max_nb_terms))
-    logging.info('Shape of data tensor: {}'.format(X.shape))
+    #tfIdf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
+    #vectorizer   = tfIdf.fit(reports['long_description'])
+    #X = vectorizer.transform(reports['long_description']).toarray()
+    
+    logging.info('Data tokenized using {} terms'.format(max_nb_terms))
+    logging.info('Shape of data tensor : {}'.format(X.shape))
 
     Y = pd.get_dummies(reports['class']).values
     logging.info('Shape of label tensor: {}'.format(Y.shape))
     logging.info('Data pre-processed')
-
     logging.info('Spliting data started')
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,
-                                                    random_state=42)
-    X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,
-                                                test_size=0.2,
-                                                random_state=42)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,random_state=42)
+    X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,test_size=0.2,random_state=42)
     logging.info('Training shape    : {} {}'.format(X_train.shape, Y_train.shape))
     logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
     logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
     logging.info('Spliting data concluded')
-
+    print('>>>>>>>>')
+    print(X_train)
+    print('>>>>>>>>')
     model   = make_model(input_length=X.shape[1], output_dim=max_nb_terms)
     model.layers[-1].bias.assign([0.0, 0.0])
     history = model.fit(
