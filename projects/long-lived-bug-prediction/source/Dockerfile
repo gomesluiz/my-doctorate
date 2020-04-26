@@ -1,6 +1,9 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 LABEL version="1.0" 
 
+ARG USER_ID
+ARG GROUP_ID 
+
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
@@ -27,6 +30,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # -- install the sfsnet package and its dependences
+RUN addgroup --gid ${GROUP_ID} user 
+RUN adduser --disable-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} user
+
 COPY install_requirements.sh requirements.txt prediction_using_lstm.py /usr/src/app/
 COPY datasets/*.csv /usr/src/app/datasets/
 WORKDIR /usr/src/app/

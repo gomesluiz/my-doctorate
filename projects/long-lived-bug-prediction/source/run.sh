@@ -6,4 +6,11 @@ IMAGE=long-lived-bug-prediction-tf-gpu-v1
 
 #nvidia-docker run -it --rm --ipc=host --userns=host --name ${IMAGE}-c1 -v /home/lgomes/Workspace/doctorate/docker-metrics:/root ${IMAGE}:latest bash
 #nvidia-docker run -it --ipc=host --userns=host -v /local:/local -v ~/Workspace/doctorate/metrics:/usr/src/app ${IMAGE}:latest bash
-nvidia-docker run -it --ipc=host --userns=host -v ~/Workspace/doctorate/projects/long-lived-bug-prediction/source/results/:/usr/src/app/results/ ${IMAGE}:latest bash
+nvidia-docker run -it --rm \ 
+    --ipc=host \ 
+    --userns=host \
+    --mount "type=bind, src=$(pwd)/results, dst=/usr/src/app/results" \
+    --workdir /usr/src/app \
+    ${IMAGE}:latest bash
+
+    #-v ~/Workspace/doctorate/projects/long-lived-bug-prediction/source/results/:/usr/src/app/results/ ${IMAGE}:latest bash
