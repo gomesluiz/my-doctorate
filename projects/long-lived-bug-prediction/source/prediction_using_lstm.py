@@ -188,14 +188,14 @@ tf.autograph.experimental.do_not_convert(
 )
 metrics = None
 for max_nb_terms in MAX_NB_TERMS:
-    keras_tokenizer.fit_on_texts(reports['long_description'].values)
+    #keras_tokenizer.fit_on_texts(reports['long_description'].values)
     # tokenizer.fit_on_texts(reports['long_description'].values)
     # word_index = tokenizer.index_word
-    X = keras_tokenizer.texts_to_matrix(reports['long_description'].values, mode='tfidf')
-    X = pad_sequences(X, maxlen=max_nb_terms)
-    #tfIdf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
-    #vectorizer   = tfIdf.fit(reports['long_description'])
-    #X = vectorizer.transform(reports['long_description']).toarray()
+    #X = keras_tokenizer.texts_to_matrix(reports['long_description'].values, mode='tfidf')
+    #X = pad_sequences(X, maxlen=max_nb_terms)
+    tf_idf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
+    vectorizer    = tf_idf.fit(reports['long_description'])
+    X = vectorizer.transform(reports['long_description']).toarray()
     
     logging.info('Data tokenized using {} terms'.format(max_nb_terms))
     logging.info('Shape of data tensor : {}'.format(X.shape))
@@ -210,9 +210,7 @@ for max_nb_terms in MAX_NB_TERMS:
     logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
     logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
     logging.info('Spliting data concluded')
-    print('>>>>>>>>')
-    print(X_train)
-    print('>>>>>>>>')
+    
     model   = make_model(input_length=X.shape[1], output_dim=max_nb_terms)
     model.layers[-1].bias.assign([0.0, 0.0])
     history = model.fit(
