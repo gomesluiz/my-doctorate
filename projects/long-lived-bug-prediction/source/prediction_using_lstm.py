@@ -150,6 +150,7 @@ def make_model(output_bias=None, input_dim=50000, output_dim=100,
 
     return model
 
+
 # constants
 cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
