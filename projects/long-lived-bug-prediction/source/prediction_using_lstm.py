@@ -106,8 +106,7 @@ def clean_reports(data, column):
 
     return cleaned_data
 
-def make_model(output_bias=None, input_dim=50000, output_dim=100,
-               input_length=50000):
+def make_model(input_dim, output_dim, input_length, output_bias=None):
     """Build predicting model.
 
     Parameters
@@ -136,8 +135,7 @@ def make_model(output_bias=None, input_dim=50000, output_dim=100,
         output_bias = tf.keras.initializers.Constant(output_bias)
 
     model = keras.Sequential([
-            keras.layers.Embedding(input_dim=input_dim, output_dim=output_dim,
-                                   input_length=input_length),
+            keras.layers.Embedding(input_dim=50000, output_dim=100, input_length=input_length),
             keras.layers.SpatialDropout1D(0.2),
             keras.layers.LSTM(100, dropout=0.2, recurrent_dropout=0.2),
             keras.layers.Dense(2, activation='sigmoid')
@@ -158,9 +156,10 @@ cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE = 'long_description'
 MAX_NB_WORDS = 50000
-MAX_NB_TERMS = [100, 150, 200, 250, 250]
+#MAX_NB_TERMS = [100, 150, 200, 250, 300]
+MAX_NB_TERMS = [300]
 EMBEDDING_DIM = 100
-EPOCHS = 20
+EPOCHS = 2
 BATCH_SIZE = 1024
 
 reports = read_reports(DATAFILE)
@@ -210,7 +209,7 @@ for max_nb_terms in MAX_NB_TERMS:
     logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
     logging.info('Spliting data concluded')
     
-    model   = make_model(input_length=X.shape[1], output_dim=max_nb_terms)
+    model   = make_model(input_dim=X.shape[1], output_dim=X.shape[1], input_length=X.shape[1])
     model.layers[-1].bias.assign([0.0, 0.0])
     history = model.fit(
         X_train,
