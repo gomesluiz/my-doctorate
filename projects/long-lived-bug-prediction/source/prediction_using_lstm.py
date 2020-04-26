@@ -22,12 +22,12 @@ mpl.rcParams['figure.figsize'] = (12, 10)
 nltk.download('stopwords')
 nltk.download('punkt')
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
+cwd = os.getcwd()
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(filename=cwd + '/results/output.log', filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 # constants
-cwd = os.getcwd()
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE  = 'long_description'
 MAX_NB_TERMS = [100, 150, 200, 250, 300]

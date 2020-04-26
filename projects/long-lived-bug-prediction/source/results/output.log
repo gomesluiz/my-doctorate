@@ -1,0 +1,14 @@
+2020-04-26 20:16:25,083:: INFO - Setup completed
+2020-04-26 20:16:25,083:: INFO - >>> Starting prediction with threshold 6
+2020-04-26 20:16:25,428:: INFO - Bug reports file read
+2020-04-26 20:16:25,429:: INFO - Reports - Total: 10000 Positive: 7282 (72.82% of total)
+2020-04-26 20:16:29,207:: INFO - Bug reports long_description cleaned.
+2020-04-26 20:16:32,929:: INFO - Data tokenized using 100 terms
+2020-04-26 20:16:32,929:: INFO - Shape of data tensor : (10000, 100)
+2020-04-26 20:16:32,929:: INFO - Shape of label tensor: (10000, 2)
+2020-04-26 20:16:32,929:: INFO - Data pre-processed
+2020-04-26 20:16:32,929:: INFO - Spliting data started
+2020-04-26 20:16:32,938:: INFO - Training shape    : (6400, 100) (6400, 2)
+2020-04-26 20:16:32,938:: INFO - Validation shape  : (1600, 100) (1600, 2)
+2020-04-26 20:16:32,938:: INFO - Test shape        : (2000, 100) (2000, 2)
+2020-04-26 20:16:32,938:: INFO - Spliting data concluded
