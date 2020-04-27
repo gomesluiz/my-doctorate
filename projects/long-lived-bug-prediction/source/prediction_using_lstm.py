@@ -31,7 +31,7 @@ logging.info('Setup completed')
 DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
 FEATURE  = 'long_description'
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
-THRESHOLDS   = [6, 63, 108, 365]
+THRESHOLDS   = [63, 338, 365, 475]
 EPOCHS     = 20
 BATCH_SIZE = 1024
 MAX_NB_WORDS  = 50000
@@ -244,7 +244,7 @@ for threshold in THRESHOLDS:
             columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
             columns += model.metrics_names
             columns += ['sensitivity', 'specificity', 'balanced_acc']
-            columns += ['fmeasure, epochs']
+            columns += ['fmeasure', 'epochs']
             metrics = pd.DataFrame(columns=columns)
 
         loss = baseline_results[0] 
@@ -296,5 +296,5 @@ for threshold in THRESHOLDS:
         metrics = metrics.append(metric, ignore_index=True)
 
 logging.info('Metricas recorded')
-metrics.to_csv(cwd+'/results/e1_metrics_results.csv', index_label='#')
+metrics.to_csv(cwd+'/results/20200427084800_e1_metrics_results.csv', index_label='#')
 
