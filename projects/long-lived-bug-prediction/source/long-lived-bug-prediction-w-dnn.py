@@ -201,10 +201,7 @@ for threshold in THRESHOLDS:
         X = keras_tokenizer.texts_to_sequences(reports['long_description'].values)
         X = pad_sequences(X, maxlen=max_nb_terms)
         Y = pd.get_dummies(reports['class']).values
-        #tf_idf        = TfidfVectorizer(tokenizer=tokenizer, stop_words='english', max_features=max_nb_terms)
-        #vectorizer    = tf_idf.fit(reports['long_description'])
-        #X = vectorizer.transform(reports['long_description']).toarray()
-
+ 
         logging.info('Data tokenized using {} terms'.format(max_nb_terms))
         logging.info('Shape of data tensor : {}'.format(X.shape))
         logging.info('Shape of label tensor: {}'.format(Y.shape))
@@ -217,10 +214,7 @@ for threshold in THRESHOLDS:
         logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
         logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
         logging.info('Spliting data concluded')
-        
-        #print(np.sum(Y_train.argmax(axis=1)==0))
-        #quit()
-
+ 
         model   = make_model(input_dim=X.shape[1], output_dim=X.shape[1], input_length=X.shape[1])
         model.layers[-1].bias.assign([0.0, 0.0])
         history = model.fit(
@@ -263,18 +257,18 @@ for threshold in THRESHOLDS:
         accuracy = baseline_results[5]
         sensitivity = tp / (tp + fn) 
         specificity = tn / (tn + fp)
-        precision = baseline_results[6]
-        recall = baseline_results[7]
+        precision   = baseline_results[6]
+        recall      = baseline_results[7]
         fmeasure = (2 * precision * recall) / (precision + recall)
         auc = baseline_results[8]
 
         metric = {
-            'project'    : 'gcc',
+            'project'    : 'eclipse',
             'feature'    : 'long_description',
             'classifier' : 'lstm+emb',
             'balancing'  : 'unbalanced',
             'resampling' : '-',
-            'metric'     : 'val_acc',
+            'metric'     : 'val_auc',
             'threshold'  : threshold,
             'train_size' : Y_train.shape[0],
             'train_size_class_0': np.sum(Y_train.argmax(axis=1) == 0),
@@ -283,8 +277,8 @@ for threshold in THRESHOLDS:
             'val_size_class_0': np.sum(Y_val.argmax(axis=1) == 0),
             'val_size_class_1': np.sum(Y_val.argmax(axis=1) == 1),
             'test_size': Y_test.shape[0],
-            'test_size_class_1': np.sum(Y_test.argmax(axis=1) == 0),
-            'test_size_class_0': np.sum(Y_test.argmax(axis=1) == 1),
+            'test_size_class_0': np.sum(Y_test.argmax(axis=1) == 0),
+            'test_size_class_1': np.sum(Y_test.argmax(axis=1) == 1),
             'loss': loss,
             'tp': tp,
             'fp': fp,
