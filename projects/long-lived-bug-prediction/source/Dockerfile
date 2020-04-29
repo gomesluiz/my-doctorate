@@ -40,7 +40,7 @@ RUN addgroup --gid $GROUP_ID lgomes
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID lgomes
 
 WORKDIR /home/lgomes/experiments
-COPY prediction_using_lstm.py /home/lgomes/experiments/
+COPY long-lived-bug-prediction-w-dnn.py /home/lgomes/experiments/
 COPY datasets/*.csv /home/lgomes/experiments/datasets/
 
 RUN chown $USER_ID:$GROUP_ID -R /home/lgomes/
