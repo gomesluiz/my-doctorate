@@ -5,6 +5,9 @@ import logging
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import nltk
+
+from datetime import datetime
+
 from nltk.corpus import stopwords
 import numpy as np
 import pandas as pd
@@ -23,16 +26,18 @@ nltk.download('stopwords')
 nltk.download('punkt')
 COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 cwd = os.getcwd()
+today = datetime.now()
+today = today.strftime("%Y%m%d%H%M%S")
 
-logging.basicConfig(filename=cwd + '/results/output.log', filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(filename=cwd + '/results/{}-long-lived-bug-prediction-w-dnn.log'.format(today), filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 # constants
-DATAFILE = cwd + '/datasets/20190917_gcc_bug_report_data.csv'
+DATAFILE = cwd + '/datasets/20190917_eclipse_bug_report_data.csv'
 FEATURE  = 'long_description'
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
-THRESHOLDS   = [63, 338, 365, 475]
-EPOCHS     = 20
+THRESHOLDS   = [8, 63, 108, 365]
+EPOCHS     = 2
 BATCH_SIZE = 1024
 MAX_NB_WORDS  = 50000
 
@@ -213,6 +218,9 @@ for threshold in THRESHOLDS:
         logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
         logging.info('Spliting data concluded')
         
+        #print(np.sum(Y_train.argmax(axis=1)==0))
+        #quit()
+
         model   = make_model(input_dim=X.shape[1], output_dim=X.shape[1], input_length=X.shape[1])
         model.layers[-1].bias.assign([0.0, 0.0])
         history = model.fit(
@@ -263,20 +271,20 @@ for threshold in THRESHOLDS:
         metric = {
             'project'    : 'gcc',
             'feature'    : 'long_description',
-            'classifier' : 'lstm',
+            'classifier' : 'lstm+emb',
             'balancing'  : 'unbalanced',
             'resampling' : '-',
             'metric'     : 'val_acc',
-            'threshold': threshold,
-            'train_size': Y_train.shape[0],
-            'train_size_class_0': (Y_train.argmax(axis=1) == 0).shape[0],
-            'train_size_class_1': (Y_train.argmax(axis=1) == 1).shape[0],
+            'threshold'  : threshold,
+            'train_size' : Y_train.shape[0],
+            'train_size_class_0': np.sum(Y_train.argmax(axis=1) == 0),
+            'train_size_class_1': np.sum(Y_train.argmax(axis=1) == 1),
             'val_size': Y_val.shape[0],
-            'val_size_class_0': (Y_val.argmax(axis=1) == 0).shape[0],
-            'val_size_class_1': (Y_val.argmax(axis=1) == 1).shape[0],
+            'val_size_class_0': np.sum(Y_val.argmax(axis=1) == 0),
+            'val_size_class_1': np.sum(Y_val.argmax(axis=1) == 1),
             'test_size': Y_test.shape[0],
-            'test_size_class_1': (Y_test.argmax(axis=1) == 0).shape[0],
-            'test_size_class_0': (Y_test.argmax(axis=1) == 1).shape[0],
+            'test_size_class_1': np.sum(Y_test.argmax(axis=1) == 0),
+            'test_size_class_0': np.sum(Y_test.argmax(axis=1) == 1),
             'loss': loss,
             'tp': tp,
             'fp': fp,
@@ -296,5 +304,5 @@ for threshold in THRESHOLDS:
         metrics = metrics.append(metric, ignore_index=True)
 
 logging.info('Metricas recorded')
-metrics.to_csv(cwd+'/results/20200427084800_e1_metrics_results.csv', index_label='#')
+metrics.to_csv(cwd+'/results/{}-long-lived-bug-prediction-w-dnn-results.csv'.format(today), index_label='#')
 

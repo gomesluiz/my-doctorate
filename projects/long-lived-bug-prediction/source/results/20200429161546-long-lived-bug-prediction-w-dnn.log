@@ -1,0 +1,101 @@
+2020-04-29 16:15:46,291:: INFO - Setup completed
+2020-04-29 16:15:46,292:: INFO - >>> Starting prediction with threshold 63
+2020-04-29 16:15:46,500:: INFO - Bug reports file read
+2020-04-29 16:15:46,501:: INFO - Reports - Total: 10000 Positive: 2492 (24.92% of total)
+2020-04-29 16:15:48,873:: INFO - Bug reports long_description cleaned.
+2020-04-29 16:15:50,268:: INFO - Data tokenized using 100 terms
+2020-04-29 16:15:50,268:: INFO - Shape of data tensor : (10000, 100)
+2020-04-29 16:15:50,268:: INFO - Shape of label tensor: (10000, 2)
+2020-04-29 16:15:50,268:: INFO - Data pre-processed
+2020-04-29 16:15:50,268:: INFO - Spliting data started
+2020-04-29 16:15:50,276:: INFO - Training shape    : (6400, 100) (6400, 2)
+2020-04-29 16:15:50,277:: INFO - Validation shape  : (1600, 100) (1600, 2)
+2020-04-29 16:15:50,277:: INFO - Test shape        : (2000, 100) (2000, 2)
+2020-04-29 16:15:50,277:: INFO - Spliting data concluded
+2020-04-29 16:17:00,851:: INFO - Model built.
+2020-04-29 16:17:00,851:: WARNING - From /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/source/long-lived-prediction-w-dnn.py:236: Sequential.predict_classes (from tensorflow.python.keras.engine.sequential) is deprecated and will be removed after 2021-01-01.
+Instructions for updating:
+Please use instead:* `np.argmax(model.predict(x), axis=-1)`,   if your model does multi-class classification   (e.g. if it uses a `softmax` last-layer activation).* `(model.predict(x) > 0.5).astype("int32")`,   if your model does binary classification   (e.g. if it uses a `sigmoid` last-layer activation).
+2020-04-29 16:17:10,743:: INFO - loss:0.5809159278869629
+2020-04-29 16:17:10,744:: INFO - tp:1477.0
+2020-04-29 16:17:10,744:: INFO - fp:523.0
+2020-04-29 16:17:10,744:: INFO - tn:1477.0
+2020-04-29 16:17:10,744:: INFO - fn:523.0
+2020-04-29 16:17:10,744:: INFO - accuracy:0.7384999990463257
+2020-04-29 16:17:10,744:: INFO - precision:0.7384999990463257
+2020-04-29 16:17:10,744:: INFO - recall:0.7384999990463257
+2020-04-29 16:17:10,745:: INFO - auc:0.7494074106216431
+2020-04-29 16:17:10,851:: INFO - balanced accuracy : 0.5
+2020-04-29 16:17:10,852:: INFO - Model evaluated.
+2020-04-29 16:17:12,820:: INFO - Data tokenized using 150 terms
+2020-04-29 16:17:12,821:: INFO - Shape of data tensor : (10000, 150)
+2020-04-29 16:17:12,821:: INFO - Shape of label tensor: (10000, 2)
+2020-04-29 16:17:12,821:: INFO - Data pre-processed
+2020-04-29 16:17:12,821:: INFO - Spliting data started
+2020-04-29 16:17:12,828:: INFO - Training shape    : (6400, 150) (6400, 2)
+2020-04-29 16:17:12,829:: INFO - Validation shape  : (1600, 150) (1600, 2)
+2020-04-29 16:17:12,829:: INFO - Test shape        : (2000, 150) (2000, 2)
+2020-04-29 16:17:12,829:: INFO - Spliting data concluded
+2020-04-29 16:18:38,952:: INFO - Model built.
+2020-04-29 16:18:51,978:: INFO - loss:0.5756525993347168
+2020-04-29 16:18:51,979:: INFO - tp:1477.0
+2020-04-29 16:18:51,979:: INFO - fp:523.0
+2020-04-29 16:18:51,979:: INFO - tn:1477.0
+2020-04-29 16:18:51,979:: INFO - fn:523.0
+2020-04-29 16:18:51,979:: INFO - accuracy:0.7384999990463257
+2020-04-29 16:18:51,979:: INFO - precision:0.7384999990463257
+2020-04-29 16:18:51,979:: INFO - recall:0.7384999990463257
+2020-04-29 16:18:51,979:: INFO - auc:0.7499935626983643
+2020-04-29 16:18:51,994:: INFO - balanced accuracy : 0.5
+2020-04-29 16:18:51,994:: INFO - Model evaluated.
+2020-04-29 16:18:53,384:: INFO - Data tokenized using 200 terms
+2020-04-29 16:18:53,385:: INFO - Shape of data tensor : (10000, 200)
+2020-04-29 16:18:53,385:: INFO - Shape of label tensor: (10000, 2)
+2020-04-29 16:18:53,385:: INFO - Data pre-processed
+2020-04-29 16:18:53,385:: INFO - Spliting data started
+2020-04-29 16:18:53,392:: INFO - Training shape    : (6400, 200) (6400, 2)
+2020-04-29 16:18:53,392:: INFO - Validation shape  : (1600, 200) (1600, 2)
+2020-04-29 16:18:53,392:: INFO - Test shape        : (2000, 200) (2000, 2)
+2020-04-29 16:18:53,393:: INFO - Spliting data concluded
+2020-04-29 16:20:41,300:: INFO - Model built.
+2020-04-29 16:20:58,607:: INFO - loss:0.5750224590301514
+2020-04-29 16:20:58,607:: INFO - tp:1477.0
+2020-04-29 16:20:58,608:: INFO - fp:523.0
+2020-04-29 16:20:58,608:: INFO - tn:1477.0
+2020-04-29 16:20:58,608:: INFO - fn:523.0
+2020-04-29 16:20:58,608:: INFO - accuracy:0.7384999990463257
+2020-04-29 16:20:58,608:: INFO - precision:0.7384999990463257
+2020-04-29 16:20:58,608:: INFO - recall:0.7384999990463257
+2020-04-29 16:20:58,608:: INFO - auc:0.7503339052200317
+2020-04-29 16:20:58,621:: INFO - balanced accuracy : 0.5
+2020-04-29 16:20:58,621:: INFO - Model evaluated.
+2020-04-29 16:20:59,970:: INFO - Data tokenized using 250 terms
+2020-04-29 16:20:59,970:: INFO - Shape of data tensor : (10000, 250)
+2020-04-29 16:20:59,971:: INFO - Shape of label tensor: (10000, 2)
+2020-04-29 16:20:59,971:: INFO - Data pre-processed
+2020-04-29 16:20:59,971:: INFO - Spliting data started
+2020-04-29 16:20:59,979:: INFO - Training shape    : (6400, 250) (6400, 2)
+2020-04-29 16:20:59,980:: INFO - Validation shape  : (1600, 250) (1600, 2)
+2020-04-29 16:20:59,980:: INFO - Test shape        : (2000, 250) (2000, 2)
+2020-04-29 16:20:59,980:: INFO - Spliting data concluded
+2020-04-29 16:23:17,425:: INFO - Model built.
+2020-04-29 16:23:38,524:: INFO - loss:0.5849956274032593
+2020-04-29 16:23:38,524:: INFO - tp:1477.0
+2020-04-29 16:23:38,525:: INFO - fp:523.0
+2020-04-29 16:23:38,525:: INFO - tn:1477.0
+2020-04-29 16:23:38,525:: INFO - fn:523.0
+2020-04-29 16:23:38,525:: INFO - accuracy:0.7384999990463257
+2020-04-29 16:23:38,525:: INFO - precision:0.7384999990463257
+2020-04-29 16:23:38,525:: INFO - recall:0.7384999990463257
+2020-04-29 16:23:38,525:: INFO - auc:0.7521722316741943
+2020-04-29 16:23:38,537:: INFO - balanced accuracy : 0.5
+2020-04-29 16:23:38,537:: INFO - Model evaluated.
+2020-04-29 16:23:39,813:: INFO - Data tokenized using 300 terms
+2020-04-29 16:23:39,813:: INFO - Shape of data tensor : (10000, 300)
+2020-04-29 16:23:39,813:: INFO - Shape of label tensor: (10000, 2)
+2020-04-29 16:23:39,813:: INFO - Data pre-processed
+2020-04-29 16:23:39,813:: INFO - Spliting data started
+2020-04-29 16:23:39,822:: INFO - Training shape    : (6400, 300) (6400, 2)
+2020-04-29 16:23:39,822:: INFO - Validation shape  : (1600, 300) (1600, 2)
+2020-04-29 16:23:39,822:: INFO - Test shape        : (2000, 300) (2000, 2)
+2020-04-29 16:23:39,822:: INFO - Spliting data concluded

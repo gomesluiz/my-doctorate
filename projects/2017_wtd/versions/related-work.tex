@@ -1,0 +1,14 @@
+\section{Related Work}\label{sec:relatedwork} 
+
+This section presents relevant articles in mining open system repositories, aiming at extracting data and using ML techniques to predict several maintenance properties. 
+
+Menzies and Marcus\cite{Menzies2008} have developed a method, named SEVERIS (SEVERity ISsue assessment), for evaluating the severity of CRs. SEVERIS is based on established data and text mining techniques. The method was applied to predict CR severity level in five projects managed by the Project and Issue Tracking System (PITS), an issue tracker system used by NASA (Stratified F-measures by severity level in the range: (2) 78\%-86\%; (3) 68\%-98\%; (4) 86\%-92\%).
+
+
+Lamkanfi et al.\cite{Lamkanfi2010} have developed an approach to predict if severity of bug report is non-severe (severity levels: 1 or 2) or severe (severity levels: 4 or 5) based on text mining algorithms (tokenization, stop word removal, stemming) and on the Naïve Bayes machine learning algorithm. They have validated their approach with data from three open source project (Mozilla, Eclipse, and GNOME). The article reports that a training set with approximately 500 CRs per severity level is sufficient to make predictions with reasonable accuracy (precision and recall in the range 0.65-0.75 with Mozilla and Eclipse; 0.70-0.85 with GNOME).
+
+Valdivia et al.\cite{ValdiviaGarcia2014} have characterized blocking bugs in six open source projects and proposed a model to predict them. Their model was composed of 14 distinct factors or features (e.g. the textual description, location the bug is found in and the people involved with the bug). Based on these factors they have built decision trees for each project to predict whether a bug will be a blocking bug or not (F-measures in the range 15-42\%).
+
+Tian et al.\cite{Tian2012} have develop a method to predict the severity level of new CRs based on similar CRs reported in the past. The comparison between old and new CRs was implemented by the BM25 similarity function. This method was applied to Mozilla, Eclipse and OpenOffice projects over more than 250,000 CR extracted from Bugzilla (F-measure in the range 13.9-65.3\% for Mozilla; 8.6-58\% for Eclipse; and 12.3-74\% for OpenOffice). 
+
+

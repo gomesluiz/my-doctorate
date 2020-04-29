@@ -1,0 +1,39 @@
+\section{Introduction}
+Change Request (CR) systems have played a major role in maintenance process in many software development settings, both in Closed Source Software (CSS) and in Open Source Software (OSS) scenarios. This is especially true in OSS, which is characterized by the existence of many of users and developers with different levels of expertise spread out around the world, who might create or be responsible for dealing with several CRs\cite{Cavalcanti2014}.
+
+A user interacts with a CR system often through a simple mechanism called CR form. This form enables him to request changes, to report bugs or to ask for support in a software product\cite{Sommerville2010}. Initially, he or she should inform a short description, a long description, a type (e.g. bug, new feature, enhancement, and task) and an associated severity level (e.g. blocker, critical, major, minor and trivial). Subsequently, a development team member will review this request and, case it is not refused for some reason (e.g. request duplication), he or she will complete the information in CR form, indicating, for example, its priority and assigning the person responsible for the CR. 
+
+The severity level information is recognized as a critical variable in the equation to estimate a prioritization of CRs \cite{Tian2012}. It defines how soon the CR needs to be addressed\cite{Lamkanfi2010}. However, the severity level assignment remains mostly a manual process which relies only on the experience and expertise of the person who has opened the CR \cite{Cavalcanti2014, Tian2012, Lamkanfi2010}. Consequently, it is a process with high degree of subjectivity, and it may be quite error-prone. 
+
+The number of CRs in large and medium software OSS projects is frequently very large\cite{Lamkanfi2011}: Eclipse project received over 2.764 requests and GNOME project received over 3.263 requests between 01$/$10$/$2009 and 01$/$01$/$2010. Severity level shifts throughout CR lifecycle may have an adverse effect on planning of maintenance activities. For example, the maintenance team could be assigned to address less significant CRs before  most important ones. There has been reports \cite{Tian2015} of efforts to implement intelligent software assistants to help developers and maintenance personnel in defining more accurately the field values in a CR form. Currently, Machine Learning techniques have become a popular method to address this issue and there are quite a few publications in this area in the literature \cite{Cavalcanti2014}. 
+
+Machine Learning (ML) techniques have been successfully applied in solving real problems in many areas of knowledge, including those related to CR systems, such as duplication and assignment of CR\cite{Cavalcanti2014}. However, the accuracy of ML algorithms may be affected by imbalanced datasets \cite{Chawla2009} \textemdash  a recurring critical problem in CR repositories\cite{Tian2015}. For example, more than 60\% of CRs may have a ``major'' severity level. In addition to this problem, most publications are still focused in predicting the severity level of CRs and none of them have been implemented into popular tools like as Bugzilla, Jira and Redmine.\cite{Cavalcanti2014}. Furthermore, many have used proprietary and/or not public ML algorithms. Therefore, there is still a clear need of advances in this knowledge area, specially broadening the reach of research questions and including more popular and open OSS and ML algorithms.
+
+In this context, the general purpose of our research is to develop an intelligent ML based assistant to help developers and maintenance personnel in the OSS maintenance activities. In this current article, our specific goals are: 
+
+\begin{enumerate}[label=\textbf{G$_\arabic*$}.]
+  \item Evaluate the performance of traditional ML algorithms in the prediction of CR severity level and identify a suitable algorithm to perform such prediction in a scenario where imbalanced data is natural;
+  \item Apply statistical tests to confirm if a ML algorithm is better than the others.  
+  \item Analyze whether ML algorithms outperforms a human user in predicting CR severity level and propose new approaches, accordingly. 
+\end{enumerate}
+
+To meet these goals, this research works with the following research questions, regarding CR severity level during its lifecycle:
+
+\begin{enumerate}[label=\textbf{RQ$_\arabic*$}.]
+  \item \textit{Will the CR severity level change?}
+  \item \textit{Will the CR severity level increase, decrease or remain the same}? 
+  \item \textit{What is the prediction for the final CR severity level?}
+  \item \textit{How ML predictions compare to user prediction?} 
+\end{enumerate}
+
+The first three research questions are related to goals 1 and 2, and the last one is related to goal 3
+
+The contributions of our research are:
+\begin{itemize}
+  \item Analyze the performance of three popular ML algorithms as multi category classifiers in imbalanced datasets extracted from three FLOSS repositories. 
+  \item Run statistical tests on experimental results and demonstrate that, under these conditions, it is not possible to guarantee that an algorithm is better than others with appropriate confidence level.
+  \item Analyze how well an automated ML based predictor performs with respect to a user prediction and propose new measurement approach.
+\end{itemize}
+
+The article is organized as follows. Section \ref{sec:relatedwork} presents related work that are relevant to our research. Section \ref{sec:background} provides the information background about CR systems, text mining and machine learning techniques necessary to understand our approach. Section \ref{sec:experiment} describes our work. Section \ref{sec:discussion} presents final findings and discussion. Finally, Section \ref{sec:conclusion} present  conclusions and  future work.
+
