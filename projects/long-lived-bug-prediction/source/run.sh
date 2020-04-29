@@ -8,5 +8,4 @@ IMAGE=long-lived-bug-prediction-tf-gpu-v1
 #nvidia-docker run -it --ipc=host --userns=host -v /local:/local -v ~/Workspace/doctorate/metrics:/usr/src/app ${IMAGE}:latest bash
 #nvidia-docker run -it --ipc=host --userns=host --mount "type=bind,src=$(pwd)/results/,dst=/home/lgomes/experiments/results/" --workdir /homes/lgomes/experiments/ ${IMAGE}:latest bash
 
-#nvidia-docker run -it --ipc=host --userns=host -v ${PWD}/results/:/home/lgomes/experiments/results/ --workdir /home/lgomes/experiments/ ${IMAGE}:latest bash
 nvidia-docker run -it --ipc=host --userns=host -v ${PWD}/results/:/home/lgomes/experiments/results/ --workdir /home/lgomes/experiments/ ${IMAGE}:latest python3 -u /home/lgomes/experiments/long-lived-bug-prediction-w-dnn.py
