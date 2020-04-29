@@ -37,7 +37,7 @@ DATAFILE = cwd + '/datasets/20190917_eclipse_bug_report_data.csv'
 FEATURE  = 'long_description'
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
 THRESHOLDS   = [8, 63, 108, 365]
-EPOCHS     = 2
+EPOCHS     = 20
 BATCH_SIZE = 1024
 MAX_NB_WORDS  = 50000
 
