@@ -1,0 +1,5 @@
+2020-05-02 16:19:14,126:: INFO - Setup completed
+2020-05-02 16:19:14,127:: INFO - >>> Starting prediction with threshold 8
+2020-05-02 16:19:14,321:: INFO - Bug reports file read
+2020-05-02 16:19:14,321:: INFO - Reports - Total: 10000 Positive: 4969 (49.69% of total)
+2020-05-02 16:19:15,824:: INFO - Bug reports short_description cleaned.

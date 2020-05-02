@@ -34,7 +34,7 @@ logging.info('Setup completed')
 
 # constants
 DATAFILE = cwd + '/datasets/20190917_eclipse_bug_report_data.csv'
-FEATURE  = 'long_description'
+FEATURE  = 'short_description'
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
 THRESHOLDS   = [8, 63, 108, 365]
 EPOCHS     = 200
@@ -85,6 +85,7 @@ def read_reports(filename, threshold):
 
     data['class'] = data['bug_fix_time'].apply(lambda t: 1 if t > threshold else 0)
     data = data[['short_description', 'long_description', 'class']]
+    data = data.dropna()
     return data
 
 
@@ -264,7 +265,7 @@ for threshold in THRESHOLDS:
 
         metric = {
             'project'    : 'eclipse',
-            'feature'    : 'long_description',
+            'feature'    : 'short_description',
             'classifier' : 'lstm+emb',
             'balancing'  : 'unbalanced',
             'resampling' : '-',
