@@ -170,7 +170,7 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
 
 
 early_stopping = tf.keras.callbacks.EarlyStopping(
-    monitor='val_auc',
+    monitor='val_accuracy',
     verbose=1,
     patience=10,
     mode='max',
@@ -268,7 +268,7 @@ for threshold in THRESHOLDS:
             'classifier' : 'lstm+emb',
             'balancing'  : 'unbalanced',
             'resampling' : '-',
-            'metric'     : 'val_auc',
+            'metric'     : 'val_acc',
             'threshold'  : threshold,
             'train_size' : Y_train.shape[0],
             'train_size_class_0': np.sum(Y_train.argmax(axis=1) == 0),
