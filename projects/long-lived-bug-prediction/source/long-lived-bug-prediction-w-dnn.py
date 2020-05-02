@@ -40,6 +40,7 @@ THRESHOLDS   = [8, 63, 108, 365]
 EPOCHS     = 200
 BATCH_SIZE = 1024
 MAX_NB_WORDS  = 50000
+METRIC = 'val_auc'
 
 def tokenizer(text):
     words = nltk.word_tokenize(text)
@@ -171,7 +172,7 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
 
 
 early_stopping = tf.keras.callbacks.EarlyStopping(
-    monitor='val_accuracy',
+    monitor=METRIC,
     verbose=1,
     patience=10,
     mode='max',
@@ -265,11 +266,11 @@ for threshold in THRESHOLDS:
 
         metric = {
             'project'    : 'eclipse',
-            'feature'    : 'short_description',
+            'feature'    : FEATURE,
             'classifier' : 'lstm+emb',
             'balancing'  : 'unbalanced',
             'resampling' : '-',
-            'metric'     : 'val_acc',
+            'metric'     : METRIC,
             'threshold'  : threshold,
             'train_size' : Y_train.shape[0],
             'train_size_class_0': np.sum(Y_train.argmax(axis=1) == 0),
