@@ -179,7 +179,7 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
 tf.autograph.experimental.do_not_convert(
     func=None
 )
-metrics = None
+results = None
 keras_tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
                       filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~',
                       lower=True)
@@ -255,7 +255,7 @@ for feature in FEATURES:
                 logging.info('balanced accuracy : {}'.format(balanced_accuracy))
 
                 logging.info('Model evaluated.')
-                if metrics is None:
+                if results is None:
                     columns  = ['project', 'feature', 'classifier']
                     columns += ['balancing', 'resampling', 'metric', 'threshold', 'terms']
                     columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
@@ -264,7 +264,7 @@ for feature in FEATURES:
                     columns += model.metrics_names
                     columns += ['sensitivity', 'specificity', 'balanced_acc']
                     columns += ['fmeasure', 'epochs']
-                    metrics = pd.DataFrame(columns=columns)
+                    results = pd.DataFrame(columns=columns)
 
                 loss = baseline_results[0] 
                 tp = baseline_results[1]
@@ -279,7 +279,7 @@ for feature in FEATURES:
                 fmeasure = (2 * precision * recall) / (precision + recall)
                 auc = baseline_results[8]
 
-                metric = {
+                result = {
                     'project'    : 'eclipse',
                     'feature'    : feature,
                     'classifier' : 'lstm+emb',
@@ -313,8 +313,8 @@ for feature in FEATURES:
                     'epochs': EPOCHS
 
                 }
-                metrics = metrics.append(metric, ignore_index=True)
+                results = results.append(result, ignore_index=True)
 
 logging.info('Metricas recorded')
-metrics.to_csv(cwd+'/results/{}-long-lived-bug-prediction-w-dnn-results.csv'.format(today), index_label='#')
+results.to_csv(cwd+'/results/{}-long-lived-bug-prediction-w-dnn-results.csv'.format(today), index_label='#')
 
