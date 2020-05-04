@@ -1,0 +1,2 @@
+#,project,feature,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,loss,tp,fp,tn,fn,accuracy,precision,recall,auc,sensitivity,specificity,balanced_acc,fmeasure
+0,gcc,long_description,lstm,unbalanced,-,val_acc,365,6400,6400,6400,2000,2000,2000,0.5622735023498535,1453.0,538.0,1462.0,547.0,0.7287499904632568,0.7297840118408203,0.7264999747276306,0.7889941334724426,0.7265,0.731,0.5669040967170891,0.7281382904007699

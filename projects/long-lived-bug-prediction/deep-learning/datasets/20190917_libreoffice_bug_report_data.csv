@@ -1,0 +1,2600 @@
+bug_id,creation_date,component_name,product_name,short_description,long_description,assignee_name,reporter_name,resolution_category,resolution_code,status_category,status_code,update_date,quantity_of_votes,quantity_of_comments,resolution_date,bug_fix_time,severity_category,severity_code
+LIBREOFFICE-31770,2010-11-19,Localization,LIBREOFFICE,BrOffice brand and LibreOffice,"BrOffice is the name of LibreOffice in Brazil (pt-BR) as demanded and fullfilled (partially).
+
+The graphics attached here shows all:
+
+The image (bitmap) is correct. Good!
+
+All references to LibreOffice in the text should be changed to BrOffice. This is actually done by setting 
+
+%PRODUCTNAME=BrOffice
+
+in compile time.
+
+On a multi-language package ths may require tweaking but if we stick with just pt-BR it may be easier to make the BrOffice package.
+
+We will appreciate to have a single language (pt-BR) package to test. The error may vanish by itself.",pmladek,olivier.hallot,fixed,1,closed,6,2011-01-12,0,19,2010-12-14,25,major,4
+LIBREOFFICE-65403,2013-06-05,Writer,LIBREOFFICE,FILEOPEN: DOCX Import of text with highlighting and character shading loses highlighting,"Created attachment 80329
+DOCX containing text with highlighting *and* character shading
+
+Problem description: 
+When loading a DOCX in LO that has text with highlighting *AND* character shading - the highlighting is not shown.
+When loading the same DOCX in Word - the highlighting *is* shown on the text.
+The only effect you see of the character shading is in the spaces between the words that have highlighting. Word does not do overlapping of the character shading and the text highlighting but it *does not* lose the information 
+meaning - if you remove the highlighting from one of the words in Word you *will* see the character shading on that word.
+
+This is related to the bug I opened here:
+https://www.libreoffice.org/bugzilla/show_bug.cgi?id=65399
+(that bug speaks about the character shading itself only)
+
+Steps to reproduce:
+1. Open the attached DOCX in LO
+2. There is no highlighting on the text - only a dark-gray shading to the entire text.
+
+Current behavior:
+LO colors the entire text with dark-gray character shading.
+
+Expected behavior:
+LO should show the text with highlighted colors and between the words show the light-gray character shading.
+              
+Operating System: Windows 8
+Version: 4.0.3.3 release",libreoffice-bugs,rattles2013,fixed,1,resolved,4,2015-03-21,0,16,2015-03-21,654,normal,2
+LIBREOFFICE-45539,2012-02-02,Calc,LIBREOFFICE,: Large array formula calculations extremely slow and cause crash ( worked fine in 3.3 ),"Created attachment 56515
+Here's a spreadsheet with 1000 row example
+
+Problem description: Large array formula calculations ( 1000 rows ) use a huge amount of memory and cause a crash. So spreadsheets which only take less than a second in version 3.3 take 10mins or crash in version 3.4. I have a few spreadsheets I just can't open in 3.4.
+
+Steps to reproduce:
+1. Enter Formula into say F2 ( Hitting CTRL+SHIFT+Return to enter array formula ) =SUM(IF(A1:A400=AIF(B1:B400=AIF(C1:C400=AD1:D4000)0)0))
+2. Add some rows of data to columns A to D e.g. A A A 4
+3. The recalc will be very slow compared to version 3.3. If the range is extended e.g A1:A1000 B1:B1000 then crashes.
+
+- My guess is that the order of looping around the array formula has been changed between versions requiring inefficient use of memory. I had a similar problem in my code once and just changing the order of the for loops produced identical results.
+
+Current behavior:
+
+Expected behavior:
+
+Platform (if different from the browser): 
+              
+Browser: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML like Gecko) Chrome/17.0.963.46 Safari/535.11#
+
+- Same behaviour in Ubuntu Linux & Windows XP",libreoffice-bugs,gppublic,fixed,1,resolved,4,2012-02-14,0,2,2012-02-14,12,normal,2
+LIBREOFFICE-54396,2012-09-02,Calc,LIBREOFFICE,better algorithm to generate the conditional format render information,"The current cond format render code is extremely slow when using the new color formats and duplicate/unique entries.
+
+The idea is to create the cond formta render information for the whole cond format range at once which brings the algorithm to O(n) instead of O(n^2).
+
+This should be the best we can do before w use a more radical idea to store the render information.",markus.mohrhard,markus.mohrhard,fixed,1,resolved,4,2015-12-15,0,5,2012-09-29,27,normal,2
+LIBREOFFICE-114728,2017-12-28,UI,LIBREOFFICE,Bibliography Entry dialog: Type dropdown has irrelevant values,"Starting with version 6 the Define Bibliography Entry dialog has wrong things listed in the Type dropdown menu.
+
+Currently shown: Short name Type ... (i.e. names of text fields in the same dialog)
+Should be: Article Book ... (i.e. actual bibliography types)",caolanm,mihhkel,fixed,1,resolved,4,2018-01-09,0,12,2018-01-08,11,normal,2
+LIBREOFFICE-32333,2010-12-12,LibreOffice,LIBREOFFICE,Permanent splash image is displayed in CREDITS.odt file,"Created attachment 41032
+A screenshot describing the problem
+
+Splash image of LibreOffice is displayed (permanently) when I follow 
+
+Help -> LibreOffice Credits
+
+path from menu. Screenshot attached.",libreoffice-bugs,gokcen.eraslan,fixed,1,closed,6,2011-01-14,0,3,2010-12-16,4,normal,2
+LIBREOFFICE-60606,2013-02-10,Localization,LIBREOFFICE,UI: German translation in context menu,"Problem description: 
+In the context menu for graphics of the German version it reads Mit externen Werkzeug bearbeiten.... It should be Mit externem Werkzeug bearbeiten...
+
+Steps to reproduce:
+1. Right click on any (bitmap) graphic in any of the modules Writer Draw or Impress
+
+Current behavior:
+
+Expected behavior:
+
+              
+Operating System: Windows 7
+Version: unspecified",libreoffice-bugs,platinius,fixed,1,resolved,4,2013-02-11,0,2,2013-02-11,1,normal,2
+LIBREOFFICE-109081,2017-07-12,Writer,LIBREOFFICE,EDITING: LibreOffice hangs while selecting text ( with Formatting Marks ) ( LibreOffice not maximized ),"Steps to reproduce:
+1. Open attachment 108991 from bug 108991
+2. Enable Formatting Marks ( Ctrl + F10 )
+3. Using the mouse select from the second line until the end of 'SELECT TILL THE END OF THIS TEXT AND CUT'
+4. Use shift + down keys
+5. Use shift + up keys
+6. Ctrl + X
+7. Using the mouse select the remaining text
+8. LibreOffice Hangs
+
+Reproduced in
+
+Version: 5.5.0.0.alpha0+
+Build ID: febbad7263ea25b76f4e53d2f136693a52207a1c
+CPU threads: 4 OS: Linux 4.8 UI render: default VCL: gtk3 
+Locale: ca-ES (ca_ES.UTF-8) Calc: group",libreoffice-bugs,xiscofauli,fixed,1,resolved,4,2017-08-02,0,10,2017-07-28,16,normal,2
+LIBREOFFICE-118702,2018-07-11,Writer,LIBREOFFICE,FILESAVE DOCX Next Style property for page styles lost,"Created attachment 143473
+The original document in ODF format.
+
+LibreOffice Writer has page styles Microsoft Word doesn't. This means that every time a document with multiple page styles is saved as DOCX and reopened page styles have to be converted back and forth.
+
+This works well when the page styles are separated with manual breaks with directly set next page styles but it doesn't if the next page style is applied via the Next style property from the page style settings and pages are separated with regular page breaks. I think that in this case regular page breaks should be converted to page breaks with style changes to preserve the original layout as much as possible.
+
+Interestingly if the page has a next style property and there are no page breaks set at all between pages (so when the text flows freely from one to the next page) LibreOffice adds page breaks with style changes automatically.
+
+
+Steps to reproduce:
+
+1.	Create a new document in LibreOffice Writer.
+2.	Open the “Style and Formatting” sidebar by pressing F11 and select the “Page Styles” view.
+3.	Create a new page style: Name it as you like set the Next Style to “Default style” and set the page orientation to Landscape.
+4.	Apply the newly created page style and add some random text.
+5.	Press Ctrl+Enter to insert a page break. The next page should be in portrait if everything was done right. Add some more random text to this page.
+6.	Save the document as DOCX and reload it.
+
+Actual results:
+Both the first and second page are in landscape.
+
+Expected results:
+Only the first page should be in landscape the second page should be in portrait.
+
+LibreOffice details:
+Version: 6.2.0.0.alpha0+
+Build ID: bb1d5780226bb1b9156580972eea9aa849178742
+CPU threads: 1 OS: Windows 6.1 UI render: default 
+TinderBox: Win-x86@42 Branch:master Time: 2018-07-03_05:56:48
+Locale: hu-HU (hu_HU) Calc: group threaded",xiscofauli,kelemeng,fixed,1,resolved,4,2018-07-25,0,11,2018-07-13,2,normal,2
+LIBREOFFICE-38845,2011-06-30,Writer,LIBREOFFICE,[EasyHack] Make python / mail-merge debuggable,"Make python / mail-merge debuggable
+
+Background: We have a mail-merge module which uses the python mail API that we bundle. The code lives in scripting/source/pyprov/ and (of course) can be edited and tweaked at run time. Unfortunately we have a steady flow of bugs from this code - which are primarily around error reporting: if people enter bad server information or wrong port numbers or have any number of problems - the error reporting is terrible. Thus we get lots of reports of the form it doesn't work. We really need better diagnostic and preferably GUI feedback from the delivery code to help here.
+
+Skills: python",caolanm,bjoern.michaelsen,fixed,1,closed,6,2015-12-15,0,5,2011-11-16,139,normal,2
+LIBREOFFICE-91355,2015-05-18,Localization,LIBREOFFICE,Bad German Translation in Bibliography. Number is not Anzahl.,"In the bibliography editor there is a field called number for journals which have a consecutive numbering for each year. This field is translated to German as Anzahl which is wrong. Anzahl means number only in the sense of a count of items. The correct German term is Nummer.
+
+Example:
+The number of socks I have is 5.
+Die Anzahl meiner Socken ist 5.
+
+My favorite sock is sock number 3.
+Mein lieblingssocke ist Socke Nummer 3.",libreoffice-bugs,graueeminenz,fixed,1,resolved,4,2015-05-18,0,3,2015-05-18,0,normal,2
+LIBREOFFICE-48868,2012-04-18,Calc,LIBREOFFICE,Ctrl-Tab no longer passes to next Auto input values,"- new spreadsheet
+- in A1: apple
+- in A2: apple juice
+- cursor in A3 or A4
+- type a
+  > apple shows
+- type ctrl-Tab to pass to next entry with 'a' (apple juice)
+  > nothing happens
+
+Of course make sure that Tools > Ceel contents > Auto input is enabled
+
+(Note when disabled hitting Ctrl-Tab after the a the cell shows 'apple' :-) )",kohei,cno,fixed,1,resolved,4,2017-10-27,0,14,2012-08-17,121,normal,2
+LIBREOFFICE-46193,2012-02-16,UI,LIBREOFFICE,Let the user copy error message from error dialog,"Created attachment 57175
+Error message in a WarningBox
+
+Currently when something goes wrong with an extension LibreOffice displays the error message in a WarningBox. This not very useful because it is impossible to copy the error message from the WarningBox. User only can make a screenshot. 
+
+Error message should be either in a read-only edit control (thus copyable) or there should be a Copy to Clipboard button. For example Help - About LibreOffice uses read-only edit control. 
+
+Code pointer: SvxScriptErrorDialog in cui/source/dialogs/scriptdlg.cxx",zolnaitamas2000,timar74,fixed,1,resolved,4,2015-08-11,0,15,2015-08-11,1272,normal,2
+LIBREOFFICE-65683,2013-06-12,Writer,LIBREOFFICE,[FORMATTING] Outline numbering settings saved under own name are not saved to use in other documents (after restart),"The Outline Numbering dialog provides the option to save the currently defined attributes for levels 1 thru 10. Clicking the Format button then Save As allows a custom name to be set.
+
+It seems as though using this option does not persist the saved settings beyond the current session.
+
+For example I edit my template and save the outline numbering attributes as my_numbering. I keep that document open but create a new blank document. If I go to Outline Numbering then I can click on the Format button and pick my_numbering to apply those attributes to this document. The problem arises if I quit LibreOffice. If I then open it again and create a new document based on my template then the Format button only offers default options Untitled1 through to Untitled9. My previously saved set of attributes has disappeared.
+
+Similar behaviour reported in the forum: http://ask.libreoffice.org/en/question/12052/having-some-troubles-for-saving-outline-numbering/?answer=18916#post-id-18916",caolanm,charles.hall,fixed,1,resolved,4,2014-11-05,0,6,2014-11-05,511,normal,2
+LIBREOFFICE-67467,2013-07-29,Writer,LIBREOFFICE,TABLE: Crash when renaming table in autoFormat dialog,"Created attachment 83190
+the screenshot of steps to rename tables before the app is exited
+
+Problem description: When i add a table in Table>AutoFormat (such as myTable) then i want to rename it by click Table>AutoFormat>AutoFormat Dialog > Rename Button. I entered the new name and click Ok in the small Dialog it crash immediately (the libreoffice Writer Window closed)
+
+Current behavior: the libreoffice exited immediately after rename table
+
+Expected behavior: the table in autoFormat is renamed
+
+              
+Operating System: Ubuntu
+Version: 4.1.0.4 release",timofeev.i.s,tancuong2596,fixed,1,resolved,4,2013-07-29,0,6,2013-07-29,0,normal,2
+LIBREOFFICE-47769,2012-03-23,Writer,LIBREOFFICE,FILEOPEN particular DOCX 2007 - pictures shown wrongly on page 1,"Created attachment 58925
+Garbled page 1
+
+Problem description: 
+
+Steps to reproduce:
+1. Open the RTF specification from
+http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=10725 in
+DOCX format
+2. Look at page 1 it is totally garbled
+
+Current behavior: Page 1 is totally garbled
+
+Expected behavior: Page 1 is displayed correctly
+
+Platform (if different from the browser): 
+              
+Browser: Mozilla/5.0 (Windows NT 6.0 WOW64 rv:11.0) Gecko/20100101 Firefox/11.0",libreoffice-bugs,s-joyemusequna,fixed,1,resolved,4,2013-02-07,0,11,2013-02-07,321,major,4
+LIBREOFFICE_ONLINE-107891,2017-05-16,LibreOffice,LIBREOFFICE_ONLINE,Resizing window resets zoom (Online),As the title says.,libreoffice-bugs,pranavk,fixed,1,resolved,4,2017-05-18,0,4,2017-05-18,2,normal,2
+LIBREOFFICE-34310,2011-02-15,Calc,LIBREOFFICE,Drop down arrow of the paste button vanishes when graying out (toolbar jumps),"Hi
+
+
+
+please...
+
+
+
+- Make sure that the clipboard is empty or does NOT contain text (bitmap etc. is ok)
+
+
+
+- Open Calc
+
+
+
+- Watch the toolbar which contains the paste button while pressing F2:
+
+
+
+It jumps. The reason is that while the paste button grays out the drop down arrow vanishes.
+
+
+
+Solution: In cell edit mode the paste button should gray out with drop down arrow preserved.",libreoffice-bugs,norbert.notz,fixed,1,resolved,4,2011-12-24,0,7,2011-12-24,312,minor,2
+LIBREOFFICE-31089,2010-10-24,LibreOffice,LIBREOFFICE,BrOffice logos and graphics for LibreOffice/TDF,"Please find attached a zip file with logos of BrOffice in PNG and SVG.
+
+These should be used to build BrOffice under The Document Foundation.",pmladek,olivier.hallot,fixed,1,closed,6,2011-01-14,0,6,2010-11-03,10,normal,2
+LIBREOFFICE-33349,2011-01-21,LibreOffice,LIBREOFFICE,Archaic Berling Antiqua Claims to have alternative name of Times New Roman,"Created attachment 42287
+odt base document
+
+The rendering of the 'Times New Roman' font is quite different when viewing the same odt or PDF document produced from the base document in Windows and Ubuntu Linux .",caolanm,mikyul,fixed,1,resolved,4,2011-01-30,0,28,2011-01-30,9,normal,2
+LIBREOFFICE-51231,2012-06-19,Impress,LIBREOFFICE,UI: Slide thumbnail overlay start presentation disable slide copy slide position depends on slides pane scroll slider position and mouse way,"Created attachment 63225
+Describes buggy behaviour of slide thumbnail overlay
+
+The slide thumbnail overlay start presentation disable slide copy slide that gets blended in when the mouse cursor was being moved over a slide thumbnail interferes with the user's work flow.
+
+The bug(s) is explained easily in the attached file which might be more comprehensible than the following description.
+
+Apparently the position of the overlay depends on the point of entry of the mouse cursor onto the slide thumbnail. When the cursor is being moved onto a thumbnail from the bottom the overlay will appear in the upper part of the thumbnail. But when the user rests the cursor in that upper part and clicks to activate/edit that slide an unexpected action is carried out because the user will click on one of the commands of the overlay instead!
+The position of the overlay should depend on the position of the mouse cursor and not on the point of entry onto the slide thumbnail.
+Furthermore there is a bug with the overlay position. When the the thumbnail view is scrolled down a little the overlay always appears in the upper part of a thumbnail independently of the point of entry.
+
+And as usual this should be optional! The user should be able to enable/disable the overlay from a context menu of any slide thumbnail and in an advanced menu in the options window.
+From a design point of view the way the overlay blends in soothes the eye but this can be annoying when a special effect takes to long to do its thing.",libreoffice-bugs,daniel.schaaaf,fixed,1,resolved,4,2013-01-03,0,13,2012-08-02,44,normal,2
+LIBREOFFICE-78815,2014-05-17,UI,LIBREOFFICE,Toolbar Formatting - Font Name - no drop-down selection,"Created attachment 99206
+FontName no selector
+
+The selector is drawn as a button with no visible response when clicking instead of a drop-down selection field as for the font-size.",momonasmon,d0m1n1k,fixed,1,resolved,4,2014-05-25,0,7,2014-05-19,2,minor,2
+LIBREOFFICE-74366,2014-02-02,UI,LIBREOFFICE,E-Mail Hyperlink No Longer Works (editing),"Created attachment 93213
+Existing e-mail hyperlink. When editted it shows as News and the Subject is not edittable.
+
+Problem description: 
+Inserting or editting a hyperlink no longer allows you to have an e-mail hyperlink only a news hyperlink option is selectable.
+
+Steps to reproduce:
+1. Select text
+2. Select Insert Hyperlink Mail & News
+3. Two choices are available E-mail and News. News radio button is automatically selected and it cannot be changed to E-mail. 
+4. Even when editting an existing e-mail hyperlink the window opens up with News selected and the Subject line is grayed out and not edittable.
+
+Current behavior:
+See above
+
+Expected behavior:
+Should be able to select E-mail radio button and the Subject line should become edittable.
+
+Thank you for the excellent software Libre Office and especially the Mac version--I appreciate your selfless service!
+Peter",sbergman,peteraxup,fixed,1,resolved,4,2014-02-04,0,6,2014-02-03,1,normal,2
+LIBREOFFICE-62634,2013-03-22,Impress,LIBREOFFICE,VIEWING: Change Line Colour and Change Fill Coulour effect do not account for object shape,"Created attachment 76901
+Slideshow illustrating the bug. On the left side is the ellipse that is animated on the right side what the final result should look like.
+
+Problem description: 
+When using the Change Line Colour effect a box with the new colour is drawn around the object no matter it's original shape. When using the Change Fill Colour effect the object changes into a rectangle with the new fill colour.
+Steps to reproduce:
+1. Add an ellipse object
+2. Choose Custom Animation -> Modify Effect -> Add -> Emphasis -> Change Line Colour
+3. Pick e.g. green colour for the line colour in the animation sidebar
+4. Choose Custom Animation -> Modify Effect -> Add -> Emphasis -> Change Fill Colour
+5. Pick e.g. red colour for the fill colour in the animation sidebar
+
+Current behavior:
+During presentation click once to see a green rectangle around the ellipse object. Click once more to see a red filled rectangle.
+
+Expected behavior:
+Click once see ellipse border change to green. Click one more to see ellipse fill color change to red.
+
+              
+Operating System: Ubuntu
+Version: 3.5.7.2 release",libreoffice-bugs,saparvia,fixed,1,resolved,4,2013-03-22,0,3,2013-03-22,0,normal,2
+LIBREOFFICE-96038,2015-11-24,BASIC,LIBREOFFICE,Shell function does not work whith .bat files and paths containing spaces,"On Windows in basic macros the shell() function does not work when executing a .bat file and when the path contains spaces. The usual ConvertToURL() trick does not work when executing .bat files.
+
+To reproduce the bug:
+
+1. Create a directory C:\Temp\Temp Folder
+
+2. Create a test.bat file with the following content:
+
+echo Test
+pause
+
+and copy that file to C:\Temp and C:\Temp\Temp Folder
+
+3. Copy C:\Windows\write.exe to C:\Temp and C:\Temp Folder to get an .exe test case
+
+4. Create the following basic macro:
+
+Sub Test
+
+' Works
+'Shell(ConvertToURL(C:\Temp\test.bat) 1)
+
+'Works
+'Shell(ConvertToURL(C:\Temp\write.exe) 1)
+
+' Works
+'Shell(ConvertToURL(C:\Temp\Test Folder\write.exe) 1)
+
+' Does not work
+Shell(ConvertToURL(C:\Temp\Test Folder\test.bat) 1)
+
+' Works
+'Shell(cmd.exe 1 /c  & C:\Temp\write.exe)
+
+' Does not work
+'Shell(cmd.exe /c 1 C:\Temp\test.bat)
+
+' Works
+'Shell(cmd.exe /c 1 C:\Temp\Test Folder\write.exe)
+
+' Does not work
+'Shell(cmd.exe /c 1 C:\Temp\Test Folder\test.bat)
+
+End Sub
+
+5. Execute the macro and check that it's only possible to execute test.bat when the path does not contain space. On the contrary executing write.exe is possible whatever the path contains spaces or not.",libreoffice-bugs,roland65,fixed,1,resolved,4,2019-03-18,0,19,2019-03-18,1210,minor,2
+LIBREOFFICE-94221,2015-09-14,Draw,LIBREOFFICE,Fontwork text along path has wrong text orientation,"Created attachment 118716
+Screenshot of the wrong orientation
+
+Customize a toolbar with command Fontwork from category Format.
+Draw an arc.
+Add a sentence to the arc. (Use double-click or key F2 to get edit mode.)
+Keep the arc selected and click on new Fontwork-icon.
+In the Fontwork-Window click on the icon top second from left tooltip Rotate.
+The letters should become perpendicular to the line but they are upright and there spacing is messed up.",libreoffice-bugs,rb.henschel,fixed,1,resolved,4,2016-10-25,0,9,2016-05-09,238,minor,2
+LIBREOFFICE-91462,2015-05-22,graphics stack,LIBREOFFICE,Menu items hidden when scrolled down,"All menu items are hidden when they scroll down
+only with SAL_USE_VCLPLUGIN=gen",libreoffice-bugs,alc,fixed,1,resolved,4,2016-10-25,0,11,2015-06-09,18,normal,2
+LIBREOFFICE-121030,2018-10-29,graphics stack,LIBREOFFICE,FreetypeFontInstance use-after-free during CppunitTest_sw_dialogs_test,"At least on a current master Linux ASan build (in an X11 session) `make CppunitTest_sw_dialogs_test` (run as part of `make screenshot`) fails with
+
+> =================================================================
+> ==18158==ERROR: AddressSanitizer: heap-use-after-free on address 0x61100039c998 at pc 0x7f8d033e36a8 bp 0x7ffcaeaee9d0 sp 0x7ffcaeaee9c8
+> READ of size 8 at 0x61100039c998 thread T0
+>  #0 in FreetypeFontInstance::GetFreetypeFont() const at vcl/inc/unx/freetype_glyphcache.hxx:118:52 (instdir/program/libvcllo.so +0x22096a7)
+>  #1 in getFreetypeFontFromGlyph(GlyphItem const&) at vcl/inc/unx/freetype_glyphcache.hxx:126:72 (instdir/program/libvcllo.so +0x220bbc7)
+>  #2 in CairoTextRender::GetGlyphBoundRect(GlyphItem const& tools::Rectangle&) at vcl/unx/generic/gdi/cairotextrender.cxx:447:25 (instdir/program/libvcllo.so +0x21fde64)
+>  #3 in SvpSalGraphics::GetGlyphBoundRect(GlyphItem const& tools::Rectangle&) at vcl/headless/svptext.cxx:97:30 (instdir/program/libvcllo.so +0x21f78b6)
+>  #4 in SalLayout::GetBoundRect(SalGraphics& tools::Rectangle&) const at vcl/source/gdi/sallayout.cxx:680:26 (instdir/program/libvcllo.so +0x19dd9ad)
+>  #5 in OutputDevice::GetTextBoundRect(tools::Rectangle& rtl::OUString const& int int int unsigned long long const* std::__debug::vector > const*) const at vcl/source/outdev/text.cxx:2362:28 (instdir/program/libvcllo.so +0x13367ed)
+>  #6 in Ruler::ImplVDrawText(OutputDevice& long long rtl::OUString const& long long) at svtools/source/control/ruler.cxx:347:20 (instdir/program/libsvtlo.so +0x9db7b5)
+>  #7 in Ruler::ImplDrawTicks(OutputDevice& long long long long long) at svtools/source/control/ruler.cxx:593:17 (instdir/program/libsvtlo.so +0x9df2d8)
+>  #8 in Ruler::ImplFormat(OutputDevice const&) at svtools/source/control/ruler.cxx:1243:5 (instdir/program/libsvtlo.so +0x9e673a)
+>  #9 in Ruler::ImplDraw(OutputDevice&) at svtools/source/control/ruler.cxx:1314:9 (instdir/program/libsvtlo.so +0x9e7631)
+>  #10 in Ruler::Paint(OutputDevice& tools::Rectangle const&) at svtools/source/control/ruler.cxx:2063:5 (instdir/program/libsvtlo.so +0x9ef2e7)
+>  #11 in SwCommentRuler::Paint(OutputDevice& tools::Rectangle const&) at sw/source/uibase/misc/swruler.cxx:102:15 (instdir/program/libswlo.so +0x3e32a26)
+>  #12 in PaintHelper::DoPaint(vcl::Region const*) at vcl/source/window/paint.cxx:300:24 (instdir/program/libvcllo.so +0x8765e1)
+>  #13 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:604:17 (instdir/program/libvcllo.so +0x87b692)
+>  #14 in PaintHelper::~PaintHelper() at vcl/source/window/paint.cxx:540:30 (instdir/program/libvcllo.so +0x8799a2)
+>  #15 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:610:1 (instdir/program/libvcllo.so +0x87b7ba)
+>  #16 in PaintHelper::~PaintHelper() at vcl/source/window/paint.cxx:540:30 (instdir/program/libvcllo.so +0x8799a2)
+>  #17 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:610:1 (instdir/program/libvcllo.so +0x87b7ba)
+>  #18 in PaintHelper::~PaintHelper() at vcl/source/window/paint.cxx:540:30 (instdir/program/libvcllo.so +0x8799a2)
+>  #19 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:610:1 (instdir/program/libvcllo.so +0x87b7ba)
+>  #20 in PaintHelper::~PaintHelper() at vcl/source/window/paint.cxx:540:30 (instdir/program/libvcllo.so +0x8799a2)
+>  #21 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:610:1 (instdir/program/libvcllo.so +0x87b7ba)
+>  #22 in PaintHelper::~PaintHelper() at vcl/source/window/paint.cxx:540:30 (instdir/program/libvcllo.so +0x8799a2)
+>  #23 in vcl::Window::ImplCallPaint(vcl::Region const* ImplPaintFlags) at vcl/source/window/paint.cxx:610:1 (instdir/program/libvcllo.so +0x87b7ba)
+>  #24 in vcl::Window::ImplCallOverlapPaint() at vcl/source/window/paint.cxx:628:9 (instdir/program/libvcllo.so +0x87bd42)
+>  #25 in vcl::Window::ImplHandlePaintHdl(Timer*) at vcl/source/window/paint.cxx:649:9 (instdir/program/libvcllo.so +0x87c09a)
+>  #26 in vcl::Window::LinkStubImplHandlePaintHdl(void* Timer*) at vcl/source/window/paint.cxx:632:1 (instdir/program/libvcllo.so +0x87bde7)
+>  #27 in Link::Call(Timer*) const at include/tools/link.hxx:84:45 (instdir/program/libvcllo.so +0x1d6d326)
+>  #28 in Timer::Invoke() at vcl/source/app/timer.cxx:77:21 (instdir/program/libvcllo.so +0x1d6cfa6)
+>  #29 in Scheduler::ProcessTaskScheduling() at vcl/source/app/scheduler.cxx:474:20 (instdir/program/libvcllo.so +0x1cb5ed8)
+>  #30 in Scheduler::CallbackTaskScheduling() at vcl/source/app/scheduler.cxx:284:5 (instdir/program/libvcllo.so +0x1cb3cdc)
+>  #31 in SalTimer::CallCallback() at vcl/inc/saltimer.hxx:55:13 (instdir/program/libvclplug_gtk3lo.so +0x1b4cd8)
+>  #32 in sal_gtk_timeout_dispatch(_GSource* int (*)(void*) void*) at vcl/unx/gtk3/gtk3gtkdata.cxx:696:45 (instdir/program/libvclplug_gtk3lo.so +0x1b2bf6)
+>  #33 in g_main_dispatch at gmain.c:3182:28 (/lib64/libglib-2.0.so.0 +0x4e26c)
+>  #34 in g_main_context_dispatch at gmain.c:3847:7 (/lib64/libglib-2.0.so.0 +0x4e26c)
+>  #35 in g_main_context_iterate at gmain.c:3920:5 (/lib64/libglib-2.0.so.0 +0x4e637)
+>  #36 in g_main_context_iteration at gmain.c:3981:12 (/lib64/libglib-2.0.so.0 +0x4e6cf)
+>  #37 in GtkSalData::Yield(bool bool) at vcl/unx/gtk3/gtk3gtkdata.cxx:463:31 (instdir/program/libvclplug_gtk3lo.so +0x1af0dc)
+>  #38 in GtkInstance::DoYield(bool bool) at vcl/unx/gtk3/../gtk/gtkinst.cxx:406:29 (instdir/program/libvclplug_gtk3lo.so +0x1b9186)
+>  #39 in ImplYield(bool bool) at vcl/source/app/svapp.cxx:438:48 (instdir/program/libvcllo.so +0x1d21c17)
+>  #40 in Application::Yield() at vcl/source/app/svapp.cxx:502:5 (instdir/program/libvcllo.so +0x1d216a3)
+>  #41 in Dialog::ensureRepaint() at vcl/source/window/dialog.cxx:992:9 (instdir/program/libvcllo.so +0xabfdd6)
+>  #42 in Dialog::createScreenshot() at vcl/source/window/dialog.cxx:1003:5 (instdir/program/libvcllo.so +0xabff50)
+>  #43 in ScreenshotTest::saveScreenshot(Dialog&) at test/source/screenshot_test.cxx:111:40 (workdir/LinkTarget/CppunitTest/../Library/libtest.so +0x91502)
+>  #44 in ScreenshotTest::dumpDialogToPath(Dialog&) at test/source/screenshot_test.cxx:180:9 (workdir/LinkTarget/CppunitTest/../Library/libtest.so +0x92bcd)
+>  #45 in ScreenshotTest::dumpDialogToPath(rtl::OString const&) at test/source/screenshot_test.cxx:212:13 (workdir/LinkTarget/CppunitTest/../Library/libtest.so +0x93656)
+>  #46 in ScreenshotTest::processDialogBatchFile(rtl::OUString const&) at test/source/screenshot_test.cxx:272:17 (workdir/LinkTarget/CppunitTest/../Library/libtest.so +0x94371)
+>  #47 in SwDialogsTest::openAnyDialog() at sw/qa/unit/sw-dialogs-test.cxx:98:5 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x8867)
+>  #48 in void std::__invoke_impl(std::__invoke_memfun_deref void (SwDialogsTest::*&)() SwDialogsTest*&) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/invoke.h:73:14 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x1428f)
+>  #49 in std::__invoke_result::type std::__invoke(void (SwDialogsTest::*&)() SwDialogsTest*&) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/invoke.h:95:14 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x14121)
+>  #50 in void std::_Bind::__call(std::tuple&& std::_Index_tuple) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/functional:400:11 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x14063)
+>  #51 in void std::_Bind::operator()() at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/functional:482:17 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x13e7e)
+>  #52 in std::_Function_handler >::_M_invoke(std::_Any_data const&) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/std_function.h:297:2 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x1384c)
+>  #53 in std::function::operator()() const at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/std_function.h:687:14 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x144ae)
+>  #54 in CppUnit::TestCaller::runTest() at workdir/UnpackedTarball/cppunit/include/cppunit/TestCaller.h:175:7 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x133d8)
+>  #55 in CppUnit::TestCaseMethodFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/TestCase.cpp:32:5 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10c085)
+>  #56 in (anonymous namespace)::Protector::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at test/source/vclbootstrapprotector.cxx:49:14 (workdir/LinkTarget/Library/libvclbootstrapprotector.so +0x1505)
+>  #57 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #58 in (anonymous namespace)::Prot::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at unotest/source/cpp/unobootstrapprotector/unobootstrapprotector.cxx:89:12 (workdir/LinkTarget/Library/unobootstrapprotector.so +0x4c35)
+>  #59 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #60 in (anonymous namespace)::Prot::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at unotest/source/cpp/unoexceptionprotector/unoexceptionprotector.cxx:63:16 (workdir/LinkTarget/Library/unoexceptionprotector.so +0x38c8)
+>  #61 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #62 in CppUnit::DefaultProtector::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at workdir/UnpackedTarball/cppunit/src/cppunit/DefaultProtector.cpp:15:12 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xbe26f)
+>  #63 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #64 in CppUnit::ProtectorChain::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:86:18 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf087a)
+>  #65 in CppUnit::TestResult::protect(CppUnit::Functor const& CppUnit::Test* std::__cxx11::basic_string std::allocator > const&) at workdir/UnpackedTarball/cppunit/src/cppunit/TestResult.cpp:182:28 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x13d55a)
+>  #66 in CppUnit::TestCase::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestCase.cpp:91:13 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10b148)
+>  #67 in CppUnit::TestComposite::doRunChildTests(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:64:30 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cfc5)
+>  #68 in CppUnit::TestComposite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:23:3 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cb04)
+>  #69 in CppUnit::TestComposite::doRunChildTests(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:64:30 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cfc5)
+>  #70 in CppUnit::TestComposite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:23:3 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cb04)
+>  #71 in CppUnit::TestRunner::WrappingSuite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestRunner.cpp:47:27 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x15346f)
+>  #72 in CppUnit::TestResult::runTest(CppUnit::Test*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestResult.cpp:149:9 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x13ca56)
+>  #73 in CppUnit::TestRunner::run(CppUnit::TestResult& std::__cxx11::basic_string std::allocator > const&) at workdir/UnpackedTarball/cppunit/src/cppunit/TestRunner.cpp:96:14 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x153ba6)
+>  #74 in (anonymous namespace)::ProtectedFixtureFunctor::run() const at sal/cppunittester/cppunittester.cxx:316:20 (workdir/LinkTarget/Executable/cppunittester +0x533a49)
+>  #75 in sal_main() at sal/cppunittester/cppunittester.cxx:466:20 (workdir/LinkTarget/Executable/cppunittester +0x531bd5)
+>  #76 in main at sal/cppunittester/cppunittester.cxx:373:1 (workdir/LinkTarget/Executable/cppunittester +0x530ec6)
+>  #77 in __libc_start_main at /usr/src/debug/glibc-2.28/csu/../csu/libc-start.c:308:16 (/lib64/libc.so.6 +0x24412)
+>  #78 in _start at  (workdir/LinkTarget/Executable/cppunittester +0x4219ed)
+> 
+> 0x61100039c998 is located 216 bytes inside of 224-byte region [0x61100039c8c00x61100039c9a0)
+> freed by thread T0 here:
+>  #0 in operator delete(void*) at /home/sbergman/github.com/llvm-project/llvm-project-20170507/compiler-rt/lib/asan/asan_new_delete.cc:167:3 (workdir/LinkTarget/Executable/cppunittester +0x52e8d8)
+>  #1 in salhelper::SimpleReferenceObject::operator delete(void*) at salhelper/source/simplereferenceobject.cxx:50:5 (instdir/program/libuno_salhelpergcc3.so.3 +0x6ee4)
+>  #2 in FreetypeFontInstance::~FreetypeFontInstance() at vcl/unx/generic/glyphs/glyphcache.cxx:276:1 (instdir/program/libvcllo.so +0x2239f11)
+>  #3 in salhelper::SimpleReferenceObject::release() at include/salhelper/simplereferenceobject.hxx:72:49 (instdir/program/libvcllo.so +0xf12e5b)
+>  #4 in rtl::Reference::~Reference() at include/rtl/ref.hxx:90:22 (instdir/program/libvcllo.so +0xefc928)
+>  #5 in std::pair const std::unique_ptr > >::~pair() at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/stl_iterator.h:1262:12 (instdir/program/libvcllo.so +0x223c3fb)
+>  #6 in void __gnu_cxx::new_allocator const std::unique_ptr > > true> >::destroy const std::unique_ptr > > >(std::pair const std::unique_ptr > >*) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/ext/new_allocator.h:140:28 (instdir/program/libvcllo.so +0x223c3c8)
+>  #7 in void std::allocator_traits const std::unique_ptr > > true> > >::destroy const std::unique_ptr > > >(std::allocator const std::unique_ptr > > true> >& std::pair const std::unique_ptr > >*) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/alloc_traits.h:487:8 (instdir/program/libvcllo.so +0x223c2f7)
+>  #8 in std::__detail::_Hashtable_alloc const std::unique_ptr > > true> > >::_M_deallocate_node(std::__detail::_Hash_node const std::unique_ptr > > true>*) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/hashtable_policy.h:2100:7 (instdir/program/libvcllo.so +0x223c289)
+>  #9 in std::__detail::_Hashtable_alloc const std::unique_ptr > > true> > >::_M_deallocate_nodes(std::__detail::_Hash_node const std::unique_ptr > > true>*) at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/hashtable_policy.h:2113:4 (instdir/program/libvcllo.so +0x223c194)
+>  #10 in std::_Hashtable std::pair const std::unique_ptr > > std::allocator const std::unique_ptr > > > std::__detail::_Select1st GlyphCache::IFSD_Equal GlyphCache::IFSD_Hash std::__detail::_Mod_range_hashing std::__detail::_Default_ranged_hash std::__detail::_Prime_rehash_policy std::__detail::_Hashtable_traits >::clear() at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/hashtable.h:2047:13 (instdir/program/libvcllo.so +0x223bfb5)
+>  #11 in std::__cxx1998::unordered_map std::unique_ptr > GlyphCache::IFSD_Hash GlyphCache::IFSD_Equal std::allocator const std::unique_ptr > > > >::clear() at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/bits/unordered_map.h:846:14 (instdir/program/libvcllo.so +0x223ccc4)
+>  #12 in std::__debug::unordered_map std::unique_ptr > GlyphCache::IFSD_Hash GlyphCache::IFSD_Equal std::allocator const std::unique_ptr > > > >::clear() at /usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/debug/unordered_map:199:9 (instdir/program/libvcllo.so +0x223a412)
+>  #13 in GlyphCache::ClearFontCache() at vcl/unx/generic/glyphs/glyphcache.cxx:49:16 (instdir/program/libvcllo.so +0x2237682)
+>  #14 in CairoTextRender::ClearDevFontCache() at vcl/unx/generic/gdi/cairotextrender.cxx:392:9 (instdir/program/libvcllo.so +0x21fd19d)
+>  #15 in SvpSalGraphics::ClearDevFontCache() at vcl/headless/svptext.cxx:56:23 (instdir/program/libvcllo.so +0x21f76bb)
+>  #16 in OutputDevice::ImplClearAllFontData(bool) at vcl/source/outdev/font.cxx:588:38 (instdir/program/libvcllo.so +0x12f59b8)
+>  #17 in OutputDevice::ImplUpdateAllFontData(bool) at vcl/source/outdev/font.cxx:602:5 (instdir/program/libvcllo.so +0x12f647c)
+>  #18 in ImplHandleSalSettings(SalEvent) at vcl/source/window/winproc.cxx:2123:17 (instdir/program/libvcllo.so +0xf30910)
+>  #19 in ImplWindowFrameProc(vcl::Window* SalEvent void const*) at vcl/source/window/winproc.cxx:2481:13 (instdir/program/libvcllo.so +0xf292d6)
+>  #20 in SalFrame::CallCallback(SalEvent void const*) const at vcl/inc/salframe.hxx:280:29 (instdir/program/libvcllo.so +0x21a926b)
+>  #21 in SalGenericDisplay::ProcessEvent(SalUserEventList::SalUserEvent) at vcl/unx/generic/app/gendisp.cxx:67:22 (instdir/program/libvcllo.so +0x21f1537)
+>  #22 in SalUserEventList::DispatchUserEvents(bool) at vcl/source/app/salusereventlist.cxx:109:17 (instdir/program/libvcllo.so +0x1c13a50)
+>  #23 in SalGenericDisplay::DispatchInternalEvent(bool) at vcl/unx/generic/app/gendisp.cxx:52:12 (instdir/program/libvcllo.so +0x21f12f4)
+>  #24 in call_userEventFn(void*) at vcl/unx/gtk3/gtk3gtkdata.cxx:788:27 (instdir/program/libvclplug_gtk3lo.so +0x1b1bce)
+>  #25 in g_idle_dispatch at gmain.c:5620:11 (/lib64/libglib-2.0.so.0 +0x4ab7a)
+> 
+> previously allocated by thread T0 here:
+>  #0 in operator new(unsigned long) at /home/sbergman/github.com/llvm-project/llvm-project-20170507/compiler-rt/lib/asan/asan_new_delete.cc:106:3 (workdir/LinkTarget/Executable/cppunittester +0x52db20)
+>  #1 in salhelper::SimpleReferenceObject::operator new(unsigned long) at salhelper/source/simplereferenceobject.cxx:34:12 (instdir/program/libuno_salhelpergcc3.so.3 +0x6f04)
+>  #2 in FreetypeFontFace::CreateFontInstance(FontSelectPattern const&) const at vcl/unx/generic/glyphs/freetype_glyphcache.cxx:344:12 (instdir/program/libvcllo.so +0x221cc1f)
+>  #3 in ImplFontCache::GetFontInstance(PhysicalFontCollection const* FontSelectPattern&) at vcl/source/font/fontcache.cxx:145:36 (instdir/program/libvcllo.so +0x1f726c4)
+>  #4 in ImplFontCache::GetFontInstance(PhysicalFontCollection const* vcl::Font const& Size const& float bool) at vcl/source/font/fontcache.cxx:104:12 (instdir/program/libvcllo.so +0x1f71b18)
+>  #5 in OutputDevice::ImplNewFont() const at vcl/source/outdev/font.cxx:1034:35 (instdir/program/libvcllo.so +0x12eef78)
+>  #6 in OutputDevice::InitFont() const at vcl/source/outdev/font.cxx:957:10 (instdir/program/libvcllo.so +0x12f2794)
+>  #7 in OutputDevice::ImplLayout(rtl::OUString const& int int Point const& long long const* SalLayoutFlags vcl::TextLayoutCache const* std::__debug::vector > const*) const at vcl/source/outdev/text.cxx:1250:10 (instdir/program/libvcllo.so +0x1320971)
+>  #8 in OutputDevice::GetTextBoundRect(tools::Rectangle& rtl::OUString const& int int int unsigned long long const* std::__debug::vector > const*) const at vcl/source/outdev/text.cxx:2357:18 (instdir/program/libvcllo.so +0x13366a8)
+>  #9 in Ruler::ImplInit(long) at svtools/source/control/ruler.cxx:236:5 (instdir/program/libsvtlo.so +0x9d8766)
+>  #10 in Ruler::Ruler(vcl::Window* long) at svtools/source/control/ruler.cxx:280:5 (instdir/program/libsvtlo.so +0x9d9cbc)
+>  #11 in SvxRuler::SvxRuler(vcl::Window* vcl::Window* SvxRulerSupportFlags SfxBindings& long) at svx/source/dialog/svxruler.cxx:225:5 (instdir/program/libsvxlo.so +0xa0ec4e)
+>  #12 in VclPtr VclPtr::Create& o3tl::is_typed_flags::Wrap SfxBindings& long>(vcl::Window*&& VclPtr& o3tl::is_typed_flags::Wrap&& SfxBindings& long&&) at include/vcl/vclptr.hxx:135:46 (instdir/program/libswlo.so +0x40acf66)
+>  #13 in SwView::SwView(SfxViewFrame* SfxViewShell*) at sw/source/uibase/uiview/view.cxx:727:15 (instdir/program/libswlo.so +0x40984c8)
+>  #14 in SwView::CreateInstance(SfxViewFrame* SfxViewShell*) at sw/source/uibase/uiview/view0.cxx:78:1 (instdir/program/libswlo.so +0x40b976a)
+>  #15 in SfxViewFactory::CreateInstance(SfxViewFrame* SfxViewShell*) at sfx2/source/view/viewfac.cxx:28:12 (instdir/program/libsfxlo.so +0x15ec2a9)
+>  #16 in SfxBaseModel::createViewController(rtl::OUString const& com::sun::star::uno::Sequence const& com::sun::star::uno::Reference const&) at sfx2/source/doc/sfxbasemodel.cxx:4089:46 (instdir/program/libsfxlo.so +0x1287aeb)
+>  #17 in non-virtual thunk to SfxBaseModel::createViewController(rtl::OUString const& com::sun::star::uno::Sequence const& com::sun::star::uno::Reference const&) at sfx2/source/doc/sfxbasemodel.cxx (instdir/program/libsfxlo.so +0x1288945)
+>  #18 in (anonymous namespace)::SfxFrameLoader_Impl::impl_createDocumentView(com::sun::star::uno::Reference const& com::sun::star::uno::Reference const& comphelper::NamedValueCollection const& rtl::OUString const&) at sfx2/source/view/frmload.cxx:584:60 (instdir/program/libsfxlo.so +0x1590ce9)
+>  #19 in (anonymous namespace)::SfxFrameLoader_Impl::load(com::sun::star::uno::Sequence const& com::sun::star::uno::Reference const&) at sfx2/source/view/frmload.cxx:711:13 (instdir/program/libsfxlo.so +0x158c436)
+>  #20 in framework::LoadEnv::impl_loadContent() at framework/source/loadenv/loadenv.cxx:1149:37 (instdir/program/libfwklo.so +0x56a94c)
+>  #21 in framework::LoadEnv::startLoading() at framework/source/loadenv/loadenv.cxx:383:20 (instdir/program/libfwklo.so +0x56046f)
+>  #22 in framework::LoadEnv::loadComponentFromURL(com::sun::star::uno::Reference const& com::sun::star::uno::Reference const& rtl::OUString const& rtl::OUString const& int com::sun::star::uno::Sequence const&) at framework/source/loadenv/loadenv.cxx:169:14 (instdir/program/libfwklo.so +0x55d5d3)
+>  #23 in framework::Desktop::loadComponentFromURL(rtl::OUString const& rtl::OUString const& int com::sun::star::uno::Sequence const&) at framework/source/services/desktop.cxx:619:12 (instdir/program/libfwklo.so +0x6229af)
+>  #24 in non-virtual thunk to framework::Desktop::loadComponentFromURL(rtl::OUString const& rtl::OUString const& int com::sun::star::uno::Sequence const&) at framework/source/services/desktop.cxx (instdir/program/libfwklo.so +0x622b7a)
+>  #25 in unotest::MacrosTest::loadFromDesktop(rtl::OUString const& rtl::OUString const& com::sun::star::uno::Sequence const&) at unotest/source/cpp/macros_test.cxx:50:60 (workdir/LinkTarget/CppunitTest/../Library/libunotest.so +0x31aa9)
+>  #26 in SwDialogsTest::setUp() at sw/qa/unit/sw-dialogs-test.cxx:64:18 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x7d6c)
+>  #27 in CppUnit::TestCaller::setUp() at workdir/UnpackedTarball/cppunit/include/cppunit/TestCaller.h:180:15 (workdir/LinkTarget/CppunitTest/libtest_sw_dialogs_test.so +0x13479)
+>  #28 in CppUnit::TestCaseMethodFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/TestCase.cpp:32:5 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10c085)
+>  #29 in (anonymous namespace)::Protector::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at test/source/vclbootstrapprotector.cxx:49:14 (workdir/LinkTarget/Library/libvclbootstrapprotector.so +0x1505)
+>  #30 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #31 in (anonymous namespace)::Prot::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at unotest/source/cpp/unobootstrapprotector/unobootstrapprotector.cxx:89:12 (workdir/LinkTarget/Library/unobootstrapprotector.so +0x4c35)
+>  #32 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #33 in (anonymous namespace)::Prot::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at unotest/source/cpp/unoexceptionprotector/unoexceptionprotector.cxx:63:16 (workdir/LinkTarget/Library/unoexceptionprotector.so +0x38c8)
+>  #34 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #35 in CppUnit::DefaultProtector::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at workdir/UnpackedTarball/cppunit/src/cppunit/DefaultProtector.cpp:15:12 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xbe26f)
+>  #36 in CppUnit::ProtectorChain::ProtectFunctor::operator()() const at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:20:25 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf37e1)
+>  #37 in CppUnit::ProtectorChain::protect(CppUnit::Functor const& CppUnit::ProtectorContext const&) at workdir/UnpackedTarball/cppunit/src/cppunit/ProtectorChain.cpp:86:18 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0xf087a)
+>  #38 in CppUnit::TestResult::protect(CppUnit::Functor const& CppUnit::Test* std::__cxx11::basic_string std::allocator > const&) at workdir/UnpackedTarball/cppunit/src/cppunit/TestResult.cpp:182:28 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x13d55a)
+>  #39 in CppUnit::TestCase::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestCase.cpp:87:16 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10af1c)
+>  #40 in CppUnit::TestComposite::doRunChildTests(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:64:30 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cfc5)
+>  #41 in CppUnit::TestComposite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:23:3 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cb04)
+>  #42 in CppUnit::TestComposite::doRunChildTests(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:64:30 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cfc5)
+>  #43 in CppUnit::TestComposite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestComposite.cpp:23:3 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x10cb04)
+>  #44 in CppUnit::TestRunner::WrappingSuite::run(CppUnit::TestResult*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestRunner.cpp:47:27 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x15346f)
+>  #45 in CppUnit::TestResult::runTest(CppUnit::Test*) at workdir/UnpackedTarball/cppunit/src/cppunit/TestResult.cpp:149:9 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x13ca56)
+>  #46 in CppUnit::TestRunner::run(CppUnit::TestResult& std::__cxx11::basic_string std::allocator > const&) at workdir/UnpackedTarball/cppunit/src/cppunit/TestRunner.cpp:96:14 (workdir/UnpackedTarball/cppunit/src/cppunit/.libs/libcppunit-1.14.so.0 +0x153ba6)
+>  #47 in (anonymous namespace)::ProtectedFixtureFunctor::run() const at sal/cppunittester/cppunittester.cxx:316:20 (workdir/LinkTarget/Executable/cppunittester +0x533a49)
+>  #48 in sal_main() at sal/cppunittester/cppunittester.cxx:466:20 (workdir/LinkTarget/Executable/cppunittester +0x531bd5)
+>  #49 in main at sal/cppunittester/cppunittester.cxx:373:1 (workdir/LinkTarget/Executable/cppunittester +0x530ec6)
+> 
+> SUMMARY: AddressSanitizer: heap-use-after-free vcl/inc/unx/freetype_glyphcache.hxx:118:52 in FreetypeFontInstance::GetFreetypeFont() const
+> Shadow bytes around the buggy address:
+>   0x0c228006b8e0: 00 00 00 00 00 00 00 00 fa fa fa fa fa fa fa fa
+>   0x0c228006b8f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x0c228006b900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>   0x0c228006b910: fa fa fa fa fa fa fa fa fd fd fd fd fd fd fd fd
+>   0x0c228006b920: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+> =>0x0c228006b930: fd fd fd[fd]fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c228006b940: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+>   0x0c228006b950: fd fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa
+>   0x0c228006b960: fa fa fa fa fa fa fa fa fd fd fd fd fd fd fd fd
+>   0x0c228006b970: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+>   0x0c228006b980: fd fd fd fd fa fa fa fa fa fa fa fa fa fa fa fa
+> Shadow byte legend (one shadow byte represents 8 application bytes):
+>   Addressable:           00
+>   Partially addressable: 01 02 03 04 05 06 07 
+>   Heap left redzone:       fa
+>   Freed heap region:       fd
+>   Stack left redzone:      f1
+>   Stack mid redzone:       f2
+>   Stack right redzone:     f3
+>   Stack after return:      f5
+>   Stack use after scope:   f8
+>   Global redzone:          f9
+>   Global init order:       f6
+>   Poisoned by user:        f7
+>   Container overflow:      fc
+>   Array cookie:            ac
+>   Intra object redzone:    bb
+>   ASan internal:           fe
+>   Left alloca redzone:     ca
+>   Right alloca redzone:    cb
+>   Shadow gap:              cc
+> ==18158==ABORTING",libreoffice-bugs,sbergman,fixed,1,resolved,4,2018-11-01,0,7,2018-11-01,3,normal,2
+LIBREOFFICE-88608,2015-01-20,UI,LIBREOFFICE,Find bar doesn't reset message area when search box is cleared,"Since the find/replace functionality was changed to remove modal dialog boxes for informational responses and replace them with a message area in the find bar it doesn't keep consistent state between that message area and the input box. If a user changes the input box in any way (clears it or enters a different term) the message box should reset itself to match state. It doesn't.
+
+Steps to reproduce:
+
+1. Enter a search term you know isn't in the document.
+2. Note the find bar says Search key not found in the new message area.
+3. Clear the search box and enter a new term.
+4. Imagine you were distracted for a moment and forgot what you were doing.
+5. Look back and see you've entered a new term where it says Search key not found. That's not true because you haven't searched for it yet.
+
+Also it consistently says Reached the end of the document when it wraps regardless of direction even when a user is searching backwards and it has reached the start of the document and wrapped to the end. It should really say Reached the start of the document then...
+
+(By the way from my perspective this was an intrusive UI change which left me wondering if search was broken because previously I'd positioned the find bar to the right of another bar as it had sufficient space to fit all its buttons. When I upgraded to 4.3 I couldn't see the text area that'd been added for messages. After I dragged the bar around I noticed messages were being displayed in it. This change wasn't mentioned in the release notes for 4.3. It should've been.)",jorendc,dhgutteridge,fixed,1,resolved,4,2015-05-10,0,4,2015-05-09,109,normal,2
+LIBREOFFICE-74790,2014-02-10,Writer,LIBREOFFICE,Document comparison causes assertion failure in SwpHintsArray::Check,"The following creates an infinite loop in master and crashes 4.2 (both dbgutil build but probably no better in the release one):
+
+* open the attached document-comparison-loop-1.odt
+* Edit -> Compare Documents choose document-comparison-loop-2.odt
+* see LibreOffice 4.2 crashing or master entering infinite loop :-)
+
+Backtrace:
+
+#0  0x00007ffff74d63d5 in raise () from /lib64/libc.so.6
+#1  0x00007ffff74d7858 in abort () from /lib64/libc.so.6
+#2  0x00007ffff74cf2e2 in __assert_fail_base () from /lib64/libc.so.6
+#3  0x00007ffff74cf392 in __assert_fail () from /lib64/libc.so.6
+#4  0x00007fffc6dd0829 in SwpHintsArray::Check (this=0x7fffdc205000 bPortionsMerged=true)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/txtnode/ndhints.cxx:308
+#5  0x00007fffc6debe78 in SwTxtNode::CopyText (this=0x7fffcc0802c0 pDest=0x7fffcc8fe2b8 rDestStart=... rStart=... nLen=
+    8 bForceCopyOfAllAttrs=false) at /local/libreoffice/libreoffice-4-2/sw/source/core/txtnode/ndtxt.cxx:1789
+#6  0x00007fffc6a06860 in SwDoc::CopyImpl (this=0x281b100 rPam=... rPos=... bMakeNewFrms=true bCopyAll=false pCpyRange=
+    0x7fffcc8fd640) at /local/libreoffice/libreoffice-4-2/sw/source/core/docnode/ndcopy.cxx:1037
+#7  0x00007fffc6a05296 in SwDoc::CopyRange (this=0x281b100 rPam=... rPos=... bCopyAll=false)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/docnode/ndcopy.cxx:701
+#8  0x00007fffc687aaee in SwCompareLine::ChangesInLine (this=0x2868e30 rLine=... rpInsRing=@0x7fffffffc000: 0x0 rpDelRing=
+    @0x7fffffffc008: 0x0) at /local/libreoffice/libreoffice-4-2/sw/source/core/doc/doccomp.cxx:1375
+#9  0x00007fffc687bb9a in SwCompareData::CheckForChangesInLine (this=0x7fffffffbfa0 rData=... rStt=@0x7fffffffbee0: 0 
+    rEnd=@0x7fffffffbef0: 1 rThisStt=@0x7fffffffbed8: 0 rThisEnd=@0x7fffffffbee8: 1)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/doc/doccomp.cxx:1601
+#10 0x00007fffc68777cd in CompareData::ShowDiffs (this=0x7fffffffbfa0 rData=...)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/doc/doccomp.cxx:397
+#11 0x00007fffc687cc36 in SwDoc::CompareDoc (this=0x127f100 rDoc=...)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/doc/doccomp.cxx:1804
+#12 0x00007fffc6abb6d7 in SwEditShell::CompareDoc (this=0x13348d0 rDoc=...)
+    at /local/libreoffice/libreoffice-4-2/sw/source/core/edit/editsh.cxx:898
+#13 0x00007fffc736391f in SwView::InsertMedium (this=0x13efec0 nSlotId=6586 pMedium=0x27f03c0 nVersion=0)
+    at /local/libreoffice/libreoffice-4-2/sw/source/ui/uiview/view2.cxx:2180
+#14 0x00007fffc73649d6 in SwView::DialogClosedHdl (this=0x13efec0 _pFileDlg=0x27bf970)
+
+etc.",michael.stahl,kendy,fixed,1,resolved,4,2014-09-10,0,16,2014-05-07,86,normal,2
+LIBREOFFICE-36916,2011-05-06,LibreOffice,LIBREOFFICE,Script provider for JavaScript extension installs with error,Cannot determine registration class! - this error occurs if you install the extension. The bundled extension has the error mark in the extension manager. JavaScript works fine nevertheless.,libreoffice-bugs,fyvaao,fixed,1,resolved,4,2011-05-12,0,3,2011-05-12,6,normal,2
+LIBREOFFICE-124219,2019-03-20,Installation,LIBREOFFICE,soffice won't launch because of missing symbol cairo_surface_get_device_scale,"Command:
+
+soffice --headless
+
+Error:
+/opt/libreoffice6.2/program/soffice.bin: /lib64/libdbus-1.so.3: no version information available (required by /opt/libreoffice6.2/program/libmergedlo.so)
+/opt/libreoffice6.2/program/soffice.bin: symbol lookup error: /opt/libreoffice6.2/program/libmergedlo.so: undefined symbol: cairo_surface_get_device_scale
+
+Linux (uname -a):
+  Linux ip-172-30-2-127 4.14.77-70.59.amzn1.x86_64 #1 SMP Mon Nov 12 22:02:45 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+Libs:
+cairo.x86_64                            1.12.14-6.8.amzn1          @amzn-main
+cups.x86_64                             1:1.4.2-67.21.amzn1        @amzn-main
+cups-libs.x86_64                        1:1.4.2-67.21.amzn1        @amzn-main
+glibc.x86_64                            2.17-222.173.amzn1         installed
+glibc-common.x86_64                     2.17-222.173.amzn1         installed
+libXinerama.x86_64                      1.1.2-2.7.amzn1            @amzn-main
+dbus.x86_64                             1:1.6.12-14.28.amzn1       installed
+
+In the same environment:
+  Libre Office version 6.1.5.2 works
+  Libre Office version 6.2.0.3 fails
+  Libre Office version 6.2.1.2 fails",caolanm,paul.jowett,fixed,1,resolved,4,2019-04-04,0,12,2019-04-04,15,normal,2
+LIBREOFFICE-41300,2011-09-28,WWW,LIBREOFFICE,BUGZILLAASSISTANT: Missing Message that Attachment has been uploaded successfully,"Steps to reproduce:
+1. Submit a bug using the Assistant
+2. Upload Attachment
+   Expected: Message successfully uploaded ....  some moments
+             after click on Upload button
+   Nothing hourglass mousepointer for some moments nothing
+
+So there is some danger that the reporter sill click the upload button several times hoping to get some feedback 
+(like I did in Bug 41299 - BUGZILLAASSISTANT: Dangerous Links in Heading Session lost if clicked)",loic,LibreOffice,fixed,1,closed,6,2011-10-08,0,2,2011-10-06,8,normal,2
+LIBREOFFICE-95626,2015-11-06,Documentation,LIBREOFFICE,Help gives incorrect navigator undocking instructions,,stanislav.horacek,nemoinis,fixed,1,resolved,4,2016-10-25,0,4,2015-11-08,2,minor,2
+LIBREOFFICE-62483,2013-03-18,Formula Editor,LIBREOFFICE,Missing Default button in Format -> Alignment dialog at Math,"Created attachment 76694
+Shows the dialog at LibO 3.5 with Default button
+
+Since LibO 3.6 and launch the Help button in dialogs the Default button at Format -> Alignment dialog is missing.
+
+Alignment 35.png - shows the dialog at LibO 3.5 with Default button
+Alignmant 40.png - shows the dialog at LibO 3.6 and 4.0 with Help button and missing Default button.",jorendc,kuehl,fixed,1,resolved,4,2013-05-21,0,12,2013-05-21,64,normal,2
+LIBREOFFICE-73087,2013-12-28,LibreOffice,LIBREOFFICE,CVE-2013-1752 and CVE-2013-4238: upgrade python to 3.3.3 for python33.dll vulnerable according to Secunia and Python,"Created attachment 91245
+C:\Program Files (x86)\LibreOffice 4\program\python33.dll is vulnerable according to Secunia and Python
+
+C:\Program Files (x86)\LibreOffice 4\program\python33.dll (version 3.3.150.1013) is vulnerable according to Secunia and Python.
+
+Version 3.3.3 is secure.
+
+Please see Secunia Advisory SA56226 at http://secunia.com/advisories/56226
+
+A security issue and multiple vulnerabilities have been reported in Python which can be exploited by malicious people to conduct spoofing attacks and cause a DoS (Denial of Service).
+
+The security issue and the vulnerabilities are reported in versions prior to 3.3.3.
+
+Solution:
+Update to version 3.3.3.
+
+Please also see
+
+http://www.python.org/download/releases/3.3.3/
+
+http://docs.python.org/3.3/whatsnew/changelog.html",michael.stahl,peter.stendahl-juvonen,fixed,1,resolved,4,2014-01-08,0,7,2014-01-07,10,major,4
+LIBREOFFICE-94389,2015-09-20,Installation,LIBREOFFICE,compilerplugins install fails with clang version 3.7.0,"Created attachment 118886
+Errors thrown when compiling compilerplugins with clang3.7.0
+
+I'm still a bit of a noobie so I could be out of line here but my install fails on Gentoo with the errors in the attachment and the following version of clang.
+
+    clang version 3.7.0 (tags/RELEASE_370/final)
+    Target: x86_64-pc-linux-gnu
+    Thread model: posix
+    Selected GCC installation /usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3
+
+According to http://clang.llvm.org/doxygen/classclang_1_1Stmt.html the second two errors are an easy fix and it compiles if range.() is changed to range->child_().
+
+The first error is a little more complicated as decl.forallBases(BaseMatches AllowShortCircuit) is correct according to http://clang.llvm.org/doxygen/classclang_1_1CXXRecordDecl.html. However according to what I have in my /usr/include/clang/AST/DeclCXX.h decl.forallBases(BaseMatches callback AllowShortCircuit) should be used. I'll submit a patch shortly with what I get to compile.",libreoffice-bugs,danlrobertson89,fixed,1,resolved,4,2016-10-25,0,2,2015-09-21,1,normal,2
+LIBREOFFICE-36668,2011-04-29,Writer,LIBREOFFICE,Possibility to add image captions above the image,"For some strange reason writer allows captions of tables above or below the table. If I want to add a caption to an image the option position cannot be selected - therefore only below is selectable.
+
+I want to be able to add image captions above as well.",caolanm,krabina,fixed,1,resolved,4,2013-12-16,0,13,2013-02-28,671,normal,2
+LIBREOFFICE-89064,2015-02-02,Impress,LIBREOFFICE,FILEOPEN .pptx slide with a comment has no view of notes,"Created attachment 113071
+test .pptx file
+
+From at least 4.3.3.2 and still present in 4.4.0.3
+
+Problem description: FILEOPEN VIEWING
+
+Opening a .pptx file that contains slides with notes and comments (inserted with MS PowerPoint) will result in the slides with the comment not displaying either the slide or the notes in note view. Slides without a comment display the slide and notes just fine in note view. Deleting the comment does not result in notes displaying. 
+
+Steps to reproduce:
+1. Open the .pptx file in attachment.
+2. See the result in notes mode: slide 2 will display neither slide nor notes in note view. Slide 3 without a comment displays notes just fine
+
+Current behavior: No slide image displayed in note view if slide has comment
+
+Expected behavior: slide image displayed in note view if slide has comment
+
+Comment: this is a collaboration blocker for me and so I must work in Windows",paul.trojahn,royden.yates,fixed,1,resolved,4,2017-06-21,0,8,2017-06-21,870,major,4
+LIBREOFFICE-116842,2018-04-06,Android Viewer,LIBREOFFICE,Adding spreadsheets or slides crashes android viewer,"Description:
+Adding spreadsheets or slides crashes android viewer
+
+Steps to Reproduce:
+1.Open a calc or impress document
+2.Click somewhere on the document to enable editing
+3.Click on the menu at the right top of the screen
+4.Select add slides or add spreadsheet
+
+Actual Results:  
+The viewer crashes
+
+Expected Results:
+The viewer adds slides or spreadsheets without crashing
+
+
+Reproducible: Always
+
+
+User Profile Reset: No
+
+
+
+Additional Info:
+
+
+User-Agent: Mozilla/5.0 (X11 Ubuntu Linux x86_64 rv:59.0) Gecko/20100101 Firefox/59.0",libreoffice-bugs,merttumer,fixed,1,resolved,4,2018-04-13,0,4,2018-04-08,2,normal,2
+LIBREOFFICE-82136,2014-08-04,LibreOffice,LIBREOFFICE,Build fails when fetching external packages with libreoffice-4.3.0.4,"Created attachment 104005
+configure output and invocation
+
+When running make build on libreoffice-4.3.0.4 release I get the following error:
+
+Makefile:197: *** fetch__Download_item: libreoffice-dictionaries-4.3.0.4.tar.xz is empty.  Stop.
+
+Issue has also been reported downstream [1].
+
+configure.log which contains output of ./configure command and the arguments it has been run with is attached. make.log and the actual build error is also attached.
+
+[1] http://wiki.linuxfromscratch.org/blfs/ticket/5311",dtardon,krejzi,fixed,1,resolved,4,2014-08-04,0,11,2014-08-04,0,major,4
+LIBREOFFICE-109223,2017-07-19,Impress,LIBREOFFICE,PPTX: Vertical flip of child shape is not imported correctly,"Description:
+In the attached test document a group shape is placed with a flipV attribute. Opening it in Impress leads a wrong result. The shape and also the text inside it is displayed wrong.
+
+Steps to Reproduce:
+1. Open attached test document an check the first slide
+
+Actual Results:  
+Shape and text is rendered incorrectly.
+
+Expected Results:
+Both shape and text should be rendered correctly.
+
+
+Reproducible: Always
+
+User Profile Reset: No
+
+Additional Info:
+
+
+User-Agent: Mozilla/5.0 (Windows NT 6.3 Win64 x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/59.0.3071.115 Safari/537.36",zolnaitamas2000,zolnaitamas2000,fixed,1,resolved,4,2017-08-29,0,8,2017-08-02,14,normal,2
+LIBREOFFICE-32304,2010-12-10,Impress,LIBREOFFICE,Impress exports grouped objects incorrectly to ppt,"I originally received this report from someone in Japan via private email.  He also told me that in order to reproduce this bug you need to first install the patch for KB2289187
+
+http://www.microsoft.com/downloads/en/details.aspx?familyid=07a6cf76-2cea-4c54-b66d-50e9eed108ac&displaylang=en
+
+but I haven't verified that this step is necessary.
+
+Anyway here are the steps to reproduce:
+
+1. Open Impress and create a new empty presentation document.
+2. Insert two arrow objects (but in theory any drawing objects will do).
+3. Select and group them.
+4. Save as .ppt.
+5. Now try opening that file in MS PowerPoint.  The grouped objects are entirely gone.",thb,kohei,fixed,1,closed,6,2011-01-15,0,8,2010-12-15,5,major,4
+LIBREOFFICE-37339,2011-05-18,UI,LIBREOFFICE,[REGRESSION] toolkit.AccessibleStatusBarItem fails,"The unoapi test toolkit.AccessibleStatusBarItem crashes LibreOffice on master@{2011-05-19}} in toolkit. To reproduce reenable the test from the test at:
+ toolkit/qa/unoapi/toolkit.sce
+and run:
+ cd smoketestoo_native && build --all
+ cd $SOLARSRC
+ cd toolkit && make -sr subsequentcheck
+
+This test does not fail on tag libreoffice-3.4.0.1 so this is a regression.",bjoern.michaelsen,bjoern.michaelsen,fixed,1,resolved,4,2013-02-23,0,3,2013-02-23,647,normal,2
+LIBREOFFICE-41642,2011-10-10,Impress,LIBREOFFICE,Impress crash due to stack exhaustion,"Created attachment 52167
+crasher slidedeck
+
+Found this bug during my fuzzing. gdb suggests stack exhaustion here could not see any traces of memory corruption but i could be wrong :)",caolanm,huzaifas,fixed,1,closed,6,2012-05-04,0,6,2011-10-15,5,normal,2
+LIBREOFFICE-62966,2013-03-31,LibreOffice,LIBREOFFICE,TDE/CDE desktop needs cleanup and fixes,"It seems to me that LO not supports CDE desktop.
+But vcl/inc/unx/desktops.hxx contains it as known desktop and the cde-open-url script always installed.
+
+The tde-open-url script always (also with --disable-tde) installed.
+              
+Operating System: Linux (Other)
+Version: 4.0.2.2 rc",libreoffice-bugs,rezso,fixed,1,resolved,4,2015-12-15,0,9,2013-07-01,92,normal,2
+LIBREOFFICE-72486,2013-12-08,Writer,LIBREOFFICE,EDITING TABLES: Edit > Select All directly selects the entire document on a document beginning with a table,"Hello
+
+Edit> Select All is now possible when there is nothing before the table thank's to Miklos Vajna :)
+
+But we lose the usual successive selection (cell table all)  (everything is selected directly). It is not homogeneous with the feature when there is a paragraph before Table.
+
+I think it would be more consistent to keep the successive selection also in this case.
+
+Regards
+Pierre-Yves",vmiklos,pierre-yves.samyn,fixed,1,closed,6,2015-12-17,0,13,2015-01-03,391,major,4
+LIBREOFFICE-103448,2016-10-24,filters and storage,LIBREOFFICE,LibreOffice installs bad mimetype info for *.wps/*.wpt files,"/usr/share/mime/packages/libreoffice.xml registers  for
+ and  for .
+which seems a result of https://gerrit.libreoffice.org/#/c/23037/
+
+Which results in shadowing the info for MS Works files from freedesktop.org's shared-mime-info and thus in the filemanager displaying all my old MS Works files as MS Word ones and also offering the wrong handlers for it.
+
+Are Kingsoft's formats really the same as the Microsoft ones? At least Kingsoft themselves claim the formats are a different one. So registering *.wps & *.wpt with the MS Word mimetypes is even wrong then.
+
+Please create separate mimetype entries for the Kingsoft files (given they seem not yet registered with iana.org/assignments/media-types/ perhaps some application/x-whatever-seems-sane-or-used) best also register them with https://freedesktop.org/wiki/Software/shared-mime-info/
+Even better would be to contact the Kingsoft developers and ask to register their mimetypes officially with IANA.
+
+The current approach in libreoffice.xml is a nice hack to register LibreOffice as handler for those files but is awful for everyone else relying on the mimetype database :)",dtardon,kossebau,fixed,1,resolved,4,2017-01-19,0,6,2016-10-25,1,normal,2
+LIBREOFFICE-92047,2015-06-13,Calc,LIBREOFFICE,icon and function format area disabled,"Created attachment 116499
+disabled format area
+
+In Calc icon and function format area is disabled. See attached screenshot.
+
+My System: Win 8.1 64 Bit LibO 5.0.0.0. beta3
+
+Version: 5.0.0.0.beta3 (x64)
+Build-ID: 96345c15d8ab19c49014f055fe41ba8e1f421e5c
+Gebietsschema: de-DE (de_DE)",libreoffice-bugs,tk,fixed,1,resolved,4,2016-10-25,0,10,2015-06-29,16,normal,2
+LIBREOFFICE-114709,2017-12-27,Documentation,LIBREOFFICE,New online help looks terrible,"The changes in online help presented in https://wiki.documentfoundation.org/ReleaseNotes/6.0 looks terrible (worse then what existed before). I wonder who made those design decisions:
+In the image https://wiki.documentfoundation.org/images/thumb/7/7a/Screenshot_help-desktop.png/500px-Screenshot_help-desktop.png there are wide borders to the left and right of the page the font is tiny to unreadable and the lines are much too long.
+Such design is against all reasonable design rules and it's definitely no improvement!",libreoffice-bugs,Ulrich.Windl,fixed,1,resolved,4,2017-12-29,0,7,2017-12-29,2,normal,2
+LIBREOFFICE-80440,2014-06-24,Documentation,LIBREOFFICE,LOCALHELP: write help page for  ERF.PRECISE and ERFC.PRECISE spreadsheet functions,"Write help pages for
+
+ ERF.PRECISE and ERFC.PRECISE spreadsheet functions",libreoffice-bugs,olivier.hallot,fixed,1,resolved,4,2014-07-20,0,2,2014-07-20,26,normal,2
+LIBREOFFICE-93656,2015-08-25,Base,LIBREOFFICE,Unable to organize forms in subfolders,https://forum.openoffice.org/en/forum/viewtopic.php?f=39&t=78838,libreoffice-bugs,villeroy,fixed,1,resolved,4,2015-08-28,0,10,2015-08-27,2,major,4
+LIBREOFFICE-115276,2018-01-28,Writer,LIBREOFFICE,RTF import: \expnd control word imports 25 times smaller than ought to,"Created attachment 139405
+Test file for \expnd control word
+
+In the attached document the text has character spacing set to 10 pt using \expnd control word (that takes values in quarter-points).
+
+LibreOffice imports it with spacing 0.4 pt.",mikekaganski,mikekaganski,fixed,1,resolved,4,2018-01-30,0,4,2018-01-28,0,normal,2
+LIBREOFFICE-91307,2015-05-15,Calc,LIBREOFFICE,Editing: (calc) using autofilter pulldown in file with 10.000+ rows. Checking and unchecking boxes freeses Libreoffice. Pulldown menu disappears sometimes.,"Created attachment 115624
+File containing 10.000+ rows with autofilter.
+
+The graphical outlook of the pulldown menu of calc got a new look in the 4.2 LibreOffice version. After that the pulldown menu is not working for me any more. It can't handle 10K+ rows. So I'm still with the latest release of the 4.1 series.
+Pulling down the menu is not a problem. Unchecking all boxes takes a very long time. Checking a view boxes and selecting isn't going very smoothly but gives the desired result. Now I'm trying to check all boxes again. Calc freezes and after a while the pulldown menu disappears. Can't use it anymore.
+Tried many versions since up to the current 5.5 alpha release. Everytime I get the same result. It's the reworked graphical look of the autofilter pulldown menu which Libreoffice has since the 4.2 release which is giving me problems.",markus.mohrhard,cojansen7,fixed,1,resolved,4,2016-12-13,0,14,2016-02-20,281,critical,5
+LIBREOFFICE-63619,2013-04-17,Calc,LIBREOFFICE,Arabic: when use Arabic letters currency the number are disappear,"the number disappear after use Arabic currency 
+
+steps to reproduce:
+1-open calc.
+2-change the currency to one of arabic currency(for example: SAR- Arabic)
+3-enter any number and use number format currency.
+
+Current behavior:
+the number disappear
+
+Expected behavior:
+the number still there and had the wanted currency.
+
+workaround:
+it works fine if the cell are merged.",libreoffice-bugs,fmalotaibi,fixed,1,resolved,4,2017-10-19,0,10,2013-11-21,218,normal,2
+LIBREOFFICE-94037,2015-09-08,Calc,LIBREOFFICE,Crash when uncheck Protect this... in Protec Sheet window,"To reproduce the bug:
+1. Tools
+2. Protect Document
+3. Sheet
+4. uncheck Protect this sheet and...
+
+It go in crash.
+
+I tested on Debian Windows 7 and OSX 10.10",Katarina.Behrens,f.rr,fixed,1,resolved,4,2016-10-25,0,12,2015-09-14,6,major,4
+LIBREOFFICE-105637,2017-01-31,UI,LIBREOFFICE,Digital Signatures dialog has two unnecessary labels,"At the top of the dialog two labels Description and Signed by are shown.
+These are intended to be only in the UI file for translation they are used in the table header later.
+
+They should be set invisible.",s.mehrbrodt,s.mehrbrodt,fixed,1,resolved,4,2017-02-02,0,3,2017-02-01,1,normal,2
+LIBREOFFICE-85817,2014-11-03,LibreOffice,LIBREOFFICE,MENUS: Improve the wording of 'Document as E-mail',"The ability to attach the current document to a new email message is labelled as 'Document as E-mail' which is quite confusing as a tooltip in the toolbar but is also confusing when it is File > Send > Document as Email.
+
+The wording is confusing as it could imply that you want the contents of the document to be used as the text of a new email. If you look at the items that follow it in the File > Send submenu they are labelled like 'Email as OpenDocument Text' so i think it would be good to follow the same type of wording and change it to 'Email Document'.",philipz85,philipz85,fixed,1,resolved,4,2014-12-02,0,12,2014-12-02,29,normal,2
+LIBREOFFICE-123654,2019-02-22,graphics stack,LIBREOFFICE,kde5: Writer crashes when text selected on close (Wayland only),"Steps are the same as those described in bug 122042 except that this is on Wayland only now:
+
+0. use a Wayland session (test was with Plasma on Debian testing)
+1. Open writer with SAL_USE_VCLPLUGIN=kde5 soffice --writer
+2. Type something
+3. Select text
+4. Close LO and select Don't save
+
+Result: LibreOffice crashes.
+
+The crash does not occur when
+* using kde5 on X11 intead of Wayland
+* switching to the gtk3 VCL plugin
+
+This happens with the current daily build:
+
+Version: 6.3.0.0.alpha0+
+Build ID: f90e2a327f0d19225b5f54a10be6a3d12567a30a
+CPU threads: 4 OS: Linux 4.19 UI render: default VCL: kde5 
+TinderBox: Linux-rpm_deb-x86_64@86-TDF-dbg Branch:master Time: 2019-02-22_02:31:00
+Locale: en-GB (en_GB.UTF-8) UI-Language: en-US
+Calc: threaded",libreoffice-bugs,m.weghorn,fixed,1,resolved,4,2019-06-14,0,5,2019-06-14,112,normal,2
+LIBREOFFICE-32377,2010-12-14,Installation,LIBREOFFICE,*NO* Bundled Extensions please,"It looks like the process of packing extensions has changed in OpenOffice 3.3 and LibreOffice 3.3:
+
+http://wiki.services.openoffice.org/wiki/Documentation/DevGuide/Extensions/Packaging_Notes
+
+Several extensions were included into LibreOffice 3.3 irrespect of the demand of the end-user.
+
+They are:
+
+LanguageTool
+MySQL connector
+PDF Import
+Presentation Minimizer
+Presenter Console
+ReportBuilder
+Non-Linear Solver
+Wiki Publisher
+
+I beg to remove them or give us a way to select them for installation. All of them are under Extension installation option that is either you get all of them or none of them.
+
+These extensions are under the new --bundled option of unopkg which prevents it to be removed. One possible solution is to pack them into --shared option.
+
+If questions rises on why on earth do I need to remove these nice extensions then I have to remind that in very large corporations with IT software policies some of these extensions are not welcome at all.
+
+For instance LanguageTool is not even localized into many languages. It should be dropped and left to the user the option to install it on his own. PDF Import can be considered as an undesired feature that overcomes restrictions on editing PDF.",libreoffice-bugs,olivier.hallot,fixed,1,closed,6,2011-01-14,0,12,2011-01-04,21,normal,2
+LIBREOFFICE-57878,2012-12-04,Calc,LIBREOFFICE,FILEOPEN: Spreadsheet crashes/closes when opening corrupt document,"Created attachment 70997
+Corrupt document
+
+Problem description: 
+
+This is a spreadsheet that may be corrupt but the bug I'm reporting is how LibreOffice is handling the file.
+
+Steps to reproduce:
+
+1. Open libreofficetest.xlsx
+
+Current behavior:
+
+Libre Office will close itself with no notification/error message
+
+Expected behavior:
+
+File should either open or display a notification/error message if it's unable to open it.",libreoffice-bugs,brucey_99,fixed,1,resolved,4,2012-12-06,0,5,2012-12-06,2,normal,2
+LIBREOFFICE-33849,2011-02-02,Formula Editor,LIBREOFFICE,smath does not handle accents in MathML,"Created attachment 42865
+MathML using accents.
+
+Description of problem:
+Libreoffice smath does not handle accents in MathML.  LibreOffice relies on
+a annotation to be able to display and edit accents.  If this is stripped away
+(as Microsoft Office 2007 does) the formulas are not properly displayed.  
+
+Version-Release number of selected component (if applicable):
+LibO_3.3.0rc4_Linux_x86-64_install-rpm_en-US
+
+How reproducible:
+Every time.
+
+Steps to Reproduce:
+1. go into smath
+2. create a formula hat a vec b
+3. Save as MathML
+4. Remove the hat a vec
+b in the file.
+5. Open with smath.
+
+Actual results:
+^a->b
+
+Expected results:
+the result of hat a vec b
+
+Additional info:
+This is a bug in LibreOffice since according to the ODF spec it should be able
+to read in a MathML file.  For reference firefox displays the attached mathml
+file correctly (so LibreOffice writes out a correct MathML file).  It looks like
+LibreOffice needs to recognize when there is an accent and properly deal with
+it.
+
+This is also a bug in OpenOffice: 
+http://qa.openoffice.org/issues/show_bug.cgi?id=90553",caolanm,jjcogliati-r1,fixed,1,resolved,4,2012-01-06,0,12,2012-01-06,338,normal,2
+LIBREOFFICE-77057,2014-04-04,Installation,LIBREOFFICE,Installing/uninstalling LibreOffice messes up the KindMap in Windows 8.1,"On the Microsoft forums a number of users reported that the Photos app in Windows 8.1 no longer worked. It would show folders of photos but it wouldn't display the actual photos - it would just say that the folders were empty.
+
+This turned out to be related to this registry key: -
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\KindMap
+
+Listed under that key are file extensions. Affected users noted that the keys for all image file extensions had been changed from picture to document which is what caused the bug in the Photos app. Manually changing the value of each affected key back to picture and then rebuilding the search index fixes the issue.
+
+This issue affected 2 of my machines so I posted a list of the software that's installed on both which includes LibreOffice. Another user also reported that he had LibreOffice installed so that started to look like the likely culprit.
+
+So I then uninstalled LibreOffice entirely. On doing so ALL photo file extensions were removed from the KindMap altogether. I then reinstalled the latest version of LibreOffice and all of the photo extensions were added back into the KindMap but they were all set to document which again breaks the Photos app.
+
+It appears that the bug has 2 elements then: -
+
+1. Installing LibreOffice changes the registry keys for image file extensions in the KindMap from picture to document breaking functionality in Windows 8.1 including Microsoft's standard Photos app.
+
+2. Uninstalling LibreOffice remove the registry keys for image file extensions completely from the KindMap which causes the Photos app in Windows 8.1 to fail to display thumbnails (and it may have other unwanted effects).
+
+Thanks.",timar74,mosaicdj,fixed,1,resolved,4,2014-08-17,0,22,2014-08-17,135,major,4
+LIBREOFFICE-80955,2014-07-05,filters and storage,LIBREOFFICE,XLS export perf. problem,"It seems (from the callgrind regression tests) that we have a significant performance regression on master / 4.4.
+
+Unfortunately this occurred during the period the performance testing was disabled for some days - also it is not reproducible locally either - which is a doubly royal pain. It seems that:
+
+2014-06-25 14:01:19+02:00	db960181fe63efa28c2370505b2074d1db485e07
+2014-07-03 20:42:10+02:00	628520684fafb1bcbf184ab8ed2f755c6ae9ee52
+2014-07-04 14:09:44+02:00	dfeef9e970a69c5736a54619b96607899c57e9a1
+
+In this range we went from:
+
+11086
+1383415
+624715
+
+pseudo-cycles converting 032_numbers.xls-convert - which seems a very significant jump in time - 2x orders of magnitude.
+
+In this time range though the most likely candidates also look like being my fault -) perhaps:
+
+	commit e820df579d9be4c1f9bb1ad8f02a8072c69b52da
+	Author: Michael Meeks 
+	Date:   Sat Jun 28 09:36:20 2014 +0100
+
+	    filters: Batch fetch filter config properties.
+
+Or the patch that changes the order of configmgr keys - so that they are no longer sorted in the same order [ of course I'd -like- to think that filter configuration is independent of key sort order but ... this is the filters code ].
+
+http://dev-builds.libreoffice.org/callgrind_report/traces/
+
+shows that all the time (some thousand trillion cycles) is spent in the XSLT code - which (of course) shouldn't be triggered for this command:
+
+cmd:  /home/buildslave/build/instdir/program/soffice.bin --splash-pipe=0 --headless --convert-to xls --outdir tmp /home/buildslave/source/test-files/loperf/032_numbers.xls
+
+Converting XLS to XLS should use native filters in each direction. Kohei - you were/are the next last person brave enough to touch the filter code =) any advice here ?",dtardon,michael.meeks,fixed,1,resolved,4,2014-07-07,0,10,2014-07-07,2,major,4
+LIBREOFFICE-82094,2014-08-03,UI,LIBREOFFICE,UI: The menu 'Set Language for Paragraph > More...' shows incorrect window,"I wanted to switch the paragraph language.
+
+I went to the status-bar and left-click on the menu I have the options of Portuguese None Reset and More... 
+
+When I click More... it shows me to a dialog called character where there is no option for language.
+
+Going to menu
+Tools-> Language -> For Selection-> More...
+or
+Tools-> Language -> For Paragraph-> More...
+gives the same result no option for language.",libreoffice-bugs,cfgnunes,fixed,1,resolved,4,2015-10-19,0,6,2015-10-19,442,normal,2
+LIBREOFFICE-92053,2015-06-13,Writer,LIBREOFFICE,Bad layout of Insert Index/Table dialog,"Created attachment 116506
+Screenshot
+
+Layout of Inser Index/Table dialog is inaccurate (see attached screenshot red box). The issue exists since LO 4.4.3 at least.",caolanm,thorsten.wagner.4,fixed,1,resolved,4,2017-01-30,0,7,2017-01-25,592,normal,2
+LIBREOFFICE-50220,2012-05-22,UI,LIBREOFFICE,Mistakable menu entry - Send feedback should be renamed to Report a bug until we have the Feedback page.,"Problem description: 
+
+Steps to reproduce:
+click Help
+the entry is send feedback
+
+Expected behavior:
+The entry should really be Report a bug or Report a problem as in other apps (especially Gnome based) - feedback could also suggest positive feedback.
+
+Platform: 
+              
+(X11 Ubuntu Linux x86_64 rv:12.0)",LibreOffice,joshua.oleary,fixed,1,resolved,4,2014-02-04,0,7,2014-02-04,623,normal,2
+LIBREOFFICE-71909,2013-11-22,WWW,LIBREOFFICE,Pootle mess up strings,"Created attachment 89624
+Screendump
+
+When editing existing strings or editing other translators suggestions the field opens with a lot of spaces and line breaks before and after the string.
+
+This is very annoing.
+
+If not corrected the string ends up 'dirty' with these blanks.
+
+The consequense will be a lot of dirty strings.",timar74,leiflodahl,fixed,1,resolved,4,2013-11-24,0,7,2013-11-23,1,normal,2
+LIBREOFFICE-67737,2013-08-04,Writer,LIBREOFFICE,FILEOPEN: DOCX shape with mirroring not mirrored in LO,"Created attachment 83606
+DOCX containing vertically flipped arrow
+
+Problem description: 
+When opening a shape that is 'flipped' on an X or Y axis - it does not appear flipped in LO.
+
+Steps to reproduce:
+1. Open the attached DOCX
+2. LO doesn't show it as flipped
+
+Current behavior:
+LO doesn't show the shape as flipped vertically
+
+Expected behavior:
+LO should show the shape as flipped vertically
+              
+Operating System: All
+Version: 4.2.0.0.alpha0+ Master",rattles2013,rattles2013,fixed,1,resolved,4,2013-12-29,0,3,2013-12-29,147,normal,2
+LIBREOFFICE-48054,2012-03-29,UI,LIBREOFFICE,KDE file-picker auto-selects obsolete filters based on extension (?),"So Nikos Platis writes at:
+
+https://bugs.freedesktop.org/show_bug.cgi?id=47857#c3
+
+[snip]
+Unfortunately this was not the case for me: On Arch Linux x86_64 with
+libreoffice-kde4 package installed when I type a filename with .doc extension
+the file type changes to Microsoft Word 6.0 (.doc).
+[snip]
+
+That looks like a potentially horrific interoperability problem for KDE users.",libreoffice-bugs,michael.meeks,fixed,1,resolved,4,2012-03-30,0,4,2012-03-30,1,critical,5
+LIBREOFFICE-95719,2015-11-10,Calc,LIBREOFFICE,Sidebar: Cell Apprearance - Select line style of the borders actually activates Cell Borders command,"--- Steps to Reproduce: ---
+
+1. New Calc select a cell
+2. In sidebar go to Cell Apprearance -> Specify the borders of the selected cells choose All Borders
+3. In the same sidebar area select Select line style of the borders
+--> This command actually activates the Specify the borders of the selected cells command not the line style command.
+
+Select line style of the borders should be the command which allow users to select the line style (solid dash thick etc).
+
+Broken in
+Version: 5.1.0.0.alpha1
+Build ID: a8e4f75fe264f6ece37c154951cff53f2f4fa3e4
+Locale: zh-CN (zh_CN)
+Win10 X86.
+
+This is a regression in. It works OK in Version: 5.0.3.2.",libreoffice-bugs,suokunlong,fixed,1,resolved,4,2016-10-25,0,5,2015-11-10,0,normal,2
+LIBREOFFICE-126061,2019-06-23,Draw,LIBREOFFICE,Cursor does not show when F6 ctrl+F6 or Escape from sidebar,,raykowj,raykowj,fixed,1,resolved,4,2019-07-03,0,6,2019-07-03,10,normal,2
+LIBREOFFICE-53859,2012-08-20,Calc,LIBREOFFICE,FILEOPEN: Unable to open some Excel 97-2003 spreadsheets created in version 3.5.5.3,Libre Office doesn't recognize some files as valid Excel spreadsheets prompts for ASCII conversion options.  Rolling back to 3.5.5.3 allows the files to be opened.  File size: 16.3 Meg.,libreoffice-bugs,ed.kapusniak,fixed,1,resolved,4,2013-03-14,0,9,2013-03-14,206,major,4
+LIBREOFFICE-84757,2014-10-07,Writer,LIBREOFFICE,Adjusting page layout to add columns is causing crash in VCL settingOptimalLayoutSize VS2012 noise?,"STR..
+1. On a TB39 Windows build of master open the Page Styles Dialog to the Page tab (F11 -> Page Styles -> Default: Modify context or Sidebar Properties -> Page panel: Size -> More button )
+2. In the Paper format section make a change (size dropdown or orientation radio buttons)
+3. Select the Columns tab of the Page dialog
+4. LO crashes with Windows C++ Assertion failed error
+
+If Columns are adjusted first there is no crash when changing page size or orientation.  Issue does not manifest on current 4.3.2.2 release
+build ID: edfb5295ba211bd31ad47d0bad0118690f76407d
+
+=-=-=
+
+On Windows 7 sp1 64-bit en-US TB 39 debug build
+Version: 4.4.0.0.alpha0+
+Build ID: 9177329a425cf70b515d1f266132838894fe54c6
+TinderBox: Win-x86@39 Branch:master Time: 2014-10-06_01:02:02
+
+=-=-=
+
+-- Error Dialog-- 
+Microsoft Visual C++ Runtime Library
+Assertion failed!
+Program:C:\LODev440_20141006_TB39\program\vcllo.dll
+File:C:\cygwin\home\tinderbox\master\include\rtl/ustring.hxx
+Line:421
+
+Expression: index >= 0 && static_cas(index)<
+static_cast(getLength())
+
+For information on how your program can cause an assertion
+failure see the Visual C++ documentation on asserts
+
+=-=-=
+Stack trace (Process Explorer)
+
+wow64cpu.dll!TurboDispatchJumpAddressEnd+0x6c0
+wow64cpu.dll!TurboDispatchJumpAddressEnd+0x676
+wow64.dll!Wow64SystemServiceEx+0x1ce
+wow64.dll!Wow64LdrpInitialize+0x42a
+ntdll.dll!RtlUniform+0x6e6
+ntdll.dll!RtlCreateTagHeap+0xa7
+ntdll.dll!LdrInitializeThunk+0xe
+USER32.dll!WaitMessage+0x15
+USER32.dll!DialogBoxIndirectParamAorW+0x108
+USER32.dll!SoftModalMessageBox+0x757
+USER32.dll!SoftModalMessageBox+0xa33
+USER32.dll!MessageBoxTimeoutW+0x52
+USER32.dll!MessageBoxExW+0x1b
+USER32.dll!MessageBoxW+0x18
+MSVCR110.dll!raise+0x3eb
+MSVCR110.dll!_wassert+0x490
+vcllo.dll!?settingOptimalLayoutSize@Dialog@@MAEXPAVVclBox@@@Z+0x44f
+vcllo.dll!?ImplFindMnemonic@MnemonicGenerator@@IAEGABVOUString@rtl@@@Z+0x36
+vcllo.dll!?RegisterMnemonic@MnemonicGenerator@@QAEXABVOUString@rtl@@@Z+0xc2
+vcllo.dll!?ImplStartExecuteModal@Dialog@@AAE_NXZ+0x394
+vcllo.dll!?StateChanged@TabPage@@UAEXG@Z+0x43
+vcllo.dll!?ImplCallInitShow@Window@vcl@@AAEXXZ+0x5d
+vcllo.dll!?Show@Window@vcl@@QAEX_NG@Z+0x625
+vcllo.dll!?ImplChangeTabPage@TabControl@@AAEXGG@Z+0x472
+vcllo.dll!?SetCurPageId@TabControl@@QAEXG@Z+0x147
+vcllo.dll!?SelectTabPage@TabControl@@QAEXG@Z+0xa9
+vcllo.dll!?MouseButtonDown@TabControl@@UAEXABVMouseEvent@@@Z+0x6a
+vcllo.dll!?ImplAsyncFocusHdl@Window@vcl@@QAEJPAX@Z+0x3244
+vcllo.dll!?ImplAsyncFocusHdl@Window@vcl@@QAEJPAX@Z+0x417b
+vcllo.dll!?ImplAsyncFocusHdl@Window@vcl@@QAEJPAX@Z+0x4f29
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x53d6e
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x58282
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x5bdb9
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x5cb91
+USER32.dll!gapfnScSendMessage+0x332
+USER32.dll!GetThreadDesktop+0xd7
+USER32.dll!CharPrevW+0x138
+USER32.dll!DispatchMessageW+0xf
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x15b76
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x15cc2
+vcllo.dll!?OpenTTFontBuffer@vcl@@YAHPBXKKPAPAU_TrueTypeFont@1@@Z+0x1666e
+vcllo.dll!?ImplCallEventListeners@Application@@SAXPAVVclSimpleEvent@@@Z+0x1de
+vcllo.dll!?Yield@Application@@SAXXZ+0xc
+vcllo.dll!?Execute@Dialog@@UAEFXZ+0x8b
+ntdll.dll!RtlAllocateHeap+0xac
+ntdll.dll!RtlInitUnicodeString+0x164
+ntdll.dll!RtlAllocateHeap+0xac
+sal3.dll!rtl_cache_alloc+0x109
+sal3.dll!rtl_cache_free+0xb0c
+sal3.dll!rtl_string_newFromLiteral+0x63",caolanm,vstuart.foote,fixed,1,resolved,4,2014-10-09,0,5,2014-10-07,0,normal,2
+LIBREOFFICE-33090,2011-01-13,UI,LIBREOFFICE,Thai text in some UI elements will be displayed overlapped on Windows Vista / Windows 7,"Step to reproduced :-
+
+This will happen only when you enable  Tools > Options > Use system font for
+user interface (which is the default).
+
+1.Input line in Calc.
+  1.1 Open OpenOffice.org Calc.
+  1.2 Type “สวัสดี Hello ขอบคุณ Thanks” in the input line.
+  1.3 You'll see the overlapped text in the input line.
+2.List box.
+  2.1 Open OpenOffice.org Calc.
+  2.2 Choose menu Format > Cells.
+  2.3 On the Numbers tab choose Language: Thai Category: Date.
+  2.4 You'll see the overlapped text at the Format List box.",caolanm,tantai,fixed,1,resolved,4,2012-12-22,0,27,2011-04-15,92,normal,2
+LIBREOFFICE-104376,2016-12-03,Impress,LIBREOFFICE,Handles on the Ruler doesn't change according to the table column,"Created attachment 129282
+Screenshot
+
+1. Use Ctrl+shift+R to enable ruler.
+2. Insert / Table to insert a new table with multiple columns.
+3. Place cursor in the last column.
+
+
+Handles ( left indent first line indent and right indent ) on the ruler should have reflected the size and position of the column. But it still spans across the whole page.",libreoffice-bugs,marklh9,fixed,1,resolved,4,2018-05-30,0,5,2018-05-30,543,trivial,1
+LIBREOFFICE-123252,2019-02-08,Localization,LIBREOFFICE,Untranslated context menu items (es-ES),"Description:
+Right-clicking over an empty page displays some items in English in the context menu (not localized) for Spanish (es-ES). «Character» (Carácter) «Paragraphs» (Párrafos) and «Bullets and Numbering» (Numeración y viñetas). When using the Format menu instead the same items are properly localized.
+
+Steps to Reproduce:
+1. See Description above.
+2.
+3.
+
+Actual Results:
+See Description above.
+
+Expected Results:
+See Description above.
+
+
+Reproducible: Always
+
+
+User Profile Reset: No
+
+
+
+Additional Info:",fitojb,noelamac,fixed,1,resolved,4,2019-02-09,0,4,2019-02-09,1,minor,2
+LIBREOFFICE-51064,2012-06-14,Calc,LIBREOFFICE,FILESAVE: Saving xls file is too long and crash,"I have a large excel file (58 MB). I have try this file from LibreOffice 3.3.x until now and it has a great improvement. 
+
+At first try using LO 3.3.x I opened this file with more than 1 hours load time it is so annoying so I back to MS Office Excel just to open that large file. Now with LibreOffice 3.5.x the load time for that file has show a great improvement in load file as we now before 3.5.x it can be opened for 1 hours now it can be opened for less than 10 minutes depend on PC specification. 
+
+The problem is not just that it's appear when I saving that file it can take more than 30 minutes just to save that file. The larger file the longer times needed.
+
+It's not the only large files. There is another files that larger than it the size is 224 MB. And when I trying to load that file LibreOffice just crash after a hour loading time.
+
+See attached file for example.",libreoffice-bugs,faris.aegis,fixed,1,resolved,4,2013-01-26,0,6,2013-01-26,226,critical,5
+LIBREOFFICE-101590,2016-08-18,LibreOffice,LIBREOFFICE,Cannot import templates with template manager (with GTK3),"I'm using LibreOffice-fresh 5.2.0.4 and I cannot import a template with template manager. But it's ok in LibreOffice-still. I'm using Arch Linux with i3 window manager.
+
+Steps to reproduce:
+1. File->Templates->Manage Templates or Shift-Ctrl-N
+2. Click 'Import'
+3. Select 'My Templates' Category and click 'OK'
+4. Then there's a file selection window but I cannot click anything in the window. I can only click cancel of the Template window and then click OK of the file selection window and no templates imported.",caolanm,vimacs.hacks,fixed,1,resolved,4,2016-10-26,0,8,2016-10-18,61,normal,2
+LIBREOFFICE-56346,2012-10-24,Linguistic,LIBREOFFICE,LibreOffice/Preferences/Language Settings/Voikko/Finnish writing aids Vocabulary recognition does not correlate with the presence of a recognized spell checker,"Created attachment 68984
+screen shot of (kpv) Komi-language text operating as Latin
+
+I am working with several minority languages producing speller.zhfst binary files for voikko/2/mor-(LANGUAGE-CODE) directories.
+
+On my own MacBook Pro Snow Leopard I can copy the required speller.zhfst and voikko-fi_FI.pro files to ~/.voikko/2/mor-la/.
+
+The LibreOffice recognizes Latin as having a spell checker _ABC_ in green before the language. 
+
+So I open an Erzya-language document (myv) 
+activate the entire text
+go to Tools/Language/For all Text/more...
+I select Latin which has the two files I described above
+
+The same can be done with a Komi-language document (kpv)
+
+NB!
+IF however I make the directories 
+~/.voikko/2/mor-myv/ for Erzya
+~/.voikko/2/mor-kpv/ for Komi (Zyrian)
+and copy the very same files 
+I get a different result.
+
+LibreOffice/Preferences/Language Settings/Voikko/Finnish writing aids Vocabulary recognizes the presence of the voikko-fi_FI.pro files.
+
+But the Tools/Language/For all Text/more... does not show any evidence of spell checkers for either of the languages.
+
+I am hoping to release open-source beta spell checkers for Erzya Komi-Zyrian and possibly Meadow Mari this year. Next year more Uralic minority languages are in the works. Please help me resolve this problem.
+
+Yours
+Jack Rueter",timar74,rueter.jack,fixed,1,resolved,4,2012-11-07,0,9,2012-11-07,14,normal,2
+LIBREOFFICE-32226,2010-12-08,Installation,LIBREOFFICE,LibO 3.3.0 RC1 fails to build with --enable-extra-gallery,"Trying to build LibO 3.3.0 RC1 with --enable-extra-gallery results in
+
+ERROR: Removing file kamigallery.zip from file list.
+ERROR: Removing file kamigallerydrawspeople.zip from file list.
+ERROR: Removing file kamigalleryelementsbullet2.zip from file list.
+ERROR: Removing file kamigallerynonfree.zip from file list.
+ERROR: Removing file kamigalleryphotosbuildings.zip from file list.
+ERROR: Removing file kamigalleryphotoscelebration.zip from file list.
+ERROR: Removing file kamigalleryphotoscities.zip from file list.
+ERROR: Removing file kamigalleryphotosfauna.zip from file list.
+ERROR: Removing file kamigalleryphotosflowers.zip from file list.
+ERROR: Removing file kamigalleryphotosfoodsanddrinks.zip from file list.
+ERROR: Removing file kamigalleryphotoshumans.zip from file list.
+ERROR: Removing file kamigalleryphotoslandscape.zip from file list.
+ERROR: Removing file kamigalleryphotosobjects.zip from file list.
+ERROR: Removing file kamigalleryphotosplants.zip from file list.
+ERROR: Removing file kamigalleryphotosspace.zip from file list.
+ERROR: Removing file kamigalleryphotosstatues.zip from file list.
+ERROR: Removing file kamigalleryphotostravel.zip from file list.
+
+Removing directory /tmp/ooopackaging/i_203621291809448
+
+******************************************************************
+ERROR: Missing files
+in function: remove_Files_Without_Sourcedirectory
+******************************************************************",kami911,bero,fixed,1,closed,6,2011-01-22,0,5,2010-12-10,2,normal,2
+LIBREOFFICE-44155,2011-12-26,Writer,LIBREOFFICE,FILESAVE: UI glitch in german SaveAsRTF dialog  (LibO 3.5.0 Beta1 and Beta2),"Created attachment 54828
+picture of UI defect erroneous parts marked in red
+
+Problem description: german SaveAsRTF dialog glitches (Save header not translated right button too small - text severed) see attached picture the english dialog is correct
+
+Steps to reproduce:
+1. Load an ODT file
+2. Datei/Speichern unter.. (File/Save As..)/ Rich Text Format
+3. dialog appears
+
+Current behavior: Save header not translated right button too small - text severed
+
+Expected behavior: Save header translated (p.ex. Speichern) right button wide enough to display the text
+
+Platform (if different from the browser): Windows Vista 64
+Windows XP (both with latest service packs)
+              
+Browser: Mozilla/5.0 (Windows NT 6.0 WOW64 rv:9.0) Gecko/20100101 Firefox/9.0",christoph.spamforme,s-joyemusequna,fixed,1,resolved,4,2012-01-09,0,4,2012-01-09,14,normal,2
+LIBREOFFICE-57780,2012-12-01,Writer,LIBREOFFICE,CRASH when FILEOPEN particular .doc with drawing object (AT_CHAR) in paragraph in table cell that is split across pages,"libO crashes when opening these two doc files:
+
+http://lci.ly.gov.tw/LyLCEW/communique/work/98/05/LCIDC01_980502_00002.doc
+http://lci.ly.gov.tw/LyLCEW/communique/work/99/05/LCIDC01_990501_00005.doc
+
+
+Process:         soffice.bin [44346]
+Path:            /Applications/LibreOffice.app/Contents/MacOS/soffice.bin
+Identifier:      org.libreoffice.script
+Version:         3.6.3.2 (???)
+Code Type:       X86 (Native)
+Parent Process:  OOoPython [44342]
+User ID:         502
+
+Date/Time:       2012-12-02 01:34:26.411 +0800
+OS Version:      Mac OS X 10.8.2 (12C60)
+Report Version:  10
+
+Interval Since Last Report:          1261202 sec
+Crashes Since Last Report:           21
+Per-App Crashes Since Last Report:   13
+Anonymous UUID:                      E5194E7B-1FFD-9D94-0AD2-BF2B0718D5B9
+
+Crashed Thread:  10
+
+Exception Type:  EXC_BAD_ACCESS (SIGBUS)
+Exception Codes: KERN_PROTECTION_FAILURE at 0x0000000000000064
+
+VM Regions Near 0x64:
+--> __PAGEZERO             0000000000000000-0000000000001000 [    4K] ---/--- SM=NUL  /Applications/LibreOffice.app/Contents/MacOS/soffice.bin
+    __TEXT                 0000000000001000-0000000000002000 [    4K] r-x/rwx SM=COW  /Applications/LibreOffice.app/Contents/MacOS/soffice.bin
+
+Thread 0:: Dispatch queue: com.apple.main-thread
+0   libsystem_kernel.dylib        	0x9542f91a __psynch_mutexwait + 10
+1   libsystem_c.dylib             	0x99ebd13b pthread_mutex_lock + 595
+2   libuno_sal.dylib.3            	0x00006835 osl_acquireMutex + 21
+3   libvcllo.dylib                	0x01aeae82 SalYieldMutex::acquire() + 18
+4   libvcllo.dylib                	0x01b32035 -[TimerCallbackCaller timerElapsed:] + 69
+5   com.apple.Foundation          	0x9a3c27d4 __NSFireTimer + 117
+6   com.apple.CoreFoundation      	0x969379b6 __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__ + 22
+7   com.apple.CoreFoundation      	0x96937355 __CFRunLoopDoTimer + 709
+8   com.apple.CoreFoundation      	0x9691c162 __CFRunLoopRun + 1730
+9   com.apple.CoreFoundation      	0x9691b63a CFRunLoopRunSpecific + 378
+10  com.apple.CoreFoundation      	0x9691b4ab CFRunLoopRunInMode + 123
+11  com.apple.HIToolbox           	0x97abb15a RunCurrentEventLoopInMode + 242
+12  com.apple.HIToolbox           	0x97abaec9 ReceiveNextEventCommon + 374
+13  com.apple.HIToolbox           	0x97abad44 BlockUntilNextEventMatchingListInMode + 88
+14  com.apple.AppKit              	0x93116a3a _DPSNextEvent + 724
+15  com.apple.AppKit              	0x9311626c -[NSApplication nextEventMatchingMask:untilDate:inMode:dequeue:] + 119
+16  libvcllo.dylib                	0x01aea99f AquaSalInstance::Yield(bool bool) + 1183
+17  libvcllo.dylib                	0x018020f0 Application::Yield(bool) + 96
+18  libvcllo.dylib                	0x018021f1 Application::Execute() + 97
+19  libsofficeapp.dylib           	0x000784ab desktop::Desktop::Main() + 6171
+20  libvcllo.dylib                	0x0180b712 ImplSVMain() + 354
+21  libvcllo.dylib                	0x01ae9d6b AquaSalInstance::handleAppDefinedEvent(NSEvent*) + 75
+22  libvcllo.dylib                	0x01b331bb -[VCL_NSApplication sendEvent:] + 315
+23  com.apple.AppKit              	0x9310c72c -[NSApplication run] + 951
+24  com.apple.AppKit              	0x930af6f6 NSApplicationMain + 1053
+25  libvcllo.dylib                	0x01aeb327 ImplSVMainHook(int*) + 343
+26  libvcllo.dylib                	0x0180b7a1 SVMain() + 17
+27  libsofficeapp.dylib           	0x000a74b5 soffice_main + 437
+28  soffice.bin                   	0x00001f0e main + 30
+29  soffice.bin                   	0x00001872 _start + 216
+30  soffice.bin                   	0x00001799 start + 41
+
+Thread 1:
+0   libsystem_kernel.dylib        	0x9542f8e2 __psynch_cvwait + 10
+1   libsystem_c.dylib             	0x99ebc289 _pthread_cond_wait + 938
+2   libsystem_c.dylib             	0x99f49b30 pthread_cond_timedwait + 47
+3   libuno_sal.dylib.3            	0x00014978 rtl_cache_wsupdate_all(void*) + 280
+4   libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+5   libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 2:
+0   libsystem_kernel.dylib        	0x954300ee __workq_kernreturn + 10
+1   libsystem_c.dylib             	0x99eba04c _pthread_workq_return + 45
+2   libsystem_c.dylib             	0x99eb9e19 _pthread_wqthread + 448
+3   libsystem_c.dylib             	0x99ea1cca start_wqthread + 30
+
+Thread 3:: Dispatch queue: com.apple.libdispatch-manager
+0   libsystem_kernel.dylib        	0x954309ae kevent + 10
+1   libdispatch.dylib             	0x91a03c71 _dispatch_mgr_invoke + 993
+2   libdispatch.dylib             	0x91a037a9 _dispatch_mgr_thread + 53
+
+Thread 4:
+0   libsystem_kernel.dylib        	0x954300ee __workq_kernreturn + 10
+1   libsystem_c.dylib             	0x99eba04c _pthread_workq_return + 45
+2   libsystem_c.dylib             	0x99eb9e19 _pthread_wqthread + 448
+3   libsystem_c.dylib             	0x99ea1cca start_wqthread + 30
+
+Thread 5:
+0   libsystem_kernel.dylib        	0x954300ee __workq_kernreturn + 10
+1   libsystem_c.dylib             	0x99eba04c _pthread_workq_return + 45
+2   libsystem_c.dylib             	0x99eb9e19 _pthread_wqthread + 448
+3   libsystem_c.dylib             	0x99ea1cca start_wqthread + 30
+
+Thread 6:
+0   libsystem_kernel.dylib        	0x9542eeb6 __accept_nocancel + 10
+1   libsystem_kernel.dylib        	0x9542de91 accept + 39
+2   libuno_sal.dylib.3            	0x0000776a osl_acceptPipe + 58
+3   libsofficeapp.dylib           	0x000a431e desktop::OfficeIPCThread::execute() + 46
+4   libuno_salhelpergcc3.dylib.3  	0x004d7da2 salhelper::Thread::run() + 34
+5   libuno_salhelpergcc3.dylib.3  	0x004d8152 threadFunc + 18
+6   libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+7   libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+8   libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 7:
+0   libsystem_kernel.dylib        	0x9542eeb6 __accept_nocancel + 10
+1   libsystem_kernel.dylib        	0x9542de91 accept + 39
+2   libuno_sal.dylib.3            	0x0000be78 osl_acceptConnectionOnSocket + 104
+3   acceptor.uno.dylib            	0x0ab3896e io_acceptor::SocketAcceptor::accept() + 62
+4   acceptor.uno.dylib            	0x0ab3b9da io_acceptor::OAcceptor::accept(rtl::OUString const&) + 394
+5   liboffacclo.dylib             	0x0ab1e45e desktop::Acceptor::run() + 94
+6   libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+7   libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+8   libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 8:
+0   libsystem_kernel.dylib        	0x9542f8e2 __psynch_cvwait + 10
+1   libsystem_c.dylib             	0x99ebc289 _pthread_cond_wait + 938
+2   libsystem_c.dylib             	0x99f49afc pthread_cond_wait + 48
+3   libuno_sal.dylib.3            	0x00031ac8 osl_waitCondition + 104
+4   binaryurp.uno.dylib           	0x0ad224ef binaryurp::Writer::execute() + 79
+5   libuno_salhelpergcc3.dylib.3  	0x004d7da2 salhelper::Thread::run() + 34
+6   libuno_salhelpergcc3.dylib.3  	0x004d8152 threadFunc + 18
+7   libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+8   libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+9   libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 9:
+0   libsystem_kernel.dylib        	0x9542fb5a __recvfrom_nocancel + 10
+1   libsystem_c.dylib             	0x99f49619 recv + 54
+2   libuno_sal.dylib.3            	0x0000bf85 osl_receiveSocket + 85
+3   libuno_sal.dylib.3            	0x0000c1cb osl_readSocket + 75
+4   acceptor.uno.dylib            	0x0ab379ea io_acceptor::SocketConnection::read(com::sun::star::uno::Sequence& long) + 250
+5   binaryurp.uno.dylib           	0x0ad16dbd binaryurp::(anonymous namespace)::read(com::sun::star::uno::Reference const& unsigned long bool) + 125
+6   binaryurp.uno.dylib           	0x0ad1acff binaryurp::Reader::execute() + 111
+7   libuno_salhelpergcc3.dylib.3  	0x004d7da2 salhelper::Thread::run() + 34
+8   libuno_salhelpergcc3.dylib.3  	0x004d8152 threadFunc + 18
+9   libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+10  libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+11  libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 10 Crashed:
+0   libswlo.dylib                 	0x1d39cf6f SwPageFrm::RemoveDrawObjFromPage(SwAnchoredObject&) + 47
+1   libswlo.dylib                 	0x1d3a4919 lcl_RemoveObjsFromPage(SwFrm*) + 425
+2   libswlo.dylib                 	0x1d3aa302 SaveCntnt(SwLayoutFrm* SwFrm*) + 530
+3   libswlo.dylib                 	0x1d3f1b04 lcl_MoveRowContent(SwRowFrm& SwRowFrm&) + 260
+4   libswlo.dylib                 	0x1d3f33ef SwTabFrm::RemoveFollowFlowLine() + 127
+5   libswlo.dylib                 	0x1d3fcf03 SwTabFrm::MakeAll() + 9411
+6   libswlo.dylib                 	0x1d37cfab SwFrm::PrepareMake() + 619
+7   libswlo.dylib                 	0x1d3b4713 SwLayAction::FormatLayoutTab(SwTabFrm* unsigned char) + 339
+8   libswlo.dylib                 	0x1d3b42ee SwLayAction::FormatLayout(SwLayoutFrm* unsigned char) + 2974
+9   libswlo.dylib                 	0x1d3b426a SwLayAction::FormatLayout(SwLayoutFrm* unsigned char) + 2842
+10  libswlo.dylib                 	0x1d3b74ab SwLayAction::InternalAction() + 795
+11  libswlo.dylib                 	0x1d3b80d0 SwLayAction::Action() + 256
+12  libswlo.dylib                 	0x1d6e3906 ViewShell::CalcLayout() + 294
+13  libswlo.dylib                 	0x1d30cced SwEditShell::CalcLayout() + 29
+14  libswlo.dylib                 	0x1d93da32 SwView::SwView(SfxViewFrame* SfxViewShell*) + 4738
+15  libswlo.dylib                 	0x1d93e220 SwView::CreateInstance(SfxViewFrame* SfxViewShell*) + 48
+16  libsfxlo.dylib                	0x00754fc9 SfxBaseModel::createViewController(rtl::OUString const& com::sun::star::uno::Sequence const& com::sun::star::uno::Reference const&) + 345
+17  libsfxlo.dylib                	0x00796274 SfxFrameLoader_Impl::impl_createDocumentView(com::sun::star::uno::Reference const& com::sun::star::uno::Reference const& comphelper::NamedValueCollection const& rtl::OUString const&) + 148
+18  libsfxlo.dylib                	0x0079a23d SfxFrameLoader_Impl::load(com::sun::star::uno::Sequence const& com::sun::star::uno::Reference const&) + 2541
+19  libfwklo.dylib                	0x0ae95377 framework::LoadEnv::impl_loadContent() + 3591
+20  libfwklo.dylib                	0x0ae958f8 framework::LoadEnv::startLoading() + 136
+21  libfwklo.dylib                	0x0ae95b30 framework::LoadEnv::loadComponentFromURL(com::sun::star::uno::Reference const& com::sun::star::uno::Reference const& rtl::OUString const& rtl::OUString const& long com::sun::star::uno::Sequence const&) + 256
+22  libfwklo.dylib                	0x0aecf6aa framework::Desktop::loadComponentFromURL(rtl::OUString const& rtl::OUString const& long com::sun::star::uno::Sequence const&) + 314
+23  libgcc3_uno.dylib             	0x03dd0c92 (anonymous namespace)::callVirtualMethod(void* long void* _typelib_TypeDescription* bool long* long) + 114
+24  libgcc3_uno.dylib             	0x03dd10f2 (anonymous namespace)::cpp_call(bridges::cpp_uno::shared::UnoInterfaceProxy* bridges::cpp_uno::shared::VtableSlot _typelib_TypeDescriptionReference* long _typelib_MethodParameter* void* void** _uno_Any**) + 530
+25  libgcc3_uno.dylib             	0x03dd182e bridges::cpp_uno::shared::unoInterfaceProxyDispatch(_uno_Interface* _typelib_TypeDescription const* void* void** _uno_Any**) + 718
+26  binaryurp.uno.dylib           	0x0ad1115b binaryurp::IncomingRequest::execute_throw(binaryurp::BinaryAny* std::vector >*) const + 347
+27  binaryurp.uno.dylib           	0x0ad11ce0 binaryurp::IncomingRequest::execute() const + 176
+28  binaryurp.uno.dylib           	0x0ad16927 request + 23
+29  libuno_cppu.dylib.3           	0x00300728 cppu_threadpool::JobQueue::enter(long long unsigned char) + 280
+30  libuno_cppu.dylib.3           	0x00300cbf cppu_threadpool::ORequestThread::run() + 79
+31  libuno_cppu.dylib.3           	0x00301a72 threadFunc + 18
+32  libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+33  libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+34  libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 11:
+0   libsystem_kernel.dylib        	0x9542f8e2 __psynch_cvwait + 10
+1   libsystem_c.dylib             	0x99ebc289 _pthread_cond_wait + 938
+2   libsystem_c.dylib             	0x99f49afc pthread_cond_wait + 48
+3   libuno_sal.dylib.3            	0x00031ac8 osl_waitCondition + 104
+4   liblnglo.dylib                	0x1e1260a3 GrammarCheckingIterator::DequeueAndCheck() + 2563
+5   libuno_sal.dylib.3            	0x0000de32 osl_thread_start_Impl + 434
+6   libsystem_c.dylib             	0x99eb7557 _pthread_start + 344
+7   libsystem_c.dylib             	0x99ea1cee thread_start + 34
+
+Thread 10 crashed with X86 Thread State (32-bit):
+  eax: 0x00000001  ebx: 0x1d3f3386  ecx: 0x1d36d7c5  edx: 0x00000001
+  edi: 0x00000000  esi: 0x1d36d830  ebp: 0xb0511a98  esp: 0xb0511a70
+   ss: 0x00000023  efl: 0x00010202  eip: 0x1d39cf6f   cs: 0x0000001b
+   ds: 0x00000023   es: 0x00000023   fs: 0x00000023   gs: 0x0000000f
+  cr2: 0x00000064
+Logical CPU: 2
+
+Binary Images:
+    0x1000 -     0x1ff7 +soffice.bin (???)  /Applications/LibreOffice.app/Contents/MacOS/soffice.bin
+    0x5000 -    0x44ffb +libuno_sal.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libuno_sal.dylib.3
+   0x64000 -    0xcdfe3 +libsofficeapp.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsofficeapp.dylib
+  0x101000 -   0x221ff7 +libcomphelpgcc3.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libcomphelpgcc3.dylib
+  0x2fe000 -   0x32ffeb +libuno_cppu.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libuno_cppu.dylib.3
+  0x343000 -   0x40cffb +libuno_cppuhelpergcc3.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libuno_cppuhelpergcc3.dylib.3
+  0x48c000 -   0x4b1ff7 +libdeploymentmisclo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libdeploymentmisclo.dylib
+  0x4cd000 -   0x4d1ff7 +libi18nisolang1gcc3.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libi18nisolang1gcc3.dylib
+  0x4d6000 -   0x4d9ffb +libuno_salhelpergcc3.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libuno_salhelpergcc3.dylib.3
+  0x4df000 -   0x840fe3 +libsfxlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsfxlo.dylib
+  0xa3c000 -   0xb04fe7 +libsvllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsvllo.dylib
+  0xb75000 -   0xe92ff3 +libsvtlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsvtlo.dylib
+ 0x106e000 -  0x12c1fef +libtklo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libtklo.dylib
+ 0x1525000 -  0x1596fff +libtllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libtllo.dylib
+ 0x15c0000 -  0x161cffb +libucbhelper4gcc3.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libucbhelper4gcc3.dylib
+ 0x165d000 -  0x1761ffb +libutllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libutllo.dylib
+ 0x17f1000 -  0x1bc6fe7 +libvcllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libvcllo.dylib
+ 0x1d62000 -  0x1d77feb +libreg.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libreg.dylib.3
+ 0x1d80000 -  0x1d8aff3 +libxmlreader.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libxmlreader.dylib
+ 0x1d90000 -  0x1daaff3 +libstore.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libstore.dylib.3
+ 0x1db9000 -  0x1e4afff +libxcrlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libxcrlo.dylib
+ 0x1e8d000 -  0x1feefe7 +libdb-4.7.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libdb-4.7.dylib
+ 0x2004000 -  0x2095ffb +libbasegfxlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libbasegfxlo.dylib
+ 0x20c8000 -  0x214aff7 +libfwelo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfwelo.dylib
+ 0x2195000 -  0x21aefe7 +libsaxlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsaxlo.dylib
+ 0x21bf000 -  0x230dfff +libsblo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsblo.dylib
+ 0x23d2000 -  0x2420feb +libsotlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsotlo.dylib
+ 0x244c000 -  0x247affb +libfwilo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfwilo.dylib
+ 0x2499000 -  0x24a1fef +libi18nutilgcc3.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libi18nutilgcc3.dylib
+ 0x24b5000 -  0x24cbff7 +libjvmfwk.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libjvmfwk.dylib.3
+ 0x24d6000 -  0x25e6ff3 +libicuuc.dylib.49 (49.1.1)  /Applications/LibreOffice.app/Contents/MacOS/libicuuc.dylib.49
+ 0x2640000 -  0x2644fff +libjvmaccessgcc3.dylib.3 (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libjvmaccessgcc3.dylib.3
+ 0x264a000 -  0x2677ff3 +libicule.dylib.49 (49.1.1)  /Applications/LibreOffice.app/Contents/MacOS/libicule.dylib.49
+ 0x268c000 -  0x26c2fe7 +liblcms2.2.dylib (3.3)  /Applications/LibreOffice.app/Contents/MacOS/liblcms2.2.dylib
+ 0x26e1000 -  0x27f9ff7 +libcairo.2.dylib (11003.2)  /Applications/LibreOffice.app/Contents/MacOS/libcairo.2.dylib
+ 0x283d000 -  0x2843ff7 +libAppleRemotelo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libAppleRemotelo.dylib
+ 0x284b000 -  0x396aff7 +libicudata.dylib.49 (49.1.1)  /Applications/LibreOffice.app/Contents/MacOS/libicudata.dylib.49
+ 0x398a000 -  0x399cffd  libTraditionalChineseConverter.dylib (61)  /System/Library/CoreServices/Encodings/libTraditionalChineseConverter.dylib
+ 0x3da3000 -  0x3db0ff3  com.apple.Librarian (1.1 - 1)  /System/Library/PrivateFrameworks/Librarian.framework/Versions/A/Librarian
+ 0x3dcb000 -  0x3dd7fff +libgcc3_uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libgcc3_uno.dylib
+ 0x5500000 -  0x55cbff7 +bootstrap.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/bootstrap.uno.dylib
+ 0x7c1b000 -  0x7cb4ff7 +configmgr.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/configmgr.uno.dylib
+ 0xaae2000 -  0xaae9ff3 +localebe1.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/localebe1.uno.dylib
+ 0xab1c000 -  0xab27fff +liboffacclo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/liboffacclo.dylib
+ 0xab33000 -  0xab3ffe7 +acceptor.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/acceptor.uno.dylib
+ 0xab4d000 -  0xab55ffb +macbe1.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/macbe1.uno.dylib
+ 0xad00000 -  0xad28ff3 +binaryurp.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/binaryurp.uno.dylib
+ 0xad3f000 -  0xad8cff3 +libucb1.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libucb1.dylib
+ 0xadb8000 -  0xb033ffb +libfwklo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfwklo.dylib
+ 0xb18f000 -  0xb1eaffb +libucpfile1.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libucpfile1.dylib
+ 0xb219000 -  0xb393fff +i18npool.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/i18npool.uno.dylib
+ 0xb422000 -  0xb58ffe3 +libicui18n.dylib.49 (49.1.1)  /Applications/LibreOffice.app/Contents/MacOS/libicui18n.dylib.49
+ 0xb631000 -  0xb6d6ffb +liblocaledata_others.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/liblocaledata_others.dylib
+ 0xb93f000 -  0xb952fe3 +liblocaledata_en.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/liblocaledata_en.dylib
+ 0xfddf000 -  0xff40fe3 +libsal_textenc.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/libsal_textenc.dylib
+0x102a3000 - 0x102a8fff +pythonloader.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/pythonloader.uno.dylib
+0x102ff000 - 0x10303ff7 +_ssl.so (???)  /Applications/LibreOffice.app/Contents/program/OOoPython.framework/Versions/2.6/lib/python2.6/lib-dynload/_ssl.so
+0x1033c000 - 0x10346ff3 +libswdlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libswdlo.dylib
+0x10351000 - 0x10352ff7 +cStringIO.so (???)  /Applications/LibreOffice.app/Contents/program/OOoPython.framework/Versions/2.6/lib/python2.6/lib-dynload/cStringIO.so
+0x10561000 - 0x10568ff7 +_socket.so (???)  /Applications/LibreOffice.app/Contents/program/OOoPython.framework/Versions/2.6/lib/python2.6/lib-dynload/_socket.so
+0x10885000 - 0x1089dff3 +stocservices.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/stocservices.uno.dylib
+0x108bc000 - 0x1090cfe3 +libfilterconfiglo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfilterconfiglo.dylib
+0x109f6000 - 0x109f9ff7 +strop.so (???)  /Applications/LibreOffice.app/Contents/program/OOoPython.framework/Versions/2.6/lib/python2.6/lib-dynload/strop.so
+0x10b80000 - 0x10b9dfe7 +libavmedialo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libavmedialo.dylib
+0x10bba000 - 0x10c9efff +libdrawinglayerlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libdrawinglayerlo.dylib
+0x10d25000 - 0x10ea9fe7 +libeditenglo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libeditenglo.dylib
+0x10fe9000 - 0x11013ff3 +libcanvastoolslo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libcanvastoolslo.dylib
+0x11073000 - 0x11078ff7 +array.so (???)  /Applications/LibreOffice.app/Contents/program/OOoPython.framework/Versions/2.6/lib/python2.6/lib-dynload/array.so
+0x1190b000 - 0x1191bff7 +libevtattlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libevtattlo.dylib
+0x1192a000 - 0x11963ffb +libspelllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libspelllo.dylib
+0x1199d000 - 0x119aaff3 +libMacOSXSpelllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libMacOSXSpelllo.dylib
+0x119c9000 - 0x119e3fff +invocation.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/invocation.uno.dylib
+0x11b00000 - 0x11b38feb +libpyuno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libpyuno.dylib
+0x11bd6000 - 0x11be1fe3 +invocadapt.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/invocadapt.uno.dylib
+0x11ccb000 - 0x11cdeff3 +libhyphenlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libhyphenlo.dylib
+0x19d4e000 - 0x19f58feb +libfrmlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfrmlo.dylib
+0x1a10b000 - 0x1a24cfe3 +libdbtoolslo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libdbtoolslo.dylib
+0x1a324000 - 0x1a473fff +OOoPython (2.6)  /Applications/LibreOffice.app/Contents/MacOS/OOoPython.framework/Versions/2.6/OOoPython
+0x1a574000 - 0x1a588fff +liblnthlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/liblnthlo.dylib
+0x1d10f000 - 0x1db78ff7 +libswlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libswlo.dylib
+0x1e0fa000 - 0x1e175fff +liblnglo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/liblnglo.dylib
+0x1e1d1000 - 0x1e3c6fe3 +libsvxlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsvxlo.dylib
+0x1e553000 - 0x1eab9feb +libsvxcorelo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libsvxcorelo.dylib
+0x1eed4000 - 0x1ef77ffb +libvbahelperlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libvbahelperlo.dylib
+0x1eff5000 - 0x1f392feb +libxolo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libxolo.dylib
+0x1f55c000 - 0x1f5adffb +libcppcanvaslo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libcppcanvaslo.dylib
+0x1f5e0000 - 0x1f678feb +libmsfilterlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libmsfilterlo.dylib
+0x1f6d7000 - 0x1f6e9ff7 +libfileacc.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libfileacc.dylib
+0x1f6f9000 - 0x1f729ff7 +expwrap.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/expwrap.uno.dylib
+0x1f74f000 - 0x1f80ffef +libdeployment.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libdeployment.dylib
+0x1f8a7000 - 0x1f8ddfe3 +libhelplinkerlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libhelplinkerlo.dylib
+0x1f8ef000 - 0x1fa36ff3 +libclucene.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libclucene.dylib
+0x1fb6c000 - 0x1fb71ff3 +ucpexpand1.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/ucpexpand1.uno.dylib
+0x1fb7b000 - 0x1fbd8fe7 +libunoxmllo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libunoxmllo.dylib
+0x1fc87000 - 0x1fcffff3 +libpackage2.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libpackage2.dylib
+0x1fd62000 - 0x1fe13ff3 +libxstor.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libxstor.dylib
+0x1fe53000 - 0x1fe74ff7 +reflection.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/reflection.uno.dylib
+0x1feaf000 - 0x1fedefef +libucppkg1.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libucppkg1.dylib
+0x1fef6000 - 0x1ff21ff7 +introspection.uno.dylib (0)  /Applications/LibreOffice.app/Contents/ure-link/lib/introspection.uno.dylib
+0x1ff59000 - 0x200e7fff +libmswordlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libmswordlo.dylib
+0x2018d000 - 0x20575fff +libooxlo.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/libooxlo.dylib
+0x20935000 - 0x20957ffe  libssl.0.9.7.dylib (106)  /usr/lib/libssl.0.9.7.dylib
+0x20965000 - 0x20a10fff  libcrypto.0.9.7.dylib (106)  /usr/lib/libcrypto.0.9.7.dylib
+0x20b4b000 - 0x20cacffb +vbaswobj.uno.dylib (0)  /Applications/LibreOffice.app/Contents/MacOS/vbaswobj.uno.dylib
+0x8fe8a000 - 0x8febce57  dyld (210.2.3)  /usr/lib/dyld
+0x90007000 - 0x9000aff9  libCGXType.A.dylib (324.6)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCGXType.A.dylib
+0x90025000 - 0x90073ff3  com.apple.SystemConfiguration (1.12.2 - 1.12.2)  /System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x90074000 - 0x900f9ff7  com.apple.SearchKit (1.4.0 - 1.4.0)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x9014b000 - 0x90168fff  libxpc.dylib (140.41)  /usr/lib/system/libxpc.dylib
+0x90169000 - 0x90203fff  com.apple.CoreSymbolication (3.0 - 87)  /System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication
+0x90204000 - 0x9020cfff  libcopyfile.dylib (89)  /usr/lib/system/libcopyfile.dylib
+0x9020d000 - 0x9021bff7  libz.1.dylib (43)  /usr/lib/libz.1.dylib
+0x9021c000 - 0x9021fffc  libpam.2.dylib (20)  /usr/lib/libpam.2.dylib
+0x90220000 - 0x90230ff2  com.apple.LangAnalysis (1.7.0 - 1.7.0)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis
+0x90273000 - 0x903c0ffb  com.apple.CFNetwork (596.2.3 - 596.2.3)  /System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x903c1000 - 0x903c4ffd  libCoreVMClient.dylib (24.4)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x9049c000 - 0x904f9fff  com.apple.audio.CoreAudio (4.1.0 - 4.1.0)  /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x904fa000 - 0x904fbfff  libsystem_sandbox.dylib (220)  /usr/lib/system/libsystem_sandbox.dylib
+0x90594000 - 0x90594ffd  com.apple.audio.units.AudioUnit (1.8 - 1.8)  /System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x90595000 - 0x905effff  com.apple.Symbolication (1.3 - 93)  /System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication
+0x905f4000 - 0x90618fff  libJPEG.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x90619000 - 0x9065dfff  libGLU.dylib (8.6.1)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x9075b000 - 0x90788ffe  libsystem_m.dylib (3022.6)  /usr/lib/system/libsystem_m.dylib
+0x91502000 - 0x91505ff7  com.apple.TCC (1.0 - 1)  /System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x9150d000 - 0x9150dfff  libkeymgr.dylib (25)  /usr/lib/system/libkeymgr.dylib
+0x9150f000 - 0x91513ffc  libGIF.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x91514000 - 0x91522fff  com.apple.opengl (1.8.6 - 1.8.6)  /System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x91523000 - 0x9173afff  com.apple.CoreData (106.1 - 407.7)  /System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x9173b000 - 0x91764fff  libxslt.1.dylib (11.3)  /usr/lib/libxslt.1.dylib
+0x91765000 - 0x9176cff3  com.apple.NetFS (5.0 - 4.0)  /System/Library/Frameworks/NetFS.framework/Versions/A/NetFS
+0x917b7000 - 0x917fcff7  com.apple.NavigationServices (3.7 - 200)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/NavigationServices.framework/Versions/A/NavigationServices
+0x917fd000 - 0x918d1fff  com.apple.backup.framework (1.4.1 - 1.4.1)  /System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup
+0x918d2000 - 0x91972ff7  com.apple.QD (3.42 - 285)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x91973000 - 0x91995fff  libc++abi.dylib (24.4)  /usr/lib/libc++abi.dylib
+0x91996000 - 0x919feff7  com.apple.framework.IOKit (2.0 - 755.18.10)  /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x919ff000 - 0x91a11ff7  libdispatch.dylib (228.23)  /usr/lib/system/libdispatch.dylib
+0x91a12000 - 0x91a53ff7  libcups.2.dylib (327)  /usr/lib/libcups.2.dylib
+0x91a54000 - 0x91e71fff  FaceCoreLight (2.4.1)  /System/Library/PrivateFrameworks/FaceCoreLight.framework/Versions/A/FaceCoreLight
+0x91e72000 - 0x91ec1ff6  libTIFF.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x91f58000 - 0x91f5afff  com.apple.securityhi (4.0 - 55002)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI
+0x91f5b000 - 0x91fa9ffb  libFontRegistry.dylib (100)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x91faa000 - 0x91fabffd  libunc.dylib (25)  /usr/lib/system/libunc.dylib
+0x91fac000 - 0x9206aff3  com.apple.ColorSync (4.8.0 - 4.8.0)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x9206b000 - 0x9206ffff  com.apple.OpenDirectory (10.8 - 151.10)  /System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x92070000 - 0x920e5ff7  com.apple.ApplicationServices.ATS (332 - 341.1)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x920e6000 - 0x920efffd  com.apple.audio.SoundManager (4.0 - 4.0)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CarbonSound.framework/Versions/A/CarbonSound
+0x920f0000 - 0x9219afff  com.apple.LaunchServices (539.7 - 539.7)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x9219b000 - 0x9219bfff  com.apple.Accelerate.vecLib (3.8 - vecLib 3.8)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x9219c000 - 0x92216ff7  com.apple.securityfoundation (6.0 - 55115.4)  /System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x92662000 - 0x926bbfff  com.apple.AE (645.3 - 645.3)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x926bc000 - 0x926bcfff  com.apple.vecLib (3.8 - vecLib 3.8)  /System/Library/Frameworks/vecLib.framework/Versions/A/vecLib
+0x926bd000 - 0x927d9ff7  com.apple.desktopservices (1.7.2 - 1.7.2)  /System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv
+0x927da000 - 0x92831ff3  com.apple.HIServices (1.20 - 417)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x92832000 - 0x9283eff8  libbz2.1.0.dylib (29)  /usr/lib/libbz2.1.0.dylib
+0x9283f000 - 0x928aeffb  com.apple.Heimdal (3.0 - 2.0)  /System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x928af000 - 0x928b3ff7  libmacho.dylib (829)  /usr/lib/system/libmacho.dylib
+0x928b4000 - 0x928bbfff  liblaunch.dylib (442.26.2)  /usr/lib/system/liblaunch.dylib
+0x928bc000 - 0x928dcffd  com.apple.ChunkingLibrary (2.0 - 133.2)  /System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary
+0x928dd000 - 0x928e6ff9  com.apple.CommonAuth (3.0 - 2.0)  /System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x92912000 - 0x92924fff  libbsm.0.dylib (32)  /usr/lib/libbsm.0.dylib
+0x92b97000 - 0x92c46ff7  com.apple.CoreText (260.0 - 275.16)  /System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x92c47000 - 0x92cabfff  com.apple.datadetectorscore (4.0 - 269.1)  /System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x92cac000 - 0x92e24ff5  com.apple.QuartzCore (1.8 - 304.0)  /System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x92e2c000 - 0x92e2efff  libCVMSPluginSupport.dylib (8.6.1)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x92e31000 - 0x92e47fff  com.apple.CFOpenDirectory (10.8 - 151.10)  /System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x92e48000 - 0x92eb0fe7  libvDSP.dylib (380.6)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x92eb1000 - 0x92eb1fff  com.apple.Cocoa (6.7 - 19)  /System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x92fa7000 - 0x92fadfff  com.apple.print.framework.Print (8.0 - 258)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print
+0x92fae000 - 0x92fb2fff  com.apple.IOSurface (86.0.3 - 86.0.3)  /System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x92fb3000 - 0x93b6fffb  com.apple.AppKit (6.8 - 1187.34)  /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x93cb5000 - 0x93cb6ffd  com.apple.TrustEvaluationAgent (2.0 - 23)  /System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent
+0x94a9a000 - 0x94aa8ff3  libsystem_network.dylib (77.10)  /usr/lib/system/libsystem_network.dylib
+0x94cda000 - 0x94e96ffd  libicucore.A.dylib (491.11.1)  /usr/lib/libicucore.A.dylib
+0x94e97000 - 0x94f8fff9  libsqlite3.dylib (138.1)  /usr/lib/libsqlite3.dylib
+0x94f90000 - 0x94f90fff  libsystem_blocks.dylib (59)  /usr/lib/system/libsystem_blocks.dylib
+0x94f91000 - 0x94fccfe7  libGLImage.dylib (8.6.1)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x9500e000 - 0x9508aff3  com.apple.Metadata (10.7.0 - 707.3)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x9508b000 - 0x9508fffe  libcache.dylib (57)  /usr/lib/system/libcache.dylib
+0x95110000 - 0x95415ff7  com.apple.CoreServices.CarbonCore (1037.3 - 1037.3)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x9541b000 - 0x95435ffc  libsystem_kernel.dylib (2050.18.24)  /usr/lib/system/libsystem_kernel.dylib
+0x95438000 - 0x95443fff  libcommonCrypto.dylib (60026)  /usr/lib/system/libcommonCrypto.dylib
+0x95444000 - 0x95483ff7  com.apple.bom (12.0 - 192)  /System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom
+0x95484000 - 0x9551bff7  com.apple.ink.framework (10.8.2 - 150)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink
+0x95808000 - 0x95c4afff  com.apple.CoreGraphics (1.600.0 - 324.6)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x95ca5000 - 0x95db2ff3  com.apple.ImageIO.framework (3.2.0 - 845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x95de9000 - 0x95deafff  libdnsinfo.dylib (453.18)  /usr/lib/system/libdnsinfo.dylib
+0x95f9d000 - 0x95fcefff  com.apple.DictionaryServices (1.2 - 184.4)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x95fcf000 - 0x95fd0fff  libDiagnosticMessagesClient.dylib (8)  /usr/lib/libDiagnosticMessagesClient.dylib
+0x95fd1000 - 0x960c2ffc  libiconv.2.dylib (34)  /usr/lib/libiconv.2.dylib
+0x960c3000 - 0x9610ffff  libcorecrypto.dylib (106.2)  /usr/lib/system/libcorecrypto.dylib
+0x963aa000 - 0x963bffff  com.apple.speech.synthesis.framework (4.1.12 - 4.1.12)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x963c0000 - 0x9663cff7  com.apple.QuickTime (7.7.1 - 2599.13)  /System/Library/Frameworks/QuickTime.framework/Versions/A/QuickTime
+0x9663d000 - 0x96795ffb  com.apple.audio.toolbox.AudioToolbox (1.8 - 1.8)  /System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x96796000 - 0x967bafff  com.apple.PerformanceAnalysis (1.16 - 16)  /System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x967bb000 - 0x96800ff5  com.apple.opencl (2.1.20 - 2.1.20)  /System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+0x968e3000 - 0x968e3fff  libSystem.B.dylib (169.3)  /usr/lib/libSystem.B.dylib
+0x968e4000 - 0x96accff3  com.apple.CoreFoundation (6.8 - 744.12)  /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x96acd000 - 0x96acdffd  libOpenScriptingUtil.dylib (148.2)  /usr/lib/libOpenScriptingUtil.dylib
+0x96ace000 - 0x96ad1ff7  libcompiler_rt.dylib (30)  /usr/lib/system/libcompiler_rt.dylib
+0x96ad2000 - 0x96bddff7  libJP2.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x96bde000 - 0x96be5fff  libsystem_dnssd.dylib (379.32.1)  /usr/lib/system/libsystem_dnssd.dylib
+0x96be6000 - 0x96c03fff  libCRFSuite.dylib (33)  /usr/lib/libCRFSuite.dylib
+0x96c04000 - 0x96c0afff  libGFXShared.dylib (8.6.1)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x96c0b000 - 0x96c15fff  libsystem_notify.dylib (98.5)  /usr/lib/system/libsystem_notify.dylib
+0x96c16000 - 0x96c22ffe  libkxld.dylib (2050.18.24)  /usr/lib/system/libkxld.dylib
+0x96e7c000 - 0x96f89057  libobjc.A.dylib (532.2)  /usr/lib/libobjc.A.dylib
+0x96f8a000 - 0x96f8efff  com.apple.CommonPanels (1.2.5 - 94)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels
+0x9701d000 - 0x97050ff3  com.apple.GSS (3.0 - 2.0)  /System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x97051000 - 0x97105fff  com.apple.coreui (2.0 - 181.1)  /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x97106000 - 0x97133ffb  com.apple.CoreServicesInternal (154.2 - 154.2)  /System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal
+0x97134000 - 0x9713bffb  libunwind.dylib (35.1)  /usr/lib/system/libunwind.dylib
+0x9713c000 - 0x97197fff  com.apple.htmlrendering (77 - 1.1.4)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HTMLRendering.framework/Versions/A/HTMLRendering
+0x971a8000 - 0x971a9fff  libremovefile.dylib (23.1)  /usr/lib/system/libremovefile.dylib
+0x971aa000 - 0x97562ffa  libLAPACK.dylib (1073.4)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x97567000 - 0x97574ff7  com.apple.AppleFSCompression (49 - 1.0)  /System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x975bb000 - 0x975c3fff  com.apple.DiskArbitration (2.5.1 - 2.5.1)  /System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x975c4000 - 0x975e2ff3  com.apple.openscripting (1.3.6 - 148.2)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
+0x975e3000 - 0x975e3fff  com.apple.Carbon (154 - 155)  /System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
+0x975e4000 - 0x9760dff7  libRIP.A.dylib (324.6)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libRIP.A.dylib
+0x9760e000 - 0x9761affa  com.apple.CrashReporterSupport (10.8.2 - 415)  /System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport
+0x9761b000 - 0x97672ff7  com.apple.ScalableUserInterface (1.0 - 1)  /System/Library/Frameworks/QuartzCore.framework/Versions/A/Frameworks/ScalableUserInterface.framework/Versions/A/ScalableUserInterface
+0x97673000 - 0x977aeff7  libBLAS.dylib (1073.4)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x977af000 - 0x977b1ffb  libRadiance.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x977b2000 - 0x97818fff  com.apple.print.framework.PrintCore (8.1 - 387.1)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x97819000 - 0x97895ffb  libType1Scaler.dylib (101.1)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libType1Scaler.dylib
+0x97896000 - 0x978ccffb  com.apple.DebugSymbols (98 - 98)  /System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
+0x97906000 - 0x97906fff  com.apple.CoreServices (57 - 57)  /System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x97907000 - 0x97926ff3  com.apple.Ubiquity (1.2 - 243.10)  /System/Library/PrivateFrameworks/Ubiquity.framework/Versions/A/Ubiquity
+0x97927000 - 0x979b9ffb  libvMisc.dylib (380.6)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x97a41000 - 0x97a5eff7  libresolv.9.dylib (51)  /usr/lib/libresolv.9.dylib
+0x97a5f000 - 0x97a62fff  com.apple.help (1.3.2 - 42)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help
+0x97a63000 - 0x97e46ff3  com.apple.HIToolbox (2.0 - 625)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x97e47000 - 0x97e51ffe  com.apple.bsd.ServiceManagement (2.0 - 2.0)  /System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement
+0x97e8f000 - 0x97eb4ffb  com.apple.framework.familycontrols (4.1 - 410)  /System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/FamilyControls
+0x97eb5000 - 0x97eb7fff  libdyld.dylib (210.2.3)  /usr/lib/system/libdyld.dylib
+0x97eec000 - 0x97f2effb  com.apple.RemoteViewServices (2.0 - 80.5)  /System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x98376000 - 0x98474ff7  libFontParser.dylib (84.5)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontParser.dylib
+0x98475000 - 0x9855eff7  libxml2.2.dylib (22.3)  /usr/lib/libxml2.2.dylib
+0x9855f000 - 0x98578fff  com.apple.Kerberos (2.0 - 1)  /System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x98602000 - 0x98603fff  libquarantine.dylib (52)  /usr/lib/system/libquarantine.dylib
+0x98604000 - 0x9878dff7  com.apple.vImage (6.0 - 6.0)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x9900b000 - 0x99015fff  libCSync.A.dylib (324.6)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/Versions/A/Resources/libCSync.A.dylib
+0x99016000 - 0x99017fff  liblangid.dylib (116)  /usr/lib/liblangid.dylib
+0x99018000 - 0x99022fff  com.apple.speech.recognition.framework (4.1.5 - 4.1.5)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x99023000 - 0x9902fff7  com.apple.NetAuth (4.0 - 4.0)  /System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
+0x99030000 - 0x99045fff  com.apple.ImageCapture (8.0 - 8.0)  /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
+0x99088000 - 0x9909ffff  com.apple.GenerationalStorage (1.1 - 132.2)  /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage
+0x990a0000 - 0x99138fff  com.apple.CoreServices.OSServices (557.4 - 557.4)  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x99179000 - 0x991ddff3  libstdc++.6.dylib (56)  /usr/lib/libstdc++.6.dylib
+0x991f9000 - 0x99201fff  com.apple.CommerceCore (1.0 - 26)  /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore
+0x992ba000 - 0x992c7fff  libGL.dylib (8.6.1)  /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x992c8000 - 0x992dbff9  com.apple.MultitouchSupport.framework (235.28 - 235.28)  /System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x992dc000 - 0x992f8ff7  libPng.dylib (845)  /System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x99418000 - 0x9943dff7  com.apple.CoreVideo (1.8 - 99.3)  /System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x9943e000 - 0x9943efff  com.apple.ApplicationServices (45 - 45)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x9943f000 - 0x994a1fff  libc++.1.dylib (65.1)  /usr/lib/libc++.1.dylib
+0x994a2000 - 0x99745ffb  com.apple.CoreImage (8.2.2 - 1.0.1)  /System/Library/Frameworks/QuartzCore.framework/Versions/A/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x99746000 - 0x99772ff7  libsystem_info.dylib (406.17)  /usr/lib/system/libsystem_info.dylib
+0x99773000 - 0x99a33fff  com.apple.security (7.0 - 55179.1)  /System/Library/Frameworks/Security.framework/Versions/A/Security
+0x99a34000 - 0x99a42fff  libxar.1.dylib (105)  /usr/lib/libxar.1.dylib
+0x99a43000 - 0x99a43fff  com.apple.Accelerate (1.8 - Accelerate 1.8)  /System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x99a5c000 - 0x99a9eff7  libauto.dylib (185.1)  /usr/lib/libauto.dylib
+0x99ea1000 - 0x99f5efeb  libsystem_c.dylib (825.25)  /usr/lib/system/libsystem_c.dylib
+0x9a349000 - 0x9a666ff3  com.apple.Foundation (6.8 - 945.11)  /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x9a667000 - 0x9a69cfff  libTrueTypeScaler.dylib (84.5)  /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libTrueTypeScaler.dylib
+
+External Modification Summary:
+  Calls made by other processes targeting this process:
+    task_for_pid: 2
+    thread_create: 0
+    thread_set_state: 0
+  Calls made by this process:
+    task_for_pid: 0
+    thread_create: 0
+    thread_set_state: 0
+  Calls made by all processes on this machine:
+    task_for_pid: 149431
+    thread_create: 1
+    thread_set_state: 0
+
+VM Region Summary:
+ReadOnly portion of Libraries: Total=253.7M resident=103.9M(41%) swapped_out_or_unallocated=149.7M(59%)
+Writable regions: Total=137.9M written=20.8M(15%) resident=37.3M(27%) swapped_out=6284K(4%) unallocated=100.7M(73%)
+ 
+REGION TYPE                      VIRTUAL
+===========                      =======
+ATS (font support)                 32.9M
+CG backing stores                  8176K
+CG image                              4K
+CG shared images                    160K
+CoreServices                       6204K
+MALLOC                             53.0M
+MALLOC guard page                    48K
+Memory tag=242                       12K
+Memory tag=35                      7264K
+Stack                              69.6M
+VM_ALLOCATE                        27.9M
+__DATA                             17.1M
+__DATA/__OBJC                       200K
+__IMAGE                             528K
+__IMPORT                            620K
+__LINKEDIT                         69.5M
+__OBJC                             1532K
+__PAGEZERO                            4K
+__TEXT                            184.2M
+__UNICODE                           544K
+mapped file                       314.5M
+shared memory                       308K
+===========                      =======
+TOTAL                             793.7M
+
+Model: MacBookPro62 BootROM MBP61.0057.B0F 2 processors Intel Core i5 2.53 GHz 8 GB SMC 1.58f16
+Graphics: Intel HD Graphics Intel HD Graphics Built-In 288 MB
+Graphics: NVIDIA GeForce GT 330M NVIDIA GeForce GT 330M PCIe 256 MB
+Memory Module: BANK 0/DIMM0 4 GB DDR3 1067 MHz 0x80AD 0x484D54333531533641465238432D47372020
+Memory Module: BANK 1/DIMM0 4 GB DDR3 1067 MHz 0x80AD 0x484D54333531533641465238432D47372020
+AirPort: spairport_wireless_card_type_airport_extreme (0x14E4 0x93) Broadcom BCM43xx 1.0 (5.106.98.81.22)
+Bluetooth: Version 4.0.9f33 10885 2 service 11 devices 1 incoming serial ports
+Network Service: Wi-Fi AirPort en1
+Serial ATA Device: PLEXTOR PX-128M3P 128.04 GB
+Serial ATA Device: TOSHIBA MK5055GSXF 500.11 GB
+USB Device: hub_device 0x0424  (SMSC) 0x2514 0xfa100000 / 2
+USB Device: HTC 0x0bb4  (HTC Corporation) 0x0cd6 0xfa140000 / 6
+USB Device: BRCM2070 Hub 0x0a5c  (Broadcom Corp.) 0x4500 0xfa110000 / 5
+USB Device: Bluetooth USB Host Controller apple_vendor_id 0x8218 0xfa113000 / 8
+USB Device: Apple Internal Keyboard / Trackpad apple_vendor_id 0x0236 0xfa120000 / 4
+USB Device: Internal Memory Card Reader apple_vendor_id 0x8403 0xfa130000 / 3
+USB Device: hub_device 0x0424  (SMSC) 0x2514 0xfd100000 / 2
+USB Device: IR Receiver apple_vendor_id 0x8242 0xfd120000 / 4
+USB Device: Built-in iSight apple_vendor_id 0x8507 0xfd110000 / 3",michael.stahl,clkao,fixed,1,resolved,4,2012-12-10,0,17,2012-12-10,9,critical,5
+LIBREOFFICE-45935,2012-02-11,Extensions,LIBREOFFICE,libreoffice-kde: Oxygen dropdown menu has no border,"Created attachment 56900
+Screenshot
+
+Using LibreOffice in KDE desktop on Linux with the libreoffice-kde package installed I find that dropdown menus in applications like writer or calc hasn't border this makes them ugly and confusing for the user because they seem to fade into the rest of the application gui.",l.lunak,EagleScreen,fixed,1,resolved,4,2015-02-20,0,17,2015-02-20,1105,normal,2
+LIBREOFFICE-68103,2013-08-14,Documentation,LIBREOFFICE,Draw Help for Master page view mode(s) remain incomplete Impress mode articles are not applicable,"I tried to create a heading in a Master Slide in Draw to get a page number on each page.
+
+The whole Help section on Adding a Header or a Footer to All Slides does not apply to LO 4.1 Draw.  
+
+As just one example the Help says:
+
+1. Choose View - Header and Footer.
+You see a dialog with two tab pages: Slide and Notes and Handouts where you can enter contents to the predefined areas. 
+
+However there is no such View option.  Many of the other options mentioned including a discussion on the types of Master seem to be wrong.
+
+Not having used Draw much in the past I do not know when the Help became out of date but this entry clearly needs a refresh.
+
+Whilst this is minor to someone new to the application it is pretty baffling.",libreoffice-bugs,tim,fixed,1,resolved,4,2019-08-15,0,25,2019-08-15,2192,normal,2
+LIBREOFFICE-96339,2015-12-08,Calc,LIBREOFFICE,Creating sort list with option Copy in options dialog omits adding comma as separator,"One can create sort list with tools > Options > Calc > Sort Lists.
+One way is using the Copy button when wanted entries are selected in spreadsheet.
+
+To reproduce:
+1. Type the next list each word in a cell
+Apple
+Pear
+Mango
+Melon
+Grape
+
+2. Select the list.
+
+3. Open tools > Options > Calc > Sort Lists click the Copy button
+
+ > the new list is shown in Lists and Entries.
+
+When you do this in 5.1.0beta1 there is no comma separator.
+So all you have is the entry ApplePearMangoMelonGrape
+As a consequence the list is not effective.
+( Type e.g. Apple. Select the cell. Drag with the block in the lower right corner of the cell. Pear Mango etc. are not filled. 
+Also using the sort list at the Options tab of the sort dialog does not help.)
+
+Try creating a list in e.g. 4.4.7.1 and there are comma separators.
+And the list does work.
+
+I will attach a simple test document.",noelgrandin,cno,fixed,1,resolved,4,2016-10-25,0,13,2015-12-12,4,normal,2
+LIBREOFFICE-52015,2012-07-12,Impress,LIBREOFFICE,FILEOPEN particular(?) .ppt with connector connected to table will CRASH,"Steps how to reproduce with Server Installation of  LibreOffice 3.6.0.0.beta3 
+German UI/Locale [Build-ID: 3e2b862] on German WIN7 Home Premium (64bit):
+
+Follow instructions in original AOOo bug with sample from original AOOo bug.
+
+OS = ALL and NEW due to AOOo Bug.
+
+Please see:
+
+concerning use of AOOo patches",dtardon,LibreOffice,fixed,1,resolved,4,2012-07-23,0,5,2012-07-23,11,major,4
+LIBREOFFICE-87405,2014-12-17,ux-advise,LIBREOFFICE,SIDEBAR: Impress/Draw code sharing causing problem with sidebar default state,"Steps:
+01) Clear your profile
+02) Open Draw
+03) Sidebar will be half open (meaning the sidebar buttons will only be visible)
+04) Close Draw and Open Impress
+05) Sidebar will be in the same half open state
+06) Close LO
+07) Clear your profile
+08) Open Impress
+09) Sidebar will be fully open
+10) Close Impress and Open Draw
+11) Sidebar will be fully open rather than half open
+
+This isnt a major issue because once you change the sidebar state in impress or draw it will keep that state.
+
+Version: 4.5.0.0.alpha0+
+Build ID: e570cd7a293ceee175949dcc9656cdf776ae3c37
+TinderBox: Linux-rpm_deb-x86@45-TDF Branch:master Time: 2014-12-12_18:49:54",libreoffice-bugs,philipz85,fixed,1,resolved,4,2016-10-24,0,4,2015-04-21,125,minor,2
+LIBREOFFICE-117809,2018-05-25,Calc,LIBREOFFICE,doesn't update type of icon of conditional formatting Icon set with percent if delete minimal or maximal values from range,"Description:
+doesn't update type of icon of conditional formatting Icon set with percent if delete minimal or maximal values from range
+
+Version: 6.0.3.2
+Build ID: 8f48d515416608e3a835360314dac7e47fd0b821
+CPU threads: 4 OS: Linux 4.13 UI render: default VCL: gtk2 
+Locale: ru-RU (ru_RU.UTF-8) Calc: group
+
+Steps to Reproduce:
+0. Just open file Example from attach and go to 5 or
+
+1. Create a conditional formatting for range A1:A20. All cells - Icon set - 3 arrows
+2. Enter value for yellow arrow - 50 percent for green arrow - 80 percent
+3. Fill range A1:A20 uses any values from 0 to 100 (for simpling)
+4. Note: percent for any value in cell of range is calculated as (cell_value-minimal_value) / (maximal_value-minimal_value)
+5. Delete all value 0 or all value 100.
+6. Type of icon for all cells in range must be recalculate and change! Because percent is changed! But it didn't happen!
+7. Then change value in any cell from range -> Type of icon for all cells in range is recalculated and changed to correct!
+
+Actual Results:  
+doesn't update type of icon of conditional formatting Icon set with percent if delete minimal or maximal values from range
+
+Expected Results:
+type of icon changes to correct if delete minimal or maximal values from range
+
+
+Reproducible: Always
+
+
+User Profile Reset: No
+
+
+
+Additional Info:
+
+
+User-Agent: Mozilla/5.0 (X11 Ubuntu Linux x86_64 rv:60.0) Gecko/20100101 Firefox/60.0",markus.mohrhard,79045_79045,fixed,1,resolved,4,2018-07-15,0,5,2018-07-15,51,normal,2
+LIBREOFFICE-119430,2018-08-22,UI,LIBREOFFICE,Icons: new icons for LibO 6.2,This is the list for all new icon for the LibO 6.2 release together with the commits to have an better overview.,kainz.a,kainz.a,fixed,1,resolved,4,2018-11-15,0,4,2018-11-15,85,normal,2
+LIBREOFFICE-103244,2016-10-15,Documentation,LIBREOFFICE,[LOCALHELP] Incorrect menu path to Tools - Protect Sheet/Spreadsheet in Calc,"Created attachment 128020
+protection help
+
+Beeing probably only an Italian translation I write the explain in Italian Language.
+
+Leggendo l'help allegato si dice Strumenti-Proteggi documento
+ma nel menu di Strumenti appare Proteggi foglio elettronico ...
+Occorre sincronizzare le due definizioni.",stanislav.horacek,gmmellina,fixed,1,closed,6,2017-01-05,0,15,2017-01-04,81,normal,2
+LIBREOFFICE-58671,2012-12-23,UI,LIBREOFFICE,Remove accelerators of ~Change Case from Undo/Redo dropdown list,"Created attachment 72016
+screenshot - notice the ~ in red circle
+
+Task: Remove accelerators (the grave accent ~ ) of ~Change Case from Undo / Redo dropdown list
+
+Steps:
+1. Open Writer
+2. Type qwerty
+3. Move the cursor inside the string - such as between 'w' and 'e' as follows: qw|erty
+4. Format > Change Case > UPPERCASE
+5. Click on Undo dropdown list (see screenshot)
+
+Expected: Change Case without ~
+Actual: ~Change Case",detective.conan.1412,detective.conan.1412,fixed,1,resolved,4,2013-01-09,0,7,2013-01-09,17,trivial,1
+LIBREOFFICE-32231,2010-12-08,contrib,LIBREOFFICE,git account request,"Created attachment 40921
+SSH public key
+
+Real name: Pierre-André Jacquod
+email address: pjacquod@alumni.ethz.ch
+preferred account name: pjacquod",libreoffice-bugs,pjacquod,fixed,1,closed,6,2012-06-01,0,4,2010-12-08,0,normal,2
+LIBREOFFICE-62590,2013-03-21,WWW,LIBREOFFICE,TDF Site [DE]: Portable recommendation 4.0.0 is unacceptable,"2 Problems here:
+
+a) Without explication that checkmark on green circle area is useful for nothing it has to be explained on that page what version is for what purpose / user
+
+b) 4.0.0 in reality is is a very very buggy Alpha version it's not a good idea to offer it with green checkmark and without warnings only for early adaptors with experience ... on the same page. The hint concerning Versionshinweise (release notes) is not appropriate Version 4.0.0 is not listed there and such a warning has to be on the same page as the download link",libreoffice-bugs,LibreOffice,fixed,1,resolved,4,2013-07-01,0,2,2013-07-01,102,major,4
+LIBREOFFICE-45107,2012-01-22,Localization,LIBREOFFICE,GUI: Rectangles instead of Characters for Tamil and Dogri,"Created attachment 56007
+attached with Junk Characters on Libreoffice GUI while system browser showing correct locale (te_IN)
+
+while testing GUI in various Indian locales there are Junk Character in interface. Somewhere Characters are mixed up with Each other. Other Places there Blocks without any glyphs. 
+
+Tested Windows Build only.
+
+LibreOffice 3.5.0rc1 
+Build ID: b6c8ba5-8c0b455-0b5e650-d7f0dd3-b100c87
+
+Tested locales with Problem:
+Dogri
+Kannada (kn_IN)
+Tamil (ta_IN)
+Telugu (te_IN)
+
+
+Change language interface with Tools->Option->Language-GUI [http://help.libreoffice.org/Common/Selecting_the_Document_Language]
+
+
+Is there any chance that there will be No (or wrong) Font Selection in Libreoffice's configration file for those languages (on Windows OS)?",timar74,aalam,fixed,1,resolved,4,2012-01-26,0,8,2012-01-25,3,normal,2
+LIBREOFFICE-31956,2010-11-28,Documentation,LIBREOFFICE,Improve wording for Readme packaged with LibreOffice 3.3 Linux downloads,"Hi
+
+The readme packaged with the LibreOffice 3.3 Linux downloads contains no installation instructions.
+
+I've attached herewith an amended readme that contains:
+
+- instructions for installing LibreOffice on Debian/Ubuntu Fedora Suse and Mandriva with supporting noteas for other Linux distribs
+
+- instructions for installing language packs on all the above distribs
+
+- instructions for de-installing an existing LibreOffice installation covering all the above Linux distribs.
+
+It would be useful to proofread what I've added for technical correctness and accuracy.
+
+Please can you include this with the next release?
+
+Thanks if so. -)",thb,commerce,fixed,1,resolved,4,2013-11-14,0,37,2011-03-25,117,major,4
+LIBREOFFICE-97822,2016-02-12,LibreOffice,LIBREOFFICE,Trees missing arrows if OpenGL is enabled,"Created attachment 122596
+Screenshot 1: OpenGL Off all OK
+
+If OpenGL is enabled the Arrows are missing in the Settings Tree.
+
+See Screenshots attached.
+
+System is Ubuntu 14.04.3 LTS.
+Graphics Card is: VGA compatible controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06)",vmiklos,andreas_b123,fixed,1,resolved,4,2019-04-16,0,17,2019-04-15,1158,normal,2
+LIBREOFFICE-75213,2014-02-19,Calc,LIBREOFFICE,FORMATTING: double line borders are not printing or exporting properly to PDF (gap too wide),"Created attachment 94366
+Simple example that shows the problem.
+
+I defined double-line borders in my page format for a title page and they display correctly on the screen but don't print or export to PDF correctly. This is a NEW problem. The affected documents printed and exported just fine in previous versions of LibreOffice.",kohei,david.burleigh,fixed,1,resolved,4,2014-03-27,0,8,2014-03-05,14,normal,2
+LIBREOFFICE-79305,2014-05-27,Calc,LIBREOFFICE,FILESAVE: relative file hyperlinks saved as absolute,"1. Launch Calc make sure that in menu 'Tools -> Options ->   Load/Save -> General - Save - Save URLs relative to file  system' is checked.
+2. Select Insert - Hyperlink from the menu and select a file from file picker.
+3. Save the document in ODS.
+
+In contents.xml there is a full absolute path instead of a relative path. For example: 
+
+xlink:href=file:///mnt/sda2/Adatok/LO/LO_proba/Melleklet/Dokumentum.pdf
+
+The same process with LibreOffice 4.1.6 leads to the correct URL:
+
+xlink:href=../Melleklet/Dokumentum.pdf",markus.mohrhard,timar74,fixed,1,resolved,4,2019-07-08,0,16,2014-07-19,53,major,4
+LIBREOFFICE-84810,2014-10-08,Calc,LIBREOFFICE,crash in paste special when combine options link and format,"Start Calc
+Write some text in A1
+Copy cell A1 to clipboard
+Set cursor in A3 (or elsewhere)
+Edit > Paste special
+Check option Link and check option Paste all
+Paste ==> Crash.
+
+The crash is caused by the combination of options Link and Format.
+
+This workflow does not crash in LibreOffice 4.2.6
+It crashes at least since Version Version: 4.4.0.0.alpha0+
+Build ID: dacab84536f61f79a5422e1d8d394019ec62f3ec
+TinderBox: Win-x86@39 Branch:master Time: 2014-06-04_04:27:18",fdbugs,rb.henschel,fixed,1,resolved,4,2018-02-05,0,9,2014-10-09,1,critical,5
+LIBREOFFICE-99361,2016-04-17,Calc,LIBREOFFICE,Engineering notation: wrong Help tips in Number dialog and Sidebar,"Description: When mouse fly over Engineering notation checkbox in Number dialog or in Sidebar help tips text correspond to Thousands separator
+
+Steps to reproduce:
+1. Tools > Options > LibreOffice > General: check Extended tips
+2. In Calc Format > Cells > Numbers
+3. Select Scientific Category
+4. Put mouse over Engineering notation checkbox
+
+Actual behavior:
+Help tips text displays information about Thousands separator checkbox
+
+Expected behavior:
+Help tips text should be specific like in Help:
+With scientific format Engineering notation ensures that exponent is a multiple of 3.
+
+Same apply with Sidebar with or without Extended tips option checked:
+1. In Calc open Sidebar Properties panel > Number Format
+2. Select Scientific as Category
+3. Put mouse over Engineering notation checkbox
+
+Actual behavior:
+Help tips text displays information about Thousands separator checkbox
+
+Expected behavior:
+Help tips text should be specific:
+Ensures that exponent is a multiple of 3.",jumbo4444,jumbo4444,fixed,1,resolved,4,2016-10-25,0,3,2016-04-20,3,minor,2
+LIBREOFFICE-89394,2015-02-15,LibreOffice,LIBREOFFICE,FILE MENU and HYPERLINKs: Freeze when UNC path is unavailable aka accessing remote server (e.g. SMB share) when off-line leads to hang / freeze / crash,"Samba files in registrymodifications.xcu causes hanging/freezing.
+
+First I realized my LibreOffice applications hang whenever I click File menu for the first time. This takes up to a minute and is really annoying. Second clicking does not cause any freezing/hanging.
+
+After a while I tried to insert a hyperlink in a Writer document. Following actions caused hanging/freezing repeatedly:
+opening Insert/Hyperlink from the menu
+typing in the target field in the hyperlink dialog (each key stroke!)
+
+Assumption:
+I have assumed that LibreOffice tried to reach a network location. I have previously worked several times on samba folders on different locations. These folders are disconnected during this behaviour.
+
+Solution:
+I found a solution about creating a new user profile and testing with folders from the old profile. So I replaced folders to see if these are the problem. Interestingly none of the folders were cause of the problem but it was the registrymodifications.xcu file.
+
+I investigated the contents of this text/xml file. There I found many files on samba locations. One of those files was the one I used several weeks ago. Location was something like this: file://10.0.0.5/.....
+One problem was that there is only two // instead of three /// like with other entries. I was not connected to this location during this behaviour. I removed this entry and restored old profile. So far there is no hanging/freezing.
+
+Therefore I file this bug for the programmers who might be interested in. I think the continous hanging/freezing in hyperlink dialog is abnormal.
+
+Cheers
+Saren Tasciyan",libreoffice-bugs,sarentasciyan,fixed,1,resolved,4,2017-10-31,0,32,2016-06-08,479,major,4
+LIBREOFFICE-86552,2014-11-22,BASIC,LIBREOFFICE,Segmentation fault when I press Ctrl-Z,"In the macro editor of Draw
+Ctrl-A Ctrl-X Ctrl-Z
+It was segmentation fault occurs After running the above.
+
+
+[My Macros & Dialogs] standard
+Module1
+Ctrl-ACtrl-XCtrl-Z
+
+Program received signal SIGSEGV Segmentation fault.
+0x00007ffff10c669d in rtl::OUString::isEmpty (this=0x7fffd826d840) at /home/buildslave/source/libo-core/include/rtl/ustring.hxx:406
+406	/home/buildslave/source/libo-core/include/rtl/ustring.hxx: No such file or directory.
+(gdb) bt
+#0  0x00007ffff10c669d in rtl::OUString::isEmpty (this=0x7fffd826d840) at /home/buildslave/source/libo-core/include/rtl/ustring.hxx:406
+#1  0x00007ffff1366285 in TextEngine::ImpGetRightToLeft (this=0x7fffd825c650 nPara=3 nPos=177 pStart=0x0 pEnd=0x0)
+    at /home/buildslave/source/libo-core/vcl/source/edit/texteng.cxx:2968
+#2  0x00007ffff1363370 in TextEngine::CreateLines (this=0x7fffd825c650 nPara=3)
+    at /home/buildslave/source/libo-core/vcl/source/edit/texteng.cxx:2293
+#3  0x00007ffff135f8f5 in TextEngine::FormatDoc (this=0x7fffd825c650) at /home/buildslave/source/libo-core/vcl/source/edit/texteng.cxx:1568
+#4  0x00007ffff135f26b in TextEngine::FormatAndUpdate (this=0x7fffd825c650 pCurView=0x7fffd8333ac0)
+    at /home/buildslave/source/libo-core/vcl/source/edit/texteng.cxx:1467
+#5  0x00007ffff1374544 in TextUndoManager::UndoRedoEnd (this=0x3d16ff0) at /home/buildslave/source/libo-core/vcl/source/edit/textundo.cxx:124
+#6  0x00007ffff137439a in TextUndoManager::Undo (this=0x3d16ff0) at /home/buildslave/source/libo-core/vcl/source/edit/textundo.cxx:87
+#7  0x00007ffff45c29e9 in SfxViewFrame::ExecHistory_Impl (this=0x7fffd82700b0 rReq=...)
+    at /home/buildslave/source/libo-core/sfx2/source/view/viewfrm.cxx:945
+#8  0x00007ffff45be41d in SfxStubSfxViewFrameExecHistory_Impl (pShell=0x7fffd82700b0 rReq=...)
+    at /home/buildslave/tinderboxbuild/workdir/SdiTarget/sfx2/sdi/sfxslots.hxx:688
+#9  0x00007ffff42794aa in SfxShell::CallExec (this=0x7fffd82700b0 
+    pFunc=0x7ffff45be3fa  rReq=...)
+    at /home/buildslave/source/libo-core/include/sfx2/shell.hxx:209
+#10 0x00007ffff42a09f5 in SfxShell::ExecuteSlot (this=0x7fffd82700b0 rReq=... pIF=0x3bc3fa0)
+    at /home/buildslave/source/libo-core/sfx2/source/control/shell.cxx:453
+#11 0x00007fffc5a7740e in basctl::Shell::ExecuteCurrent (this=0x7fffd82781c0 rReq=...)
+    at /home/buildslave/source/libo-core/basctl/source/basicide/basides1.cxx:193
+#12 0x00007fffc5a84261 in SfxStubbasctl_ShellExecuteCurrent (pShell=0x7fffd82781c0 rReq=...)
+    at /home/buildslave/tinderboxbuild/workdir/SdiTarget/basctl/sdi/basslots.hxx:153
+#13 0x00007ffff42794aa in SfxShell::CallExec (this=0x7fffd82781c0 
+    pFunc=0x7fffc5a8423e  rReq=...)
+    at /home/buildslave/source/libo-core/include/sfx2/shell.hxx:209
+#14 0x00007ffff4270bf7 in SfxDispatcher::Call_Impl (this=0x7fffd826f180 rShell=... rSlot=... rReq=... bRecord=true)
+    at /home/buildslave/source/libo-core/sfx2/source/control/dispatch.cxx:260
+#15 0x00007ffff4273a95 in SfxDispatcher::_Execute (this=0x7fffd826f180 rShell=... rSlot=... rReq=... eCallMode=RECORD)
+    at /home/buildslave/source/libo-core/sfx2/source/control/dispatch.cxx:862
+#16 0x00007ffff42609d2 in SfxBindings::Execute_Impl (this=0x7fffd82705e0 aReq=... pSlot=0x7fffc5e23f30 pShell=0x7fffd82781c0)
+    at /home/buildslave/source/libo-core/sfx2/source/control/bindings.cxx:1204
+#17 0x00007ffff42de1b3 in SfxDispatchController_Impl::dispatch (this=0x3ff2f00 aURL=... aArgs=... rListener=...)
+    at /home/buildslave/source/libo-core/sfx2/source/control/unoctitm.cxx:851
+#18 0x00007ffff42dbf05 in SfxOfficeDispatch::dispatch (this=0x7fffc5e48908 aURL=... aArgs=...)
+    at /home/buildslave/source/libo-core/sfx2/source/control/unoctitm.cxx:365
+#19 0x00007ffff348e1f7 in svt::AsyncAccelExec::impl_ts_asyncCallback (this=0x3fe81b0)
+---Type  to continue or q  to quit---
+    at /home/buildslave/source/libo-core/svtools/source/misc/acceleratorexecute.cxx:475
+#20 0x00007ffff348e17f in svt::AsyncAccelExec::LinkStubimpl_ts_asyncCallback (pThis=0x3fe81b0 pCaller=0x0)
+    at /home/buildslave/source/libo-core/svtools/source/misc/acceleratorexecute.cxx:468
+#21 0x00007ffff10cbfd2 in Link::Call (this=0x3fe81b8 pCaller=0x0) at /home/buildslave/source/libo-core/include/tools/link.hxx:139
+#22 0x00007ffff1608aab in vcl::EventPoster::DoEvent_Impl (this=0x3fe81b0 pEvent=0x0)
+    at /home/buildslave/source/libo-core/vcl/source/helper/evntpost.cxx:53
+#23 0x00007ffff1608a67 in vcl::EventPoster::LinkStubDoEvent_Impl (pThis=0x3fe81b0 pCaller=0x0)
+    at /home/buildslave/source/libo-core/vcl/source/helper/evntpost.cxx:49
+#24 0x00007ffff10cbfd2 in Link::Call (this=0x4739a20 pCaller=0x0) at /home/buildslave/source/libo-core/include/tools/link.hxx:139
+#25 0x00007ffff1268f80 in ImplHandleUserEvent (pSVEvent=0x46ef6c0) at /home/buildslave/source/libo-core/vcl/source/window/winproc.cxx:1920
+#26 0x00007ffff126a42b in ImplWindowFrameProc (pWindow=0x3bc6300 nEvent=22 pEvent=0x46ef6c0)
+    at /home/buildslave/source/libo-core/vcl/source/window/winproc.cxx:2491
+#27 0x00007ffff16f1a3d in SalFrame::CallCallback (this=0x3bc6c70 nEvent=22 pEvent=0x46ef6c0)
+    at /home/buildslave/source/libo-core/vcl/inc/salframe.hxx:242
+#28 0x00007ffff16f1572 in SalGenericDisplay::DispatchInternalEvent (this=0xf6b2f0)
+    at /home/buildslave/source/libo-core/vcl/generic/app/gendisp.cxx:90
+#29 0x00007fffe3f44a0d in GtkData::userEventFn (data=0x618bb0) at /home/buildslave/source/libo-core/vcl/unx/gtk/app/gtkdata.cxx:935
+#30 0x00007fffe3f44a68 in call_userEventFn (data=0x618bb0) at /home/buildslave/source/libo-core/vcl/unx/gtk/app/gtkdata.cxx:945
+#31 0x00007fffeca01355 in g_main_context_dispatch () from /lib/x86_64-linux-gnu/libglib-2.0.so.0
+#32 0x00007fffeca01688 in ?? () from /lib/x86_64-linux-gnu/libglib-2.0.so.0
+#33 0x00007fffeca01744 in g_main_context_iteration () from /lib/x86_64-linux-gnu/libglib-2.0.so.0
+#34 0x00007fffe3f43997 in GtkData::Yield (this=0x618bb0 bWait=true bHandleAllCurrentEvents=false)
+    at /home/buildslave/source/libo-core/vcl/unx/gtk/app/gtkdata.cxx:575
+#35 0x00007fffe3f478bc in GtkInstance::Yield (this=0x618b00 bWait=true bHandleAllCurrentEvents=false)
+    at /home/buildslave/source/libo-core/vcl/unx/gtk/app/gtkinst.cxx:420
+#36 0x00007ffff163c01e in ImplYield (i_bWait=true i_bAllEvents=false) at /home/buildslave/source/libo-core/vcl/source/app/svapp.cxx:360
+#37 0x00007ffff1638a73 in Application::Yield () at /home/buildslave/source/libo-core/vcl/source/app/svapp.cxx:392
+#38 0x00007ffff1638a21 in Application::Execute () at /home/buildslave/source/libo-core/vcl/source/app/svapp.cxx:341
+#39 0x00007ffff785bfc4 in desktop::Desktop::Main (this=0x7fffffffdfe0) at /home/buildslave/source/libo-core/desktop/source/app/app.cxx:1638
+#40 0x00007ffff164015a in ImplSVMain () at /home/buildslave/source/libo-core/vcl/source/app/svmain.cxx:160
+#41 0x00007ffff1640250 in SVMain () at /home/buildslave/source/libo-core/vcl/source/app/svmain.cxx:193
+#42 0x00007ffff789ff6d in soffice_main () at /home/buildslave/source/libo-core/desktop/source/app/sofficemain.cxx:93
+#43 0x00000000004009b7 in sal_main () at /home/buildslave/source/libo-core/desktop/source/app/main.c:48
+#44 0x000000000040099d in main (argc=1 argv=0x7fffffffe2c8) at /home/buildslave/source/libo-core/desktop/source/app/main.c:47
+(gdb)",caolanm,info,fixed,1,resolved,4,2015-12-16,0,14,2014-12-19,27,critical,5
+LIBREOFFICE-53474,2012-08-14,LibreOffice,LIBREOFFICE,ACCESSIBILITY: Java Accessibility Bridge based Accessibility does not work on Windows for ALL LibreOffice 3.6.x releases thusfar,"operating environment
+
+LibO3.6
+OS:WinXP Home Edition SP3Windows VistaWindos7
+JRE:Java SE Runtime Environment 6 Update 33(i586)
+JAB:Java Access Bridge2.0.2
+Screen reader:NVDA",sbergman,mshinke,fixed,1,resolved,4,2013-06-25,0,19,2012-10-25,72,major,4
+LIBREOFFICE-89254,2015-02-09,Calc,LIBREOFFICE,XLSX:New lines (CTRL+ENTER) in cells disappear,"I'm currently using LibreOffice Fresh (version 4.4.0) but the problem appears in LibreOffice Still. 
+
+I have a spreadsheet document where in each cell I have a header row in bold and several lines starting with dashes (-) below the header line. The new line between the header row and the second row in each cell disappears when I save and open the spreadsheet again. 
+
+In LibreOffice Fresh the bug seemed fixed and new lines are intact when I open the spreadsheet again but when I open the spreadsheet in LibreOffice Still or in Excel the new lines are gone.",markus.mohrhard,lblagoev,fixed,1,resolved,4,2016-10-25,0,19,2016-04-12,428,normal,2
+LIBREOFFICE-46699,2012-02-27,Calc,LIBREOFFICE,Try to open CSV empty (with 0 bytes) writes garbage data to file.,When you open a 0 bytes CSV file the program ask you for file format. If you say it is a CSV file then opens garbage data. Then if you cancel the import the file content is 15 KB of garbage data.,erack,fcojavmc,fixed,1,resolved,4,2012-06-17,0,7,2012-04-04,37,major,4
+LIBREOFFICE-46552,2012-02-23,Writer,LIBREOFFICE,UI: Preview for Bullets/Numbering Configuration incorrect,"Problem description:  The preview window for modifying the List styles does not update correctly. for levels 4+. It might also help to show non-printing characters in the preview regardless of how that option is set for the document.
+
+Steps to reproduce:
+1. modify a list style
+2. click through the list style levels
+3. watch preview window
+
+Current behavior: It sometimes works correctly for levels 1-3.  Starting with level 4 once you click on it the symbol for level 5 disappears (same for level 5 with 6 disappearing etc.). Also the indenting also seems have issues if you make a combo numbering to bullet list (lower level being bulleted).
+
+Expected behavior: The preview would look correct for all levels
+
+Platform (if different from the browser): 
+              
+Browser: Mozilla/5.0 (Windows NT 6.1 WOW64 rv:10.0.2) Gecko/20100101 Firefox/10.0.2",vidhey96,jon,fixed,1,resolved,4,2017-01-13,0,18,2017-01-13,1786,normal,2
+LIBREOFFICE-89996,2015-03-13,Printing and PDF export,LIBREOFFICE,No fax printer available with fax4CUPS / Problems with Brother Fax,"I had a very god fax solution with previos LibreOffice version using spadmin and brpcfax script for a Brother MFC device.
+
+After upgrading to 4.3 I installed fax4CUPS 1.29 as recommended. However if I print to one of these fax devices (e.g. efax) LibreOffice spools a print job immediately without asking for a fax number - probably they are not recognized as fax devices ...",libreoffice-bugs,rainer.kaluscha,fixed,1,resolved,4,2015-03-21,0,2,2015-03-21,8,major,4
+LIBREOFFICE-43630,2011-12-08,Calc,LIBREOFFICE,EDITING: Initial number of empty worksheets in a new spreadsheet should be 1.,"Problem description: 
+Initial number of empty worksheets in a new spreadsheet should be configurable 
+
+Steps to reproduce:
+1. Create a new workbook with the first icon of the toolbar
+2. Check the number of worksheets. It is 3. 
+3. ....
+
+Current behavior:
+New workbook is created always by 3 sheets. 
+
+Expected behavior:
+I would like to configure LO to set this to 1 because more sheets confuses other users. They do not see the second third ... sheets becase they are always empty. It would be better to use only 1 sheet if no more is needed and use more sheets if it is really needed. 
+
+
+Platform (if different from the browser): 
+              
+Browser: Mozilla/5.0 (Windows NT 5.1 rv:8.0) Gecko/20100101 Firefox/8.0",libreoffice-bugs,csongor,fixed,1,resolved,4,2011-12-08,0,3,2011-12-08,0,normal,2
+LIBREOFFICE-44738,2012-01-12,Calc,LIBREOFFICE,FILEOPEN WKS importer creates date formats in German language,When importing WKS spreadsheets cells formatted as date have 'TT.MM.JJJJ' format or similar. Even if used locale has nothing with German.,erack,davian818,fixed,1,resolved,4,2012-06-01,0,5,2012-05-09,118,minor,2
+LIBREOFFICE-112936,2017-10-06,Calc,LIBREOFFICE,Pivot table: LO created XLSX file makes Excel to crash,"Description:
+Check the attached test document. It was created in MS Excel and contains a simple pivot table. If I open it in Calc and save back to an XLSX file than MSO opens it but when I try to refresh the pivot table it crashes.
+After some testing I found out that this is because of the field called DATA. This DATA name might collide with some internally used name. I would guess something like that. If I change it to DATA1 in the source range and refesh the table then roundtriping in Calc will not lead to this issue.
+
+Steps to Reproduce:
+1. Open attached test XLSX in Calc
+2. Save it back to an XLSX file
+3. Open in Excel and refresh the table (right click on pivot table -> refresh)
+
+Actual Results:  
+Excel crashes.
+
+Expected Results:
+Excel should not crash on the roundtripped document.
+
+
+Reproducible: Always
+
+User Profile Reset: No
+
+Additional Info:
+
+
+User-Agent: Mozilla/5.0 (Windows NT 6.3 Win64 x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/61.0.3163.100 Safari/537.36",zolnaitamas2000,zolnaitamas2000,fixed,1,resolved,4,2019-04-30,0,3,2017-10-07,1,normal,2
+LIBREOFFICE-61940,2013-03-07,LibreOffice,LIBREOFFICE,: Unable to Change Shape Fill Colors,"Problem description: 
+Version 4.1.0.0.alpha0+ (Build ID: 2bb13b83e40aec362964d26921a3fc1660a5da2)
+Pull Date:   Thu Feb 28 20:17:25 2013 +0100
+Bodhi Linux 2.2 X64
+
+I am unable to change the fill color of any object in Drawing component. Works fine running 4.0.0.3 release
+
+Steps to reproduce:
+1. Open up drawing
+2. Insert any shape (example smiley face or rectangle)
+3. Right click and select Fill Area
+4. Select a different color
+
+
+Current behavior: Color doesn't change
+
+Expected behavior: Color should change to selected color
+
+More info: If you go back into fill color for the shape you can see that it has reverted back to original color
+
+              
+Operating System: All
+Version: 4.1.0.0.alpha0+ Master
+Last worked in: 4.0.0.3 release",caolanm,jmadero.dev,fixed,1,resolved,4,2013-04-07,0,11,2013-04-05,29,normal,2
+LIBREOFFICE-51247,2012-06-20,Impress,LIBREOFFICE,EDITING: CRASH when modify Text Animation properties to As one object and check Animate attached shape option,"Steps how to with Master  3.7.0alpha0+  – WIN7 Home Premium (64bit) ENGLISH UI [Build ID: 1d1c70d] (tinderbox: W2008R2@20 pull time 2012-06-18 08:23:14) (due to AOOo report):
+
+1.Launch LibO 
+2. New Presentation document form LibO Start Center
+3. Input a character into the title textbox.
+4.Click on the blank space to exit edit mode
+5. select the title textbox (If you have Quick Edit enabled you will have 
+   to press  to leave Edit mode and to get the control points of the 
+    text box)
+6. Switch to Tasks Sidebar add Custom Animation 'Entrance - Expand' 
+7. Switch to 'Custom Animation' sidebar panel select the effect 
+   created in step 6 then click the 'Effect Options' button (shown as ...).
+8. In Effect Options dialog switch to Text Animation tab select 
+   'Group text->All paragraphs at once'.
+9. Select the animation effect on Task panel open 'Effect Options' dialog again 
+   switch to 'Text Animation' tab select 'Group text -> As one object'
+10. check Animate attached shape
+11. 
+   > CRASH",caolanm,LibreOffice,fixed,1,resolved,4,2012-10-26,0,7,2012-10-26,128,major,4
+LIBREOFFICE-115090,2018-01-18,BASIC,LIBREOFFICE,Crashes when closing the document running the macro (itself),"Created attachment 139184
+Crashes LO on load if macros are enabled!
+
+I'm replicating the StarBasic macro code here:
+
+Sub Main
+    oMakroDoc = StarDesktop.currentComponent
+    MsgBox Lets crash LO
+    oMakroDoc.Close(true)
+End Sub
+
+In the attached document the macro is connected to the onLoad event. You have been warned!
+
+LO 4.1.6 5.1.6 5.2.6 and master (6.1 = 30a3011a5229ea2e6228f6aa265d80204dd4263c) just crash after OK. Seldomly you get the document recovery dialog most times it doesn't recover at all. Obviously you get a slightly different bt per VCL backend
+
+#0  0x00007fc6a673b260 in osl::Mutex::acquire()
+#1  0x00007fc6a67476c3 in osl::Guard::Guard(osl::Mutex&)
+#2  0x00007fc6a677fa80 in cppu::OInterfaceIteratorHelper::~OInterfaceIteratorHelper()
+#3  0x00007fc6a490ef1a in cppu::OInterfaceContainerHelper::forEach >((anonymous namespace)::NotifySingleListenerIgnoreRE const&)
+#4  0x00007fc6a490e76b in SfxBaseModel::postEvent_Impl(rtl::OUString const& com::sun::star::uno::Reference const&)
+#5  0x00007fc6a490dc2f in SfxBaseModel::Notify(SfxBroadcaster& SfxHint const&)
+#6  0x00007fc6a3d08bab in SfxBroadcaster::Broadcast(SfxHint const&)
+#7  0x00007fc6a43e41ad in SfxEventAsyncer_Impl::IdleHdl(Timer*)
+#8  0x00007fc6a43e3f78 in SfxEventAsyncer_Impl::LinkStubIdleHdl(void* Timer*)
+#9  0x00007fc69f04e5e8 in Link::Call(Timer*) const
+#10 0x00007fc69f04e447 in Timer::Invoke()
+#11 0x00007fc69f00a9c3 in Scheduler::ProcessTaskScheduling()
+#12 0x00007fc69f009bed in Scheduler::CallbackTaskScheduling()
+#13 0x00007fc68b9d48f6 in SalTimer::CallCallback()
+#14 0x00007fc68b9d35cd in X11SalData::Timeout()
+#15 0x00007fc68b9d39d5 in SalXLib::CheckTimeout(bool)
+#16 0x00007fc68b9d3ed2 in SalXLib::Yield(bool bool)
+#17 0x00007fc68b9ef62f in X11SalInstance::DoYield(bool bool)
+#18 0x00007fc69f03de21 in ImplYield(bool bool)
+#19 0x00007fc69f038ad4 in Application::Yield()
+#20 0x00007fc69f038a60 in Application::Execute()
+#21 0x00007fc6aa12345c in desktop::Desktop::Main()
+#22 0x00007fc69f04a8f5 in ImplSVMain()
+#23 0x00007fc69f04c4d8 in SVMain()
+#24 0x00007fc6aa18c85d in soffice_main()
+#25 0x000000000040096d in sal_main
+#26 0x0000000000400947 in main
+
+OOo 3.2.1 just continues to run in the background after the window vanishes.",thb,glogow,fixed,1,resolved,4,2018-01-30,0,15,2018-01-28,10,major,4
+LIBREOFFICE_ONLINE-94608,2015-09-29,LibreOffice,LIBREOFFICE_ONLINE,LOOL UX: Ctrl-something shortcuts at least for the commands in the toolbar,"Ctrl+b Ctrl+i etc.
+
+Advanced: Ctrl+arrows to jump the words.",libreoffice-bugs,kendy,fixed,1,resolved,4,2016-10-25,0,12,2015-11-10,42,normal,2
+LIBREOFFICE-108446,2017-06-10,Android Viewer,LIBREOFFICE,Android: Shape is not changed after change,"Description:
+Version: 5.5.0.0.alpha0+
+Build ID: 076ed44
+
+Open attached file
+Resize or move shape
+Button back
+Reopen file
+actual result:
+Shape Is not changed
+expected result:
+dialog do you want to save the file? and possibility to save the file
+
+If I add some text for example then shape change is saved. 
+
+
+
+Actual Results:  
+.
+
+Expected Results:
+.
+
+
+Reproducible: Always
+
+User Profile Reset: No
+
+Additional Info:
+
+
+User-Agent: Mozilla/5.0 (X11 Ubuntu Linux x86_64 rv:53.0) Gecko/20100101 Firefox/53.0",merttumer,raal,fixed,1,resolved,4,2018-03-20,0,7,2018-03-20,283,normal,2
+LIBREOFFICE-64916,2013-05-23,Installation,LIBREOFFICE,[FILEOPEN] LO 4.1 beta1: missing libsqlite3.so prevents encrypted files from loading,"Created attachment 79709
+Encryped file. Password is 1111
+
+Hey
+
+LO 4.1 beta1 can't open any encrypted document. If I try I get standard dialog (The password is incorrect. The file cannot be opened).
+
+If I try save encrypted file I got:
+
+Error saving the document Untitled2:
+General Error.
+General input/output error.
+
+I attach exampled of file. Password is 1111.",dtardon,quest-88,fixed,1,resolved,4,2013-11-20,0,33,2013-07-24,62,major,4
+LIBREOFFICE-79535,2014-06-02,Writer,LIBREOFFICE,FILEOPEN: LO getting crash while Opening file in Ubuntu,"Problem description: While Opening Document in LOLo getting crash.
+
+Steps to reproduce:
+1. Try to Open file in LibreOffice (On Ubuntu Build)
+
+Expected Result:
+The file should open properly.
+
+Actual Result:
+File crashing LibreOffice writer on open.
+
+              
+Operating System: Ubuntu
+Version: 4.4.0.0.alpha0+ Master
+Last worked in: 4.2.2.1 release",tushar.bende,tushar.bende,fixed,1,resolved,4,2015-12-17,0,12,2014-09-12,102,normal,2
+LIBREOFFICE-63403,2013-04-10,Calc,LIBREOFFICE,EDITING: Calc crash when entering single cell matrix formula with ROW() or COLUMN(),Enter =SUM(ROW()) as matrix formula (closing with Shift+Ctrl+Enter) in a single cell Calc crashes.,erack,erack,fixed,1,resolved,4,2013-04-12,0,6,2013-04-12,2,normal,2
+LIBREOFFICE-88417,2015-01-14,UI,LIBREOFFICE,Dropdown for ruler settings should show radio buttons instead of check boxes,Rulers can set to centimeter millimeter inches etc. via context menu. Right click the ruler and select how it should look like. This is a single selection from a list and has to use radio buttons therefore. The checkbox indicates that more than one option can be selected which is not true.,caolanm,heiko.tietze,fixed,1,resolved,4,2015-03-24,0,17,2015-01-19,5,normal,2
+LIBREOFFICE-72163,2013-11-29,Base,LIBREOFFICE,Report of query with two primarykeys and over 50 rows fails,"I have a report with an embedded SQL statement that prompts for parameters. For example PaymentDate BETWEEN :EnterStartDate END :EnterEndDate.  When I run it in LibreOffice 3.6 it functions correctly.  When running the DB in LO 4.1.3.2 it gives the following error: 'The Document Report_W_Payments could not be opened.  Failed to process the report.'  I tried editing the report in the report builder and I get a little more detail there when executing it.  It produces a few more error lines: 
+
+SQL Status: S1000
+An error occurred while creating the report.
+
+An exception of type com.sun.star.lang.WrappedTargetException was caught.
+
+Failed to process the report.
+
+Failed to process the report.
+
+I then went into the SQL builder and ran the same code interactively supplying the same parameters and it returns Zero rows but does execute.  If I change the criteria to for payment date to >= :EnterStartDate and an additional line of <=:EnterEndDate and run it interactively I get the 62 rows that I would expect.
+
+So it appears as if there may be a few things going on here:  1.  Issues with parameter passing to the SQL engine and 2. That the newer version of HSQL is improperly handling the between statement for date fields.",lionel,bmikowski1,fixed,1,resolved,4,2013-12-17,0,22,2013-12-02,3,major,4
+LIBREOFFICE-53246,2012-08-08,LibreOffice,LIBREOFFICE,Libo36 does not start InvalidRegistryException from program/services/postgresql-sdbc.rdb,"Created attachment 65287
+the details
+
+I installed the recent Libo36 version and it simply does not start.
+After clicking on the icon I get this alert:
+============================
+Fatal error
+Unhandled exception:
+InvalidRegistryException: file:///program/services/postgresql-sdbc.rdb: duplicate 
+=======================
+Click ok then:
+========================
+Microsoft Visual C++ Runtime Library
+Program: <path_to_libo*\program\soffice.bin
+
+This application has requested the Runtime to terminate it in an unusual way. Please contact the application support team for more information.
+=====================
+Click ok then:
+=================
+Libo alert panel (in Hungarian):
+Error detected then stop click here for details.
+================
+The details:
+================
+AppName: soffice.bin	 AppVer: 3.6.0.104	 ModName: msvcr90.dll
+ModVer: 9.0.30729.6161	 Offset: 0005beae
+=====================
+Technical details:
+==================
+in the attachment",libreoffice-bugs,reussandras,fixed,1,resolved,4,2012-08-22,0,9,2012-08-14,6,critical,5
+LIBREOFFICE-51639,2012-07-01,LibreOffice,LIBREOFFICE,'SOFFICE.EXE --VERSION' starts LibO Start Center instead showing version,"In MS Windows command prompt invoking soffice.exe --version does not work.
+
+At least I think it should print on stdout the version number and quit. But nothing is printed and the application launch.
+
+Same issue in 3.5 branch.",timar74,olivier.hallot,fixed,1,resolved,4,2013-10-21,0,22,2013-10-21,477,normal,2
+LIBREOFFICE-46538,2012-02-23,contrib,LIBREOFFICE,[EasyHack] add support for more bug trackers to get-bugzilla-attachments-by-mimetype,"In the core repository there is a Python script
+bin/get-bugzilla-attachments-by-mimetype
+
+This can download all sorts of interesting bug attachments
+(bugdocs) for testing purposes from various bug trackers
+currently including bugs.freedesktop.org openoffice.org bugzilla
+and bugzilla.redhat.com.
+
+There are more bug trackers that contain interesting attachments
+and support for these should be added:
+
+- Novell bugzilla
+- Launchpad
+- whatever is used by KOffice/Calligra
+- whatever is used by AbiWord/Gnumeric
+- anything else likely to contain ODF or other office format bugdocs
+
+This requires no LO code or C++ knowledge whatsoever.",gokcen.eraslan,michael.stahl,fixed,1,closed,6,2015-12-15,0,8,2012-04-17,54,normal,2
+LIBREOFFICE-82182,2014-08-05,Writer,LIBREOFFICE,FILEOPEN: File is corrupted after RT,"Created attachment 104062
+Issue with data label position
+
+Problem description: 
+
+Steps to reproduce:
+1. Open document in LibreOffice
+2. Save as .docx
+3. Open in MS Office 2010.
+
+Current behavior:
+Document is corrupted.
+
+Expected behavior:
+Document should open properly.
+              
+Operating System: All
+Version: 4.4.0.0.alpha0+ Master",yogesh.bharate,yogesh.bharate,fixed,1,resolved,4,2014-08-08,0,6,2014-08-08,3,normal,2
+LIBREOFFICE-112352,2017-09-12,Writer,LIBREOFFICE,FILESAVE DOCX: Document with one column section appears with two columns in LO,"Created attachment 136201
+The problematic document
+
+This DOCX document was originally created in Microsoft Office. The document begins with a short two column text then continues with a one column text on the same page. If the document is saved as DOCX in LibreOffice the whole text turns into two columns. The issue doesn't appear if the document is saved as ODT.
+
+Steps to reproduce:
+1. Open the original document (columns-bug-original.docx) in LibreOffice.
+2. Save the document as DOCX in LibreOffice Writer.
+3 Open the saved DOCX in LO and Word 2013 as well
+
+Actual results:
+The whole document has two columns of text when opened in Writer. It has one column in Word.
+
+Expected results:
+The original layout of the document should be preserved.",jluth,kelemeng,fixed,1,resolved,4,2017-11-10,0,12,2017-11-10,59,normal,2
+LIBREOFFICE-31472,2010-11-08,Draw,LIBREOFFICE,[UI]: Grid to Front does not work,"I checked with LibreOffice 3.3.0  -  WIN XP DE [OOO330m9 (Build:1 - build 3.2.99.2)] 
+
+Steps to reproduce: 
+1. open new DRAWing
+2. Make grid visible if invisible
+3. Draw a big rectangle with filling
+   normally grid will become invisible behind drawing
+4. 'Rigtclick -> Grid -> Grid to Front'
+    into empty drawing area 
+    expected: grid should become visible in drawing rectangle filled area
+    actual: nothing grid stays invisible behind rectangle
+
+Same problem in Menu
+
+I believe this very visible problem is a blocker for 3.3.0",thb,LibreOffice,fixed,1,closed,6,2011-12-23,0,7,2010-11-19,11,normal,2
+LIBREOFFICE-71729,2013-11-18,Calc,LIBREOFFICE,UI: Manage Names dialog populates Name box but not Range box for the first range before any is selected,"Steps to reproduce:
+1. Open a spreadsheet with any number of named ranges.
+2. Click Insert > Names > Manage to display the Manage Names dialog.
+
+Current behavior:
+In the list pane (the top part of the dialog) there is a list of the named ranges.  The first one is highlighted.  In the middle part of the dialog there are fields for Name Range and Scope.  The Name and Scope fields in this middle part are populated with the information for the first named range.  The Range field is blank.  You need to focus on the first range either with a mouse click or by pressing the down arrow for the Range field to populate with the information for the first range.
+
+Expected behavior:
+When the Manage Names dialog first displays before the user has clicked on a range or begun to scroll through the list of ranges with the arrow keys all of the fields in the middle part of the Manage Names dialog (Name Range and Scope) should be populated with the correct information for the first range.
+
+This pertains to 67621 and takes the place of 68608.",kohei,douglasnaphas,fixed,1,resolved,4,2014-04-09,0,8,2014-04-09,142,minor,2
+LIBREOFFICE-92773,2015-07-15,Calc,LIBREOFFICE,Calc file with many hyperlinks slow on FILEOPEN FILESAVE VIEWING,"Created attachment 117265
+ods file with many hyperlinks
+
+A file with many hyperlinks (90000) is very slow on loading saving and scrolling is not smooth - hangs for a while every now and then. It is a regression it worked well for versions 4.4.0.0.beta1 to 4.1.1.1 - the slowdown is about 200 times.
+
+Detailed statistics LO versions downloaded from http://downloadarchive.documentfoundation.org/libreoffice/old/
+
+commentversionbuildloadmanipulationsave
+last slowVersion: 4.3.7.2 Build ID: 8a35821d8636a03b8bf4e15b48f59794652c68ba       10 minclumsy10 min
+first fastVersion: 4.4.0.0.beta1 Build ID: 9af3d21234aa89dac653c0bd76648188cdeb683e4 ssmooth3 s
+last fastVersion: 4.4.1.1 Build ID: b5ac74bf8683a92078a2bc8aff97d4b436af63cb       4 ssmooth3 s
+fist slowVersion: 4.4.1.2 Build ID: 45e2de17089c24a1fa810c8f975a7171ba4cd432       10 min clumsy 10 min
+
+I would also bibisect it but I was not able to find the right git repository to clone. This information is missing in e.g. in https://wiki.documentfoundation.org/QA/Bibisect
+
+Milos",markus.mohrhard,msramek22,fixed,1,resolved,4,2017-03-12,0,6,2016-04-10,270,normal,2
+LIBREOFFICE-72187,2013-11-30,graphics stack,LIBREOFFICE,FILESAVE: edit filter settings checkbox disabled for a CSV file in the KDE Save As dialog,"Problem description: In Calc with Kubuntu 13.10 impossible de modify the text separator on a CSV file. The box edit separator is grayed out.
+
+Steps to reproduce:
+1. Open a CSV file
+2. File/Save as
+3. Box is grayed out
+
+Current behavior: checkbox edit separator is grayed out
+
+Expected behavior: checkbox edit separator is NOT grayed out :-)
+
+              
+Operating System: Ubuntu
+Version: 4.1.2.3 release",libreoffice-bugs,rboulle,fixed,1,resolved,4,2019-01-23,0,18,2019-01-23,1880,normal,2

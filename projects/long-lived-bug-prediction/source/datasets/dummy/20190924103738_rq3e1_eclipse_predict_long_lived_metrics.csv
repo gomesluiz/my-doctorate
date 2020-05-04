@@ -1,2 +1,0 @@
-project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
-eclipse,short_description,100,nb,unbalanced,repeatedcv,Kappa,365,644,592,52,214,197,17,0,0,197,17,0,1,0.5,0.5,0,0,0

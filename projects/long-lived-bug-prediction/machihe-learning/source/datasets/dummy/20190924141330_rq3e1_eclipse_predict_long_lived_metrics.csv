@@ -1,0 +1,2 @@
+project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
+eclipse,short_description,100,nb,unbalanced,repeatedcv,ROC,365,6335,5846,489,2110,1948,162,102,1068,880,60,0.6296296296296297,0.4517453798767967,0.5406875047532131,0.5406875047532131,0.08717948717948718,0.6296296296296297,0.15315315315315314
