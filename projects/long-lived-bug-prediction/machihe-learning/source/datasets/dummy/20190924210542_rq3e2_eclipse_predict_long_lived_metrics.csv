@@ -1,6 +1,0 @@
-project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
-eclipse,short_description,100,nb,unbalanced,repeatedcv,Kappa,365,6335,5846,489,2110,1948,162,102,1068,880,60,0.6296296296296297,0.4517453798767967,0.5406875047532131,0.5406875047532131,0.08717948717948718,0.6296296296296297,0.15315315315315314
-eclipse,short_description,150,nb,unbalanced,repeatedcv,Kappa,365,6700,6183,517,2233,2061,172,106,1110,951,66,0.6162790697674418,0.46142649199417757,0.5388527808808097,0.5388527808808097,0.08717105263157894,0.6162790697674418,0.15273775216138327
-eclipse,short_description,200,nb,unbalanced,repeatedcv,Kappa,365,6898,6367,531,2299,2122,177,0,0,2122,177,0,1,0.5,0.5,0,0,0
-eclipse,short_description,250,nb,unbalanced,repeatedcv,Kappa,365,7032,6486,546,2343,2161,182,0,0,2161,182,0,1,0.5,0.5,0,0,0
-eclipse,short_description,300,nb,unbalanced,repeatedcv,Kappa,365,7101,6549,552,2366,2183,183,0,0,2183,183,0,1,0.5,0.5,0,0,0

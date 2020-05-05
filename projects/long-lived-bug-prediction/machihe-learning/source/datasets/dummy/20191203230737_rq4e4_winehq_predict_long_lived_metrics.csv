@@ -1,2 +1,0 @@
-project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
-winehq,long_description,100,nn,smote,repeatedcv,Accuracy,365,4527,2688,1839,1507,895,612,181,149,746,431,0.2957516339869281,0.8335195530726257,0.5646355935297769,0.5646355935297769,0.5484848484848485,0.2957516339869281,0.3842887473460722
