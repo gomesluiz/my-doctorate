@@ -23,9 +23,9 @@ IN_DEBUG_MODE  <- FALSE
 FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate", "projects")
 LIBDIR  <- file.path(BASEDIR, "lib", "R")
-PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction")
+PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction", "machine-learning")
 SRCDIR  <- file.path(PRJDIR, "R")
-DATADIR <- file.path(PRJDIR, "notebooks", "datasets")
+DATADIR <- file.path(PRJDIR, "source", "datasets")
 
 if (!require('caret')) install.packages("caret")
 if (!require('doParallel')) install.packages("doParallel")
@@ -34,7 +34,7 @@ if (!require("klaR")) install.packages("klaR") # naive bayes package.
 if (!require("kernlab")) install.packages("kernlab")
 if (!require("futile.logger")) install.packages("futile.logger")
 if (!require("nnet")) install.packages("nnet")
-if (!require("qdap")) install.packages("qdap")
+#if (!require("qdap")) install.packages("qdap")
 if (!require("randomForest")) install.packages("randomForest")
 if (!require("SnowballC")) install.packages("SnowballC")
 if (!require('smotefamily')) install.packages('smotefamily')
@@ -51,7 +51,7 @@ library(klaR)
 library(kernlab)
 library(futile.logger)
 library(nnet)
-library(qdap)
+#library(qdap)
 library(randomForest)
 library(SnowballC)
 library(tidyverse)
@@ -135,118 +135,136 @@ for (project.name in projects){
   reports <- reports[, c('bug_id', 'short_description', 'long_description' , 'bug_fix_time')]
   reports <- reports[complete.cases(reports), ]
   
-  flog.trace("Clean text features")
-  reports$short_description <- clean_text(reports$short_description)
-  reports$long_description  <- clean_text(reports$long_description)
- 
+  if (FALSE)
+  {
+    flog.trace("Clean text features")
+    reports$short_description <- clean_text(reports$short_description)
+    reports$long_description  <- clean_text(reports$long_description)
+  }
+  
   last.feature     <- "" 
   best.accuracy    <- 0
   best.sensitivity <- 0
   for (i in parameter.number:nrow(parameters)) {
     parameter = parameters[i, ]
     
-    flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Metric...: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
-             , parameter$n_term , parameter$classifier , parameter$metric.type, parameter$feature
-             , parameter$threshold , parameter$balancing , parameter$resampling)
-
-    if (parameter$feature != last.feature){
-      flog.trace("Converting dataframe to term matrix")
-      flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-      reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
-      flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
-      last.feature = parameter$feature
+    if (FALSE)
+    {
+      flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Metric...: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
+               , parameter$n_term , parameter$classifier , parameter$metric.type, parameter$feature
+               , parameter$threshold , parameter$balancing , parameter$resampling)
+  
+      if (parameter$feature != last.feature){
+        flog.trace("Converting dataframe to term matrix")
+        flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+        reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
+        flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+        last.feature = parameter$feature
+      }
+      
+      flog.trace("Partitioning dataset in training and testing")
+      set.seed(DEFAULT_SEED)
+      reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
+      in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
+      train.dataset <- reports.dataset[in_train, ]
+      test.dataset  <- reports.dataset[-in_train, ]
     }
     
-    flog.trace("Partitioning dataset in training and testing")
+    # save data to dnn 
     set.seed(DEFAULT_SEED)
-    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
-    in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
-    train.dataset <- reports.dataset[in_train, ]
-    test.dataset  <- reports.dataset[-in_train, ]
-     
-    flog.trace("Balancing training dataset")
-    balanced.dataset = balance_dataset(train.dataset, 
-                                       class_label, 
-                                       c("bug_id", "bug_fix_time"), 
-                                       parameter$balancing)
-    
-    X_train <- subset(balanced.dataset, select=-c(long_lived))
-    y_train <- balanced.dataset[, class_label]
-    
-    X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
-    y_test  <- test.dataset[, class_label]
-
-    flog.trace("Training model ")
-    fit_control <- get_resampling_method(parameter$resampling)
-    fit_model   <- train_with (.x=X_train, 
-                               .y=y_train, 
-                               .classifier=parameter$classifier,
-                               .control=fit_control,
-                               .metric=parameter$metric.type)
-    # saving model plot to file 
-    plot_file_name = sprintf("%s_rq3e3_%s_%s_%s_%s_%s_%s.jpg", timestamp, project.name
-                             , parameter$classifier, parameter$balancing, parameter$feature
-                             , parameter$n_term, parameter$metric.type)
-    plot_file_name_path = file.path(DATADIR, plot_file_name)
-    jpeg(plot_file_name_path)
-    print(plot(fit_model))
-    dev.off()
-    
-    flog.trace("Testing model ")
-    y_hat <- predict(object = fit_model, X_test)
-
-    flog.trace("Calculating evaluating metrics")
-    metrics <- calculate_metrics(y_hat, y_test)
-    
-    flog.trace("Evaluating metrics calculated!")
-    if (!is.na(metrics$balanced_acc)){
-      if (metrics$balanced_acc > best.accuracy){
-        test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
-        write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e3_%s_test_results_balanced_acc.csv", timestamp, project.name)))
-        best.accuracy = metrics$balanced_acc
+    reports$class <- as.factor(ifelse(reports$bug_fix_time <= parameter$threshold, 0, 1))
+    in_train      <- createDataPartition(reports$class, p = 0.75, list = FALSE)
+    train.data    <- reports[in_train, ]
+    test.data     <- reports[-in_train, ]
+    write.csv(train.data, file.path(DATADIR, sprintf("20190917_%s_bug_report_%d_train_data.csv", project.name, parameter$threshold)), row.names=F)
+    write.csv(test.data,  file.path(DATADIR, sprintf("20190917_%s_bug_report_%d_test_data.csv",  project.name, parameter$threshold)), row.names=F)
+    #
+    if (FALSE)
+    {
+      flog.trace("Balancing training dataset")
+      balanced.dataset = balance_dataset(train.dataset, 
+                                         class_label, 
+                                         c("bug_id", "bug_fix_time"), 
+                                         parameter$balancing)
+      
+      X_train <- subset(balanced.dataset, select=-c(long_lived))
+      y_train <- balanced.dataset[, class_label]
+      
+      X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
+      y_test  <- test.dataset[, class_label]
+  
+      flog.trace("Training model ")
+      fit_control <- get_resampling_method(parameter$resampling)
+      fit_model   <- train_with (.x=X_train, 
+                                 .y=y_train, 
+                                 .classifier=parameter$classifier,
+                                 .control=fit_control,
+                                 .metric=parameter$metric.type)
+      # saving model plot to file 
+      plot_file_name = sprintf("%s_rq3e3_%s_%s_%s_%s_%s_%s.jpg", timestamp, project.name
+                               , parameter$classifier, parameter$balancing, parameter$feature
+                               , parameter$n_term, parameter$metric.type)
+      plot_file_name_path = file.path(DATADIR, plot_file_name)
+      jpeg(plot_file_name_path)
+      print(plot(fit_model))
+      dev.off()
+      
+      flog.trace("Testing model ")
+      y_hat <- predict(object = fit_model, X_test)
+  
+      flog.trace("Calculating evaluating metrics")
+      metrics <- calculate_metrics(y_hat, y_test)
+      
+      flog.trace("Evaluating metrics calculated!")
+      if (!is.na(metrics$balanced_acc)){
+        if (metrics$balanced_acc > best.accuracy){
+          test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
+          write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e3_%s_test_results_balanced_acc.csv", timestamp, project.name)))
+          best.accuracy = metrics$balanced_acc
+        }
       }
-    }
-    
-    if (!is.na(metrics$sensitivity)){
-      if (metrics$sensitivity > best.sensitivity){
-        test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
-        write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e3_%s_test_results_sensitivity.csv", timestamp, project.name)))
-        best.sensitivity = metrics$sensitivity
+      
+      if (!is.na(metrics$sensitivity)){
+        if (metrics$sensitivity > best.sensitivity){
+          test.result = cbind(test.dataset[, c("bug_id", "bug_fix_time", "long_lived")], y_hat)
+          write_csv( test.result , file.path(DATADIR, sprintf("%s_rq3e3_%s_test_results_sensitivity.csv", timestamp, project.name)))
+          best.sensitivity = metrics$sensitivity
+        }
       }
+      flog.trace("Metrics: sensitivity [%f], specificity [%f], b_acc [%f]"
+                  , metrics$sensitivity, metrics$specificity, metrics$balanced_acc)
+      
+      metrics.record<-
+        data.frame(
+          project    = project.name,
+          feature    = parameter$feature,
+          n_term     = parameter$n_term,
+          classifier = parameter$classifier,
+          balancing  = parameter$balancing,
+          resampling = parameter$resampling,
+          metric     = parameter$metric.type,
+          threshold  = parameter$threshold,
+          train_size = nrow(X_train),
+          train_size_class_0 = length(subset(y_train, y_train == "N")),
+          train_size_class_1 = length(subset(y_train, y_train == "Y")),
+          test_size = nrow(X_test),
+          test_size_class_0 = length(subset(y_test, y_test == "N")),
+          test_size_class_1 = length(subset(y_test, y_test == "Y")),
+          tp = metrics$tp,
+          fp = metrics$fp,
+          tn = metrics$tn,
+          fn = metrics$fn,
+          sensitivity = metrics$sensitivity,
+          specificity = metrics$specificity,
+          balanced_acc = metrics$balanced_acc,
+          balanced_acc_manual = metrics$balanced_acc_manual,
+          precision = metrics$precision,
+          recall = metrics$recall,
+          fmeasure = metrics$fmeasure
+        )
+        flog.trace("Recording evaluation results on CSV file.")
+        insert_one_evaluation_data(metrics.file, metrics.record)
+        flog.trace("Evaluation results recorded on CSV file.")
     }
-    flog.trace("Metrics: sensitivity [%f], specificity [%f], b_acc [%f]"
-                , metrics$sensitivity, metrics$specificity, metrics$balanced_acc)
-    
-    metrics.record<-
-      data.frame(
-        project    = project.name,
-        feature    = parameter$feature,
-        n_term     = parameter$n_term,
-        classifier = parameter$classifier,
-        balancing  = parameter$balancing,
-        resampling = parameter$resampling,
-        metric     = parameter$metric.type,
-        threshold  = parameter$threshold,
-        train_size = nrow(X_train),
-        train_size_class_0 = length(subset(y_train, y_train == "N")),
-        train_size_class_1 = length(subset(y_train, y_train == "Y")),
-        test_size = nrow(X_test),
-        test_size_class_0 = length(subset(y_test, y_test == "N")),
-        test_size_class_1 = length(subset(y_test, y_test == "Y")),
-        tp = metrics$tp,
-        fp = metrics$fp,
-        tn = metrics$tn,
-        fn = metrics$fn,
-        sensitivity = metrics$sensitivity,
-        specificity = metrics$specificity,
-        balanced_acc = metrics$balanced_acc,
-        balanced_acc_manual = metrics$balanced_acc_manual,
-        precision = metrics$precision,
-        recall = metrics$recall,
-        fmeasure = metrics$fmeasure
-      )
-      flog.trace("Recording evaluation results on CSV file.")
-      insert_one_evaluation_data(metrics.file, metrics.record)
-      flog.trace("Evaluation results recorded on CSV file.")
   }
 }

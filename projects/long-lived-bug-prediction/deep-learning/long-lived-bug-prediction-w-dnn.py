@@ -38,13 +38,18 @@ logging.info('Setup completed')
 
 # constants
 DATAFILE = cwd + '/datasets/20190917_eclipse_bug_report_data.csv'
-FEATURES  = ['long_description', 'short_description']
+TRAIN = cwd + '/datasets/20190917_eclipse_bug_report_train_data.csv'
+TEST  = cwd + '/datasets/20190917_eclipse_bug_report_test_data.csv'
+
+#FEATURES  = ['long_description', 'short_description']
+FEATURES  = ['long_description']
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
 THRESHOLDS   = [8, 63, 108, 365]
-EPOCHS     = 200
-BATCH_SIZE = 1024
+EPOCHS        = 200
+BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
-METRICS = ['val_accuracy', 'val_auc']
+#METRICS = ['val_accuracy', 'val_auc']
+METRICS = ['val_accuracy']
 BALANCING = 'unbalanced'
 
 def tokenizer(text):
@@ -77,7 +82,7 @@ def clean_text(text):
     return text
 
 
-def read_reports(filename, feature, threshold):
+def read_reports(filename, feature):
     """Read a bug reports file.
 
     Parameters
@@ -86,10 +91,8 @@ def read_reports(filename, feature, threshold):
         A datafile name.
 
     """
-    data = pd.read_csv(filename, encoding='utf8', sep=',', parse_dates=True,
-                       low_memory=False)
-
-    data['class'] = data['bug_fix_time'].apply(lambda t: 1 if t > threshold else 0)
+    data = pd.read_csv(filename, encoding='utf8', sep=',', parse_dates=True, low_memory=False)
+    #data['class'] = data['bug_fix_time'].apply(lambda t: 1 if t > threshold else 0)
     data = data[[feature, 'class']]
     data = data.dropna()
     return data
@@ -127,6 +130,25 @@ def clean_reports(data, column):
     cleaned_data[column] = cleaned_data[column].str.replace('\d+', '')
 
     return cleaned_data
+
+
+def tokenize_reports(data, column, max_nb_term):
+    """Clean text data of bug reports.
+
+    Parameters
+    ----------
+    data: dataframe
+        A bug reports dataframe.
+
+    """
+    tokenizer = Tokenizer(num_words=max_nb_term, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True)
+    tokenizer.fit_on_texts(data[column].values)
+    X = tokenizer.texts_to_sequences(data[column].values)
+    X = pad_sequences(X, maxlen=max_nb_term)
+    y = pd.get_dummies(data['class']).values
+
+    return (X, y)
+
 
 def make_model(input_dim, output_dim, input_length, output_bias=None):
     """Build predicting model.
@@ -180,24 +202,32 @@ tf.autograph.experimental.do_not_convert(
     func=None
 )
 results = None
-keras_tokenizer = Tokenizer(num_words=MAX_NB_WORDS,
-                      filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~',
-                      lower=True)
+
 for feature in FEATURES:
     logging.info('Starting prediction using feature {}'.format(feature))
     for threshold in THRESHOLDS:
         logging.info('Threshold: {}'.format(threshold))
-        reports = read_reports(DATAFILE, feature, threshold)
-        logging.info('Bug reports file read')
-        neg, pos = np.bincount(reports['class'])
+       
+        TRAIN_FILE = cwd + '/datasets/20190917_eclipse_bug_report_{}_train_data.csv'.format(threshold)
+        train_data = read_reports(TRAIN_FILE, feature)
+        TEST_FILE  = cwd + '/datasets/20190917_eclipse_bug_report_{}_test_data.csv'.format(threshold)
+        test_data  = read_reports(TEST_FILE, feature)
+
+        logging.info('Bug reports train file read: {}'.format(TRAIN_FILE))
+        logging.info('Bug reports test file read: {}'.format(TEST_FILE))
+        neg, pos = np.bincount(train_data['class'])
         total = neg + pos
-        logging.info('Reports - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
-        reports = clean_reports(reports, feature)
+        logging.info('Reports in train - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
+        neg, pos = np.bincount(test_data['class'])
+        total = neg + pos
+        logging.info('Reports in test - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
+        train_data = clean_reports(train_data, feature)
+        test_data  = clean_reports(test_data, feature)
         logging.info('Bug reports {} cleaned.'.format(feature))
 
         for max_nb_term in MAX_NB_TERMS:
             for metric in METRICS:
-
+                logging.info('Metric: {}'.format(metric))
                 early_stopping = tf.keras.callbacks.EarlyStopping(
                     monitor=metric,
                     verbose=1,
@@ -206,51 +236,48 @@ for feature in FEATURES:
                     restore_best_weights=True
                 )
 
-                keras_tokenizer.fit_on_texts(reports['long_description'].values)
-                word_index = keras_tokenizer.index_word
-                X = keras_tokenizer.texts_to_sequences(reports['long_description'].values)
-                X = pad_sequences(X, maxlen=max_nb_term)
-                Y = pd.get_dummies(reports['class']).values
-        
-                logging.info('Metric: {}'.format(metric))
+                X_train, y_train = tokenize_reports(train_data, feature, max_nb_term)
                 logging.info('Data tokenized using {} terms'.format(max_nb_term))
-                logging.info('Shape of data tensor : {}'.format(X.shape))
-                logging.info('Shape of label tensor: {}'.format(Y.shape))
-                logging.info('Data pre-processed')
-                
+                logging.info('Shape of train data tensor : {}'.format(X_train.shape))
+                logging.info('Shape of train label tensor: {}'.format(y_train.shape))
+
+                X_test, y_test = tokenize_reports(test_data, feature, max_nb_term)
+                logging.info('Shape of test data tensor : {}'.format(X_test.shape))
+                logging.info('Shape of test label tensor: {}'.format(y_test.shape))
+
+                X_train, X_val, y_train, y_val = train_test_split(X_train, y_train
+                    , test_size=0.2, random_state=42)    
                 logging.info('Spliting data started')
             
-                X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,random_state=42)
-                X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train,test_size=0.2,random_state=42)
-            
+                
                 #if BALANCING == 'smote':
                 #    X_train, Y_train = sm.fit_sample(X_train, Y_train)
 
             
-                logging.info('Training shape    : {} {}'.format(X_train.shape, Y_train.shape))
-                logging.info('Validation shape  : {} {}'.format(X_val.shape, Y_val.shape))
-                logging.info('Test shape        : {} {}'.format(X_test.shape, Y_test.shape))
+                logging.info('Training shape    : {} {}'.format(X_train.shape, y_train.shape))
+                logging.info('Validation shape  : {} {}'.format(X_val.shape, y_val.shape))
+                logging.info('Test shape        : {} {}'.format(X_test.shape, y_test.shape))
                 logging.info('Spliting data concluded')
         
-                model   = make_model(input_dim=X.shape[1], output_dim=X.shape[1], input_length=X.shape[1])
+                model   = make_model(input_dim=X_train.shape[1], output_dim=X_train.shape[1], input_length=X_train.shape[1])
                 model.layers[-1].bias.assign([0.0, 0.0])
                 history = model.fit(
                     X_train,
-                    Y_train,
+                    y_train,
                     batch_size=BATCH_SIZE,
                     epochs=EPOCHS,
-                    validation_data=(X_val, Y_val),
+                    validation_data=(X_val, y_val),
                     callbacks=[early_stopping],
                     verbose=1
                 )
                 logging.info('Model built.')
                 train_predictions_baseline = model.predict_classes(X_train, batch_size=BATCH_SIZE)
                 test_predictions_baseline  = model.predict_classes(X_test, batch_size=BATCH_SIZE)
-                baseline_results = model.evaluate(X_test, Y_test, batch_size=BATCH_SIZE, verbose=0)
+                baseline_results = model.evaluate(X_test, y_test, batch_size=BATCH_SIZE, verbose=0)
                 for name, value in zip(model.metrics_names, baseline_results):
                     logging.info('{}:{}'.format(name, value))
 
-                cm = confusion_matrix(Y_test.argmax(axis=1), test_predictions_baseline > 0.5)
+                cm = confusion_matrix(y_test.argmax(axis=1), test_predictions_baseline > 0.5)
                 balanced_accuracy=((cm[1][1]/(cm[1][1]+cm[1][0])) + (cm[0][0]/(cm[0][0]+cm[0][1])))/2
                 logging.info('balanced accuracy : {}'.format(balanced_accuracy))
 
@@ -288,15 +315,15 @@ for feature in FEATURES:
                     'metric'     : metric,
                     'threshold'  : threshold,
                     'terms' : max_nb_term,
-                    'train_size' : Y_train.shape[0],
-                    'train_size_class_0': np.sum(Y_train.argmax(axis=1) == 0),
-                    'train_size_class_1': np.sum(Y_train.argmax(axis=1) == 1),
-                    'val_size': Y_val.shape[0],
-                    'val_size_class_0': np.sum(Y_val.argmax(axis=1) == 0),
-                    'val_size_class_1': np.sum(Y_val.argmax(axis=1) == 1),
-                    'test_size': Y_test.shape[0],
-                    'test_size_class_0': np.sum(Y_test.argmax(axis=1) == 0),
-                    'test_size_class_1': np.sum(Y_test.argmax(axis=1) == 1),
+                    'train_size' : y_train.shape[0],
+                    'train_size_class_0': np.sum(y_train.argmax(axis=1) == 0),
+                    'train_size_class_1': np.sum(y_train.argmax(axis=1) == 1),
+                    'val_size': y_val.shape[0],
+                    'val_size_class_0': np.sum(y_val.argmax(axis=1) == 0),
+                    'val_size_class_1': np.sum(y_val.argmax(axis=1) == 1),
+                    'test_size': y_test.shape[0],
+                    'test_size_class_0': np.sum(y_test.argmax(axis=1) == 0),
+                    'test_size_class_1': np.sum(y_test.argmax(axis=1) == 1),
                     'loss': loss,
                     'tp': tp,
                     'fp': fp,
