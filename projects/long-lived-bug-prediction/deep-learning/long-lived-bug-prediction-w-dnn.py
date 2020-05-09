@@ -47,7 +47,7 @@ TEST  = cwd + '/datasets/20190917_eclipse_bug_report_test_data.csv'
 FEATURES  = ['long_description']
 MAX_NB_TERMS = [100, 150, 200, 250, 300]
 THRESHOLDS   = [8, 63, 108, 365]
-EPOCHS        = 200
+EPOCHS        = 2
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 #METRICS = ['val_accuracy', 'val_auc']
@@ -251,19 +251,30 @@ for feature in FEATURES:
                 X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)    
                 logging.info('Spliting data started')
             
-                
                 X_train, y_train = sm.fit_resample(X_train, y_train)
                 
-                y_train = pd.get_dummies(y_train)
-                y_val   = pd.get_dummies(y_val)
-                y_test  = pd.get_dummies(y_test)
-               
-                logging.info('Training shape    : {} {}'.format(X_train.shape, y_train.shape))
-                logging.info('Validation shape  : {} {}'.format(X_val.shape, y_val.shape))
-                logging.info('Test shape        : {} {}'.format(X_test.shape, y_test.shape))
+                y_train = pd.get_dummies(y_train).values
+                y_val   = pd.get_dummies(y_val).values
+                y_test  = pd.get_dummies(y_test).values
+                logging.info('Training shape    : X={} y={}'.format(X_train.shape, y_train.shape))
+                logging.info('Training shape    : Class 0={} Class 1={}'.format(
+                        np.sum(y_train.argmax(axis=1) == 0), 
+                        np.sum(y_train.argmax(axis=1) == 1)
+                    )
+                )              
+                logging.info('Validation shape  : X={} y={}'.format(X_val.shape, y_val.shape))
+                logging.info('Validation shape  : Class 0={} Class 1={}'.format(
+                        np.sum(y_val.argmax(axis=1) == 0), 
+                        np.sum(y_val.argmax(axis=1) == 1)
+                    )
+                )
+                logging.info('Test shape    : X={} y={}'.format(X_test.shape, y_test.shape))
+                logging.info('Test shape    : Class 0={} Class 1={}'.format(
+                        np.sum(y_test.argmax(axis=1) == 0), 
+                        np.sum(y_test.argmax(axis=1) == 1)
+                    )
+                )
                 logging.info('Spliting data concluded')
-                print("Resampled dataset shape %s" % Counter(y_train))
-                
                 
                 model   = make_model(input_dim=X_train.shape[1], output_dim=X_train.shape[1], input_length=X_train.shape[1])
                 model.layers[-1].bias.assign([0.0, 0.0])
