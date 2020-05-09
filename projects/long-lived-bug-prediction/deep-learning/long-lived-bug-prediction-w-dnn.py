@@ -22,6 +22,7 @@ from tensorflow import keras
 
 from imblearn.over_sampling import SMOTE
 
+from collections import Counter
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 mpl.rcParams['figure.figsize'] = (12, 10)
@@ -31,9 +32,10 @@ COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 cwd = os.getcwd()
 today = datetime.now()
 today = today.strftime("%Y%m%d%H%M%S")
-sm = SMOTE(random_state=42)
+sm = SMOTE(sampling_strategy='minority', random_state=42)
 
-logging.basicConfig(filename=cwd + '/results/{}-long-lived-bug-prediction-w-dnn.log'.format(today), filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+#logging.basicConfig(filename=cwd + '/results/{}-long-lived-bug-prediction-w-dnn.log'.format(today), filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 # constants
@@ -145,7 +147,8 @@ def tokenize_reports(data, column, max_nb_term):
     tokenizer.fit_on_texts(data[column].values)
     X = tokenizer.texts_to_sequences(data[column].values)
     X = pad_sequences(X, maxlen=max_nb_term)
-    y = pd.get_dummies(data['class']).values
+    #y = pd.get_dummies(data['class']).values
+    y = data['class']
 
     return (X, y)
 
@@ -245,20 +248,23 @@ for feature in FEATURES:
                 logging.info('Shape of test data tensor : {}'.format(X_test.shape))
                 logging.info('Shape of test label tensor: {}'.format(y_test.shape))
 
-                X_train, X_val, y_train, y_val = train_test_split(X_train, y_train
-                    , test_size=0.2, random_state=42)    
+                X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)    
                 logging.info('Spliting data started')
             
                 
-                #if BALANCING == 'smote':
-                #    X_train, Y_train = sm.fit_sample(X_train, Y_train)
-
-            
+                X_train, y_train = sm.fit_resample(X_train, y_train)
+                
+                y_train = pd.get_dummies(y_train)
+                y_val   = pd.get_dummies(y_val)
+                y_test  = pd.get_dummies(y_test)
+               
                 logging.info('Training shape    : {} {}'.format(X_train.shape, y_train.shape))
                 logging.info('Validation shape  : {} {}'.format(X_val.shape, y_val.shape))
                 logging.info('Test shape        : {} {}'.format(X_test.shape, y_test.shape))
                 logging.info('Spliting data concluded')
-        
+                print("Resampled dataset shape %s" % Counter(y_train))
+                
+                
                 model   = make_model(input_dim=X_train.shape[1], output_dim=X_train.shape[1], input_length=X_train.shape[1])
                 model.layers[-1].bias.assign([0.0, 0.0])
                 history = model.fit(
