@@ -32,7 +32,7 @@ COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
 cwd = os.getcwd()
 today = datetime.now()
 today = today.strftime("%Y%m%d%H%M%S")
-sm = SMOTE(sampling_strategy='minority', random_state=42)
+sm = SMOTE(sampling_strategy='auto', k_neighbors=3, random_state=42)
 
 logging.basicConfig(filename=cwd + '/results/{}-long-lived-bug-prediction-w-dnn.log'.format(today), filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 #logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
@@ -50,9 +50,8 @@ THRESHOLDS   = [8, 63, 108, 365]
 EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
-#METRICS = ['val_accuracy', 'val_auc']
 METRICS = ['val_accuracy']
-BALANCING = 'unbalanced'
+BALANCING = 'smote'
 
 def tokenizer(text):
     words = nltk.word_tokenize(text)
@@ -221,6 +220,7 @@ for feature in FEATURES:
         neg, pos = np.bincount(train_data['class'])
         total = neg + pos
         logging.info('Reports in train - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
+        logging.info('Reports in train - Total: {} Negative: {} ({:.2f}% of total)'.format(total, neg, 100 * neg / total))
         neg, pos = np.bincount(test_data['class'])
         total = neg + pos
         logging.info('Reports in test - Total: {} Positive: {} ({:.2f}% of total)'.format(total, pos, 100 * pos / total))
@@ -250,12 +250,21 @@ for feature in FEATURES:
 
                 X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)    
                 logging.info('Spliting data started')
-            
-                X_train, y_train = sm.fit_resample(X_train, y_train)
+                logging.info('BEFORE SMOTE:')
+                logging.info('Training shape    : X={} y={}'.format(X_train.shape, y_train.shape))
+                logging.info('Training shape    : Class 0={} Class 1={}'.format(
+                        np.sum(y_train == 0), 
+                        np.sum(y_train == 1)
+                    )
+                )              
                 
+
+                X_train, y_train = sm.fit_resample(X_train, y_train)
                 y_train = pd.get_dummies(y_train).values
                 y_val   = pd.get_dummies(y_val).values
                 y_test  = pd.get_dummies(y_test).values
+
+                logging.info('AFTER SMOTE:')
                 logging.info('Training shape    : X={} y={}'.format(X_train.shape, y_train.shape))
                 logging.info('Training shape    : Class 0={} Class 1={}'.format(
                         np.sum(y_train.argmax(axis=1) == 0), 
