@@ -1,0 +1,17 @@
+2020-05-15 01:21:43,188:: INFO - Setup completed
+2020-05-15 01:21:43,189:: INFO - Starting prediction
+2020-05-15 01:21:43,189:: INFO - Feature  : long_description
+2020-05-15 01:21:43,189:: INFO - Threshold: 8
+2020-05-15 01:21:43,189:: INFO - Terms    : 100
+2020-05-15 01:21:43,189:: INFO - Metric   : val_accuracy
+2020-05-15 01:21:43,357:: INFO - Bug reports train file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_train_data.csv
+2020-05-15 01:21:43,357:: INFO - Bug reports test file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_test_data.csv
+2020-05-15 01:21:43,357:: INFO - Reports in train - Total: 7334 Positive: 3659 (49.89% of total)
+2020-05-15 01:21:43,357:: INFO - Reports in train - Total: 7334 Negative: 3675 (50.11% of total)
+2020-05-15 01:21:43,357:: INFO - Reports in test - Total: 2444 Positive: 1219 (49.88% of total)
+2020-05-15 01:21:46,726:: INFO - Bug reports long_description cleaned.
+2020-05-15 01:21:47,872:: INFO - Data tokenized using 100 terms
+2020-05-15 01:21:47,872:: INFO - Shape of train data tensor : (7334, 100)
+2020-05-15 01:21:47,872:: INFO - Shape of train label tensor: (7334,)
+2020-05-15 01:21:48,205:: INFO - Shape of test data tensor : (2444, 100)
+2020-05-15 01:21:48,205:: INFO - Shape of test label tensor: (2444,)

@@ -39,9 +39,11 @@ RUN pip install --upgrade pip && \
 RUN addgroup --gid $GROUP_ID lgomes 
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID lgomes
 
-WORKDIR /home/lgomes/experiments
-COPY long-lived-bug-prediction-w-dnn.py /home/lgomes/experiments/
-COPY datasets/*.csv /home/lgomes/experiments/datasets/
+WORKDIR /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning
+RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/
+RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/src/modeling/
+COPY long-lived-bug-prediction-w-dnn.py /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/src/modeling/
+COPY data/raw/*.csv /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/
 
 RUN chown $USER_ID:$GROUP_ID -R /home/lgomes/
 USER lgomes
