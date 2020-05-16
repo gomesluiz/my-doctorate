@@ -298,8 +298,6 @@ for parameter in parameters:
         np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_val_fold_{}_{}_{}.csv'.format(
             threshold, max_nb_term, fold), np.concatenate((X_val, y_val), axis=1), delimiter=',')
         
-        exit()
-
         logging.info('Builing model for Fold# {} started'.format(fold))
         model   = make_model(input_dim=X_train.shape[1]
             , output_dim=X_train.shape[1]
