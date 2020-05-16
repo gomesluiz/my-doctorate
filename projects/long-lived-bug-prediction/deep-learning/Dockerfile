@@ -43,7 +43,7 @@ WORKDIR /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep
 RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/
 RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/src/modeling/
 COPY src/modeling/long-lived-bug-prediction-w-dnn.py /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/src/modeling/
-COPY data/raw/*.csv /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw:/
+COPY data/raw/*.csv /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/
 
 RUN chown $USER_ID:$GROUP_ID -R /home/lgomes/
 USER lgomes
