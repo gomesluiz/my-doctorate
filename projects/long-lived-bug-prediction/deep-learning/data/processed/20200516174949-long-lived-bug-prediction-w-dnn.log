@@ -1,0 +1,28 @@
+2020-05-16 17:49:49,981:: INFO - Setup completed
+2020-05-16 17:49:49,981:: INFO - >> Starting prediction
+2020-05-16 17:49:49,981:: INFO - Dataset       : eclipse
+2020-05-16 17:49:49,981:: INFO - Feature       : long_description
+2020-05-16 17:49:49,981:: INFO - Classifier    : lstm+emb
+2020-05-16 17:49:49,981:: INFO - Balancing     : smote
+2020-05-16 17:49:49,981:: INFO - Resampling    : repeated_cv_5x2
+2020-05-16 17:49:49,981:: INFO - Metric        : val_accuracy
+2020-05-16 17:49:49,982:: INFO - Threshold     : 8
+2020-05-16 17:49:49,982:: INFO - Terms         : 100
+2020-05-16 17:49:50,241:: INFO - Bug reports train file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_train_data.csv
+2020-05-16 17:49:50,242:: INFO - Bug reports test file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_test_data.csv
+2020-05-16 17:49:50,242:: INFO - Reports in train - Total: 7334 Positive: 3659 (49.89% of total)
+2020-05-16 17:49:50,242:: INFO - Reports in train - Total: 7334 Negative: 3675 (50.11% of total)
+2020-05-16 17:49:50,242:: INFO - Reports in test - Total: 2444 Positive: 1219 (49.88% of total)
+2020-05-16 17:49:53,951:: INFO - Bug reports long_description cleaned.
+2020-05-16 17:49:53,952:: INFO - Balancing data started
+2020-05-16 17:49:55,359:: INFO - BEFORE SMOTE:
+2020-05-16 17:49:55,359:: INFO - Reports shape    : data (7334, 100) label (7334, 2)
+2020-05-16 17:49:55,360:: INFO - Reports class distribution : 0 (3675) 1 (3659)
+2020-05-16 17:49:59,598:: INFO - AFTER SMOTE:
+2020-05-16 17:49:59,598:: INFO - Reports shape    : data (7350, 100) label (7350, 2)
+2020-05-16 17:49:59,599:: INFO - Reports class distribution : 0 (3675) 1 (3675)
+2020-05-16 17:50:00,090:: INFO - Shape of test data tensor : (2444, 100)
+2020-05-16 17:50:00,090:: INFO - Shape of test label tensor: (2444, 2)
+2020-05-16 17:50:00,090:: INFO - Class distribution in test label tensor: 1225(0) 1219(1)
+2020-05-16 17:50:00,090:: INFO - Balancing data finished
+2020-05-16 17:50:00,090:: INFO - Trainning with k-folding started

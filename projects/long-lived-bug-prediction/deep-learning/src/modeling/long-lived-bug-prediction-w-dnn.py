@@ -11,8 +11,9 @@ from nltk.corpus import stopwords
 import numpy as np
 import pandas as pd
 
+from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import RepeatedKFold
+from sklearn.model_selection import RepeatedStratifiedKFold
 
 from sklearn.metrics import confusion_matrix
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -26,8 +27,6 @@ from imblearn.over_sampling import SMOTE
 
 from collections import Counter
 
-
-
 # environment
 path = os.getcwd()
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -37,14 +36,17 @@ RAW_DATA_DIR = ROOT_DIR + '/data/raw'
 PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
+DATASETS  = ['eclipse']
 FEATURES  = ['long_description']
-MAX_NB_TERMS  = [100, 150, 200, 250, 300]
+CLASSIFIERS = ['lstm+emb']
+BALANCINGS = ['smote']
+RESAMPLINGS = ['repeated_cv_5x2']
+METRICS = ['val_accuracy']
 THRESHOLDS    = [8, 63, 108, 365]
-EPOCHS        = 2
+MAX_NB_TERMS  = [100, 150, 200, 250, 300]
+EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
-METRICS = ['val_accuracy']
-BALANCING = 'smote'
 
 today = datetime.now()
 today = today.strftime("%Y%m%d%H%M%S")
@@ -52,12 +54,12 @@ today = today.strftime("%Y%m%d%H%M%S")
 nltk.download('stopwords')
 nltk.download('punkt')
 
-kf = RepeatedKFold(n_splits=5, n_repeats=2, random_state=42)
+kf = RepeatedStratifiedKFold(n_splits=5, n_repeats=2, random_state=42)
 sm = SMOTE(sampling_strategy='auto', k_neighbors=3, random_state=42)
 
-logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
-    , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
-#logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+#logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
+#    , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 
@@ -148,8 +150,7 @@ def tokenize_reports(data, column, max_nb_term):
     tokenizer.fit_on_texts(data[column].values)
     X = tokenizer.texts_to_sequences(data[column].values)
     X = pad_sequences(X, maxlen=max_nb_term)
-    y = data['class']
-
+    y = pd.get_dummies(data['class']).values
     return (X, y)
 
 
@@ -187,7 +188,7 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
             keras.layers.Embedding(input_dim=MAX_NB_WORDS, output_dim=EMBEDDING_DIM, input_length=input_length),
             keras.layers.SpatialDropout1D(0.2),
             keras.layers.LSTM(EMBEDDING_DIM, dropout=0.2, recurrent_dropout=0.2),
-            keras.layers.Dense(2, activation='sigmoid')
+            keras.layers.Dense(2, activation='softmax')
         ]
      )
 
@@ -199,26 +200,34 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
 
     return model
 
-
 results = None
-fold = 0
-for parameter in itertools.product(FEATURES, THRESHOLDS, MAX_NB_TERMS, METRICS):
-    fold += 1
-    feature = parameter[0]
-    threshold = parameter[1]
-    max_nb_term = parameter[2]
-    metric = parameter[3]
+parameters = itertools.product(DATASETS, FEATURES, CLASSIFIERS, 
+    BALANCINGS, RESAMPLINGS, METRICS, 
+    THRESHOLDS, MAX_NB_TERMS) 
 
-    logging.info('Starting prediction')
-    logging.info('Fold# {}'.format(fold))
-    logging.info('Feature  : {}'.format(feature))
-    logging.info('Threshold: {}'.format(threshold))
-    logging.info('Terms    : {}'.format(max_nb_term))
-    logging.info('Metric   : {}'.format(metric))
+for parameter in parameters:
+    dataset = parameter[0]
+    feature = parameter[1]
+    classifier = parameter[2]
+    balancing =  parameter[3]
+    resampling =  parameter[4]
+    metric = parameter[5]
+    threshold = parameter[6]
+    max_nb_term = parameter[7]
+   
+    logging.info('>> Starting prediction')
+    logging.info('Dataset       : {}'.format(dataset))
+    logging.info('Feature       : {}'.format(feature))
+    logging.info('Classifier    : {}'.format(classifier))
+    logging.info('Balancing     : {}'.format(balancing))
+    logging.info('Resampling    : {}'.format(resampling))
+    logging.info('Metric        : {}'.format(metric))
+    logging.info('Threshold     : {}'.format(threshold))
+    logging.info('Terms         : {}'.format(max_nb_term))
     
-    TRAIN_FILE = RAW_DATA_DIR + '/20190917_eclipse_bug_report_{}_train_data.csv'.format(threshold)
+    TRAIN_FILE = RAW_DATA_DIR + '/20190917_{}_bug_report_{}_train_data.csv'.format(dataset, threshold)
     train_data = read_reports(TRAIN_FILE, feature)
-    TEST_FILE  = RAW_DATA_DIR + '/20190917_eclipse_bug_report_{}_test_data.csv'.format(threshold)
+    TEST_FILE  = RAW_DATA_DIR + '/20190917_{}_bug_report_{}_test_data.csv'.format(dataset, threshold)
     test_data  = read_reports(TEST_FILE, feature)
 
     logging.info('Bug reports train file read: {}'.format(TRAIN_FILE))
@@ -242,77 +251,88 @@ for parameter in itertools.product(FEATURES, THRESHOLDS, MAX_NB_TERMS, METRICS):
         restore_best_weights=True
     )
 
+    logging.info('Balancing data started')
     X_main, y_main = tokenize_reports(train_data, feature, max_nb_term)
-    logging.info('Data tokenized using {} terms'.format(max_nb_term))
-    logging.info('Shape of train data tensor : {}'.format(X_main.shape))
-    logging.info('Shape of train label tensor: {}'.format(y_main.shape))
-
+    logging.info('BEFORE SMOTE:')
+    logging.info('Reports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
+    logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
+            np.sum(y_main.argmax(axis=1) == 0), 
+            np.sum(y_main.argmax(axis=1) == 1)
+        )
+    )     
+    
+    X_main, y_main = sm.fit_resample(X_main, y_main.argmax(axis=1))
+    y_main = pd.get_dummies(y_main).values
+    logging.info('AFTER SMOTE:')
+    logging.info('Reports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
+    logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
+            np.sum(y_main.argmax(axis=1) == 0), 
+            np.sum(y_main.argmax(axis=1) == 1)
+        )
+    )
+    
     X_test, y_test = tokenize_reports(test_data, feature, max_nb_term)
     logging.info('Shape of test data tensor : {}'.format(X_test.shape))
     logging.info('Shape of test label tensor: {}'.format(y_test.shape))
+    logging.info('Class distribution in test label tensor: {}(0) {}(1)'.format(
+        np.sum(y_test.argmax(axis=1) == 0), 
+        np.sum(y_test.argmax(axis=1) == 1)
+        )
+    )
+    logging.info('Balancing data finished')
 
-    for train, val in kf.split(X_main):
-        #X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.1, random_state=42)    
-        X_train = X_main[train]
-        y_train = y_main[train]
-        X_val   = X_main[val]
-        y_val   = y_main[val]
-        logging.info('Spliting data started')
-        logging.info('BEFORE SMOTE:')
-        logging.info('Training shape    : X={} y={}'.format(X_train.shape, y_train.shape))
-        logging.info('Training shape    : Class 0={} Class 1={}'.format(
-                np.sum(y_train == 0), 
-                np.sum(y_train == 1)
-            )
-        )              
-        
-        X_train, y_train = sm.fit_resample(X_train, y_train)
-        y_train = pd.get_dummies(y_train).values
-        y_val   = pd.get_dummies(y_val).values
-        #y_test  = pd.get_dummies(y_test).values
+    logging.info('Trainning with k-folding started')
+    fold     = 0
+    oos_y    = []
+    oos_pred = []
+    best_accuracy = 0
+    for train_index, val_index in kf.split(X_main, y_main.argmax(axis=1)):
+        fold += 1
+        X_train = X_main[train_index]
+        y_train = y_main[train_index]
+        X_val   = X_main[val_index]
+        y_val   = y_main[val_index]
 
-        if (False):
-            logging.info('AFTER SMOTE:')
-            logging.info('Training shape    : X={} y={}'.format(X_train.shape, y_train.shape))
-            logging.info('Training shape    : Class 0={} Class 1={}'.format(
-                    np.sum(y_train.argmax(axis=1) == 0), 
-                    np.sum(y_train.argmax(axis=1) == 1)
-                )
-            )              
-            logging.info('Validation shape  : X={} y={}'.format(X_val.shape, y_val.shape))
-            logging.info('Validation shape  : Class 0={} Class 1={}'.format(
-                    np.sum(y_val.argmax(axis=1) == 0), 
-                    np.sum(y_val.argmax(axis=1) == 1)
-                )
-            )
+        np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_train_fold_{}_{}_{}.csv'.format(
+            threshold, max_nb_term, fold), np.concatenate((X_train, y_train), axis=1), delimiter=',')
+        np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_val_fold_{}_{}_{}.csv'.format(
+            threshold, max_nb_term, fold), np.concatenate((X_val, y_val), axis=1), delimiter=',')
         
-            logging.info('Test shape    : X={} y={}'.format(X_test.shape, y_test.shape))
-            logging.info('Test shape    : Class 0={} Class 1={}'.format(
-                np.sum(y_test.argmax(axis=1) == 0), 
-                np.sum(y_test.argmax(axis=1) == 1)
-                )
-            )
+        exit()
 
-        logging.info('Spliting data concluded')
-        
-        model   = make_model(input_dim=X_train.shape[1], output_dim=X_train.shape[1], input_length=X_train.shape[1])
-        model.layers[-1].bias.assign([0.0, 0.0])
+        logging.info('Builing model for Fold# {} started'.format(fold))
+        model   = make_model(input_dim=X_train.shape[1]
+            , output_dim=X_train.shape[1]
+            , input_length=X_train.shape[1])
+
+        #model.layers[-1].bias.assign([0.0, 0.0])
+       
         history = model.fit(
             X_train,
             y_train,
             validation_data=(X_val, y_val),
             verbose=1,
-            epochs=EPOCHS
-            # batch_size=BATCH_SIZE,    
-            # callbacks=[early_stopping],
+            epochs=EPOCHS,
+            batch_size=BATCH_SIZE,    
+            callbacks=[early_stopping]
         )
-        logging.info('Model built.')
-        #train_predictions_baseline = model.predict_classes(X_train, batch_size=BATCH_SIZE)
-        train_predictions_baseline = model.predict_classes(X_train)
+        logging.info('Builing model for Fold# {} finished'.format(fold))
 
-    test_predictions_baseline  = model.predict_classes(X_test, batch_size=BATCH_SIZE)
-    baseline_results = model.evaluate(X_test, y_test, batch_size=BATCH_SIZE, verbose=0)
-    for name, value in zip(model.metrics_names, baseline_results):
+        pred = model.predict_classes(X_val)
+        oos_y.append(y_val)
+        oos_pred.append(pred)  
+
+        fold_accuracy = metrics.accuracy_score(y_val.argmax(axis=1), pred)
+        logging.info(f"Fold {fold} score (accuracy): {fold_accuracy}")
+        if (fold_accuracy > best_accuracy):
+            best_accuracy = fold_accuracy
+            best_model    = model
+
+        
+    logging.info(f"Best fold score (accuracy): {best_accuracy}")
+    test_predictions_baseline  = best_model.predict_classes(X_test, batch_size=BATCH_SIZE)
+    baseline_results = best_model.evaluate(X_test, y_test, batch_size=BATCH_SIZE, verbose=0)
+    for name, value in zip(best_model.metrics_names, baseline_results):
         logging.info('{}:{}'.format(name, value))
 
     cm = confusion_matrix(y_test.argmax(axis=1), test_predictions_baseline > 0.5)
@@ -345,10 +365,10 @@ for parameter in itertools.product(FEATURES, THRESHOLDS, MAX_NB_TERMS, METRICS):
     auc = baseline_results[8]
 
     result = {
-        'project'    : 'eclipse',
+        'project'    : dataset,
         'feature'    : feature,
-        'classifier' : 'lstm+emb',
-        'balancing'  : BALANCING,
+        'classifier' : classifier,
+        'balancing'  : balancing,
         'resampling' : '-',
         'metric'     : metric,
         'threshold'  : threshold,
@@ -376,9 +396,9 @@ for parameter in itertools.product(FEATURES, THRESHOLDS, MAX_NB_TERMS, METRICS):
         'balanced_acc': balanced_accuracy,
         'fmeasure': fmeasure,
         'epochs': EPOCHS
-
     }
     results = results.append(result, ignore_index=True)
 
 logging.info('Metricas recorded')
-results.to_csv(cwd+'/results/{}-long-lived-bug-prediction-w-dnn-results.csv'.format(today), index_label='#')
+results.to_csv(PROCESSED_DATA_DIR+'/{}-long-lived-bug-prediction-w-dnn-results.csv'.format(today), index_label='#')
+logging.info('>> Pridicting finished')
