@@ -1,0 +1,10 @@
+2020-05-17 12:03:06,450:: INFO - Setup completed
+2020-05-17 12:03:06,450:: INFO - >> Starting prediction
+2020-05-17 12:03:06,450:: INFO - Dataset       : gcc
+2020-05-17 12:03:06,450:: INFO - Feature       : long_description
+2020-05-17 12:03:06,450:: INFO - Classifier    : lstm+emb
+2020-05-17 12:03:06,450:: INFO - Balancing     : smote
+2020-05-17 12:03:06,450:: INFO - Resampling    : repeated_cv_5x2
+2020-05-17 12:03:06,450:: INFO - Metric        : val_accuracy
+2020-05-17 12:03:06,451:: INFO - Threshold     : 365
+2020-05-17 12:03:06,451:: INFO - Terms         : 100

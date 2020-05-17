@@ -1,0 +1,47 @@
+2020-05-17 11:57:01,909:: INFO - Setup completed
+2020-05-17 11:57:01,909:: INFO - >> Starting prediction
+2020-05-17 11:57:01,909:: INFO - Dataset       : eclipse
+2020-05-17 11:57:01,909:: INFO - Feature       : long_description
+2020-05-17 11:57:01,909:: INFO - Classifier    : lstm+emb
+2020-05-17 11:57:01,909:: INFO - Balancing     : smote
+2020-05-17 11:57:01,909:: INFO - Resampling    : repeated_cv_5x2
+2020-05-17 11:57:01,909:: INFO - Metric        : val_accuracy
+2020-05-17 11:57:01,909:: INFO - Threshold     : 8
+2020-05-17 11:57:01,909:: INFO - Terms         : 100
+2020-05-17 11:57:01,992:: INFO - Bug reports train file read: /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_train_data.csv
+2020-05-17 11:57:01,993:: INFO - Bug reports test file read: /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_eclipse_bug_report_8_test_data.csv
+2020-05-17 11:57:01,993:: INFO - Reports in train - Total: 7334 Positive: 3659 (49.89% of total)
+2020-05-17 11:57:01,993:: INFO - Reports in train - Total: 7334 Negative: 3675 (50.11% of total)
+2020-05-17 11:57:01,993:: INFO - Reports in test - Total: 2444 Positive: 1219 (49.88% of total)
+2020-05-17 11:57:03,725:: INFO - Bug reports long_description cleaned.
+2020-05-17 11:57:03,725:: INFO - Balancing data started
+2020-05-17 11:57:04,425:: INFO - BEFORE SMOTE:
+2020-05-17 11:57:04,425:: INFO - Reports shape    : data (7334, 100) label (7334, 2)
+2020-05-17 11:57:04,425:: INFO - Reports class distribution : 0 (3675) 1 (3659)
+2020-05-17 11:57:05,823:: INFO - AFTER SMOTE:
+2020-05-17 11:57:05,823:: INFO - Reports shape    : data (7350, 100) label (7350, 2)
+2020-05-17 11:57:05,824:: INFO - Reports class distribution : 0 (3675) 1 (3675)
+2020-05-17 11:57:06,024:: INFO - Shape of test data tensor : (2444, 100)
+2020-05-17 11:57:06,024:: INFO - Shape of test label tensor: (2444, 2)
+2020-05-17 11:57:06,024:: INFO - Class distribution in test label tensor: 1225(0) 1219(1)
+2020-05-17 11:57:06,024:: INFO - Balancing data finished
+2020-05-17 11:57:06,024:: INFO - Trainning with k-folding started
+2020-05-17 11:57:06,365:: INFO - Builing model for Fold# 1 started
+2020-05-17 11:57:40,130:: INFO - Builing model for Fold# 1 finished
+2020-05-17 11:57:40,130:: WARNING - From /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/src/modeling/long-lived-bug-prediction-w-dnn.py:319: Sequential.predict_classes (from tensorflow.python.keras.engine.sequential) is deprecated and will be removed after 2021-01-01.
+Instructions for updating:
+Please use instead:* `np.argmax(model.predict(x), axis=-1)`,   if your model does multi-class classification   (e.g. if it uses a `softmax` last-layer activation).* `(model.predict(x) > 0.5).astype("int32")`,   if your model does binary classification   (e.g. if it uses a `sigmoid` last-layer activation).
+2020-05-17 11:57:41,449:: INFO - Fold 1 score (accuracy): 0.5619047619047619
+2020-05-17 11:57:41,820:: INFO - Builing model for Fold# 2 started
+2020-05-17 11:58:28,981:: INFO - Builing model for Fold# 2 finished
+2020-05-17 11:58:30,245:: INFO - Fold 2 score (accuracy): 0.5727891156462585
+2020-05-17 11:58:30,623:: INFO - Builing model for Fold# 3 started
+2020-05-17 11:59:17,775:: INFO - Builing model for Fold# 3 finished
+2020-05-17 11:59:19,040:: INFO - Fold 3 score (accuracy): 0.5530612244897959
+2020-05-17 11:59:19,419:: INFO - Builing model for Fold# 4 started
+2020-05-17 11:59:53,077:: INFO - Builing model for Fold# 4 finished
+2020-05-17 11:59:54,327:: INFO - Fold 4 score (accuracy): 0.5585034013605442
+2020-05-17 11:59:54,708:: INFO - Builing model for Fold# 5 started
+2020-05-17 12:00:47,020:: INFO - Builing model for Fold# 5 finished
+2020-05-17 12:00:48,420:: INFO - Fold 5 score (accuracy): 0.5598639455782313
+2020-05-17 12:00:48,803:: INFO - Builing model for Fold# 6 started
