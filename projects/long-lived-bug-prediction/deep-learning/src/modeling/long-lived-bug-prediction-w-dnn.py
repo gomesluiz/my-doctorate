@@ -45,7 +45,7 @@ METRICS = ['val_accuracy']
 #THRESHOLDS    = [8, 63, 108, 365]
 THRESHOLDS    = [365]
 MAX_NB_TERMS  = [100, 150, 200, 250, 300]
-EPOCHS        = 2
+EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 
@@ -58,9 +58,9 @@ nltk.download('punkt')
 kf = RepeatedStratifiedKFold(n_splits=5, n_repeats=2, random_state=42)
 sm = SMOTE(sampling_strategy='auto', k_neighbors=3, random_state=42)
 
-#logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
-#    , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
-logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
+   , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+#logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 
