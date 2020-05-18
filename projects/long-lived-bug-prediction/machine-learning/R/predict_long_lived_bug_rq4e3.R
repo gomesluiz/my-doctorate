@@ -79,7 +79,7 @@ registerDoParallel(r_cluster)
 class_label     <- "long_lived"
 
 # setup experimental parameters.
-projects    <- c("eclipse")
+projects    <- c("gcc")
 n_term      <- c(100)
 classifier  <- c(NNET)
 feature     <- c("long_description")
