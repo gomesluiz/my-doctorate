@@ -36,7 +36,7 @@ RAW_DATA_DIR = ROOT_DIR + '/data/raw'
 PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
-DATASETS  = ['eclipse']
+DATASETS  = ['gcc']
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
 BALANCINGS = ['smote']

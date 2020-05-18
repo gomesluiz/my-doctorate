@@ -78,7 +78,7 @@ registerDoParallel(r_cluster)
 class_label     <- "long_lived"
 
 # setup experimental parameters.
-projects    <- c("eclipse")
+projects    <- c("gcc")
 n_term      <- c(100)
 classifier  <- c(NNET)
 #classifier  <- c(KNN,NB, NNET, RF, SVM)
@@ -145,7 +145,7 @@ for (project.name in projects){
   write.csv(train.data, file.path(DATADIR, sprintf("20190917_%s_bug_report_train_data.csv", project.name)), row.names=F)
   write.csv(test.data,  file.path(DATADIR, sprintf("20190917_%s_bug_report_test_data.csv",  project.name)), row.names=F)
   #
-  stop("exit")
+  stop()
   
   flog.trace("Clean text features")
   reports$short_description <- clean_text(reports$short_description)
