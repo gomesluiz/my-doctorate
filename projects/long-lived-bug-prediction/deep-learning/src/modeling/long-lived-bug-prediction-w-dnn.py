@@ -36,7 +36,7 @@ RAW_DATA_DIR = ROOT_DIR + '/data/raw'
 PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
-DATASETS  = ['gcc']
+DATASETS  = ['eclipse']
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
 BALANCINGS = ['smote']
@@ -45,7 +45,7 @@ METRICS = ['val_accuracy']
 #THRESHOLDS    = [8, 63, 108, 365]
 THRESHOLDS    = [365]
 MAX_NB_TERMS  = [100, 150, 200, 250, 300]
-EPOCHS        = 200
+EPOCHS        = 2
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 
@@ -58,9 +58,9 @@ nltk.download('punkt')
 kf = RepeatedStratifiedKFold(n_splits=5, n_repeats=2, random_state=42)
 sm = SMOTE(sampling_strategy='auto', k_neighbors=3, random_state=42)
 
-logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
-    , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
-#logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+#logging.basicConfig(filename= PROCESSED_DATA_DIR + '/{}-long-lived-bug-prediction-w-dnn.log'.format(today)
+#    , filemode='w', level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s:: %(levelname)s - %(message)s')
 logging.info('Setup completed')
 
 
@@ -284,9 +284,7 @@ for parameter in parameters:
 
     logging.info('Trainning with k-folding started')
     fold     = 0
-    oos_y    = []
-    oos_pred = []
-    best_accuracy = 0
+    best_balanced_accuracy = 0
     for train_index, val_index in kf.split(X_main, y_main.argmax(axis=1)):
         fold += 1
         X_train = X_main[train_index]
@@ -294,10 +292,10 @@ for parameter in parameters:
         X_val   = X_main[val_index]
         y_val   = y_main[val_index]
 
-        np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_train_fold_{}_{}_{}.csv'.format(
-            threshold, max_nb_term, fold), np.concatenate((X_train, y_train), axis=1), delimiter=',')
-        np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_val_fold_{}_{}_{}.csv'.format(
-            threshold, max_nb_term, fold), np.concatenate((X_val, y_val), axis=1), delimiter=',')
+       #np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_train_fold_{}_{}_{}.csv'.format(
+       #     threshold, max_nb_term, fold), np.concatenate((X_train, y_train), axis=1), delimiter=',')
+       #np.savetxt(PROCESSED_DATA_DIR+'/20190917_eclipse_val_fold_{}_{}_{}.csv'.format(
+       #     threshold, max_nb_term, fold), np.concatenate((X_val, y_val), axis=1), delimiter=',')
         
         logging.info('Builing model for Fold# {} started'.format(fold))
         model   = make_model(input_dim=X_train.shape[1]
@@ -306,39 +304,34 @@ for parameter in parameters:
 
         #model.layers[-1].bias.assign([0.0, 0.0])
        
-        history = model.fit(
-            X_train,
-            y_train,
-            validation_data=(X_val, y_val),
-            verbose=1,
-            epochs=EPOCHS,
-            batch_size=BATCH_SIZE,    
+        model.fit(X_train, y_train, validation_data=(X_val, y_val),
+            verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE,    
             callbacks=[early_stopping]
         )
         logging.info('Builing model for Fold# {} finished'.format(fold))
 
-        pred = model.predict_classes(X_val)
-        oos_y.append(y_val)
-        oos_pred.append(pred)  
-
-        fold_accuracy = metrics.accuracy_score(y_val.argmax(axis=1), pred)
-        logging.info(f"Fold {fold} score (accuracy): {fold_accuracy}")
-        if (fold_accuracy > best_accuracy):
-            best_accuracy = fold_accuracy
+        fold_prediction = model.predict_classes(X_val,batch_size=BATCH_SIZE)
+        fold_balanced_accuracy = metrics.balanced_accuracy_score(y_val.argmax(axis=1), fold_prediction)
+        logging.info(f"Fold {fold} score (balanced accuracy): {fold_balanced_accuracy}")
+        if (fold_balanced_accuracy > best_balanced_accuracy):
+            best_balanced_accuracy = fold_balanced_accuracy
             best_model    = model
 
         
-    logging.info(f"Best fold score (accuracy): {best_accuracy}")
+    logging.info(f"Best fold score (accuracy): {best_balanced_accuracy}")
     test_predictions_baseline  = best_model.predict_classes(X_test, batch_size=BATCH_SIZE)
+    balanced_accuracy = metrics.balanced_accuracy_score(y_test.argmax(axis=1), test_predictions_baseline)
     baseline_results = best_model.evaluate(X_test, y_test, batch_size=BATCH_SIZE, verbose=0)
+    
+    #cm = confusion_matrix(y_test.argmax(axis=1), test_predictions_baseline > 0.5)
+    #balanced_accuracy=((cm[1][1]/(cm[1][1]+cm[1][0])) + (cm[0][0]/(cm[0][0]+cm[0][1])))/2
+    
     for name, value in zip(best_model.metrics_names, baseline_results):
         logging.info('{}:{}'.format(name, value))
-
-    cm = confusion_matrix(y_test.argmax(axis=1), test_predictions_baseline > 0.5)
-    balanced_accuracy=((cm[1][1]/(cm[1][1]+cm[1][0])) + (cm[0][0]/(cm[0][0]+cm[0][1])))/2
+    
     logging.info('balanced accuracy : {}'.format(balanced_accuracy))
-
     logging.info('Model evaluated.')
+
     if results is None:
         columns  = ['project', 'feature', 'classifier']
         columns += ['balancing', 'resampling', 'metric', 'threshold', 'terms']
@@ -368,7 +361,7 @@ for parameter in parameters:
         'feature'    : feature,
         'classifier' : classifier,
         'balancing'  : balancing,
-        'resampling' : '-',
+        'resampling' : resampling,
         'metric'     : metric,
         'threshold'  : threshold,
         'terms' : max_nb_term,
