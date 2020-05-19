@@ -1,6 +1,0 @@
-2020-05-15 01:13:29,576:: INFO - Setup completed
-2020-05-15 01:13:29,576:: INFO - Starting prediction
-2020-05-15 01:13:29,576:: INFO - Feature  : long_description
-2020-05-15 01:13:29,576:: INFO - Threshold: 8
-2020-05-15 01:13:29,576:: INFO - Terms    : 100
-2020-05-15 01:13:29,576:: INFO - Metric   : val_accuracy
