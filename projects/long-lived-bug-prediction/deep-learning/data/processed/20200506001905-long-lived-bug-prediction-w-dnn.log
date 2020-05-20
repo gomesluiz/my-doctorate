@@ -1,9 +1,0 @@
-2020-05-06 00:19:05,806:: INFO - Setup completed
-2020-05-06 00:19:05,807:: INFO - Starting prediction using feature long_description
-2020-05-06 00:19:05,807:: INFO - Threshold: 8
-2020-05-06 00:19:06,077:: INFO - Bug reports train file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/datasets/20190917_eclipse_bug_report_8_train_data.csv
-2020-05-06 00:19:06,077:: INFO - Bug reports test file read: /home/gomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/datasets/20190917_eclipse_bug_report_8_test_data.csv
-2020-05-06 00:19:06,078:: INFO - Reports in train - Total: 7334 Positive: 3659 (49.89% of total)
-2020-05-06 00:19:06,078:: INFO - Reports in test - Total: 2444 Positive: 1219 (49.88% of total)
-2020-05-06 00:19:08,583:: INFO - Bug reports long_description cleaned.
-2020-05-06 00:19:08,583:: INFO - Metric: val_accuracy

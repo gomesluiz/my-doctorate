@@ -67,7 +67,7 @@ if (DEBUG):
         'winehq': [220]
     }
     MAX_NB_TERMS  = [100]
-    EPOCHS        = 2
+    EPOCHS        = 1
 
 today = datetime.now()
 today = today.strftime("%Y%m%d%H%M%S")
@@ -211,7 +211,7 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
             keras.layers.Embedding(input_dim=MAX_NB_WORDS, output_dim=EMBEDDING_DIM, input_length=input_length),
             keras.layers.SpatialDropout1D(0.2),
             keras.layers.LSTM(EMBEDDING_DIM, dropout=0.2, recurrent_dropout=0.2),
-            keras.layers.Dense(2, activation='softmax')
+            keras.layers.Dense(2, activation='sigmoid')
         ]
      )
 
@@ -352,28 +352,35 @@ for parameter in parameters:
             # logging.info('Salving File for Fold# {} finished'.format(fold))
 
             logging.info('Builing model for Fold# {} started'.format(fold))
-            model   = make_model(input_dim=X_train.shape[1]
+            fold_model   = make_model(input_dim=X_train.shape[1]
                 , output_dim=X_train.shape[1]
                 , input_length=X_train.shape[1])
 
-            model.fit(X_train, y_train, validation_data=(X_val, y_val),
+            fold_model.fit(X_train, y_train, validation_data=(X_val, y_val),
                 verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE,    
                 callbacks=[early_stopping]
             )
             logging.info('Builing model for Fold# {} finished'.format(fold))
 
             logging.info('Evaluating model for Fold# {} finished'.format(fold))
-            fold_prediction = model.predict_classes(X_val,batch_size=BATCH_SIZE)
+            fold_prediction = (fold_model.predict(X_val) > 0.5).astype("int32")
+            fold_prediction = fold_prediction.argmax(axis=1)
+            #print(fold_prediction)
+            #exit()
+            #fold_prediction = fold_model.predict_classes(X_val,batch_size=BATCH_SIZE)
             fold_balanced_accuracy = metrics.balanced_accuracy_score(y_val.argmax(axis=1), fold_prediction)
             logging.info(f"Fold {fold} score (balanced accuracy): {fold_balanced_accuracy}")
             if (fold_balanced_accuracy > best_balanced_accuracy):
                 best_balanced_accuracy = fold_balanced_accuracy
-                best_model    = model
+                best_model    = fold_model
             logging.info('Evaluating model for Fold# {} finished'.format(fold))
 
         logging.info('Evaluating final model started')
         logging.info(f"Best fold score (accuracy): {best_balanced_accuracy}")
-        test_predictions_baseline  = best_model.predict_classes(X_test, batch_size=BATCH_SIZE)
+
+        test_predictions_baseline  = (best_model.predict(X_test) > 0.5).astype("int32")
+        test_predictions_baseline  = test_predictions_baseline.argmax(axis=1)
+
         balanced_accuracy = metrics.balanced_accuracy_score(y_test.argmax(axis=1), test_predictions_baseline)
         baseline_results = best_model.evaluate(X_test, y_test, batch_size=BATCH_SIZE, verbose=1)
         for name, value in zip(best_model.metrics_names, baseline_results):
@@ -389,7 +396,7 @@ for parameter in parameters:
             columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
             columns += ['val_size', 'val_size_class_0', 'val_size_class_1']
             columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
-            columns += model.metrics_names
+            columns += best_model.metrics_names
             columns += ['sensitivity', 'specificity', 'balanced_acc']
             columns += ['fmeasure', 'epochs']
             results = pd.DataFrame(columns=columns)
@@ -411,8 +418,8 @@ for parameter in parameters:
             logging.info('DEBUG: loss : {}'.format(loss))
             logging.info('DEBUG: tp : {}'.format(tp))
             logging.info('DEBUG: fp : {}'.format(fp))
-            logging.info('DEBUG: tn : {}'.format(tp))
-            logging.info('DEBUG: fn : {}'.format(fp))
+            logging.info('DEBUG: tn : {}'.format(tn))
+            logging.info('DEBUG: fn : {}'.format(fn))
             logging.info('DEBUG: accuracy : {}'.format(accuracy))
             logging.info('DEBUG: sensitivity : {}'.format(sensitivity))
             logging.info('DEBUG: specificity : {}'.format(specificity))
