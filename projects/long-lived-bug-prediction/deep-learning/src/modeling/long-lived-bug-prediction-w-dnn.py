@@ -359,8 +359,8 @@ for parameter in parameters:
                 , input_length=X_train.shape[1])
 
             fold_model.fit(X_train, y_train, validation_data=(X_val, y_val),
-                verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE,    
-                callbacks=[early_stopping]
+                verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE    
+            #    callbacks=[early_stopping]
             )
             logging.info('Builing model for Fold# {} finished'.format(fold))
 
