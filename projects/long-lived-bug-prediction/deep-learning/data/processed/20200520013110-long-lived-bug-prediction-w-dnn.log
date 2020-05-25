@@ -1,0 +1,1843 @@
+2020-05-20 01:31:12,547:: INFO - Setup completed
+2020-05-20 01:31:12,547:: INFO - >> Starting prediction
+2020-05-20 01:31:12,548:: INFO - Dataset       : freedesktop
+2020-05-20 01:31:12,548:: INFO - Feature       : long_description
+2020-05-20 01:31:12,548:: INFO - Classifier    : lstm+emb
+2020-05-20 01:31:12,548:: INFO - Balancing     : smote
+2020-05-20 01:31:12,548:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 01:31:12,548:: INFO - Metric        : val_accuracy
+2020-05-20 01:31:12,548:: INFO - Threshold     : 28
+2020-05-20 01:31:12,548:: INFO - Terms         : 100
+2020-05-20 01:31:12,630:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_train_data.csv
+2020-05-20 01:31:12,630:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_test_data.csv
+2020-05-20 01:31:12,630:: INFO - Reports in train - Total: 5751 Positive: 2859 (49.71% of total)
+2020-05-20 01:31:12,630:: INFO - Reports in train - Total: 5751 Negative: 2892 (50.29% of total)
+2020-05-20 01:31:12,630:: INFO - Reports in test - Total : 1915 Positive: 952 (49.71% of total)
+2020-05-20 01:31:14,324:: INFO - Bug reports long_description cleaned.
+2020-05-20 01:31:14,324:: INFO - Balancing data started
+2020-05-20 01:31:15,194:: INFO - BEFORE SMOTE:
+2020-05-20 01:31:15,194:: INFO - Reports shape    : data (5751, 100) label (5751, 2)
+2020-05-20 01:31:15,194:: INFO - Reports class distribution : 0 (2892) 1 (2859)
+2020-05-20 01:31:16,153:: INFO - AFTER SMOTE:
+2020-05-20 01:31:16,153:: INFO - Reports shape    : data (5784, 100) label (5784, 2)
+2020-05-20 01:31:16,153:: INFO - Reports class distribution : 0 (2892) 1 (2892)
+2020-05-20 01:31:16,421:: INFO - Shape of test data tensor : (1915, 100)
+2020-05-20 01:31:16,421:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 01:31:16,421:: INFO - Class distribution in test label tensor: 963(0) 952(1)
+2020-05-20 01:31:16,421:: INFO - Balancing data finished
+2020-05-20 01:31:16,421:: INFO - Trainning with k-folding started
+2020-05-20 01:31:16,423:: INFO - Builing model for Fold# 1 started
+2020-05-20 01:31:56,052:: INFO - Builing model for Fold# 1 finished
+2020-05-20 01:31:56,052:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 01:31:57,195:: INFO - Fold 1 score (balanced accuracy): 0.5427998996001936
+2020-05-20 01:31:57,195:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 01:31:57,196:: INFO - Builing model for Fold# 2 started
+2020-05-20 01:32:45,610:: INFO - Builing model for Fold# 2 finished
+2020-05-20 01:32:45,610:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 01:32:46,648:: INFO - Fold 2 score (balanced accuracy): 0.5773407198905165
+2020-05-20 01:32:46,648:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 01:32:46,649:: INFO - Builing model for Fold# 3 started
+2020-05-20 01:33:29,697:: INFO - Builing model for Fold# 3 finished
+2020-05-20 01:33:29,697:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 01:33:30,763:: INFO - Fold 3 score (balanced accuracy): 0.5557159163573994
+2020-05-20 01:33:30,763:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 01:33:30,765:: INFO - Builing model for Fold# 4 started
+2020-05-20 01:34:09,506:: INFO - Builing model for Fold# 4 finished
+2020-05-20 01:34:09,507:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 01:34:10,536:: INFO - Fold 4 score (balanced accuracy): 0.5781609504515004
+2020-05-20 01:34:10,536:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 01:34:10,538:: INFO - Builing model for Fold# 5 started
+2020-05-20 01:34:47,840:: INFO - Builing model for Fold# 5 finished
+2020-05-20 01:34:47,840:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 01:34:48,876:: INFO - Fold 5 score (balanced accuracy): 0.5622837370242215
+2020-05-20 01:34:48,876:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 01:34:48,880:: INFO - Builing model for Fold# 6 started
+2020-05-20 01:35:36,817:: INFO - Builing model for Fold# 6 finished
+2020-05-20 01:35:36,817:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 01:35:37,868:: INFO - Fold 6 score (balanced accuracy): 0.5557517734311037
+2020-05-20 01:35:37,868:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 01:35:37,870:: INFO - Builing model for Fold# 7 started
+2020-05-20 01:36:17,631:: INFO - Builing model for Fold# 7 finished
+2020-05-20 01:36:17,631:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 01:36:18,662:: INFO - Fold 7 score (balanced accuracy): 0.5886491445099833
+2020-05-20 01:36:18,663:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 01:36:18,664:: INFO - Builing model for Fold# 8 started
+2020-05-20 01:37:02,561:: INFO - Builing model for Fold# 8 finished
+2020-05-20 01:37:02,561:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 01:37:03,602:: INFO - Fold 8 score (balanced accuracy): 0.5669526268294578
+2020-05-20 01:37:03,603:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 01:37:03,604:: INFO - Builing model for Fold# 9 started
+2020-05-20 01:37:43,487:: INFO - Builing model for Fold# 9 finished
+2020-05-20 01:37:43,488:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 01:37:44,545:: INFO - Fold 9 score (balanced accuracy): 0.5720562836533577
+2020-05-20 01:37:44,545:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 01:37:44,547:: INFO - Builing model for Fold# 10 started
+2020-05-20 01:38:32,676:: INFO - Builing model for Fold# 10 finished
+2020-05-20 01:38:32,676:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 01:38:33,734:: INFO - Fold 10 score (balanced accuracy): 0.5570934256055363
+2020-05-20 01:38:33,734:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 01:38:33,734:: INFO - Evaluating final model started
+2020-05-20 01:38:33,734:: INFO - Best fold score (accuracy): 0.5886491445099833
+2020-05-20 01:38:35,594:: INFO - loss:0.6919946670532227
+2020-05-20 01:38:35,594:: INFO - tp:1027.0
+2020-05-20 01:38:35,594:: INFO - fp:910.0
+2020-05-20 01:38:35,594:: INFO - tn:1005.0
+2020-05-20 01:38:35,595:: INFO - fn:888.0
+2020-05-20 01:38:35,595:: INFO - accuracy:0.5305482745170593
+2020-05-20 01:38:35,595:: INFO - precision:0.5302013158798218
+2020-05-20 01:38:35,595:: INFO - recall:0.5362924337387085
+2020-05-20 01:38:35,595:: INFO - auc:0.5461105108261108
+2020-05-20 01:38:35,595:: INFO - Balanced accuracy : 0.5295246603314223
+2020-05-20 01:38:35,595:: INFO - Evaluating final model finished
+2020-05-20 01:38:35,595:: INFO - Extracting evaluating metrics started
+2020-05-20 01:38:35,619:: INFO - Extracting evaluating metrics finished
+2020-05-20 01:38:35,619:: INFO - >> Starting prediction
+2020-05-20 01:38:35,619:: INFO - Dataset       : freedesktop
+2020-05-20 01:38:35,619:: INFO - Feature       : long_description
+2020-05-20 01:38:35,619:: INFO - Classifier    : lstm+emb
+2020-05-20 01:38:35,619:: INFO - Balancing     : smote
+2020-05-20 01:38:35,619:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 01:38:35,619:: INFO - Metric        : val_accuracy
+2020-05-20 01:38:35,619:: INFO - Threshold     : 173
+2020-05-20 01:38:35,619:: INFO - Terms         : 100
+2020-05-20 01:38:35,698:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_train_data.csv
+2020-05-20 01:38:35,698:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_test_data.csv
+2020-05-20 01:38:35,698:: INFO - Reports in train - Total: 5751 Positive: 1395 (24.26% of total)
+2020-05-20 01:38:35,699:: INFO - Reports in train - Total: 5751 Negative: 4356 (75.74% of total)
+2020-05-20 01:38:35,699:: INFO - Reports in test - Total : 1915 Positive: 464 (24.23% of total)
+2020-05-20 01:38:37,338:: INFO - Bug reports long_description cleaned.
+2020-05-20 01:38:37,338:: INFO - Balancing data started
+2020-05-20 01:38:38,133:: INFO - BEFORE SMOTE:
+2020-05-20 01:38:38,133:: INFO - Reports shape    : data (5751, 100) label (5751, 2)
+2020-05-20 01:38:38,133:: INFO - Reports class distribution : 0 (4356) 1 (1395)
+2020-05-20 01:38:38,348:: INFO - AFTER SMOTE:
+2020-05-20 01:38:38,348:: INFO - Reports shape    : data (8712, 100) label (8712, 2)
+2020-05-20 01:38:38,348:: INFO - Reports class distribution : 0 (4356) 1 (4356)
+2020-05-20 01:38:38,617:: INFO - Shape of test data tensor : (1915, 100)
+2020-05-20 01:38:38,617:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 01:38:38,617:: INFO - Class distribution in test label tensor: 1451(0) 464(1)
+2020-05-20 01:38:38,617:: INFO - Balancing data finished
+2020-05-20 01:38:38,617:: INFO - Trainning with k-folding started
+2020-05-20 01:38:38,619:: INFO - Builing model for Fold# 1 started
+2020-05-20 01:41:13,332:: INFO - Builing model for Fold# 1 finished
+2020-05-20 01:41:13,332:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 01:41:14,788:: INFO - Fold 1 score (balanced accuracy): 0.6954123173827405
+2020-05-20 01:41:14,788:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 01:41:14,790:: INFO - Builing model for Fold# 2 started
+2020-05-20 01:43:28,833:: INFO - Builing model for Fold# 2 finished
+2020-05-20 01:43:28,834:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 01:43:30,299:: INFO - Fold 2 score (balanced accuracy): 0.7010198653872486
+2020-05-20 01:43:30,300:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 01:43:30,302:: INFO - Builing model for Fold# 3 started
+2020-05-20 01:45:23,120:: INFO - Builing model for Fold# 3 finished
+2020-05-20 01:45:23,120:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 01:45:24,590:: INFO - Fold 3 score (balanced accuracy): 0.7123995407577497
+2020-05-20 01:45:24,591:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 01:45:24,593:: INFO - Builing model for Fold# 4 started
+2020-05-20 01:47:18,659:: INFO - Builing model for Fold# 4 finished
+2020-05-20 01:47:18,660:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 01:47:20,117:: INFO - Fold 4 score (balanced accuracy): 0.7095292766934558
+2020-05-20 01:47:20,117:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 01:47:20,119:: INFO - Builing model for Fold# 5 started
+2020-05-20 01:49:40,304:: INFO - Builing model for Fold# 5 finished
+2020-05-20 01:49:40,305:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 01:49:41,772:: INFO - Fold 5 score (balanced accuracy): 0.7072330654420207
+2020-05-20 01:49:41,773:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 01:49:41,778:: INFO - Builing model for Fold# 6 started
+2020-05-20 01:52:38,046:: INFO - Builing model for Fold# 6 finished
+2020-05-20 01:52:38,046:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 01:52:39,526:: INFO - Fold 6 score (balanced accuracy): 0.7304045229041806
+2020-05-20 01:52:39,526:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 01:52:39,528:: INFO - Builing model for Fold# 7 started
+2020-05-20 01:54:28,399:: INFO - Builing model for Fold# 7 finished
+2020-05-20 01:54:28,399:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 01:54:29,887:: INFO - Fold 7 score (balanced accuracy): 0.6981384099263738
+2020-05-20 01:54:29,887:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 01:54:29,890:: INFO - Builing model for Fold# 8 started
+2020-05-20 01:55:57,081:: INFO - Builing model for Fold# 8 finished
+2020-05-20 01:55:57,081:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 01:55:58,576:: INFO - Fold 8 score (balanced accuracy): 0.6917336394948335
+2020-05-20 01:55:58,576:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 01:55:58,578:: INFO - Builing model for Fold# 9 started
+2020-05-20 01:57:05,821:: INFO - Builing model for Fold# 9 finished
+2020-05-20 01:57:05,821:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 01:57:07,304:: INFO - Fold 9 score (balanced accuracy): 0.6963260619977039
+2020-05-20 01:57:07,304:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 01:57:07,306:: INFO - Builing model for Fold# 10 started
+2020-05-20 01:58:52,622:: INFO - Builing model for Fold# 10 finished
+2020-05-20 01:58:52,622:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 01:58:54,103:: INFO - Fold 10 score (balanced accuracy): 0.6974741676234213
+2020-05-20 01:58:54,103:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 01:58:54,103:: INFO - Evaluating final model started
+2020-05-20 01:58:54,103:: INFO - Best fold score (accuracy): 0.7304045229041806
+2020-05-20 01:58:55,885:: INFO - loss:1.8080627918243408
+2020-05-20 01:58:55,885:: INFO - tp:727.0
+2020-05-20 01:58:55,886:: INFO - fp:1186.0
+2020-05-20 01:58:55,886:: INFO - tn:729.0
+2020-05-20 01:58:55,886:: INFO - fn:1188.0
+2020-05-20 01:58:55,886:: INFO - accuracy:0.38015666604042053
+2020-05-20 01:58:55,886:: INFO - precision:0.38003137707710266
+2020-05-20 01:58:55,886:: INFO - recall:0.37963446974754333
+2020-05-20 01:58:55,886:: INFO - auc:0.30092060565948486
+2020-05-20 01:58:55,886:: INFO - Balanced accuracy : 0.5099537477126358
+2020-05-20 01:58:55,886:: INFO - Evaluating final model finished
+2020-05-20 01:58:55,886:: INFO - Extracting evaluating metrics started
+2020-05-20 01:58:55,905:: INFO - Extracting evaluating metrics finished
+2020-05-20 01:58:55,905:: INFO - >> Starting prediction
+2020-05-20 01:58:55,905:: INFO - Dataset       : freedesktop
+2020-05-20 01:58:55,905:: INFO - Feature       : long_description
+2020-05-20 01:58:55,905:: INFO - Classifier    : lstm+emb
+2020-05-20 01:58:55,905:: INFO - Balancing     : smote
+2020-05-20 01:58:55,906:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 01:58:55,906:: INFO - Metric        : val_accuracy
+2020-05-20 01:58:55,906:: INFO - Threshold     : 162
+2020-05-20 01:58:55,906:: INFO - Terms         : 100
+2020-05-20 01:58:55,988:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_train_data.csv
+2020-05-20 01:58:55,988:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_test_data.csv
+2020-05-20 01:58:55,988:: INFO - Reports in train - Total: 5751 Positive: 1437 (24.99% of total)
+2020-05-20 01:58:55,988:: INFO - Reports in train - Total: 5751 Negative: 4314 (75.01% of total)
+2020-05-20 01:58:55,988:: INFO - Reports in test - Total : 1915 Positive: 478 (24.96% of total)
+2020-05-20 01:58:57,669:: INFO - Bug reports long_description cleaned.
+2020-05-20 01:58:57,670:: INFO - Balancing data started
+2020-05-20 01:58:58,496:: INFO - BEFORE SMOTE:
+2020-05-20 01:58:58,496:: INFO - Reports shape    : data (5751, 100) label (5751, 2)
+2020-05-20 01:58:58,496:: INFO - Reports class distribution : 0 (4314) 1 (1437)
+2020-05-20 01:58:58,737:: INFO - AFTER SMOTE:
+2020-05-20 01:58:58,737:: INFO - Reports shape    : data (8628, 100) label (8628, 2)
+2020-05-20 01:58:58,737:: INFO - Reports class distribution : 0 (4314) 1 (4314)
+2020-05-20 01:58:58,997:: INFO - Shape of test data tensor : (1915, 100)
+2020-05-20 01:58:58,997:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 01:58:58,997:: INFO - Class distribution in test label tensor: 1437(0) 478(1)
+2020-05-20 01:58:58,997:: INFO - Balancing data finished
+2020-05-20 01:58:58,997:: INFO - Trainning with k-folding started
+2020-05-20 01:58:58,999:: INFO - Builing model for Fold# 1 started
+2020-05-20 02:02:11,446:: INFO - Builing model for Fold# 1 finished
+2020-05-20 02:02:11,446:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:02:12,969:: INFO - Fold 1 score (balanced accuracy): 0.7033603707995365
+2020-05-20 02:02:12,969:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:02:12,972:: INFO - Builing model for Fold# 2 started
+2020-05-20 02:04:59,701:: INFO - Builing model for Fold# 2 finished
+2020-05-20 02:04:59,702:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:05:01,177:: INFO - Fold 2 score (balanced accuracy): 0.7207415990730012
+2020-05-20 02:05:01,177:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:05:01,179:: INFO - Builing model for Fold# 3 started
+2020-05-20 02:06:43,864:: INFO - Builing model for Fold# 3 finished
+2020-05-20 02:06:43,865:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:06:45,340:: INFO - Fold 3 score (balanced accuracy): 0.7108922363847046
+2020-05-20 02:06:45,340:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:06:45,342:: INFO - Builing model for Fold# 4 started
+2020-05-20 02:10:11,040:: INFO - Builing model for Fold# 4 finished
+2020-05-20 02:10:11,041:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 02:10:12,467:: INFO - Fold 4 score (balanced accuracy): 0.7229670146497004
+2020-05-20 02:10:12,467:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 02:10:12,469:: INFO - Builing model for Fold# 5 started
+2020-05-20 02:11:52,264:: INFO - Builing model for Fold# 5 finished
+2020-05-20 02:11:52,265:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 02:11:53,716:: INFO - Fold 5 score (balanced accuracy): 0.703704500299769
+2020-05-20 02:11:53,716:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 02:11:53,721:: INFO - Builing model for Fold# 6 started
+2020-05-20 02:13:59,407:: INFO - Builing model for Fold# 6 finished
+2020-05-20 02:13:59,408:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 02:14:00,857:: INFO - Fold 6 score (balanced accuracy): 0.7050984936268829
+2020-05-20 02:14:00,858:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 02:14:00,860:: INFO - Builing model for Fold# 7 started
+2020-05-20 02:16:01,531:: INFO - Builing model for Fold# 7 finished
+2020-05-20 02:16:01,531:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 02:16:02,983:: INFO - Fold 7 score (balanced accuracy): 0.7219003476245655
+2020-05-20 02:16:02,983:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 02:16:02,985:: INFO - Builing model for Fold# 8 started
+2020-05-20 02:17:52,421:: INFO - Builing model for Fold# 8 finished
+2020-05-20 02:17:52,421:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 02:17:53,885:: INFO - Fold 8 score (balanced accuracy): 0.6958285052143685
+2020-05-20 02:17:53,885:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 02:17:53,887:: INFO - Builing model for Fold# 9 started
+2020-05-20 02:20:05,245:: INFO - Builing model for Fold# 9 finished
+2020-05-20 02:20:05,246:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 02:20:06,897:: INFO - Fold 9 score (balanced accuracy): 0.7101885184418462
+2020-05-20 02:20:06,897:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 02:20:06,899:: INFO - Builing model for Fold# 10 started
+2020-05-20 02:23:19,729:: INFO - Builing model for Fold# 10 finished
+2020-05-20 02:23:19,730:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 02:23:21,158:: INFO - Fold 10 score (balanced accuracy): 0.7013715442542472
+2020-05-20 02:23:21,159:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 02:23:21,159:: INFO - Evaluating final model started
+2020-05-20 02:23:21,159:: INFO - Best fold score (accuracy): 0.7229670146497004
+2020-05-20 02:23:22,975:: INFO - loss:1.143787145614624
+2020-05-20 02:23:22,975:: INFO - tp:953.0
+2020-05-20 02:23:22,975:: INFO - fp:965.0
+2020-05-20 02:23:22,975:: INFO - tn:950.0
+2020-05-20 02:23:22,976:: INFO - fn:962.0
+2020-05-20 02:23:22,976:: INFO - accuracy:0.4968668520450592
+2020-05-20 02:23:22,976:: INFO - precision:0.4968717396259308
+2020-05-20 02:23:22,976:: INFO - recall:0.4976501166820526
+2020-05-20 02:23:22,976:: INFO - auc:0.46364280581474304
+2020-05-20 02:23:22,976:: INFO - Balanced accuracy : 0.5158840040414275
+2020-05-20 02:23:22,976:: INFO - Evaluating final model finished
+2020-05-20 02:23:22,976:: INFO - Extracting evaluating metrics started
+2020-05-20 02:23:22,993:: INFO - Extracting evaluating metrics finished
+2020-05-20 02:23:22,994:: INFO - >> Starting prediction
+2020-05-20 02:23:22,994:: INFO - Dataset       : freedesktop
+2020-05-20 02:23:22,994:: INFO - Feature       : long_description
+2020-05-20 02:23:22,994:: INFO - Classifier    : lstm+emb
+2020-05-20 02:23:22,994:: INFO - Balancing     : smote
+2020-05-20 02:23:22,994:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 02:23:22,994:: INFO - Metric        : val_accuracy
+2020-05-20 02:23:22,994:: INFO - Threshold     : 365
+2020-05-20 02:23:22,994:: INFO - Terms         : 100
+2020-05-20 02:23:23,079:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_train_data.csv
+2020-05-20 02:23:23,079:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_test_data.csv
+2020-05-20 02:23:23,080:: INFO - Reports in train - Total: 5750 Positive: 787 (13.69% of total)
+2020-05-20 02:23:23,080:: INFO - Reports in train - Total: 5750 Negative: 4963 (86.31% of total)
+2020-05-20 02:23:23,080:: INFO - Reports in test - Total : 1916 Positive: 262 (13.67% of total)
+2020-05-20 02:23:24,789:: INFO - Bug reports long_description cleaned.
+2020-05-20 02:23:24,790:: INFO - Balancing data started
+2020-05-20 02:23:25,572:: INFO - BEFORE SMOTE:
+2020-05-20 02:23:25,572:: INFO - Reports shape    : data (5750, 100) label (5750, 2)
+2020-05-20 02:23:25,572:: INFO - Reports class distribution : 0 (4963) 1 (787)
+2020-05-20 02:23:25,645:: INFO - AFTER SMOTE:
+2020-05-20 02:23:25,645:: INFO - Reports shape    : data (9926, 100) label (9926, 2)
+2020-05-20 02:23:25,646:: INFO - Reports class distribution : 0 (4963) 1 (4963)
+2020-05-20 02:23:25,901:: INFO - Shape of test data tensor : (1916, 100)
+2020-05-20 02:23:25,901:: INFO - Shape of test label tensor: (1916, 2)
+2020-05-20 02:23:25,901:: INFO - Class distribution in test label tensor: 1654(0) 262(1)
+2020-05-20 02:23:25,901:: INFO - Balancing data finished
+2020-05-20 02:23:25,901:: INFO - Trainning with k-folding started
+2020-05-20 02:23:25,904:: INFO - Builing model for Fold# 1 started
+2020-05-20 02:28:25,217:: INFO - Builing model for Fold# 1 finished
+2020-05-20 02:28:25,217:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:28:26,918:: INFO - Fold 1 score (balanced accuracy): 0.7824773413897281
+2020-05-20 02:28:26,918:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:28:26,921:: INFO - Builing model for Fold# 2 started
+2020-05-20 02:30:17,371:: INFO - Builing model for Fold# 2 finished
+2020-05-20 02:30:17,372:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:30:19,047:: INFO - Fold 2 score (balanced accuracy): 0.780817029691713
+2020-05-20 02:30:19,047:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:30:19,049:: INFO - Builing model for Fold# 3 started
+2020-05-20 02:34:12,215:: INFO - Builing model for Fold# 3 finished
+2020-05-20 02:34:12,215:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:34:13,908:: INFO - Fold 3 score (balanced accuracy): 0.7954309196634506
+2020-05-20 02:34:13,908:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:34:13,910:: INFO - Builing model for Fold# 4 started
+2020-05-20 02:37:18,771:: INFO - Builing model for Fold# 4 finished
+2020-05-20 02:37:18,771:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 02:37:20,452:: INFO - Fold 4 score (balanced accuracy): 0.8005412890231621
+2020-05-20 02:37:20,452:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 02:37:20,455:: INFO - Builing model for Fold# 5 started
+2020-05-20 02:40:34,539:: INFO - Builing model for Fold# 5 finished
+2020-05-20 02:40:34,539:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 02:40:36,249:: INFO - Fold 5 score (balanced accuracy): 0.7899606722866517
+2020-05-20 02:40:36,249:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 02:40:36,254:: INFO - Builing model for Fold# 6 started
+2020-05-20 02:44:06,046:: INFO - Builing model for Fold# 6 finished
+2020-05-20 02:44:06,047:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 02:44:07,752:: INFO - Fold 6 score (balanced accuracy): 0.7990936555891238
+2020-05-20 02:44:07,753:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 02:44:07,755:: INFO - Builing model for Fold# 7 started
+2020-05-20 02:46:58,751:: INFO - Builing model for Fold# 7 finished
+2020-05-20 02:46:58,752:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 02:47:00,450:: INFO - Fold 7 score (balanced accuracy): 0.7909032582919144
+2020-05-20 02:47:00,450:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 02:47:00,452:: INFO - Builing model for Fold# 8 started
+2020-05-20 02:50:45,396:: INFO - Builing model for Fold# 8 finished
+2020-05-20 02:50:45,396:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 02:50:47,096:: INFO - Fold 8 score (balanced accuracy): 0.7818266169639086
+2020-05-20 02:50:47,096:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 02:50:47,099:: INFO - Builing model for Fold# 9 started
+2020-05-20 02:54:11,221:: INFO - Builing model for Fold# 9 finished
+2020-05-20 02:54:11,222:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 02:54:12,914:: INFO - Fold 9 score (balanced accuracy): 0.8000458857161421
+2020-05-20 02:54:12,914:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 02:54:12,916:: INFO - Builing model for Fold# 10 started
+2020-05-20 02:56:18,935:: INFO - Builing model for Fold# 10 finished
+2020-05-20 02:56:18,935:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 02:56:20,590:: INFO - Fold 10 score (balanced accuracy): 0.7869253118604425
+2020-05-20 02:56:20,590:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 02:56:20,590:: INFO - Evaluating final model started
+2020-05-20 02:56:20,590:: INFO - Best fold score (accuracy): 0.8005412890231621
+2020-05-20 02:56:22,432:: INFO - loss:1.661743402481079
+2020-05-20 02:56:22,432:: INFO - tp:750.0
+2020-05-20 02:56:22,433:: INFO - fp:1166.0
+2020-05-20 02:56:22,433:: INFO - tn:750.0
+2020-05-20 02:56:22,433:: INFO - fn:1166.0
+2020-05-20 02:56:22,433:: INFO - accuracy:0.3914405107498169
+2020-05-20 02:56:22,433:: INFO - precision:0.3914405107498169
+2020-05-20 02:56:22,433:: INFO - recall:0.3914405107498169
+2020-05-20 02:56:22,433:: INFO - auc:0.3043380379676819
+2020-05-20 02:56:22,433:: INFO - Balanced accuracy : 0.48330210362110815
+2020-05-20 02:56:22,433:: INFO - Evaluating final model finished
+2020-05-20 02:56:22,433:: INFO - Extracting evaluating metrics started
+2020-05-20 02:56:22,452:: INFO - Extracting evaluating metrics finished
+2020-05-20 02:56:22,452:: INFO - >> Starting prediction
+2020-05-20 02:56:22,452:: INFO - Dataset       : freedesktop
+2020-05-20 02:56:22,452:: INFO - Feature       : long_description
+2020-05-20 02:56:22,452:: INFO - Classifier    : lstm+emb
+2020-05-20 02:56:22,452:: INFO - Balancing     : smote
+2020-05-20 02:56:22,452:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 02:56:22,452:: INFO - Metric        : val_accuracy
+2020-05-20 02:56:22,452:: INFO - Threshold     : 28
+2020-05-20 02:56:22,452:: INFO - Terms         : 150
+2020-05-20 02:56:22,536:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_train_data.csv
+2020-05-20 02:56:22,537:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_test_data.csv
+2020-05-20 02:56:22,537:: INFO - Reports in train - Total: 5751 Positive: 2859 (49.71% of total)
+2020-05-20 02:56:22,537:: INFO - Reports in train - Total: 5751 Negative: 2892 (50.29% of total)
+2020-05-20 02:56:22,537:: INFO - Reports in test - Total : 1915 Positive: 952 (49.71% of total)
+2020-05-20 02:56:24,230:: INFO - Bug reports long_description cleaned.
+2020-05-20 02:56:24,230:: INFO - Balancing data started
+2020-05-20 02:56:24,996:: INFO - BEFORE SMOTE:
+2020-05-20 02:56:24,996:: INFO - Reports shape    : data (5751, 150) label (5751, 2)
+2020-05-20 02:56:24,996:: INFO - Reports class distribution : 0 (2892) 1 (2859)
+2020-05-20 02:56:26,384:: INFO - AFTER SMOTE:
+2020-05-20 02:56:26,384:: INFO - Reports shape    : data (5784, 150) label (5784, 2)
+2020-05-20 02:56:26,384:: INFO - Reports class distribution : 0 (2892) 1 (2892)
+2020-05-20 02:56:26,651:: INFO - Shape of test data tensor : (1915, 150)
+2020-05-20 02:56:26,652:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 02:56:26,652:: INFO - Class distribution in test label tensor: 963(0) 952(1)
+2020-05-20 02:56:26,652:: INFO - Balancing data finished
+2020-05-20 02:56:26,652:: INFO - Trainning with k-folding started
+2020-05-20 02:56:26,654:: INFO - Builing model for Fold# 1 started
+2020-05-20 02:57:20,316:: INFO - Builing model for Fold# 1 finished
+2020-05-20 02:57:20,317:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:57:21,770:: INFO - Fold 1 score (balanced accuracy): 0.5446061996880435
+2020-05-20 02:57:21,771:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 02:57:21,773:: INFO - Builing model for Fold# 2 started
+2020-05-20 02:58:27,434:: INFO - Builing model for Fold# 2 finished
+2020-05-20 02:58:27,434:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:58:28,857:: INFO - Fold 2 score (balanced accuracy): 0.5799851790762023
+2020-05-20 02:58:28,857:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 02:58:28,859:: INFO - Builing model for Fold# 3 started
+2020-05-20 02:59:24,907:: INFO - Builing model for Fold# 3 finished
+2020-05-20 02:59:24,907:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:59:26,357:: INFO - Fold 3 score (balanced accuracy): 0.5660472357184264
+2020-05-20 02:59:26,357:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 02:59:26,359:: INFO - Builing model for Fold# 4 started
+2020-05-20 03:00:57,796:: INFO - Builing model for Fold# 4 finished
+2020-05-20 03:00:57,797:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:00:59,204:: INFO - Fold 4 score (balanced accuracy): 0.5937318847075557
+2020-05-20 03:00:59,204:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:00:59,206:: INFO - Builing model for Fold# 5 started
+2020-05-20 03:02:08,010:: INFO - Builing model for Fold# 5 finished
+2020-05-20 03:02:08,010:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:02:09,457:: INFO - Fold 5 score (balanced accuracy): 0.5752595155709342
+2020-05-20 03:02:09,457:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:02:09,462:: INFO - Builing model for Fold# 6 started
+2020-05-20 03:03:26,516:: INFO - Builing model for Fold# 6 finished
+2020-05-20 03:03:26,516:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 03:03:27,881:: INFO - Fold 6 score (balanced accuracy): 0.5687006591725383
+2020-05-20 03:03:27,882:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 03:03:27,884:: INFO - Builing model for Fold# 7 started
+2020-05-20 03:04:28,647:: INFO - Builing model for Fold# 7 finished
+2020-05-20 03:04:28,647:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 03:04:30,063:: INFO - Fold 7 score (balanced accuracy): 0.5869593799116721
+2020-05-20 03:04:30,064:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 03:04:30,066:: INFO - Builing model for Fold# 8 started
+2020-05-20 03:05:25,567:: INFO - Builing model for Fold# 8 finished
+2020-05-20 03:05:25,568:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 03:05:27,002:: INFO - Fold 8 score (balanced accuracy): 0.5651732195468862
+2020-05-20 03:05:27,002:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 03:05:27,004:: INFO - Builing model for Fold# 9 started
+2020-05-20 03:06:25,807:: INFO - Builing model for Fold# 9 finished
+2020-05-20 03:06:25,807:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 03:06:27,304:: INFO - Fold 9 score (balanced accuracy): 0.5721130573533895
+2020-05-20 03:06:27,305:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 03:06:27,307:: INFO - Builing model for Fold# 10 started
+2020-05-20 03:07:48,744:: INFO - Builing model for Fold# 10 finished
+2020-05-20 03:07:48,745:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 03:07:50,179:: INFO - Fold 10 score (balanced accuracy): 0.5544982698961938
+2020-05-20 03:07:50,179:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 03:07:50,179:: INFO - Evaluating final model started
+2020-05-20 03:07:50,179:: INFO - Best fold score (accuracy): 0.5937318847075557
+2020-05-20 03:07:52,733:: INFO - loss:0.7218453884124756
+2020-05-20 03:07:52,734:: INFO - tp:1039.0
+2020-05-20 03:07:52,734:: INFO - fp:895.0
+2020-05-20 03:07:52,734:: INFO - tn:1020.0
+2020-05-20 03:07:52,734:: INFO - fn:876.0
+2020-05-20 03:07:52,734:: INFO - accuracy:0.5375978946685791
+2020-05-20 03:07:52,734:: INFO - precision:0.537228524684906
+2020-05-20 03:07:52,734:: INFO - recall:0.5425587296485901
+2020-05-20 03:07:52,735:: INFO - auc:0.5416338443756104
+2020-05-20 03:07:52,735:: INFO - Balanced accuracy : 0.5403648219412376
+2020-05-20 03:07:52,735:: INFO - Evaluating final model finished
+2020-05-20 03:07:52,735:: INFO - Extracting evaluating metrics started
+2020-05-20 03:07:52,752:: INFO - Extracting evaluating metrics finished
+2020-05-20 03:07:52,752:: INFO - >> Starting prediction
+2020-05-20 03:07:52,752:: INFO - Dataset       : freedesktop
+2020-05-20 03:07:52,752:: INFO - Feature       : long_description
+2020-05-20 03:07:52,752:: INFO - Classifier    : lstm+emb
+2020-05-20 03:07:52,752:: INFO - Balancing     : smote
+2020-05-20 03:07:52,752:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 03:07:52,752:: INFO - Metric        : val_accuracy
+2020-05-20 03:07:52,752:: INFO - Threshold     : 173
+2020-05-20 03:07:52,752:: INFO - Terms         : 150
+2020-05-20 03:07:52,837:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_train_data.csv
+2020-05-20 03:07:52,837:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_test_data.csv
+2020-05-20 03:07:52,837:: INFO - Reports in train - Total: 5751 Positive: 1395 (24.26% of total)
+2020-05-20 03:07:52,837:: INFO - Reports in train - Total: 5751 Negative: 4356 (75.74% of total)
+2020-05-20 03:07:52,837:: INFO - Reports in test - Total : 1915 Positive: 464 (24.23% of total)
+2020-05-20 03:07:54,514:: INFO - Bug reports long_description cleaned.
+2020-05-20 03:07:54,514:: INFO - Balancing data started
+2020-05-20 03:07:55,322:: INFO - BEFORE SMOTE:
+2020-05-20 03:07:55,322:: INFO - Reports shape    : data (5751, 150) label (5751, 2)
+2020-05-20 03:07:55,323:: INFO - Reports class distribution : 0 (4356) 1 (1395)
+2020-05-20 03:07:55,676:: INFO - AFTER SMOTE:
+2020-05-20 03:07:55,677:: INFO - Reports shape    : data (8712, 150) label (8712, 2)
+2020-05-20 03:07:55,677:: INFO - Reports class distribution : 0 (4356) 1 (4356)
+2020-05-20 03:07:55,943:: INFO - Shape of test data tensor : (1915, 150)
+2020-05-20 03:07:55,943:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 03:07:55,943:: INFO - Class distribution in test label tensor: 1451(0) 464(1)
+2020-05-20 03:07:55,943:: INFO - Balancing data finished
+2020-05-20 03:07:55,943:: INFO - Trainning with k-folding started
+2020-05-20 03:07:55,946:: INFO - Builing model for Fold# 1 started
+2020-05-20 03:12:35,107:: INFO - Builing model for Fold# 1 finished
+2020-05-20 03:12:35,108:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 03:12:37,109:: INFO - Fold 1 score (balanced accuracy): 0.7275717829343051
+2020-05-20 03:12:37,109:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 03:12:37,111:: INFO - Builing model for Fold# 2 started
+2020-05-20 03:14:52,544:: INFO - Builing model for Fold# 2 finished
+2020-05-20 03:14:52,545:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 03:14:54,635:: INFO - Fold 2 score (balanced accuracy): 0.7245527391272291
+2020-05-20 03:14:54,635:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 03:14:54,638:: INFO - Builing model for Fold# 3 started
+2020-05-20 03:17:43,961:: INFO - Builing model for Fold# 3 finished
+2020-05-20 03:17:43,961:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 03:17:46,011:: INFO - Fold 3 score (balanced accuracy): 0.74052812858783
+2020-05-20 03:17:46,011:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 03:17:46,013:: INFO - Builing model for Fold# 4 started
+2020-05-20 03:21:18,872:: INFO - Builing model for Fold# 4 finished
+2020-05-20 03:21:18,872:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:21:20,868:: INFO - Fold 4 score (balanced accuracy): 0.7376578645235361
+2020-05-20 03:21:20,868:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:21:20,871:: INFO - Builing model for Fold# 5 started
+2020-05-20 03:25:36,849:: INFO - Builing model for Fold# 5 finished
+2020-05-20 03:25:36,850:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:25:38,966:: INFO - Fold 5 score (balanced accuracy): 0.7439724454649828
+2020-05-20 03:25:38,966:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:25:38,972:: INFO - Builing model for Fold# 6 started
+2020-05-20 03:29:27,950:: INFO - Builing model for Fold# 6 finished
+2020-05-20 03:29:27,951:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 03:29:30,082:: INFO - Fold 6 score (balanced accuracy): 0.7441824487302373
+2020-05-20 03:29:30,082:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 03:29:30,085:: INFO - Builing model for Fold# 7 started
+2020-05-20 03:31:39,405:: INFO - Builing model for Fold# 7 finished
+2020-05-20 03:31:39,405:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 03:31:41,539:: INFO - Fold 7 score (balanced accuracy): 0.7194073299697701
+2020-05-20 03:31:41,540:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 03:31:41,542:: INFO - Builing model for Fold# 8 started
+2020-05-20 03:35:52,848:: INFO - Builing model for Fold# 8 finished
+2020-05-20 03:35:52,848:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 03:35:54,878:: INFO - Fold 8 score (balanced accuracy): 0.7347876004592422
+2020-05-20 03:35:54,878:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 03:35:54,880:: INFO - Builing model for Fold# 9 started
+2020-05-20 03:38:45,518:: INFO - Builing model for Fold# 9 finished
+2020-05-20 03:38:45,519:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 03:38:47,653:: INFO - Fold 9 score (balanced accuracy): 0.7451205510907004
+2020-05-20 03:38:47,654:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 03:38:47,657:: INFO - Builing model for Fold# 10 started
+2020-05-20 03:40:57,077:: INFO - Builing model for Fold# 10 finished
+2020-05-20 03:40:57,077:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 03:40:59,213:: INFO - Fold 10 score (balanced accuracy): 0.722158438576349
+2020-05-20 03:40:59,214:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 03:40:59,214:: INFO - Evaluating final model started
+2020-05-20 03:40:59,214:: INFO - Best fold score (accuracy): 0.7451205510907004
+2020-05-20 03:41:01,845:: INFO - loss:1.93767249584198
+2020-05-20 03:41:01,846:: INFO - tp:661.0
+2020-05-20 03:41:01,846:: INFO - fp:1247.0
+2020-05-20 03:41:01,846:: INFO - tn:668.0
+2020-05-20 03:41:01,846:: INFO - fn:1254.0
+2020-05-20 03:41:01,846:: INFO - accuracy:0.34699738025665283
+2020-05-20 03:41:01,846:: INFO - precision:0.3464360535144806
+2020-05-20 03:41:01,847:: INFO - recall:0.34516972303390503
+2020-05-20 03:41:01,847:: INFO - auc:0.2940875291824341
+2020-05-20 03:41:01,847:: INFO - Balanced accuracy : 0.48306979134485134
+2020-05-20 03:41:01,847:: INFO - Evaluating final model finished
+2020-05-20 03:41:01,847:: INFO - Extracting evaluating metrics started
+2020-05-20 03:41:01,864:: INFO - Extracting evaluating metrics finished
+2020-05-20 03:41:01,865:: INFO - >> Starting prediction
+2020-05-20 03:41:01,865:: INFO - Dataset       : freedesktop
+2020-05-20 03:41:01,865:: INFO - Feature       : long_description
+2020-05-20 03:41:01,865:: INFO - Classifier    : lstm+emb
+2020-05-20 03:41:01,865:: INFO - Balancing     : smote
+2020-05-20 03:41:01,865:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 03:41:01,865:: INFO - Metric        : val_accuracy
+2020-05-20 03:41:01,865:: INFO - Threshold     : 162
+2020-05-20 03:41:01,865:: INFO - Terms         : 150
+2020-05-20 03:41:01,951:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_train_data.csv
+2020-05-20 03:41:01,951:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_test_data.csv
+2020-05-20 03:41:01,951:: INFO - Reports in train - Total: 5751 Positive: 1437 (24.99% of total)
+2020-05-20 03:41:01,951:: INFO - Reports in train - Total: 5751 Negative: 4314 (75.01% of total)
+2020-05-20 03:41:01,952:: INFO - Reports in test - Total : 1915 Positive: 478 (24.96% of total)
+2020-05-20 03:41:03,686:: INFO - Bug reports long_description cleaned.
+2020-05-20 03:41:03,687:: INFO - Balancing data started
+2020-05-20 03:41:04,515:: INFO - BEFORE SMOTE:
+2020-05-20 03:41:04,515:: INFO - Reports shape    : data (5751, 150) label (5751, 2)
+2020-05-20 03:41:04,515:: INFO - Reports class distribution : 0 (4314) 1 (1437)
+2020-05-20 03:41:04,886:: INFO - AFTER SMOTE:
+2020-05-20 03:41:04,886:: INFO - Reports shape    : data (8628, 150) label (8628, 2)
+2020-05-20 03:41:04,887:: INFO - Reports class distribution : 0 (4314) 1 (4314)
+2020-05-20 03:41:05,150:: INFO - Shape of test data tensor : (1915, 150)
+2020-05-20 03:41:05,150:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 03:41:05,150:: INFO - Class distribution in test label tensor: 1437(0) 478(1)
+2020-05-20 03:41:05,150:: INFO - Balancing data finished
+2020-05-20 03:41:05,150:: INFO - Trainning with k-folding started
+2020-05-20 03:41:05,153:: INFO - Builing model for Fold# 1 started
+2020-05-20 03:43:56,192:: INFO - Builing model for Fold# 1 finished
+2020-05-20 03:43:56,192:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 03:43:58,253:: INFO - Fold 1 score (balanced accuracy): 0.7294322132097335
+2020-05-20 03:43:58,253:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 03:43:58,256:: INFO - Builing model for Fold# 2 started
+2020-05-20 03:48:37,958:: INFO - Builing model for Fold# 2 finished
+2020-05-20 03:48:37,958:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 03:48:39,932:: INFO - Fold 2 score (balanced accuracy): 0.7421784472769408
+2020-05-20 03:48:39,932:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 03:48:39,935:: INFO - Builing model for Fold# 3 started
+2020-05-20 03:51:02,472:: INFO - Builing model for Fold# 3 finished
+2020-05-20 03:51:02,473:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 03:51:04,594:: INFO - Fold 3 score (balanced accuracy): 0.7137891077636154
+2020-05-20 03:51:04,594:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 03:51:04,597:: INFO - Builing model for Fold# 4 started
+2020-05-20 03:55:05,202:: INFO - Builing model for Fold# 4 finished
+2020-05-20 03:55:05,202:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:55:07,258:: INFO - Fold 4 score (balanced accuracy): 0.7449933190483744
+2020-05-20 03:55:07,258:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 03:55:07,261:: INFO - Builing model for Fold# 5 started
+2020-05-20 03:58:13,964:: INFO - Builing model for Fold# 5 finished
+2020-05-20 03:58:13,964:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:58:16,014:: INFO - Fold 5 score (balanced accuracy): 0.7187568052952926
+2020-05-20 03:58:16,014:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 03:58:16,020:: INFO - Builing model for Fold# 6 started
+2020-05-20 04:03:13,491:: INFO - Builing model for Fold# 6 finished
+2020-05-20 04:03:13,492:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 04:03:15,509:: INFO - Fold 6 score (balanced accuracy): 0.7369640787949016
+2020-05-20 04:03:15,509:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 04:03:15,512:: INFO - Builing model for Fold# 7 started
+2020-05-20 04:06:23,206:: INFO - Builing model for Fold# 7 finished
+2020-05-20 04:06:23,206:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 04:06:25,241:: INFO - Fold 7 score (balanced accuracy): 0.7468134414831982
+2020-05-20 04:06:25,241:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 04:06:25,244:: INFO - Builing model for Fold# 8 started
+2020-05-20 04:10:11,683:: INFO - Builing model for Fold# 8 finished
+2020-05-20 04:10:11,684:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 04:10:13,674:: INFO - Fold 8 score (balanced accuracy): 0.7224797219003476
+2020-05-20 04:10:13,674:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 04:10:13,677:: INFO - Builing model for Fold# 9 started
+2020-05-20 04:13:43,753:: INFO - Builing model for Fold# 9 finished
+2020-05-20 04:13:43,753:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 04:13:45,813:: INFO - Fold 9 score (balanced accuracy): 0.7363148032143846
+2020-05-20 04:13:45,813:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 04:13:45,815:: INFO - Builing model for Fold# 10 started
+2020-05-20 04:18:14,951:: INFO - Builing model for Fold# 10 finished
+2020-05-20 04:18:14,952:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 04:18:16,939:: INFO - Fold 10 score (balanced accuracy): 0.7332559490043097
+2020-05-20 04:18:16,940:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 04:18:16,940:: INFO - Evaluating final model started
+2020-05-20 04:18:16,940:: INFO - Best fold score (accuracy): 0.7468134414831982
+2020-05-20 04:18:19,480:: INFO - loss:1.3534646034240723
+2020-05-20 04:18:19,480:: INFO - tp:943.0
+2020-05-20 04:18:19,480:: INFO - fp:971.0
+2020-05-20 04:18:19,480:: INFO - tn:944.0
+2020-05-20 04:18:19,480:: INFO - fn:972.0
+2020-05-20 04:18:19,480:: INFO - accuracy:0.4926892817020416
+2020-05-20 04:18:19,481:: INFO - precision:0.492685467004776
+2020-05-20 04:18:19,481:: INFO - recall:0.492428183555603
+2020-05-20 04:18:19,481:: INFO - auc:0.4390052258968353
+2020-05-20 04:18:19,481:: INFO - Balanced accuracy : 0.5165951846449046
+2020-05-20 04:18:19,481:: INFO - Evaluating final model finished
+2020-05-20 04:18:19,481:: INFO - Extracting evaluating metrics started
+2020-05-20 04:18:19,497:: INFO - Extracting evaluating metrics finished
+2020-05-20 04:18:19,497:: INFO - >> Starting prediction
+2020-05-20 04:18:19,497:: INFO - Dataset       : freedesktop
+2020-05-20 04:18:19,497:: INFO - Feature       : long_description
+2020-05-20 04:18:19,497:: INFO - Classifier    : lstm+emb
+2020-05-20 04:18:19,497:: INFO - Balancing     : smote
+2020-05-20 04:18:19,497:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 04:18:19,498:: INFO - Metric        : val_accuracy
+2020-05-20 04:18:19,498:: INFO - Threshold     : 365
+2020-05-20 04:18:19,498:: INFO - Terms         : 150
+2020-05-20 04:18:19,583:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_train_data.csv
+2020-05-20 04:18:19,583:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_test_data.csv
+2020-05-20 04:18:19,583:: INFO - Reports in train - Total: 5750 Positive: 787 (13.69% of total)
+2020-05-20 04:18:19,583:: INFO - Reports in train - Total: 5750 Negative: 4963 (86.31% of total)
+2020-05-20 04:18:19,583:: INFO - Reports in test - Total : 1916 Positive: 262 (13.67% of total)
+2020-05-20 04:18:21,292:: INFO - Bug reports long_description cleaned.
+2020-05-20 04:18:21,292:: INFO - Balancing data started
+2020-05-20 04:18:22,073:: INFO - BEFORE SMOTE:
+2020-05-20 04:18:22,074:: INFO - Reports shape    : data (5750, 150) label (5750, 2)
+2020-05-20 04:18:22,074:: INFO - Reports class distribution : 0 (4963) 1 (787)
+2020-05-20 04:18:22,189:: INFO - AFTER SMOTE:
+2020-05-20 04:18:22,190:: INFO - Reports shape    : data (9926, 150) label (9926, 2)
+2020-05-20 04:18:22,190:: INFO - Reports class distribution : 0 (4963) 1 (4963)
+2020-05-20 04:18:22,441:: INFO - Shape of test data tensor : (1916, 150)
+2020-05-20 04:18:22,441:: INFO - Shape of test label tensor: (1916, 2)
+2020-05-20 04:18:22,441:: INFO - Class distribution in test label tensor: 1654(0) 262(1)
+2020-05-20 04:18:22,441:: INFO - Balancing data finished
+2020-05-20 04:18:22,441:: INFO - Trainning with k-folding started
+2020-05-20 04:18:22,444:: INFO - Builing model for Fold# 1 started
+2020-05-20 04:22:55,221:: INFO - Builing model for Fold# 1 finished
+2020-05-20 04:22:55,221:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 04:22:57,536:: INFO - Fold 1 score (balanced accuracy): 0.8182275931520644
+2020-05-20 04:22:57,536:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 04:22:57,540:: INFO - Builing model for Fold# 2 started
+2020-05-20 04:26:35,481:: INFO - Builing model for Fold# 2 finished
+2020-05-20 04:26:35,481:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 04:26:37,787:: INFO - Fold 2 score (balanced accuracy): 0.8281757585355554
+2020-05-20 04:26:37,787:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 04:26:37,790:: INFO - Builing model for Fold# 3 started
+2020-05-20 04:30:39,180:: INFO - Builing model for Fold# 3 finished
+2020-05-20 04:30:39,180:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 04:30:41,582:: INFO - Fold 3 score (balanced accuracy): 0.8327201702238248
+2020-05-20 04:30:41,582:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 04:30:41,585:: INFO - Builing model for Fold# 4 started
+2020-05-20 04:35:12,988:: INFO - Builing model for Fold# 4 finished
+2020-05-20 04:35:12,989:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 04:35:15,310:: INFO - Fold 4 score (balanced accuracy): 0.8383239125491342
+2020-05-20 04:35:15,311:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 04:35:15,313:: INFO - Builing model for Fold# 5 started
+2020-05-20 04:38:57,279:: INFO - Builing model for Fold# 5 finished
+2020-05-20 04:38:57,280:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 04:38:59,653:: INFO - Fold 5 score (balanced accuracy): 0.8201919484780561
+2020-05-20 04:38:59,654:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 04:38:59,659:: INFO - Builing model for Fold# 6 started
+2020-05-20 04:43:48,795:: INFO - Builing model for Fold# 6 finished
+2020-05-20 04:43:48,795:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 04:43:51,127:: INFO - Fold 6 score (balanced accuracy): 0.8323262839879154
+2020-05-20 04:43:51,127:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 04:43:51,130:: INFO - Builing model for Fold# 7 started
+2020-05-20 04:49:47,755:: INFO - Builing model for Fold# 7 finished
+2020-05-20 04:49:47,755:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 04:49:50,124:: INFO - Fold 7 score (balanced accuracy): 0.8246510858265926
+2020-05-20 04:49:50,124:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 04:49:50,127:: INFO - Builing model for Fold# 8 started
+2020-05-20 04:52:57,475:: INFO - Builing model for Fold# 8 finished
+2020-05-20 04:52:57,476:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 04:52:59,808:: INFO - Fold 8 score (balanced accuracy): 0.8085281445927948
+2020-05-20 04:52:59,809:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 04:52:59,812:: INFO - Builing model for Fold# 9 started
+2020-05-20 04:59:19,751:: INFO - Builing model for Fold# 9 finished
+2020-05-20 04:59:19,751:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 04:59:22,147:: INFO - Fold 9 score (balanced accuracy): 0.8257312274632103
+2020-05-20 04:59:22,147:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 04:59:22,150:: INFO - Builing model for Fold# 10 started
+2020-05-20 05:04:25,913:: INFO - Builing model for Fold# 10 finished
+2020-05-20 05:04:25,913:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 05:04:28,304:: INFO - Fold 10 score (balanced accuracy): 0.8282458053146217
+2020-05-20 05:04:28,304:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 05:04:28,304:: INFO - Evaluating final model started
+2020-05-20 05:04:28,304:: INFO - Best fold score (accuracy): 0.8383239125491342
+2020-05-20 05:04:30,819:: INFO - loss:2.0706889629364014
+2020-05-20 05:04:30,819:: INFO - tp:716.0
+2020-05-20 05:04:30,819:: INFO - fp:1197.0
+2020-05-20 05:04:30,819:: INFO - tn:719.0
+2020-05-20 05:04:30,819:: INFO - fn:1200.0
+2020-05-20 05:04:30,819:: INFO - accuracy:0.3744780719280243
+2020-05-20 05:04:30,820:: INFO - precision:0.37428122758865356
+2020-05-20 05:04:30,820:: INFO - recall:0.3736951947212219
+2020-05-20 05:04:30,820:: INFO - auc:0.28796088695526123
+2020-05-20 05:04:30,820:: INFO - Balanced accuracy : 0.49029417465870384
+2020-05-20 05:04:30,820:: INFO - Evaluating final model finished
+2020-05-20 05:04:30,820:: INFO - Extracting evaluating metrics started
+2020-05-20 05:04:30,836:: INFO - Extracting evaluating metrics finished
+2020-05-20 05:04:30,836:: INFO - >> Starting prediction
+2020-05-20 05:04:30,836:: INFO - Dataset       : freedesktop
+2020-05-20 05:04:30,836:: INFO - Feature       : long_description
+2020-05-20 05:04:30,836:: INFO - Classifier    : lstm+emb
+2020-05-20 05:04:30,836:: INFO - Balancing     : smote
+2020-05-20 05:04:30,836:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 05:04:30,836:: INFO - Metric        : val_accuracy
+2020-05-20 05:04:30,836:: INFO - Threshold     : 28
+2020-05-20 05:04:30,836:: INFO - Terms         : 200
+2020-05-20 05:04:30,917:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_train_data.csv
+2020-05-20 05:04:30,917:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_test_data.csv
+2020-05-20 05:04:30,917:: INFO - Reports in train - Total: 5751 Positive: 2859 (49.71% of total)
+2020-05-20 05:04:30,918:: INFO - Reports in train - Total: 5751 Negative: 2892 (50.29% of total)
+2020-05-20 05:04:30,918:: INFO - Reports in test - Total : 1915 Positive: 952 (49.71% of total)
+2020-05-20 05:04:32,616:: INFO - Bug reports long_description cleaned.
+2020-05-20 05:04:32,617:: INFO - Balancing data started
+2020-05-20 05:04:33,417:: INFO - BEFORE SMOTE:
+2020-05-20 05:04:33,417:: INFO - Reports shape    : data (5751, 200) label (5751, 2)
+2020-05-20 05:04:33,418:: INFO - Reports class distribution : 0 (2892) 1 (2859)
+2020-05-20 05:04:35,274:: INFO - AFTER SMOTE:
+2020-05-20 05:04:35,274:: INFO - Reports shape    : data (5784, 200) label (5784, 2)
+2020-05-20 05:04:35,275:: INFO - Reports class distribution : 0 (2892) 1 (2892)
+2020-05-20 05:04:35,545:: INFO - Shape of test data tensor : (1915, 200)
+2020-05-20 05:04:35,545:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 05:04:35,545:: INFO - Class distribution in test label tensor: 963(0) 952(1)
+2020-05-20 05:04:35,545:: INFO - Balancing data finished
+2020-05-20 05:04:35,545:: INFO - Trainning with k-folding started
+2020-05-20 05:04:35,547:: INFO - Builing model for Fold# 1 started
+2020-05-20 05:05:40,129:: INFO - Builing model for Fold# 1 finished
+2020-05-20 05:05:40,129:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 05:05:42,019:: INFO - Fold 1 score (balanced accuracy): 0.5566810692579378
+2020-05-20 05:05:42,020:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 05:05:42,022:: INFO - Builing model for Fold# 2 started
+2020-05-20 05:07:44,887:: INFO - Builing model for Fold# 2 finished
+2020-05-20 05:07:44,887:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 05:07:46,716:: INFO - Fold 2 score (balanced accuracy): 0.5807964453687601
+2020-05-20 05:07:46,716:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 05:07:46,718:: INFO - Builing model for Fold# 3 started
+2020-05-20 05:09:00,769:: INFO - Builing model for Fold# 3 finished
+2020-05-20 05:09:00,769:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 05:09:02,638:: INFO - Fold 3 score (balanced accuracy): 0.5746887904811422
+2020-05-20 05:09:02,638:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 05:09:02,641:: INFO - Builing model for Fold# 4 started
+2020-05-20 05:10:49,601:: INFO - Builing model for Fold# 4 finished
+2020-05-20 05:10:49,602:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 05:10:51,428:: INFO - Fold 4 score (balanced accuracy): 0.592058554601359
+2020-05-20 05:10:51,428:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 05:10:51,431:: INFO - Builing model for Fold# 5 started
+2020-05-20 05:12:29,905:: INFO - Builing model for Fold# 5 finished
+2020-05-20 05:12:29,905:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 05:12:31,780:: INFO - Fold 5 score (balanced accuracy): 0.5752595155709342
+2020-05-20 05:12:31,780:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 05:12:31,785:: INFO - Builing model for Fold# 6 started
+2020-05-20 05:13:59,744:: INFO - Builing model for Fold# 6 finished
+2020-05-20 05:13:59,744:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 05:14:01,495:: INFO - Fold 6 score (balanced accuracy): 0.5600859972151007
+2020-05-20 05:14:01,495:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 05:14:01,497:: INFO - Builing model for Fold# 7 started
+2020-05-20 05:15:05,796:: INFO - Builing model for Fold# 7 finished
+2020-05-20 05:15:05,797:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 05:15:07,648:: INFO - Fold 7 score (balanced accuracy): 0.5850948120790529
+2020-05-20 05:15:07,648:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 05:15:07,651:: INFO - Builing model for Fold# 8 started
+2020-05-20 05:16:14,924:: INFO - Builing model for Fold# 8 finished
+2020-05-20 05:16:14,925:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 05:16:16,792:: INFO - Fold 8 score (balanced accuracy): 0.5798566912287622
+2020-05-20 05:16:16,793:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 05:16:16,795:: INFO - Builing model for Fold# 9 started
+2020-05-20 05:17:19,947:: INFO - Builing model for Fold# 9 finished
+2020-05-20 05:17:19,948:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 05:17:21,873:: INFO - Fold 9 score (balanced accuracy): 0.5739148753070262
+2020-05-20 05:17:21,873:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 05:17:21,875:: INFO - Builing model for Fold# 10 started
+2020-05-20 05:18:50,826:: INFO - Builing model for Fold# 10 finished
+2020-05-20 05:18:50,826:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 05:18:52,564:: INFO - Fold 10 score (balanced accuracy): 0.5562283737024222
+2020-05-20 05:18:52,565:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 05:18:52,565:: INFO - Evaluating final model started
+2020-05-20 05:18:52,565:: INFO - Best fold score (accuracy): 0.592058554601359
+2020-05-20 05:18:55,870:: INFO - loss:0.7096961736679077
+2020-05-20 05:18:55,871:: INFO - tp:1006.0
+2020-05-20 05:18:55,871:: INFO - fp:916.0
+2020-05-20 05:18:55,871:: INFO - tn:999.0
+2020-05-20 05:18:55,871:: INFO - fn:909.0
+2020-05-20 05:18:55,871:: INFO - accuracy:0.5234987139701843
+2020-05-20 05:18:55,871:: INFO - precision:0.5234131217002869
+2020-05-20 05:18:55,871:: INFO - recall:0.5253263711929321
+2020-05-20 05:18:55,871:: INFO - auc:0.540016770362854
+2020-05-20 05:18:55,871:: INFO - Balanced accuracy : 0.5240620391458763
+2020-05-20 05:18:55,871:: INFO - Evaluating final model finished
+2020-05-20 05:18:55,871:: INFO - Extracting evaluating metrics started
+2020-05-20 05:18:55,887:: INFO - Extracting evaluating metrics finished
+2020-05-20 05:18:55,887:: INFO - >> Starting prediction
+2020-05-20 05:18:55,887:: INFO - Dataset       : freedesktop
+2020-05-20 05:18:55,887:: INFO - Feature       : long_description
+2020-05-20 05:18:55,887:: INFO - Classifier    : lstm+emb
+2020-05-20 05:18:55,887:: INFO - Balancing     : smote
+2020-05-20 05:18:55,887:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 05:18:55,887:: INFO - Metric        : val_accuracy
+2020-05-20 05:18:55,888:: INFO - Threshold     : 173
+2020-05-20 05:18:55,888:: INFO - Terms         : 200
+2020-05-20 05:18:55,974:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_train_data.csv
+2020-05-20 05:18:55,974:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_test_data.csv
+2020-05-20 05:18:55,974:: INFO - Reports in train - Total: 5751 Positive: 1395 (24.26% of total)
+2020-05-20 05:18:55,974:: INFO - Reports in train - Total: 5751 Negative: 4356 (75.74% of total)
+2020-05-20 05:18:55,975:: INFO - Reports in test - Total : 1915 Positive: 464 (24.23% of total)
+2020-05-20 05:18:57,657:: INFO - Bug reports long_description cleaned.
+2020-05-20 05:18:57,657:: INFO - Balancing data started
+2020-05-20 05:18:58,450:: INFO - BEFORE SMOTE:
+2020-05-20 05:18:58,450:: INFO - Reports shape    : data (5751, 200) label (5751, 2)
+2020-05-20 05:18:58,451:: INFO - Reports class distribution : 0 (4356) 1 (1395)
+2020-05-20 05:18:58,920:: INFO - AFTER SMOTE:
+2020-05-20 05:18:58,920:: INFO - Reports shape    : data (8712, 200) label (8712, 2)
+2020-05-20 05:18:58,920:: INFO - Reports class distribution : 0 (4356) 1 (4356)
+2020-05-20 05:18:59,183:: INFO - Shape of test data tensor : (1915, 200)
+2020-05-20 05:18:59,183:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 05:18:59,183:: INFO - Class distribution in test label tensor: 1451(0) 464(1)
+2020-05-20 05:18:59,183:: INFO - Balancing data finished
+2020-05-20 05:18:59,183:: INFO - Trainning with k-folding started
+2020-05-20 05:18:59,186:: INFO - Builing model for Fold# 1 started
+2020-05-20 05:22:59,666:: INFO - Builing model for Fold# 1 finished
+2020-05-20 05:22:59,666:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 05:23:02,148:: INFO - Fold 1 score (balanced accuracy): 0.7459144819305028
+2020-05-20 05:23:02,148:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 05:23:02,151:: INFO - Builing model for Fold# 2 started
+2020-05-20 05:25:46,009:: INFO - Builing model for Fold# 2 finished
+2020-05-20 05:25:46,010:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 05:25:48,575:: INFO - Fold 2 score (balanced accuracy): 0.7279898145124764
+2020-05-20 05:25:48,575:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 05:25:48,578:: INFO - Builing model for Fold# 3 started
+2020-05-20 05:29:23,067:: INFO - Builing model for Fold# 3 finished
+2020-05-20 05:29:23,067:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 05:29:25,611:: INFO - Fold 3 score (balanced accuracy): 0.7606199770378874
+2020-05-20 05:29:25,612:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 05:29:25,615:: INFO - Builing model for Fold# 4 started
+2020-05-20 05:35:38,477:: INFO - Builing model for Fold# 4 finished
+2020-05-20 05:35:38,477:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 05:35:41,326:: INFO - Fold 4 score (balanced accuracy): 0.746268656716418
+2020-05-20 05:35:41,326:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 05:35:41,330:: INFO - Builing model for Fold# 5 started
+2020-05-20 05:40:53,589:: INFO - Builing model for Fold# 5 finished
+2020-05-20 05:40:53,589:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 05:40:56,267:: INFO - Fold 5 score (balanced accuracy): 0.7462686567164178
+2020-05-20 05:40:56,267:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 05:40:56,273:: INFO - Builing model for Fold# 6 started
+2020-05-20 05:45:05,804:: INFO - Builing model for Fold# 6 finished
+2020-05-20 05:45:05,804:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 05:45:08,464:: INFO - Fold 6 score (balanced accuracy): 0.7504891298623326
+2020-05-20 05:45:08,464:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 05:45:08,468:: INFO - Builing model for Fold# 7 started
+2020-05-20 05:50:13,380:: INFO - Builing model for Fold# 7 finished
+2020-05-20 05:50:13,380:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 05:50:15,917:: INFO - Fold 7 score (balanced accuracy): 0.7354439429528434
+2020-05-20 05:50:15,917:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 05:50:15,921:: INFO - Builing model for Fold# 8 started
+2020-05-20 05:52:36,224:: INFO - Builing model for Fold# 8 finished
+2020-05-20 05:52:36,224:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 05:52:38,808:: INFO - Fold 8 score (balanced accuracy): 0.7416762342135477
+2020-05-20 05:52:38,808:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 05:52:38,811:: INFO - Builing model for Fold# 9 started
+2020-05-20 05:57:45,588:: INFO - Builing model for Fold# 9 finished
+2020-05-20 05:57:45,589:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 05:57:48,207:: INFO - Fold 9 score (balanced accuracy): 0.7456946039035591
+2020-05-20 05:57:48,208:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 05:57:48,211:: INFO - Builing model for Fold# 10 started
+2020-05-20 06:03:27,031:: INFO - Builing model for Fold# 10 finished
+2020-05-20 06:03:27,031:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 06:03:30,187:: INFO - Fold 10 score (balanced accuracy): 0.7554535017221584
+2020-05-20 06:03:30,188:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 06:03:30,188:: INFO - Evaluating final model started
+2020-05-20 06:03:30,188:: INFO - Best fold score (accuracy): 0.7606199770378874
+2020-05-20 06:03:33,514:: INFO - loss:1.6418426036834717
+2020-05-20 06:03:33,514:: INFO - tp:705.0
+2020-05-20 06:03:33,514:: INFO - fp:1213.0
+2020-05-20 06:03:33,515:: INFO - tn:702.0
+2020-05-20 06:03:33,515:: INFO - fn:1210.0
+2020-05-20 06:03:33,515:: INFO - accuracy:0.367362916469574
+2020-05-20 06:03:33,515:: INFO - precision:0.3675704002380371
+2020-05-20 06:03:33,515:: INFO - recall:0.36814621090888977
+2020-05-20 06:03:33,515:: INFO - auc:0.30943000316619873
+2020-05-20 06:03:33,515:: INFO - Balanced accuracy : 0.4987954205185484
+2020-05-20 06:03:33,515:: INFO - Evaluating final model finished
+2020-05-20 06:03:33,515:: INFO - Extracting evaluating metrics started
+2020-05-20 06:03:33,534:: INFO - Extracting evaluating metrics finished
+2020-05-20 06:03:33,534:: INFO - >> Starting prediction
+2020-05-20 06:03:33,534:: INFO - Dataset       : freedesktop
+2020-05-20 06:03:33,534:: INFO - Feature       : long_description
+2020-05-20 06:03:33,534:: INFO - Classifier    : lstm+emb
+2020-05-20 06:03:33,535:: INFO - Balancing     : smote
+2020-05-20 06:03:33,535:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 06:03:33,535:: INFO - Metric        : val_accuracy
+2020-05-20 06:03:33,535:: INFO - Threshold     : 162
+2020-05-20 06:03:33,535:: INFO - Terms         : 200
+2020-05-20 06:03:33,622:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_train_data.csv
+2020-05-20 06:03:33,622:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_test_data.csv
+2020-05-20 06:03:33,623:: INFO - Reports in train - Total: 5751 Positive: 1437 (24.99% of total)
+2020-05-20 06:03:33,623:: INFO - Reports in train - Total: 5751 Negative: 4314 (75.01% of total)
+2020-05-20 06:03:33,623:: INFO - Reports in test - Total : 1915 Positive: 478 (24.96% of total)
+2020-05-20 06:03:35,351:: INFO - Bug reports long_description cleaned.
+2020-05-20 06:03:35,351:: INFO - Balancing data started
+2020-05-20 06:03:36,201:: INFO - BEFORE SMOTE:
+2020-05-20 06:03:36,201:: INFO - Reports shape    : data (5751, 200) label (5751, 2)
+2020-05-20 06:03:36,201:: INFO - Reports class distribution : 0 (4314) 1 (1437)
+2020-05-20 06:03:36,710:: INFO - AFTER SMOTE:
+2020-05-20 06:03:36,710:: INFO - Reports shape    : data (8628, 200) label (8628, 2)
+2020-05-20 06:03:36,710:: INFO - Reports class distribution : 0 (4314) 1 (4314)
+2020-05-20 06:03:36,979:: INFO - Shape of test data tensor : (1915, 200)
+2020-05-20 06:03:36,979:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 06:03:36,979:: INFO - Class distribution in test label tensor: 1437(0) 478(1)
+2020-05-20 06:03:36,979:: INFO - Balancing data finished
+2020-05-20 06:03:36,979:: INFO - Trainning with k-folding started
+2020-05-20 06:03:36,982:: INFO - Builing model for Fold# 1 started
+2020-05-20 06:08:28,144:: INFO - Builing model for Fold# 1 finished
+2020-05-20 06:08:28,144:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 06:08:30,822:: INFO - Fold 1 score (balanced accuracy): 0.7520278099652375
+2020-05-20 06:08:30,823:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 06:08:30,826:: INFO - Builing model for Fold# 2 started
+2020-05-20 06:13:04,005:: INFO - Builing model for Fold# 2 finished
+2020-05-20 06:13:04,006:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 06:13:06,620:: INFO - Fold 2 score (balanced accuracy): 0.7531865585168018
+2020-05-20 06:13:06,620:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 06:13:06,624:: INFO - Builing model for Fold# 3 started
+2020-05-20 06:17:53,035:: INFO - Builing model for Fold# 3 finished
+2020-05-20 06:17:53,035:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 06:17:55,696:: INFO - Fold 3 score (balanced accuracy): 0.7398609501738123
+2020-05-20 06:17:55,696:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 06:17:55,699:: INFO - Builing model for Fold# 4 started
+2020-05-20 06:23:23,223:: INFO - Builing model for Fold# 4 finished
+2020-05-20 06:23:23,223:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 06:23:25,973:: INFO - Fold 4 score (balanced accuracy): 0.7681682900796606
+2020-05-20 06:23:25,973:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 06:23:25,977:: INFO - Builing model for Fold# 5 started
+2020-05-20 06:28:18,276:: INFO - Builing model for Fold# 5 finished
+2020-05-20 06:28:18,277:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 06:28:20,928:: INFO - Fold 5 score (balanced accuracy): 0.7326832960078289
+2020-05-20 06:28:20,928:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 06:28:20,935:: INFO - Builing model for Fold# 6 started
+2020-05-20 06:31:35,914:: INFO - Builing model for Fold# 6 finished
+2020-05-20 06:31:35,914:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 06:31:38,446:: INFO - Fold 6 score (balanced accuracy): 0.7479721900347625
+2020-05-20 06:31:38,446:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 06:31:38,450:: INFO - Builing model for Fold# 7 started
+2020-05-20 06:33:44,697:: INFO - Builing model for Fold# 7 finished
+2020-05-20 06:33:44,697:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 06:33:47,280:: INFO - Fold 7 score (balanced accuracy): 0.7224797219003476
+2020-05-20 06:33:47,280:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 06:33:47,283:: INFO - Builing model for Fold# 8 started
+2020-05-20 06:38:06,851:: INFO - Builing model for Fold# 8 finished
+2020-05-20 06:38:06,852:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 06:38:09,485:: INFO - Fold 8 score (balanced accuracy): 0.7410196987253765
+2020-05-20 06:38:09,486:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 06:38:09,489:: INFO - Builing model for Fold# 9 started
+2020-05-20 06:42:09,308:: INFO - Builing model for Fold# 9 finished
+2020-05-20 06:42:09,308:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 06:42:11,990:: INFO - Fold 9 score (balanced accuracy): 0.7496363787897933
+2020-05-20 06:42:11,990:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 06:42:11,993:: INFO - Builing model for Fold# 10 started
+2020-05-20 06:48:01,115:: INFO - Builing model for Fold# 10 finished
+2020-05-20 06:48:01,116:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 06:48:03,726:: INFO - Fold 10 score (balanced accuracy): 0.7500846881191978
+2020-05-20 06:48:03,726:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 06:48:03,726:: INFO - Evaluating final model started
+2020-05-20 06:48:03,726:: INFO - Best fold score (accuracy): 0.7681682900796606
+2020-05-20 06:48:07,296:: INFO - loss:1.459190845489502
+2020-05-20 06:48:07,297:: INFO - tp:915.0
+2020-05-20 06:48:07,297:: INFO - fp:998.0
+2020-05-20 06:48:07,297:: INFO - tn:917.0
+2020-05-20 06:48:07,297:: INFO - fn:1000.0
+2020-05-20 06:48:07,297:: INFO - accuracy:0.47832897305488586
+2020-05-20 06:48:07,297:: INFO - precision:0.4783063232898712
+2020-05-20 06:48:07,297:: INFO - recall:0.47780677676200867
+2020-05-20 06:48:07,297:: INFO - auc:0.4107498228549957
+2020-05-20 06:48:07,298:: INFO - Balanced accuracy : 0.5351149972484517
+2020-05-20 06:48:07,298:: INFO - Evaluating final model finished
+2020-05-20 06:48:07,298:: INFO - Extracting evaluating metrics started
+2020-05-20 06:48:07,316:: INFO - Extracting evaluating metrics finished
+2020-05-20 06:48:07,316:: INFO - >> Starting prediction
+2020-05-20 06:48:07,316:: INFO - Dataset       : freedesktop
+2020-05-20 06:48:07,316:: INFO - Feature       : long_description
+2020-05-20 06:48:07,316:: INFO - Classifier    : lstm+emb
+2020-05-20 06:48:07,316:: INFO - Balancing     : smote
+2020-05-20 06:48:07,316:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 06:48:07,316:: INFO - Metric        : val_accuracy
+2020-05-20 06:48:07,316:: INFO - Threshold     : 365
+2020-05-20 06:48:07,316:: INFO - Terms         : 200
+2020-05-20 06:48:07,398:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_train_data.csv
+2020-05-20 06:48:07,398:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_test_data.csv
+2020-05-20 06:48:07,398:: INFO - Reports in train - Total: 5750 Positive: 787 (13.69% of total)
+2020-05-20 06:48:07,398:: INFO - Reports in train - Total: 5750 Negative: 4963 (86.31% of total)
+2020-05-20 06:48:07,398:: INFO - Reports in test - Total : 1916 Positive: 262 (13.67% of total)
+2020-05-20 06:48:09,080:: INFO - Bug reports long_description cleaned.
+2020-05-20 06:48:09,080:: INFO - Balancing data started
+2020-05-20 06:48:09,884:: INFO - BEFORE SMOTE:
+2020-05-20 06:48:09,885:: INFO - Reports shape    : data (5750, 200) label (5750, 2)
+2020-05-20 06:48:09,885:: INFO - Reports class distribution : 0 (4963) 1 (787)
+2020-05-20 06:48:10,034:: INFO - AFTER SMOTE:
+2020-05-20 06:48:10,034:: INFO - Reports shape    : data (9926, 200) label (9926, 2)
+2020-05-20 06:48:10,034:: INFO - Reports class distribution : 0 (4963) 1 (4963)
+2020-05-20 06:48:10,293:: INFO - Shape of test data tensor : (1916, 200)
+2020-05-20 06:48:10,293:: INFO - Shape of test label tensor: (1916, 2)
+2020-05-20 06:48:10,293:: INFO - Class distribution in test label tensor: 1654(0) 262(1)
+2020-05-20 06:48:10,293:: INFO - Balancing data finished
+2020-05-20 06:48:10,293:: INFO - Trainning with k-folding started
+2020-05-20 06:48:10,296:: INFO - Builing model for Fold# 1 started
+2020-05-20 06:56:09,637:: INFO - Builing model for Fold# 1 finished
+2020-05-20 06:56:09,638:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 06:56:12,791:: INFO - Fold 1 score (balanced accuracy): 0.823262839879154
+2020-05-20 06:56:12,791:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 06:56:12,794:: INFO - Builing model for Fold# 2 started
+2020-05-20 07:00:32,143:: INFO - Builing model for Fold# 2 finished
+2020-05-20 07:00:32,144:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 07:00:35,295:: INFO - Fold 2 score (balanced accuracy): 0.8322136000389826
+2020-05-20 07:00:35,296:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 07:00:35,300:: INFO - Builing model for Fold# 3 started
+2020-05-20 07:07:46,001:: INFO - Builing model for Fold# 3 finished
+2020-05-20 07:07:46,002:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 07:07:49,035:: INFO - Fold 3 score (balanced accuracy): 0.8443032680375532
+2020-05-20 07:07:49,036:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 07:07:49,040:: INFO - Builing model for Fold# 4 started
+2020-05-20 07:13:15,845:: INFO - Builing model for Fold# 4 finished
+2020-05-20 07:13:15,845:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 07:13:18,834:: INFO - Fold 4 score (balanced accuracy): 0.8413409999025436
+2020-05-20 07:13:18,834:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 07:13:18,838:: INFO - Builing model for Fold# 5 started
+2020-05-20 07:18:03,604:: INFO - Builing model for Fold# 5 finished
+2020-05-20 07:18:03,605:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 07:18:06,499:: INFO - Fold 5 score (balanced accuracy): 0.8282442825585551
+2020-05-20 07:18:06,499:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 07:18:06,503:: INFO - Builing model for Fold# 6 started
+2020-05-20 07:23:33,289:: INFO - Builing model for Fold# 6 finished
+2020-05-20 07:23:33,289:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 07:23:36,272:: INFO - Fold 6 score (balanced accuracy): 0.8373615307150051
+2020-05-20 07:23:36,273:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 07:23:36,276:: INFO - Builing model for Fold# 7 started
+2020-05-20 07:31:37,520:: INFO - Builing model for Fold# 7 finished
+2020-05-20 07:31:37,520:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 07:31:40,433:: INFO - Fold 7 score (balanced accuracy): 0.8402786237533704
+2020-05-20 07:31:40,433:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 07:31:40,437:: INFO - Builing model for Fold# 8 started
+2020-05-20 07:38:47,223:: INFO - Builing model for Fold# 8 finished
+2020-05-20 07:38:47,223:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 07:38:50,073:: INFO - Fold 8 score (balanced accuracy): 0.8241506066660169
+2020-05-20 07:38:50,073:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 07:38:50,077:: INFO - Builing model for Fold# 9 started
+2020-05-20 07:42:54,098:: INFO - Builing model for Fold# 9 finished
+2020-05-20 07:42:54,098:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 07:42:56,887:: INFO - Fold 9 score (balanced accuracy): 0.8186783289477959
+2020-05-20 07:42:56,887:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 07:42:56,891:: INFO - Builing model for Fold# 10 started
+2020-05-20 07:47:00,524:: INFO - Builing model for Fold# 10 finished
+2020-05-20 07:47:00,524:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 07:47:03,561:: INFO - Fold 10 score (balanced accuracy): 0.8287472996459084
+2020-05-20 07:47:03,561:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 07:47:03,561:: INFO - Evaluating final model started
+2020-05-20 07:47:03,561:: INFO - Best fold score (accuracy): 0.8443032680375532
+2020-05-20 07:47:06,993:: INFO - loss:2.206845760345459
+2020-05-20 07:47:06,993:: INFO - tp:683.0
+2020-05-20 07:47:06,993:: INFO - fp:1240.0
+2020-05-20 07:47:06,993:: INFO - tn:676.0
+2020-05-20 07:47:06,993:: INFO - fn:1233.0
+2020-05-20 07:47:06,993:: INFO - accuracy:0.35464510321617126
+2020-05-20 07:47:06,993:: INFO - precision:0.3551742136478424
+2020-05-20 07:47:06,994:: INFO - recall:0.35647180676460266
+2020-05-20 07:47:06,994:: INFO - auc:0.26545071601867676
+2020-05-20 07:47:06,994:: INFO - Balanced accuracy : 0.5129318699982462
+2020-05-20 07:47:06,994:: INFO - Evaluating final model finished
+2020-05-20 07:47:06,994:: INFO - Extracting evaluating metrics started
+2020-05-20 07:47:07,013:: INFO - Extracting evaluating metrics finished
+2020-05-20 07:47:07,013:: INFO - >> Starting prediction
+2020-05-20 07:47:07,013:: INFO - Dataset       : freedesktop
+2020-05-20 07:47:07,013:: INFO - Feature       : long_description
+2020-05-20 07:47:07,013:: INFO - Classifier    : lstm+emb
+2020-05-20 07:47:07,013:: INFO - Balancing     : smote
+2020-05-20 07:47:07,013:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 07:47:07,013:: INFO - Metric        : val_accuracy
+2020-05-20 07:47:07,013:: INFO - Threshold     : 28
+2020-05-20 07:47:07,013:: INFO - Terms         : 250
+2020-05-20 07:47:07,100:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_train_data.csv
+2020-05-20 07:47:07,100:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_test_data.csv
+2020-05-20 07:47:07,100:: INFO - Reports in train - Total: 5751 Positive: 2859 (49.71% of total)
+2020-05-20 07:47:07,100:: INFO - Reports in train - Total: 5751 Negative: 2892 (50.29% of total)
+2020-05-20 07:47:07,100:: INFO - Reports in test - Total : 1915 Positive: 952 (49.71% of total)
+2020-05-20 07:47:08,832:: INFO - Bug reports long_description cleaned.
+2020-05-20 07:47:08,832:: INFO - Balancing data started
+2020-05-20 07:47:09,637:: INFO - BEFORE SMOTE:
+2020-05-20 07:47:09,637:: INFO - Reports shape    : data (5751, 250) label (5751, 2)
+2020-05-20 07:47:09,637:: INFO - Reports class distribution : 0 (2892) 1 (2859)
+2020-05-20 07:47:12,083:: INFO - AFTER SMOTE:
+2020-05-20 07:47:12,083:: INFO - Reports shape    : data (5784, 250) label (5784, 2)
+2020-05-20 07:47:12,084:: INFO - Reports class distribution : 0 (2892) 1 (2892)
+2020-05-20 07:47:12,358:: INFO - Shape of test data tensor : (1915, 250)
+2020-05-20 07:47:12,358:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 07:47:12,358:: INFO - Class distribution in test label tensor: 963(0) 952(1)
+2020-05-20 07:47:12,358:: INFO - Balancing data finished
+2020-05-20 07:47:12,358:: INFO - Trainning with k-folding started
+2020-05-20 07:47:12,361:: INFO - Builing model for Fold# 1 started
+2020-05-20 07:48:34,315:: INFO - Builing model for Fold# 1 finished
+2020-05-20 07:48:34,315:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 07:48:36,434:: INFO - Fold 1 score (balanced accuracy): 0.5566810692579378
+2020-05-20 07:48:36,434:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 07:48:36,436:: INFO - Builing model for Fold# 2 started
+2020-05-20 07:50:03,151:: INFO - Builing model for Fold# 2 finished
+2020-05-20 07:50:03,151:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 07:50:05,422:: INFO - Fold 2 score (balanced accuracy): 0.579115645038875
+2020-05-20 07:50:05,422:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 07:50:05,425:: INFO - Builing model for Fold# 3 started
+2020-05-20 07:52:00,274:: INFO - Builing model for Fold# 3 finished
+2020-05-20 07:52:00,275:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 07:52:02,563:: INFO - Fold 3 score (balanced accuracy): 0.5755374078921419
+2020-05-20 07:52:02,563:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 07:52:02,566:: INFO - Builing model for Fold# 4 started
+2020-05-20 07:54:04,570:: INFO - Builing model for Fold# 4 finished
+2020-05-20 07:54:04,570:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 07:54:06,735:: INFO - Fold 4 score (balanced accuracy): 0.5885609958704603
+2020-05-20 07:54:06,735:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 07:54:06,738:: INFO - Builing model for Fold# 5 started
+2020-05-20 07:56:17,980:: INFO - Builing model for Fold# 5 finished
+2020-05-20 07:56:17,981:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 07:56:20,243:: INFO - Fold 5 score (balanced accuracy): 0.5683391003460208
+2020-05-20 07:56:20,243:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 07:56:20,249:: INFO - Builing model for Fold# 6 started
+2020-05-20 07:59:42,843:: INFO - Builing model for Fold# 6 finished
+2020-05-20 07:59:42,843:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 07:59:45,469:: INFO - Fold 6 score (balanced accuracy): 0.5816973543455786
+2020-05-20 07:59:45,469:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 07:59:45,472:: INFO - Builing model for Fold# 7 started
+2020-05-20 08:01:03,905:: INFO - Builing model for Fold# 7 finished
+2020-05-20 08:01:03,905:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 08:01:06,126:: INFO - Fold 7 score (balanced accuracy): 0.5912174074140476
+2020-05-20 08:01:06,126:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 08:01:06,129:: INFO - Builing model for Fold# 8 started
+2020-05-20 08:02:29,197:: INFO - Builing model for Fold# 8 finished
+2020-05-20 08:02:29,198:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 08:02:31,544:: INFO - Fold 8 score (balanced accuracy): 0.5642962152858705
+2020-05-20 08:02:31,544:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 08:02:31,547:: INFO - Builing model for Fold# 9 started
+2020-05-20 08:04:13,724:: INFO - Builing model for Fold# 9 finished
+2020-05-20 08:04:13,725:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 08:04:15,842:: INFO - Fold 9 score (balanced accuracy): 0.5816331104218585
+2020-05-20 08:04:15,843:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 08:04:15,845:: INFO - Builing model for Fold# 10 started
+2020-05-20 08:07:05,428:: INFO - Builing model for Fold# 10 finished
+2020-05-20 08:07:05,428:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 08:07:07,545:: INFO - Fold 10 score (balanced accuracy): 0.5579584775086506
+2020-05-20 08:07:07,545:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 08:07:07,545:: INFO - Evaluating final model started
+2020-05-20 08:07:07,545:: INFO - Best fold score (accuracy): 0.5912174074140476
+2020-05-20 08:07:11,698:: INFO - loss:0.6908154487609863
+2020-05-20 08:07:11,698:: INFO - tp:1008.0
+2020-05-20 08:07:11,699:: INFO - fp:895.0
+2020-05-20 08:07:11,699:: INFO - tn:1020.0
+2020-05-20 08:07:11,699:: INFO - fn:907.0
+2020-05-20 08:07:11,699:: INFO - accuracy:0.5295039415359497
+2020-05-20 08:07:11,699:: INFO - precision:0.5296899676322937
+2020-05-20 08:07:11,699:: INFO - recall:0.5263707637786865
+2020-05-20 08:07:11,699:: INFO - auc:0.5506346225738525
+2020-05-20 08:07:11,699:: INFO - Balanced accuracy : 0.5298606202605654
+2020-05-20 08:07:11,699:: INFO - Evaluating final model finished
+2020-05-20 08:07:11,699:: INFO - Extracting evaluating metrics started
+2020-05-20 08:07:11,711:: INFO - Extracting evaluating metrics finished
+2020-05-20 08:07:11,711:: INFO - >> Starting prediction
+2020-05-20 08:07:11,711:: INFO - Dataset       : freedesktop
+2020-05-20 08:07:11,711:: INFO - Feature       : long_description
+2020-05-20 08:07:11,711:: INFO - Classifier    : lstm+emb
+2020-05-20 08:07:11,711:: INFO - Balancing     : smote
+2020-05-20 08:07:11,711:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 08:07:11,711:: INFO - Metric        : val_accuracy
+2020-05-20 08:07:11,711:: INFO - Threshold     : 173
+2020-05-20 08:07:11,711:: INFO - Terms         : 250
+2020-05-20 08:07:11,789:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_train_data.csv
+2020-05-20 08:07:11,789:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_test_data.csv
+2020-05-20 08:07:11,789:: INFO - Reports in train - Total: 5751 Positive: 1395 (24.26% of total)
+2020-05-20 08:07:11,789:: INFO - Reports in train - Total: 5751 Negative: 4356 (75.74% of total)
+2020-05-20 08:07:11,789:: INFO - Reports in test - Total : 1915 Positive: 464 (24.23% of total)
+2020-05-20 08:07:13,433:: INFO - Bug reports long_description cleaned.
+2020-05-20 08:07:13,433:: INFO - Balancing data started
+2020-05-20 08:07:14,219:: INFO - BEFORE SMOTE:
+2020-05-20 08:07:14,219:: INFO - Reports shape    : data (5751, 250) label (5751, 2)
+2020-05-20 08:07:14,219:: INFO - Reports class distribution : 0 (4356) 1 (1395)
+2020-05-20 08:07:14,815:: INFO - AFTER SMOTE:
+2020-05-20 08:07:14,815:: INFO - Reports shape    : data (8712, 250) label (8712, 2)
+2020-05-20 08:07:14,815:: INFO - Reports class distribution : 0 (4356) 1 (4356)
+2020-05-20 08:07:15,075:: INFO - Shape of test data tensor : (1915, 250)
+2020-05-20 08:07:15,075:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 08:07:15,075:: INFO - Class distribution in test label tensor: 1451(0) 464(1)
+2020-05-20 08:07:15,075:: INFO - Balancing data finished
+2020-05-20 08:07:15,075:: INFO - Trainning with k-folding started
+2020-05-20 08:07:15,079:: INFO - Builing model for Fold# 1 started
+2020-05-20 08:11:43,660:: INFO - Builing model for Fold# 1 finished
+2020-05-20 08:11:43,661:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 08:11:47,556:: INFO - Fold 1 score (balanced accuracy): 0.7424622652439987
+2020-05-20 08:11:47,556:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 08:11:47,561:: INFO - Builing model for Fold# 2 started
+2020-05-20 08:15:10,401:: INFO - Builing model for Fold# 2 finished
+2020-05-20 08:15:10,401:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 08:15:13,674:: INFO - Fold 2 score (balanced accuracy): 0.7199800661477369
+2020-05-20 08:15:13,674:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 08:15:13,678:: INFO - Builing model for Fold# 3 started
+2020-05-20 08:19:38,282:: INFO - Builing model for Fold# 3 finished
+2020-05-20 08:19:38,282:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 08:19:41,683:: INFO - Fold 3 score (balanced accuracy): 0.7560275545350172
+2020-05-20 08:19:41,683:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 08:19:41,687:: INFO - Builing model for Fold# 4 started
+2020-05-20 08:24:27,512:: INFO - Builing model for Fold# 4 finished
+2020-05-20 08:24:27,513:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 08:24:30,761:: INFO - Fold 4 score (balanced accuracy): 0.7611940298507462
+2020-05-20 08:24:30,761:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 08:24:30,765:: INFO - Builing model for Fold# 5 started
+2020-05-20 08:28:34,542:: INFO - Builing model for Fold# 5 finished
+2020-05-20 08:28:34,542:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 08:28:37,830:: INFO - Fold 5 score (balanced accuracy): 0.7474167623421355
+2020-05-20 08:28:37,830:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 08:28:37,837:: INFO - Builing model for Fold# 6 started
+2020-05-20 08:32:37,960:: INFO - Builing model for Fold# 6 finished
+2020-05-20 08:32:37,961:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 08:32:41,229:: INFO - Fold 6 score (balanced accuracy): 0.7630814259682532
+2020-05-20 08:32:41,229:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 08:32:41,233:: INFO - Builing model for Fold# 7 started
+2020-05-20 08:37:35,043:: INFO - Builing model for Fold# 7 finished
+2020-05-20 08:37:35,043:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 08:37:38,884:: INFO - Fold 7 score (balanced accuracy): 0.7589801082800536
+2020-05-20 08:37:38,885:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 08:37:38,889:: INFO - Builing model for Fold# 8 started
+2020-05-20 08:41:03,012:: INFO - Builing model for Fold# 8 finished
+2020-05-20 08:41:03,012:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 08:41:06,446:: INFO - Fold 8 score (balanced accuracy): 0.7445464982778416
+2020-05-20 08:41:06,446:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 08:41:06,450:: INFO - Builing model for Fold# 9 started
+2020-05-20 08:45:29,544:: INFO - Builing model for Fold# 9 finished
+2020-05-20 08:45:29,544:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 08:45:32,676:: INFO - Fold 9 score (balanced accuracy): 0.7583237657864523
+2020-05-20 08:45:32,677:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 08:45:32,680:: INFO - Builing model for Fold# 10 started
+2020-05-20 08:49:50,191:: INFO - Builing model for Fold# 10 finished
+2020-05-20 08:49:50,192:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 08:49:53,223:: INFO - Fold 10 score (balanced accuracy): 0.7342135476463835
+2020-05-20 08:49:53,223:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 08:49:53,223:: INFO - Evaluating final model started
+2020-05-20 08:49:53,223:: INFO - Best fold score (accuracy): 0.7630814259682532
+2020-05-20 08:49:57,349:: INFO - loss:1.871429443359375
+2020-05-20 08:49:57,349:: INFO - tp:659.0
+2020-05-20 08:49:57,349:: INFO - fp:1255.0
+2020-05-20 08:49:57,349:: INFO - tn:660.0
+2020-05-20 08:49:57,349:: INFO - fn:1256.0
+2020-05-20 08:49:57,349:: INFO - accuracy:0.34438642859458923
+2020-05-20 08:49:57,349:: INFO - precision:0.3443051278591156
+2020-05-20 08:49:57,349:: INFO - recall:0.34412533044815063
+2020-05-20 08:49:57,350:: INFO - auc:0.2910815179347992
+2020-05-20 08:49:57,350:: INFO - Balanced accuracy : 0.5008369673708977
+2020-05-20 08:49:57,350:: INFO - Evaluating final model finished
+2020-05-20 08:49:57,350:: INFO - Extracting evaluating metrics started
+2020-05-20 08:49:57,369:: INFO - Extracting evaluating metrics finished
+2020-05-20 08:49:57,369:: INFO - >> Starting prediction
+2020-05-20 08:49:57,369:: INFO - Dataset       : freedesktop
+2020-05-20 08:49:57,369:: INFO - Feature       : long_description
+2020-05-20 08:49:57,369:: INFO - Classifier    : lstm+emb
+2020-05-20 08:49:57,369:: INFO - Balancing     : smote
+2020-05-20 08:49:57,369:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 08:49:57,369:: INFO - Metric        : val_accuracy
+2020-05-20 08:49:57,369:: INFO - Threshold     : 162
+2020-05-20 08:49:57,369:: INFO - Terms         : 250
+2020-05-20 08:49:57,458:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_train_data.csv
+2020-05-20 08:49:57,458:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_test_data.csv
+2020-05-20 08:49:57,458:: INFO - Reports in train - Total: 5751 Positive: 1437 (24.99% of total)
+2020-05-20 08:49:57,459:: INFO - Reports in train - Total: 5751 Negative: 4314 (75.01% of total)
+2020-05-20 08:49:57,459:: INFO - Reports in test - Total : 1915 Positive: 478 (24.96% of total)
+2020-05-20 08:49:59,178:: INFO - Bug reports long_description cleaned.
+2020-05-20 08:49:59,179:: INFO - Balancing data started
+2020-05-20 08:50:00,030:: INFO - BEFORE SMOTE:
+2020-05-20 08:50:00,030:: INFO - Reports shape    : data (5751, 250) label (5751, 2)
+2020-05-20 08:50:00,030:: INFO - Reports class distribution : 0 (4314) 1 (1437)
+2020-05-20 08:50:00,686:: INFO - AFTER SMOTE:
+2020-05-20 08:50:00,686:: INFO - Reports shape    : data (8628, 250) label (8628, 2)
+2020-05-20 08:50:00,686:: INFO - Reports class distribution : 0 (4314) 1 (4314)
+2020-05-20 08:50:00,942:: INFO - Shape of test data tensor : (1915, 250)
+2020-05-20 08:50:00,942:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 08:50:00,942:: INFO - Class distribution in test label tensor: 1437(0) 478(1)
+2020-05-20 08:50:00,942:: INFO - Balancing data finished
+2020-05-20 08:50:00,942:: INFO - Trainning with k-folding started
+2020-05-20 08:50:00,945:: INFO - Builing model for Fold# 1 started
+2020-05-20 08:55:30,045:: INFO - Builing model for Fold# 1 finished
+2020-05-20 08:55:30,046:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 08:55:33,390:: INFO - Fold 1 score (balanced accuracy): 0.7578215527230592
+2020-05-20 08:55:33,391:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 08:55:33,395:: INFO - Builing model for Fold# 2 started
+2020-05-20 08:59:31,065:: INFO - Builing model for Fold# 2 finished
+2020-05-20 08:59:31,066:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 08:59:34,322:: INFO - Fold 2 score (balanced accuracy): 0.7415990730011588
+2020-05-20 08:59:34,322:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 08:59:34,326:: INFO - Builing model for Fold# 3 started
+2020-05-20 09:06:04,115:: INFO - Builing model for Fold# 3 finished
+2020-05-20 09:06:04,116:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 09:06:07,239:: INFO - Fold 3 score (balanced accuracy): 0.7473928157589802
+2020-05-20 09:06:07,240:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 09:06:07,243:: INFO - Builing model for Fold# 4 started
+2020-05-20 09:13:16,852:: INFO - Builing model for Fold# 4 finished
+2020-05-20 09:13:16,853:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 09:13:20,204:: INFO - Fold 4 score (balanced accuracy): 0.7664368885316155
+2020-05-20 09:13:20,204:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 09:13:20,208:: INFO - Builing model for Fold# 5 started
+2020-05-20 09:19:00,373:: INFO - Builing model for Fold# 5 finished
+2020-05-20 09:19:00,374:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 09:19:03,542:: INFO - Fold 5 score (balanced accuracy): 0.7431214427629298
+2020-05-20 09:19:03,543:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 09:19:03,549:: INFO - Builing model for Fold# 6 started
+2020-05-20 09:24:50,109:: INFO - Builing model for Fold# 6 finished
+2020-05-20 09:24:50,109:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 09:24:53,406:: INFO - Fold 6 score (balanced accuracy): 0.7555040556199305
+2020-05-20 09:24:53,406:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 09:24:53,410:: INFO - Builing model for Fold# 7 started
+2020-05-20 09:29:04,299:: INFO - Builing model for Fold# 7 finished
+2020-05-20 09:29:04,300:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 09:29:07,514:: INFO - Fold 7 score (balanced accuracy): 0.7578215527230592
+2020-05-20 09:29:07,514:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 09:29:07,519:: INFO - Builing model for Fold# 8 started
+2020-05-20 09:34:38,787:: INFO - Builing model for Fold# 8 finished
+2020-05-20 09:34:38,787:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 09:34:41,910:: INFO - Fold 8 score (balanced accuracy): 0.7537659327925841
+2020-05-20 09:34:41,910:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 09:34:41,913:: INFO - Builing model for Fold# 9 started
+2020-05-20 09:39:21,186:: INFO - Builing model for Fold# 9 finished
+2020-05-20 09:39:21,187:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 09:39:24,342:: INFO - Fold 9 score (balanced accuracy): 0.760059738730431
+2020-05-20 09:39:24,343:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 09:39:24,346:: INFO - Builing model for Fold# 10 started
+2020-05-20 09:43:10,726:: INFO - Builing model for Fold# 10 finished
+2020-05-20 09:43:10,726:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 09:43:13,986:: INFO - Fold 10 score (balanced accuracy): 0.7442748142910529
+2020-05-20 09:43:13,986:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 09:43:13,986:: INFO - Evaluating final model started
+2020-05-20 09:43:13,986:: INFO - Best fold score (accuracy): 0.7664368885316155
+2020-05-20 09:43:18,324:: INFO - loss:1.8750834465026855
+2020-05-20 09:43:18,325:: INFO - tp:910.0
+2020-05-20 09:43:18,325:: INFO - fp:1010.0
+2020-05-20 09:43:18,325:: INFO - tn:905.0
+2020-05-20 09:43:18,325:: INFO - fn:1005.0
+2020-05-20 09:43:18,325:: INFO - accuracy:0.4738903343677521
+2020-05-20 09:43:18,325:: INFO - precision:0.4739583432674408
+2020-05-20 09:43:18,325:: INFO - recall:0.47519582509994507
+2020-05-20 09:43:18,325:: INFO - auc:0.40446728467941284
+2020-05-20 09:43:18,325:: INFO - Balanced accuracy : 0.5403669604563203
+2020-05-20 09:43:18,325:: INFO - Evaluating final model finished
+2020-05-20 09:43:18,326:: INFO - Extracting evaluating metrics started
+2020-05-20 09:43:18,343:: INFO - Extracting evaluating metrics finished
+2020-05-20 09:43:18,343:: INFO - >> Starting prediction
+2020-05-20 09:43:18,343:: INFO - Dataset       : freedesktop
+2020-05-20 09:43:18,343:: INFO - Feature       : long_description
+2020-05-20 09:43:18,343:: INFO - Classifier    : lstm+emb
+2020-05-20 09:43:18,343:: INFO - Balancing     : smote
+2020-05-20 09:43:18,343:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 09:43:18,343:: INFO - Metric        : val_accuracy
+2020-05-20 09:43:18,343:: INFO - Threshold     : 365
+2020-05-20 09:43:18,343:: INFO - Terms         : 250
+2020-05-20 09:43:18,427:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_train_data.csv
+2020-05-20 09:43:18,427:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_test_data.csv
+2020-05-20 09:43:18,427:: INFO - Reports in train - Total: 5750 Positive: 787 (13.69% of total)
+2020-05-20 09:43:18,427:: INFO - Reports in train - Total: 5750 Negative: 4963 (86.31% of total)
+2020-05-20 09:43:18,427:: INFO - Reports in test - Total : 1916 Positive: 262 (13.67% of total)
+2020-05-20 09:43:20,178:: INFO - Bug reports long_description cleaned.
+2020-05-20 09:43:20,179:: INFO - Balancing data started
+2020-05-20 09:43:21,007:: INFO - BEFORE SMOTE:
+2020-05-20 09:43:21,008:: INFO - Reports shape    : data (5750, 250) label (5750, 2)
+2020-05-20 09:43:21,008:: INFO - Reports class distribution : 0 (4963) 1 (787)
+2020-05-20 09:43:21,210:: INFO - AFTER SMOTE:
+2020-05-20 09:43:21,210:: INFO - Reports shape    : data (9926, 250) label (9926, 2)
+2020-05-20 09:43:21,210:: INFO - Reports class distribution : 0 (4963) 1 (4963)
+2020-05-20 09:43:21,473:: INFO - Shape of test data tensor : (1916, 250)
+2020-05-20 09:43:21,473:: INFO - Shape of test label tensor: (1916, 2)
+2020-05-20 09:43:21,473:: INFO - Class distribution in test label tensor: 1654(0) 262(1)
+2020-05-20 09:43:21,473:: INFO - Balancing data finished
+2020-05-20 09:43:21,473:: INFO - Trainning with k-folding started
+2020-05-20 09:43:21,476:: INFO - Builing model for Fold# 1 started
+2020-05-20 09:49:17,894:: INFO - Builing model for Fold# 1 finished
+2020-05-20 09:49:17,894:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 09:49:21,483:: INFO - Fold 1 score (balanced accuracy): 0.8298086606243706
+2020-05-20 09:49:21,484:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 09:49:21,488:: INFO - Builing model for Fold# 2 started
+2020-05-20 09:53:50,602:: INFO - Builing model for Fold# 2 finished
+2020-05-20 09:53:50,603:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 09:53:54,367:: INFO - Fold 2 score (balanced accuracy): 0.8457981069096578
+2020-05-20 09:53:54,368:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 09:53:54,372:: INFO - Builing model for Fold# 3 started
+2020-05-20 10:02:03,274:: INFO - Builing model for Fold# 3 finished
+2020-05-20 10:02:03,275:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 10:02:06,921:: INFO - Fold 3 score (balanced accuracy): 0.8352383011727252
+2020-05-20 10:02:06,922:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 10:02:06,925:: INFO - Builing model for Fold# 4 started
+2020-05-20 10:10:16,195:: INFO - Builing model for Fold# 4 finished
+2020-05-20 10:10:16,196:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 10:10:19,735:: INFO - Fold 4 score (balanced accuracy): 0.8453600607478153
+2020-05-20 10:10:19,736:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 10:10:19,741:: INFO - Builing model for Fold# 5 started
+2020-05-20 10:14:54,815:: INFO - Builing model for Fold# 5 finished
+2020-05-20 10:14:54,816:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 10:14:58,413:: INFO - Fold 5 score (balanced accuracy): 0.8398217969333723
+2020-05-20 10:14:58,414:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 10:14:58,421:: INFO - Builing model for Fold# 6 started
+2020-05-20 10:20:48,379:: INFO - Builing model for Fold# 6 finished
+2020-05-20 10:20:48,380:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 10:20:52,170:: INFO - Fold 6 score (balanced accuracy): 0.8398791540785498
+2020-05-20 10:20:52,170:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 10:20:52,175:: INFO - Builing model for Fold# 7 started
+2020-05-20 10:26:35,214:: INFO - Builing model for Fold# 7 finished
+2020-05-20 10:26:35,215:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 10:26:38,965:: INFO - Fold 7 score (balanced accuracy): 0.8412745062209661
+2020-05-20 10:26:38,965:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 10:26:38,969:: INFO - Builing model for Fold# 8 started
+2020-05-20 10:33:42,025:: INFO - Builing model for Fold# 8 finished
+2020-05-20 10:33:42,026:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 10:33:45,638:: INFO - Fold 8 score (balanced accuracy): 0.8437982206087775
+2020-05-20 10:33:45,638:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 10:33:45,642:: INFO - Builing model for Fold# 9 started
+2020-05-20 10:38:15,750:: INFO - Builing model for Fold# 9 finished
+2020-05-20 10:38:15,750:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 10:38:19,496:: INFO - Fold 9 score (balanced accuracy): 0.8363067683461651
+2020-05-20 10:38:19,496:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 10:38:19,501:: INFO - Builing model for Fold# 10 started
+2020-05-20 10:43:54,527:: INFO - Builing model for Fold# 10 finished
+2020-05-20 10:43:54,527:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 10:43:58,047:: INFO - Fold 10 score (balanced accuracy): 0.8337810236169314
+2020-05-20 10:43:58,048:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 10:43:58,048:: INFO - Evaluating final model started
+2020-05-20 10:43:58,048:: INFO - Best fold score (accuracy): 0.8457981069096578
+2020-05-20 10:44:02,258:: INFO - loss:1.9019209146499634
+2020-05-20 10:44:02,258:: INFO - tp:787.0
+2020-05-20 10:44:02,259:: INFO - fp:1128.0
+2020-05-20 10:44:02,259:: INFO - tn:788.0
+2020-05-20 10:44:02,259:: INFO - fn:1129.0
+2020-05-20 10:44:02,259:: INFO - accuracy:0.41101253032684326
+2020-05-20 10:44:02,259:: INFO - precision:0.41096606850624084
+2020-05-20 10:44:02,259:: INFO - recall:0.4107515513896942
+2020-05-20 10:44:02,259:: INFO - auc:0.3136464059352875
+2020-05-20 10:44:02,259:: INFO - Balanced accuracy : 0.5201847014408743
+2020-05-20 10:44:02,259:: INFO - Evaluating final model finished
+2020-05-20 10:44:02,259:: INFO - Extracting evaluating metrics started
+2020-05-20 10:44:02,278:: INFO - Extracting evaluating metrics finished
+2020-05-20 10:44:02,278:: INFO - >> Starting prediction
+2020-05-20 10:44:02,279:: INFO - Dataset       : freedesktop
+2020-05-20 10:44:02,279:: INFO - Feature       : long_description
+2020-05-20 10:44:02,279:: INFO - Classifier    : lstm+emb
+2020-05-20 10:44:02,279:: INFO - Balancing     : smote
+2020-05-20 10:44:02,279:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 10:44:02,279:: INFO - Metric        : val_accuracy
+2020-05-20 10:44:02,279:: INFO - Threshold     : 28
+2020-05-20 10:44:02,279:: INFO - Terms         : 300
+2020-05-20 10:44:02,366:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_train_data.csv
+2020-05-20 10:44:02,366:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_28_test_data.csv
+2020-05-20 10:44:02,367:: INFO - Reports in train - Total: 5751 Positive: 2859 (49.71% of total)
+2020-05-20 10:44:02,367:: INFO - Reports in train - Total: 5751 Negative: 2892 (50.29% of total)
+2020-05-20 10:44:02,367:: INFO - Reports in test - Total : 1915 Positive: 952 (49.71% of total)
+2020-05-20 10:44:04,066:: INFO - Bug reports long_description cleaned.
+2020-05-20 10:44:04,066:: INFO - Balancing data started
+2020-05-20 10:44:04,860:: INFO - BEFORE SMOTE:
+2020-05-20 10:44:04,860:: INFO - Reports shape    : data (5751, 300) label (5751, 2)
+2020-05-20 10:44:04,860:: INFO - Reports class distribution : 0 (2892) 1 (2859)
+2020-05-20 10:44:07,722:: INFO - AFTER SMOTE:
+2020-05-20 10:44:07,722:: INFO - Reports shape    : data (5784, 300) label (5784, 2)
+2020-05-20 10:44:07,722:: INFO - Reports class distribution : 0 (2892) 1 (2892)
+2020-05-20 10:44:08,007:: INFO - Shape of test data tensor : (1915, 300)
+2020-05-20 10:44:08,007:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 10:44:08,007:: INFO - Class distribution in test label tensor: 963(0) 952(1)
+2020-05-20 10:44:08,007:: INFO - Balancing data finished
+2020-05-20 10:44:08,007:: INFO - Trainning with k-folding started
+2020-05-20 10:44:08,010:: INFO - Builing model for Fold# 1 started
+2020-05-20 10:45:44,584:: INFO - Builing model for Fold# 1 finished
+2020-05-20 10:45:44,585:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 10:45:47,191:: INFO - Fold 1 score (balanced accuracy): 0.5644306793122613
+2020-05-20 10:45:47,191:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 10:45:47,194:: INFO - Builing model for Fold# 2 started
+2020-05-20 10:49:03,804:: INFO - Builing model for Fold# 2 finished
+2020-05-20 10:49:03,804:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 10:49:06,284:: INFO - Fold 2 score (balanced accuracy): 0.5791380557099401
+2020-05-20 10:49:06,284:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 10:49:06,287:: INFO - Builing model for Fold# 3 started
+2020-05-20 10:51:06,807:: INFO - Builing model for Fold# 3 finished
+2020-05-20 10:51:06,807:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 10:51:09,405:: INFO - Fold 3 score (balanced accuracy): 0.5643798817911804
+2020-05-20 10:51:09,406:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 10:51:09,409:: INFO - Builing model for Fold# 4 started
+2020-05-20 10:52:57,284:: INFO - Builing model for Fold# 4 finished
+2020-05-20 10:52:57,285:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 10:53:00,111:: INFO - Fold 4 score (balanced accuracy): 0.5824563290723177
+2020-05-20 10:53:00,111:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 10:53:00,114:: INFO - Builing model for Fold# 5 started
+2020-05-20 10:54:36,550:: INFO - Builing model for Fold# 5 finished
+2020-05-20 10:54:36,550:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 10:54:39,241:: INFO - Fold 5 score (balanced accuracy): 0.5735294117647058
+2020-05-20 10:54:39,241:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 10:54:39,245:: INFO - Builing model for Fold# 6 started
+2020-05-20 10:56:31,078:: INFO - Builing model for Fold# 6 finished
+2020-05-20 10:56:31,079:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 10:56:33,708:: INFO - Fold 6 score (balanced accuracy): 0.5652807907679988
+2020-05-20 10:56:33,709:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 10:56:33,712:: INFO - Builing model for Fold# 7 started
+2020-05-20 10:58:01,639:: INFO - Builing model for Fold# 7 finished
+2020-05-20 10:58:01,639:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 10:58:04,154:: INFO - Fold 7 score (balanced accuracy): 0.589433517997263
+2020-05-20 10:58:04,154:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 10:58:04,158:: INFO - Builing model for Fold# 8 started
+2020-05-20 11:00:21,221:: INFO - Builing model for Fold# 8 finished
+2020-05-20 11:00:21,222:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 11:00:23,620:: INFO - Fold 8 score (balanced accuracy): 0.5643529889859022
+2020-05-20 11:00:23,620:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 11:00:23,623:: INFO - Builing model for Fold# 9 started
+2020-05-20 11:02:52,013:: INFO - Builing model for Fold# 9 finished
+2020-05-20 11:02:52,014:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 11:02:54,653:: INFO - Fold 9 score (balanced accuracy): 0.5919704059618361
+2020-05-20 11:02:54,653:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 11:02:54,656:: INFO - Builing model for Fold# 10 started
+2020-05-20 11:04:57,013:: INFO - Builing model for Fold# 10 finished
+2020-05-20 11:04:57,014:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 11:04:59,806:: INFO - Fold 10 score (balanced accuracy): 0.5553633217993079
+2020-05-20 11:04:59,806:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 11:04:59,806:: INFO - Evaluating final model started
+2020-05-20 11:04:59,807:: INFO - Best fold score (accuracy): 0.5919704059618361
+2020-05-20 11:05:04,742:: INFO - loss:0.7467682957649231
+2020-05-20 11:05:04,742:: INFO - tp:992.0
+2020-05-20 11:05:04,743:: INFO - fp:925.0
+2020-05-20 11:05:04,743:: INFO - tn:990.0
+2020-05-20 11:05:04,743:: INFO - fn:923.0
+2020-05-20 11:05:04,743:: INFO - accuracy:0.517493486404419
+2020-05-20 11:05:04,743:: INFO - precision:0.5174752473831177
+2020-05-20 11:05:04,743:: INFO - recall:0.5180156826972961
+2020-05-20 11:05:04,743:: INFO - auc:0.5271638035774231
+2020-05-20 11:05:04,743:: INFO - Balanced accuracy : 0.5188132106425125
+2020-05-20 11:05:04,743:: INFO - Evaluating final model finished
+2020-05-20 11:05:04,743:: INFO - Extracting evaluating metrics started
+2020-05-20 11:05:04,761:: INFO - Extracting evaluating metrics finished
+2020-05-20 11:05:04,761:: INFO - >> Starting prediction
+2020-05-20 11:05:04,761:: INFO - Dataset       : freedesktop
+2020-05-20 11:05:04,761:: INFO - Feature       : long_description
+2020-05-20 11:05:04,761:: INFO - Classifier    : lstm+emb
+2020-05-20 11:05:04,761:: INFO - Balancing     : smote
+2020-05-20 11:05:04,761:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 11:05:04,761:: INFO - Metric        : val_accuracy
+2020-05-20 11:05:04,761:: INFO - Threshold     : 173
+2020-05-20 11:05:04,761:: INFO - Terms         : 300
+2020-05-20 11:05:04,847:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_train_data.csv
+2020-05-20 11:05:04,847:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_173_test_data.csv
+2020-05-20 11:05:04,847:: INFO - Reports in train - Total: 5751 Positive: 1395 (24.26% of total)
+2020-05-20 11:05:04,848:: INFO - Reports in train - Total: 5751 Negative: 4356 (75.74% of total)
+2020-05-20 11:05:04,848:: INFO - Reports in test - Total : 1915 Positive: 464 (24.23% of total)
+2020-05-20 11:05:06,569:: INFO - Bug reports long_description cleaned.
+2020-05-20 11:05:06,569:: INFO - Balancing data started
+2020-05-20 11:05:07,418:: INFO - BEFORE SMOTE:
+2020-05-20 11:05:07,419:: INFO - Reports shape    : data (5751, 300) label (5751, 2)
+2020-05-20 11:05:07,419:: INFO - Reports class distribution : 0 (4356) 1 (1395)
+2020-05-20 11:05:08,173:: INFO - AFTER SMOTE:
+2020-05-20 11:05:08,174:: INFO - Reports shape    : data (8712, 300) label (8712, 2)
+2020-05-20 11:05:08,174:: INFO - Reports class distribution : 0 (4356) 1 (4356)
+2020-05-20 11:05:08,449:: INFO - Shape of test data tensor : (1915, 300)
+2020-05-20 11:05:08,449:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 11:05:08,449:: INFO - Class distribution in test label tensor: 1451(0) 464(1)
+2020-05-20 11:05:08,449:: INFO - Balancing data finished
+2020-05-20 11:05:08,449:: INFO - Trainning with k-folding started
+2020-05-20 11:05:08,453:: INFO - Builing model for Fold# 1 started
+2020-05-20 11:13:24,802:: INFO - Builing model for Fold# 1 finished
+2020-05-20 11:13:24,803:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 11:13:28,531:: INFO - Fold 1 score (balanced accuracy): 0.756245457609623
+2020-05-20 11:13:28,531:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 11:13:28,535:: INFO - Builing model for Fold# 2 started
+2020-05-20 11:17:38,669:: INFO - Builing model for Fold# 2 finished
+2020-05-20 11:17:38,670:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 11:17:42,472:: INFO - Fold 2 score (balanced accuracy): 0.7492475431592918
+2020-05-20 11:17:42,472:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 11:17:42,477:: INFO - Builing model for Fold# 3 started
+2020-05-20 11:23:28,039:: INFO - Builing model for Fold# 3 finished
+2020-05-20 11:23:28,040:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 11:23:31,946:: INFO - Fold 3 score (balanced accuracy): 0.7657864523536165
+2020-05-20 11:23:31,947:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 11:23:31,951:: INFO - Builing model for Fold# 4 started
+2020-05-20 11:26:23,474:: INFO - Builing model for Fold# 4 finished
+2020-05-20 11:26:23,474:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 11:26:27,136:: INFO - Fold 4 score (balanced accuracy): 0.7433983926521239
+2020-05-20 11:26:27,136:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 11:26:27,140:: INFO - Builing model for Fold# 5 started
+2020-05-20 11:36:16,402:: INFO - Builing model for Fold# 5 finished
+2020-05-20 11:36:16,402:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 11:36:20,244:: INFO - Fold 5 score (balanced accuracy): 0.7606199770378874
+2020-05-20 11:36:20,244:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 11:36:20,252:: INFO - Builing model for Fold# 6 started
+2020-05-20 11:40:17,784:: INFO - Builing model for Fold# 6 finished
+2020-05-20 11:40:17,784:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 11:40:21,477:: INFO - Fold 6 score (balanced accuracy): 0.7584988782270721
+2020-05-20 11:40:21,477:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 11:40:21,481:: INFO - Builing model for Fold# 7 started
+2020-05-20 11:47:32,473:: INFO - Builing model for Fold# 7 finished
+2020-05-20 11:47:32,473:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 11:47:36,515:: INFO - Fold 7 score (balanced accuracy): 0.7555318414982252
+2020-05-20 11:47:36,515:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 11:47:36,520:: INFO - Builing model for Fold# 8 started
+2020-05-20 11:53:10,626:: INFO - Builing model for Fold# 8 finished
+2020-05-20 11:53:10,626:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 11:53:14,400:: INFO - Fold 8 score (balanced accuracy): 0.7531572904707233
+2020-05-20 11:53:14,400:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 11:53:14,404:: INFO - Builing model for Fold# 9 started
+2020-05-20 12:00:56,495:: INFO - Builing model for Fold# 9 finished
+2020-05-20 12:00:56,496:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 12:01:00,213:: INFO - Fold 9 score (balanced accuracy): 0.764638346727899
+2020-05-20 12:01:00,213:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 12:01:00,217:: INFO - Builing model for Fold# 10 started
+2020-05-20 12:08:43,813:: INFO - Builing model for Fold# 10 finished
+2020-05-20 12:08:43,813:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 12:08:47,528:: INFO - Fold 10 score (balanced accuracy): 0.7617680826636051
+2020-05-20 12:08:47,529:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 12:08:47,529:: INFO - Evaluating final model started
+2020-05-20 12:08:47,529:: INFO - Best fold score (accuracy): 0.7657864523536165
+2020-05-20 12:08:52,519:: INFO - loss:1.9644027948379517
+2020-05-20 12:08:52,520:: INFO - tp:649.0
+2020-05-20 12:08:52,520:: INFO - fp:1263.0
+2020-05-20 12:08:52,520:: INFO - tn:652.0
+2020-05-20 12:08:52,520:: INFO - fn:1266.0
+2020-05-20 12:08:52,520:: INFO - accuracy:0.33968669176101685
+2020-05-20 12:08:52,520:: INFO - precision:0.3394351601600647
+2020-05-20 12:08:52,520:: INFO - recall:0.33890339732170105
+2020-05-20 12:08:52,520:: INFO - auc:0.2830873429775238
+2020-05-20 12:08:52,520:: INFO - Balanced accuracy : 0.5061432068252573
+2020-05-20 12:08:52,520:: INFO - Evaluating final model finished
+2020-05-20 12:08:52,521:: INFO - Extracting evaluating metrics started
+2020-05-20 12:08:52,538:: INFO - Extracting evaluating metrics finished
+2020-05-20 12:08:52,538:: INFO - >> Starting prediction
+2020-05-20 12:08:52,538:: INFO - Dataset       : freedesktop
+2020-05-20 12:08:52,538:: INFO - Feature       : long_description
+2020-05-20 12:08:52,538:: INFO - Classifier    : lstm+emb
+2020-05-20 12:08:52,538:: INFO - Balancing     : smote
+2020-05-20 12:08:52,538:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 12:08:52,538:: INFO - Metric        : val_accuracy
+2020-05-20 12:08:52,539:: INFO - Threshold     : 162
+2020-05-20 12:08:52,539:: INFO - Terms         : 300
+2020-05-20 12:08:52,626:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_train_data.csv
+2020-05-20 12:08:52,626:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_162_test_data.csv
+2020-05-20 12:08:52,626:: INFO - Reports in train - Total: 5751 Positive: 1437 (24.99% of total)
+2020-05-20 12:08:52,626:: INFO - Reports in train - Total: 5751 Negative: 4314 (75.01% of total)
+2020-05-20 12:08:52,626:: INFO - Reports in test - Total : 1915 Positive: 478 (24.96% of total)
+2020-05-20 12:08:54,366:: INFO - Bug reports long_description cleaned.
+2020-05-20 12:08:54,367:: INFO - Balancing data started
+2020-05-20 12:08:55,186:: INFO - BEFORE SMOTE:
+2020-05-20 12:08:55,186:: INFO - Reports shape    : data (5751, 300) label (5751, 2)
+2020-05-20 12:08:55,186:: INFO - Reports class distribution : 0 (4314) 1 (1437)
+2020-05-20 12:08:55,936:: INFO - AFTER SMOTE:
+2020-05-20 12:08:55,936:: INFO - Reports shape    : data (8628, 300) label (8628, 2)
+2020-05-20 12:08:55,937:: INFO - Reports class distribution : 0 (4314) 1 (4314)
+2020-05-20 12:08:56,208:: INFO - Shape of test data tensor : (1915, 300)
+2020-05-20 12:08:56,208:: INFO - Shape of test label tensor: (1915, 2)
+2020-05-20 12:08:56,209:: INFO - Class distribution in test label tensor: 1437(0) 478(1)
+2020-05-20 12:08:56,209:: INFO - Balancing data finished
+2020-05-20 12:08:56,209:: INFO - Trainning with k-folding started
+2020-05-20 12:08:56,212:: INFO - Builing model for Fold# 1 started
+2020-05-20 12:16:09,717:: INFO - Builing model for Fold# 1 finished
+2020-05-20 12:16:09,718:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 12:16:14,163:: INFO - Fold 1 score (balanced accuracy): 0.7531865585168018
+2020-05-20 12:16:14,164:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 12:16:14,169:: INFO - Builing model for Fold# 2 started
+2020-05-20 12:20:40,246:: INFO - Builing model for Fold# 2 finished
+2020-05-20 12:20:40,246:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 12:20:44,011:: INFO - Fold 2 score (balanced accuracy): 0.7520278099652375
+2020-05-20 12:20:44,011:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 12:20:44,016:: INFO - Builing model for Fold# 3 started
+2020-05-20 12:26:11,579:: INFO - Builing model for Fold# 3 finished
+2020-05-20 12:26:11,579:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 12:26:15,335:: INFO - Fold 3 score (balanced accuracy): 0.7520278099652375
+2020-05-20 12:26:15,335:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 12:26:15,339:: INFO - Builing model for Fold# 4 started
+2020-05-20 12:31:09,638:: INFO - Builing model for Fold# 4 finished
+2020-05-20 12:31:09,638:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 12:31:13,340:: INFO - Fold 4 score (balanced accuracy): 0.7739795081636658
+2020-05-20 12:31:13,340:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 12:31:13,344:: INFO - Builing model for Fold# 5 started
+2020-05-20 12:39:26,100:: INFO - Builing model for Fold# 5 finished
+2020-05-20 12:39:26,101:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 12:39:30,066:: INFO - Fold 5 score (balanced accuracy): 0.7558784308770194
+2020-05-20 12:39:30,066:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 12:39:30,074:: INFO - Builing model for Fold# 6 started
+2020-05-20 12:45:38,392:: INFO - Builing model for Fold# 6 finished
+2020-05-20 12:45:38,392:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 12:45:42,330:: INFO - Fold 6 score (balanced accuracy): 0.7618771726535343
+2020-05-20 12:45:42,330:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 12:45:42,335:: INFO - Builing model for Fold# 7 started
+2020-05-20 12:50:42,259:: INFO - Builing model for Fold# 7 finished
+2020-05-20 12:50:42,259:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 12:50:46,146:: INFO - Fold 7 score (balanced accuracy): 0.761297798377752
+2020-05-20 12:50:46,146:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 12:50:46,150:: INFO - Builing model for Fold# 8 started
+2020-05-20 12:57:34,470:: INFO - Builing model for Fold# 8 finished
+2020-05-20 12:57:34,471:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 12:57:38,439:: INFO - Fold 8 score (balanced accuracy): 0.7711471610660486
+2020-05-20 12:57:38,439:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 12:57:38,444:: INFO - Builing model for Fold# 9 started
+2020-05-20 13:03:48,485:: INFO - Builing model for Fold# 9 finished
+2020-05-20 13:03:48,486:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 13:03:52,249:: INFO - Fold 9 score (balanced accuracy): 0.764120063556417
+2020-05-20 13:03:52,249:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 13:03:52,253:: INFO - Builing model for Fold# 10 started
+2020-05-20 13:08:18,272:: INFO - Builing model for Fold# 10 finished
+2020-05-20 13:08:18,272:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 13:08:22,158:: INFO - Fold 10 score (balanced accuracy): 0.7489158576486814
+2020-05-20 13:08:22,158:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 13:08:22,158:: INFO - Evaluating final model started
+2020-05-20 13:08:22,158:: INFO - Best fold score (accuracy): 0.7739795081636658
+2020-05-20 13:08:27,066:: INFO - loss:1.4412758350372314
+2020-05-20 13:08:27,066:: INFO - tp:857.0
+2020-05-20 13:08:27,066:: INFO - fp:1053.0
+2020-05-20 13:08:27,066:: INFO - tn:862.0
+2020-05-20 13:08:27,066:: INFO - fn:1058.0
+2020-05-20 13:08:27,066:: INFO - accuracy:0.44882506132125854
+2020-05-20 13:08:27,066:: INFO - precision:0.44869109988212585
+2020-05-20 13:08:27,067:: INFO - recall:0.44751957058906555
+2020-05-20 13:08:27,067:: INFO - auc:0.38103264570236206
+2020-05-20 13:08:27,067:: INFO - Balanced accuracy : 0.5170326662648532
+2020-05-20 13:08:27,067:: INFO - Evaluating final model finished
+2020-05-20 13:08:27,067:: INFO - Extracting evaluating metrics started
+2020-05-20 13:08:27,082:: INFO - Extracting evaluating metrics finished
+2020-05-20 13:08:27,082:: INFO - >> Starting prediction
+2020-05-20 13:08:27,082:: INFO - Dataset       : freedesktop
+2020-05-20 13:08:27,082:: INFO - Feature       : long_description
+2020-05-20 13:08:27,082:: INFO - Classifier    : lstm+emb
+2020-05-20 13:08:27,083:: INFO - Balancing     : smote
+2020-05-20 13:08:27,083:: INFO - Resampling    : repeated_cv_5x2
+2020-05-20 13:08:27,083:: INFO - Metric        : val_accuracy
+2020-05-20 13:08:27,083:: INFO - Threshold     : 365
+2020-05-20 13:08:27,083:: INFO - Terms         : 300
+2020-05-20 13:08:27,163:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_train_data.csv
+2020-05-20 13:08:27,163:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_freedesktop_bug_report_365_test_data.csv
+2020-05-20 13:08:27,164:: INFO - Reports in train - Total: 5750 Positive: 787 (13.69% of total)
+2020-05-20 13:08:27,164:: INFO - Reports in train - Total: 5750 Negative: 4963 (86.31% of total)
+2020-05-20 13:08:27,164:: INFO - Reports in test - Total : 1916 Positive: 262 (13.67% of total)
+2020-05-20 13:08:28,840:: INFO - Bug reports long_description cleaned.
+2020-05-20 13:08:28,840:: INFO - Balancing data started
+2020-05-20 13:08:29,635:: INFO - BEFORE SMOTE:
+2020-05-20 13:08:29,635:: INFO - Reports shape    : data (5750, 300) label (5750, 2)
+2020-05-20 13:08:29,635:: INFO - Reports class distribution : 0 (4963) 1 (787)
+2020-05-20 13:08:29,869:: INFO - AFTER SMOTE:
+2020-05-20 13:08:29,869:: INFO - Reports shape    : data (9926, 300) label (9926, 2)
+2020-05-20 13:08:29,869:: INFO - Reports class distribution : 0 (4963) 1 (4963)
+2020-05-20 13:08:30,126:: INFO - Shape of test data tensor : (1916, 300)
+2020-05-20 13:08:30,126:: INFO - Shape of test label tensor: (1916, 2)
+2020-05-20 13:08:30,126:: INFO - Class distribution in test label tensor: 1654(0) 262(1)
+2020-05-20 13:08:30,126:: INFO - Balancing data finished
+2020-05-20 13:08:30,126:: INFO - Trainning with k-folding started
+2020-05-20 13:08:30,130:: INFO - Builing model for Fold# 1 started
+2020-05-20 13:17:24,144:: INFO - Builing model for Fold# 1 finished
+2020-05-20 13:17:24,144:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 13:17:28,818:: INFO - Fold 1 score (balanced accuracy): 0.824269889224572
+2020-05-20 13:17:28,819:: INFO - Evaluating model for Fold# 1 finished
+2020-05-20 13:17:28,824:: INFO - Builing model for Fold# 2 started
+2020-05-20 13:24:26,832:: INFO - Builing model for Fold# 2 finished
+2020-05-20 13:24:26,833:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 13:24:31,165:: INFO - Fold 2 score (balanced accuracy): 0.8432891124971575
+2020-05-20 13:24:31,166:: INFO - Evaluating model for Fold# 2 finished
+2020-05-20 13:24:31,171:: INFO - Builing model for Fold# 3 started
+2020-05-20 13:30:13,051:: INFO - Builing model for Fold# 3 finished
+2020-05-20 13:30:13,052:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 13:30:17,224:: INFO - Fold 3 score (balanced accuracy): 0.83725138469285
+2020-05-20 13:30:17,224:: INFO - Evaluating model for Fold# 3 finished
+2020-05-20 13:30:17,229:: INFO - Builing model for Fold# 4 started
+2020-05-20 13:35:42,597:: INFO - Builing model for Fold# 4 finished
+2020-05-20 13:35:42,597:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 13:35:46,843:: INFO - Fold 4 score (balanced accuracy): 0.8438530398271773
+2020-05-20 13:35:46,843:: INFO - Evaluating model for Fold# 4 finished
+2020-05-20 13:35:46,848:: INFO - Builing model for Fold# 5 started
+2020-05-20 13:42:17,861:: INFO - Builing model for Fold# 5 finished
+2020-05-20 13:42:17,861:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 13:42:22,703:: INFO - Fold 5 score (balanced accuracy): 0.848393898417958
+2020-05-20 13:42:22,703:: INFO - Evaluating model for Fold# 5 finished
+2020-05-20 13:42:22,710:: INFO - Builing model for Fold# 6 started
+2020-05-20 13:52:52,668:: INFO - Builing model for Fold# 6 finished
+2020-05-20 13:52:52,668:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 13:52:57,177:: INFO - Fold 6 score (balanced accuracy): 0.8484390735146022
+2020-05-20 13:52:57,177:: INFO - Evaluating model for Fold# 6 finished
+2020-05-20 13:52:57,182:: INFO - Builing model for Fold# 7 started
+2020-05-20 14:00:06,012:: INFO - Builing model for Fold# 7 finished
+2020-05-20 14:00:06,013:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 14:00:10,226:: INFO - Fold 7 score (balanced accuracy): 0.8382553885261346
+2020-05-20 14:00:10,227:: INFO - Evaluating model for Fold# 7 finished
+2020-05-20 14:00:10,232:: INFO - Builing model for Fold# 8 started
+2020-05-20 14:07:46,144:: INFO - Builing model for Fold# 8 finished
+2020-05-20 14:07:46,145:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 14:07:50,531:: INFO - Fold 8 score (balanced accuracy): 0.8387665269791769
+2020-05-20 14:07:50,531:: INFO - Evaluating model for Fold# 8 finished
+2020-05-20 14:07:50,537:: INFO - Builing model for Fold# 9 started
+2020-05-20 14:13:57,754:: INFO - Builing model for Fold# 9 finished
+2020-05-20 14:13:57,754:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 14:14:02,343:: INFO - Fold 9 score (balanced accuracy): 0.8413521667803658
+2020-05-20 14:14:02,343:: INFO - Evaluating model for Fold# 9 finished
+2020-05-20 14:14:02,348:: INFO - Builing model for Fold# 10 started
+2020-05-20 14:20:54,018:: INFO - Builing model for Fold# 10 finished
+2020-05-20 14:20:54,018:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 14:20:58,159:: INFO - Fold 10 score (balanced accuracy): 0.8363027076633207
+2020-05-20 14:20:58,160:: INFO - Evaluating model for Fold# 10 finished
+2020-05-20 14:20:58,160:: INFO - Evaluating final model started
+2020-05-20 14:20:58,160:: INFO - Best fold score (accuracy): 0.8484390735146022
+2020-05-20 14:21:03,179:: INFO - loss:3.1227502822875977
+2020-05-20 14:21:03,180:: INFO - tp:631.0
+2020-05-20 14:21:03,180:: INFO - fp:1290.0
+2020-05-20 14:21:03,180:: INFO - tn:626.0
+2020-05-20 14:21:03,180:: INFO - fn:1285.0
+2020-05-20 14:21:03,180:: INFO - accuracy:0.3280271291732788
+2020-05-20 14:21:03,180:: INFO - precision:0.328474760055542
+2020-05-20 14:21:03,180:: INFO - recall:0.3293319344520569
+2020-05-20 14:21:03,180:: INFO - auc:0.22706545889377594
+2020-05-20 14:21:03,180:: INFO - Balanced accuracy : 0.5203023897652694
+2020-05-20 14:21:03,180:: INFO - Evaluating final model finished
+2020-05-20 14:21:03,181:: INFO - Extracting evaluating metrics started
+2020-05-20 14:21:03,198:: INFO - Extracting evaluating metrics finished
+2020-05-20 14:21:03,199:: INFO - Metrics recorded
+2020-05-20 14:21:03,201:: INFO - >> Pridicting finished

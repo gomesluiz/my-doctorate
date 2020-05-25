@@ -36,8 +36,8 @@ RAW_DATA_DIR = ROOT_DIR + '/data/raw'
 PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
-# DATASETS  = ["freedesktop", "gcc", "gnome", "mozilla", "winehq"]
-DATASETS  = ["freedesktop"]
+# DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
+DATASETS  = ["winehq"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
 BALANCINGS = ['smote']
@@ -45,6 +45,7 @@ RESAMPLINGS = ['repeated_cv_5x2']
 METRICS = ['val_accuracy']
 #THRESHOLDS    = [8, 63, 108, 365]
 THRESHOLDS    = {
+    'eclipse': [8, 63, 108, 365],   
     'freedesktop': [28, 173, 162, 365],   
     'gcc': [63, 337, 475, 365],
     'gnome': [23, 202, 162, 365],
