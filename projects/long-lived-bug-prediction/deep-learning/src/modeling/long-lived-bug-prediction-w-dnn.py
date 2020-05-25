@@ -37,7 +37,7 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
 # DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
-DATASETS  = ["winehq"]
+DATASETS  = ["gcc"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
 BALANCINGS = ['smote']
@@ -280,7 +280,7 @@ for parameter in parameters:
 
         """
         Stop training when a monitored metric has stopped improving.
-        """
+        
         early_stopping = tf.keras.callbacks.EarlyStopping(
             monitor=metric,     # quantify to be monitored
             patience=10,        # number of epochs with no improvement after training will be stopped
@@ -288,6 +288,7 @@ for parameter in parameters:
             restore_best_weights=True, # restore model weigths from the epoch with the best value of monitored quantity
             verbose=1           # verbosity mode
         )
+        """
 
         logging.info('Balancing data started')
         X_main, y_main = tokenize_reports(train_data, feature, max_nb_term)
