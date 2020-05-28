@@ -1,0 +1,29 @@
+2020-05-25 19:35:25,222:: INFO - Setup completed
+2020-05-25 19:35:25,222:: INFO - >> Starting prediction
+2020-05-25 19:35:25,222:: INFO - Dataset       : gcc
+2020-05-25 19:35:25,222:: INFO - Feature       : long_description
+2020-05-25 19:35:25,222:: INFO - Classifier    : lstm+emb
+2020-05-25 19:35:25,222:: INFO - Balancing     : smote
+2020-05-25 19:35:25,222:: INFO - Resampling    : repeated_cv_5x2
+2020-05-25 19:35:25,222:: INFO - Metric        : val_accuracy
+2020-05-25 19:35:25,222:: INFO - Threshold     : 63
+2020-05-25 19:35:25,222:: INFO - Terms         : 100
+2020-05-25 19:35:25,360:: INFO - Bug reports train file  : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_gcc_bug_report_63_train_data.csv
+2020-05-25 19:35:25,360:: INFO - Bug reports test file   : /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/deep-learning/data/raw/20190917_gcc_bug_report_63_test_data.csv
+2020-05-25 19:35:25,360:: INFO - Reports in train - Total: 7473 Positive: 3729 (49.90% of total)
+2020-05-25 19:35:25,360:: INFO - Reports in train - Total: 7473 Negative: 3744 (50.10% of total)
+2020-05-25 19:35:25,360:: INFO - Reports in test - Total : 2489 Positive: 1242 (49.90% of total)
+2020-05-25 19:35:28,248:: INFO - Bug reports long_description cleaned.
+2020-05-25 19:35:28,248:: INFO - Balancing data started
+2020-05-25 19:35:29,878:: INFO - BEFORE SMOTE:
+2020-05-25 19:35:29,878:: INFO - Reports shape    : data (7473, 100) label (7473, 2)
+2020-05-25 19:35:29,878:: INFO - Reports class distribution : 0 (3744) 1 (3729)
+2020-05-25 19:35:31,315:: INFO - AFTER SMOTE:
+2020-05-25 19:35:31,315:: INFO - Reports shape    : data (7488, 100) label (7488, 2)
+2020-05-25 19:35:31,316:: INFO - Reports class distribution : 0 (3744) 1 (3744)
+2020-05-25 19:35:31,830:: INFO - Shape of test data tensor : (2489, 100)
+2020-05-25 19:35:31,830:: INFO - Shape of test label tensor: (2489, 2)
+2020-05-25 19:35:31,831:: INFO - Class distribution in test label tensor: 1247(0) 1242(1)
+2020-05-25 19:35:31,831:: INFO - Balancing data finished
+2020-05-25 19:35:31,831:: INFO - Trainning with k-folding started
+2020-05-25 19:35:31,833:: INFO - Builing model for Fold# 1 started
