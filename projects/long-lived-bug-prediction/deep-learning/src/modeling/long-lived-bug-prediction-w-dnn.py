@@ -37,7 +37,7 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
 # DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
-DATASETS  = ["gcc"]
+DATASETS  = ["freedesktop"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
 #BALANCINGS = ['smote']
@@ -58,7 +58,7 @@ EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 SEED_NUMBER = 42
-DEBUG = True
+DEBUG = False
 
 if (DEBUG):
     THRESHOLDS    = {
