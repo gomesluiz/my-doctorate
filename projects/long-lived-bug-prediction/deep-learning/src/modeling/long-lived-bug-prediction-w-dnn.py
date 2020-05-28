@@ -40,7 +40,8 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 DATASETS  = ["gcc"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
-BALANCINGS = ['smote']
+#BALANCINGS = ['smote']
+BALANCINGS = ['unbalanced']
 RESAMPLINGS = ['repeated_cv_5x2']
 METRICS = ['val_accuracy']
 #THRESHOLDS    = [8, 63, 108, 365]
@@ -57,7 +58,7 @@ EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 SEED_NUMBER = 42
-DEBUG = False
+DEBUG = True
 
 if (DEBUG):
     THRESHOLDS    = {
@@ -280,7 +281,7 @@ for parameter in parameters:
 
         """
         Stop training when a monitored metric has stopped improving.
-        
+        """
         early_stopping = tf.keras.callbacks.EarlyStopping(
             monitor=metric,     # quantify to be monitored
             patience=10,        # number of epochs with no improvement after training will be stopped
@@ -288,11 +289,10 @@ for parameter in parameters:
             restore_best_weights=True, # restore model weigths from the epoch with the best value of monitored quantity
             verbose=1           # verbosity mode
         )
-        """
-
-        logging.info('Balancing data started')
+        
+        logging.info('Balancing data started with {} method'.format(balancing))
         X_main, y_main = tokenize_reports(train_data, feature, max_nb_term)
-        logging.info('BEFORE SMOTE:')
+        logging.info('BEFORE:')
         logging.info('Reports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
         logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
                 np.sum(y_main.argmax(axis=1) == 0), 
@@ -300,15 +300,19 @@ for parameter in parameters:
             )
         )     
         
-        X_main, y_main = sm.fit_resample(X_main, y_main.argmax(axis=1))
-        y_main = pd.get_dummies(y_main).values
-        logging.info('AFTER SMOTE:')
-        logging.info('Reports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
-        logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
-                np.sum(y_main.argmax(axis=1) == 0), 
-                np.sum(y_main.argmax(axis=1) == 1)
+        if (balancing == "smote"):
+            X_main, y_main = sm.fit_resample(X_main, y_main.argmax(axis=1))
+            y_main = pd.get_dummies(y_main).values
+            logging.info('AFTER Balancing:')
+            logging.info('Redports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
+            logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
+                    np.sum(y_main.argmax(axis=1) == 0), 
+                    np.sum(y_main.argmax(axis=1) == 1)
+                )
             )
-        )
+        else:
+            logging.info('Balancing is not required.')
+
         
         X_test, y_test = tokenize_reports(test_data, feature, max_nb_term)
         logging.info('Shape of test data tensor : {}'.format(X_test.shape))
@@ -352,15 +356,14 @@ for parameter in parameters:
             #    np.savetxt(FOLD_VAL_FILE, np.concatenate((X_val, y_val), axis=1), delimiter=',')
 
             # logging.info('Salving File for Fold# {} finished'.format(fold))
-
-            logging.info('Builing model for Fold# {} started'.format(fold))
+            logging.info('Building model for Fold# {} started'.format(fold))
             fold_model   = make_model(input_dim=X_train.shape[1]
                 , output_dim=X_train.shape[1]
                 , input_length=X_train.shape[1])
 
             fold_model.fit(X_train, y_train, validation_data=(X_val, y_val),
-                verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE    
-            #    callbacks=[early_stopping]
+                verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE,    
+                callbacks=[early_stopping]
             )
             logging.info('Builing model for Fold# {} finished'.format(fold))
 
