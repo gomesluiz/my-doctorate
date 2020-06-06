@@ -37,11 +37,11 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
 # DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
-DATASETS  = ["winehq"]
+DATASETS  = ["gcc"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+emb']
-#BALANCINGS = ['smote']
-BALANCINGS = ['unbalanced']
+BALANCINGS = ['smote']
+#BALANCINGS = ['unbalanced']
 RESAMPLINGS = ['repeated_cv_5x2']
 METRICS = ['val_accuracy']
 #THRESHOLDS    = [8, 63, 108, 365]
@@ -59,6 +59,7 @@ BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
 SEED_NUMBER = 42
 DEBUG = False
+EXPERIMENT  = 'E1' 
 
 if (DEBUG):
     THRESHOLDS    = {
@@ -70,6 +71,7 @@ if (DEBUG):
     }
     MAX_NB_TERMS  = [100]
     EPOCHS        = 1
+    EXPERIMENT    = 'XX'
 
 today = datetime.now()
 today = today.strftime("%Y%m%d%H%M%S")
@@ -173,7 +175,7 @@ def clean_reports(data, column):
     return cleaned_data
 
 
-def tokenize_reports(data, column, max_nb_term):
+def tokenize_reports(data, column, max_nb_term, mode='sequence'):
     """Clean text data of bug reports.
 
     Parameters
@@ -182,11 +184,15 @@ def tokenize_reports(data, column, max_nb_term):
         A bug reports dataframe.
 
     """
-    tokenizer = Tokenizer(num_words=max_nb_term, filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True)
+    tokenizer = Tokenizer(num_words=MAX_NB_WORDS+1
+            , filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True)
     tokenizer.fit_on_texts(data[column].values)
-    X = tokenizer.texts_to_sequences(data[column].values)
-    X = pad_sequences(X, maxlen=max_nb_term)
+    if (mode == 'sequence'):
+        X = tokenizer.texts_to_sequences(data[column].values)
+        X = pad_sequences(X, maxlen=max_nb_term)
+        
     y = pd.get_dummies(data['class']).values
+    
     return (X, y)
 
 
@@ -403,7 +409,7 @@ for parameter in parameters:
             columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
             columns += best_model.metrics_names
             columns += ['sensitivity', 'specificity', 'balanced_acc']
-            columns += ['fmeasure', 'epochs']
+            columns += ['fmeasure', 'epochs', 'experiment']
             results = pd.DataFrame(columns=columns)
 
         loss = baseline_results[0] 
@@ -464,7 +470,8 @@ for parameter in parameters:
             'specificity': specificity,
             'balanced_acc': balanced_accuracy,
             'fmeasure': fmeasure,
-            'epochs': EPOCHS
+            'epochs': EPOCHS,
+            'experiment' : EXPERIMENT
         }
         results = results.append(result, ignore_index=True)
         logging.info('Extracting evaluating metrics finished')
