@@ -3,6 +3,9 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ## References 
 
+### Deep Learning
+1. [How to Get Reproducible Results with Keras](https://machinelearningmastery.com/reproducible-results-neural-networks-keras/)
+
 ### Machine Learning
 1. [Naive Bayes Classifier](http://uc-r.github.io/naive_bayes)
 2. [Caret Package - A Pratical Guide to Machine Learning](https://www.machinelearningplus.com/machine-learning/caret-package/)
