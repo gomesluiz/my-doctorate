@@ -1,4 +1,10 @@
 """Predict a long lived bug."""
+SEED_NUMBER = 42
+from numpy.random import seed
+seed(SEED_NUMBER)
+from tensorflow.random import set_seed
+set_seed(SEED_NUMBER+1)
+
 import os
 import re
 import logging
@@ -39,12 +45,12 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 # DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
 DATASETS  = ["gcc"]
 FEATURES  = ['long_description']
-CLASSIFIERS = ['lstm+emb']
+CLASSIFIERS = ['lstm+tfidf']
 BALANCINGS = ['smote']
 #BALANCINGS = ['unbalanced']
 RESAMPLINGS = ['repeated_cv_5x2']
 METRICS = ['val_accuracy']
-#THRESHOLDS    = [8, 63, 108, 365]
+VECTORIZES    = ['tfidf']
 THRESHOLDS    = {
     'eclipse': [8, 63, 108, 365],   
     'freedesktop': [28, 173, 162, 365],   
@@ -57,7 +63,6 @@ MAX_NB_TERMS  = [100, 150, 200, 250, 300]
 EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
-SEED_NUMBER = 42
 DEBUG = False
 EXPERIMENT  = 'E1' 
 
@@ -175,7 +180,7 @@ def clean_reports(data, column):
     return cleaned_data
 
 
-def tokenize_reports(data, column, max_nb_term, mode='sequence'):
+def tokenize_reports(data, column, max_nb_term, vectorize='sequence'):
     """Clean text data of bug reports.
 
     Parameters
@@ -187,16 +192,20 @@ def tokenize_reports(data, column, max_nb_term, mode='sequence'):
     tokenizer = Tokenizer(num_words=MAX_NB_WORDS+1
             , filters='!"#$%&()*+,-./:;<=>?@[\]^_`{|}~', lower=True)
     tokenizer.fit_on_texts(data[column].values)
-    if (mode == 'sequence'):
+    
+    if (vectorize == 'tfidf'):
+        X = tokenizer.texts_to_matrix(data[column].values, mode="tfidf")
+        X = X[:, 1:max_nb_term+1]
+    else:
         X = tokenizer.texts_to_sequences(data[column].values)
         X = pad_sequences(X, maxlen=max_nb_term)
-        
+
     y = pd.get_dummies(data['class']).values
     
     return (X, y)
 
 
-def make_model(input_dim, output_dim, input_length, output_bias=None):
+def make_model(input_dim, output_dim, input_length, vectorize, output_bias=None):
     """Build predicting model.
     """
     EMBEDDING_DIM = 100    
@@ -215,13 +224,22 @@ def make_model(input_dim, output_dim, input_length, output_bias=None):
     if output_bias is not None:
         output_bias = tf.keras.initializers.Constant(output_bias)
 
-    model = keras.Sequential([
-            keras.layers.Embedding(input_dim=MAX_NB_WORDS, output_dim=EMBEDDING_DIM, input_length=input_length),
-            keras.layers.SpatialDropout1D(0.2),
-            keras.layers.LSTM(EMBEDDING_DIM, dropout=0.2, recurrent_dropout=0.2),
-            keras.layers.Dense(2, activation='sigmoid')
-        ]
-     )
+    if vectorize == "tfidf":
+        model = keras.Sequential([
+                #keras.layers.Embedding(input_dim=MAX_NB_WORDS, output_dim=EMBEDDING_DIM, input_length=input_length),
+                #keras.layers.SpatialDropout1D(0.2),
+                keras.layers.LSTM(units=EMBEDDING_DIM, input_shape=input_length, dropout=0.2, recurrent_dropout=0.2),
+                keras.layers.Dense(2, activation='sigmoid')
+            ]
+        )
+    else:
+        model = keras.Sequential([
+                keras.layers.Embedding(input_dim=MAX_NB_WORDS, output_dim=EMBEDDING_DIM, input_length=input_length),
+                keras.layers.SpatialDropout1D(0.2),
+                keras.layers.LSTM(EMBEDDING_DIM, dropout=0.2, recurrent_dropout=0.2),
+                keras.layers.Dense(2, activation='sigmoid')
+            ]
+        )
 
     model.compile(
             optimizer=keras.optimizers.Adam(lr=1e-3),
@@ -244,7 +262,8 @@ parameters = itertools.product(
     BALANCINGS, 
     RESAMPLINGS, 
     METRICS, 
-    MAX_NB_TERMS
+    MAX_NB_TERMS,
+    VECTORIZES
 ) 
 
 for parameter in parameters:
@@ -255,6 +274,7 @@ for parameter in parameters:
     resampling =  parameter[4]
     metric = parameter[5]
     max_nb_term = parameter[6]
+    vectorize = parameter[7]
 
     for threshold in THRESHOLDS[dataset]:
         logging.info('>> Starting prediction')
@@ -266,6 +286,7 @@ for parameter in parameters:
         logging.info('Metric        : {}'.format(metric))
         logging.info('Threshold     : {}'.format(threshold))
         logging.info('Terms         : {}'.format(max_nb_term))
+        logging.info('Vectorize     : {}'.format(vectorize))
 
         TRAIN_FILE = RAW_DATA_DIR + '/20190917_{}_bug_report_{}_train_data.csv'.format(dataset, threshold)
         train_data = read_reports(TRAIN_FILE, feature)
@@ -297,7 +318,7 @@ for parameter in parameters:
         )
         
         logging.info('Balancing data started with {} method'.format(balancing))
-        X_main, y_main = tokenize_reports(train_data, feature, max_nb_term)
+        X_main, y_main = tokenize_reports(train_data, feature, max_nb_term, vectorize)
         logging.info('BEFORE:')
         logging.info('Reports shape    : data {} label {}'.format(X_main.shape, y_main.shape))
         logging.info('Reports class distribution : 0 ({}) 1 ({})'.format(
@@ -320,7 +341,7 @@ for parameter in parameters:
             logging.info('Balancing is not required.')
 
         
-        X_test, y_test = tokenize_reports(test_data, feature, max_nb_term)
+        X_test, y_test = tokenize_reports(test_data, feature, max_nb_term, vectorize)
         logging.info('Shape of test data tensor : {}'.format(X_test.shape))
         logging.info('Shape of test label tensor: {}'.format(y_test.shape))
         logging.info('Class distribution in test label tensor: {}(0) {}(1)'.format(
@@ -363,10 +384,16 @@ for parameter in parameters:
 
             # logging.info('Salving File for Fold# {} finished'.format(fold))
             logging.info('Building model for Fold# {} started'.format(fold))
+            if (vectorize == 'tfidf'):
+                X_train = X_train[:, :, None] 
+                X_val = X_val[:, :, None]
+
             fold_model   = make_model(input_dim=X_train.shape[1]
                 , output_dim=X_train.shape[1]
-                , input_length=X_train.shape[1])
+                , input_length=X_train.shape[1:]
+                , vectorize=vectorize)
 
+            
             fold_model.fit(X_train, y_train, validation_data=(X_val, y_val),
                 verbose=1, epochs=EPOCHS, batch_size=BATCH_SIZE,    
                 callbacks=[early_stopping]
@@ -388,7 +415,9 @@ for parameter in parameters:
 
         logging.info('Evaluating final model started')
         logging.info(f"Best fold score (accuracy): {best_balanced_accuracy}")
-
+        if (vectorize == 'tfidf'):
+            X_test = X_test[:, :, None] 
+       
         test_predictions_baseline  = (best_model.predict(X_test) > 0.5).astype("int32")
         test_predictions_baseline  = test_predictions_baseline.argmax(axis=1)
 
@@ -403,7 +432,7 @@ for parameter in parameters:
         logging.info('Extracting evaluating metrics started')
         if results is None:
             columns  = ['project', 'feature', 'classifier']
-            columns += ['balancing', 'resampling', 'metric', 'threshold', 'terms']
+            columns += ['balancing', 'resampling', 'vectorizing', 'metric', 'threshold', 'terms']
             columns += ['train_size', 'train_size_class_0', 'train_size_class_1']
             columns += ['val_size', 'val_size_class_0', 'val_size_class_1']
             columns += ['test_size', 'test_size_class_0', 'test_size_class_1']
@@ -445,6 +474,7 @@ for parameter in parameters:
             'classifier' : classifier,
             'balancing'  : balancing,
             'resampling' : resampling,
+            'vectorizing': vectorize,
             'metric'     : metric,
             'threshold'  : threshold,
             'terms' : max_nb_term,

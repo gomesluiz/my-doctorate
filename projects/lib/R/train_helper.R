@@ -79,7 +79,6 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=
     method = "knn",
     trControl = .control,
     tuneGrid  = grid,
-    #preProc = DEFAULT_PREPROC,
     metric=.metric
   )
 

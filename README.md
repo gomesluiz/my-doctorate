@@ -3,9 +3,12 @@ A crawler for issue extraction information from many issue tracking systems.
 
 ## References 
 
+### Deep Learning
+1. [How to Get Reproducible Results with Keras](https://machinelearningmastery.com/reproducible-results-neural-networks-keras/)
+
 ### Machine Learning
 1. [Naive Bayes Classifier](http://uc-r.github.io/naive_bayes)
-2. [Caret Package - A Pratical Guide to Machine Learning](https://www.machinelearningplus.com/machine-learning/caret-package/)
+2. [Caret Package - A Pratical Guide to Machine Learning in R](https://www.machinelearningplus.com/machine-learning/caret-package/)
 3. [Visualizing Machine Learning Thresholds to Make Better Business Decisions](https://blog.insightdatascience.com/visualizing-machine-learning-thresholds-to-make-better-business-decisions-4ab07f823415)
 4. [Measuring Performance in Caret Package](https://topepo.github.io/caret/measuring-performance.html#class) 
 5. [Using Your Own Model in train](https://topepo.github.io/caret/using-your-own-model-in-train.html#Illustration4)
@@ -41,6 +44,9 @@ A crawler for issue extraction information from many issue tracking systems.
 2. [Textual Data Visualization](https://quanteda.io/articles/pkgdown/examples/plotting.html)
 3. [Creating a Word Cloud in R](https://rpubs.com/brandonkopp/creating-word-clouds-in-r)
 4. [Keras Model visualization](https://keras.io/visualization/)
+
+## Deploy and Environments
+1. [Docker: Environment Management with Docker](https://environments.rstudio.com/docker)
 
 ## Vídeos 
 
