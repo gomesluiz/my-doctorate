@@ -45,7 +45,7 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 # DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
 DATASETS  = ["gcc"]
 FEATURES  = ['long_description']
-CLASSIFIERS = ['lstm+emb']
+CLASSIFIERS = ['lstm+tfidf']
 BALANCINGS = ['smote']
 #BALANCINGS = ['unbalanced']
 RESAMPLINGS = ['repeated_cv_5x2']
@@ -63,7 +63,7 @@ MAX_NB_TERMS  = [100, 150, 200, 250, 300]
 EPOCHS        = 200
 BATCH_SIZE    = 1024
 MAX_NB_WORDS  = 50000
-DEBUG = True
+DEBUG = False
 EXPERIMENT  = 'E1' 
 
 if (DEBUG):
