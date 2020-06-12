@@ -52,9 +52,11 @@ opt-einsum==3.2.1
 packaging==20.4
 pandas==1.0.4
 pandocfilters==1.4.2
+paretochart==1.0
 parso==0.7.0
 pexpect==4.8.0
 pickleshare==0.7.5
+Pillow==7.1.2
 prometheus-client==0.8.0
 prompt-toolkit==3.0.5
 protobuf==3.12.2
@@ -96,4 +98,5 @@ wcwidth==0.2.3
 webencodings==0.5.1
 Werkzeug==1.0.1
 widgetsnbextension==3.5.1
+wordcloud==1.7.0
 wrapt==1.12.1
