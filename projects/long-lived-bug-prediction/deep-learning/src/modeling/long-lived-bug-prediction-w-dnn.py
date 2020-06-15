@@ -42,8 +42,8 @@ RAW_DATA_DIR = ROOT_DIR + '/data/raw'
 PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
-# DATASETS  = ["freedesktop", "gcc", "eclipse", "gnome", "mozilla", "winehq"]
-DATASETS  = ["gcc"]
+# DATASETS  = ["gcc", "freedesktop", "eclipse", "gnome", "mozilla", "winehq"]
+DATASETS  = ["eclipse"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+tfidf']
 BALANCINGS = ['smote']
