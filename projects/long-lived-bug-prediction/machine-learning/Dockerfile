@@ -16,10 +16,10 @@ RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} lg
 # create directories
 WORKDIR /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
 RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/R/lib
-RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/sources/datasets
+RUN mkdir -p /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/source/datasets
 COPY R/* /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/R/
 COPY R/lib/* /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/R/lib/
-COPY source/datasets/* /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/sources/datasets/
+COPY source/datasets/* /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/source/datasets/
 
 RUN chown ${USER_ID}:${GROUP_ID} -R /home/lgomes
 USER lgomes
