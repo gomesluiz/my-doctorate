@@ -13,5 +13,3 @@ if (!require('smotefamily')) install.packages('smotefamily')
 if (!require("tidyverse")) install.packages("tidyverse")
 if (!require('tidytext')) install.packages('tidytext')
 if (!require("tm")) install.packages("tm")
-#if (!require("xgboost")) install.packages("xgboost")
-
