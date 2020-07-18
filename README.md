@@ -44,6 +44,7 @@ A crawler for issue extraction information from many issue tracking systems.
 2. [Textual Data Visualization](https://quanteda.io/articles/pkgdown/examples/plotting.html)
 3. [Creating a Word Cloud in R](https://rpubs.com/brandonkopp/creating-word-clouds-in-r)
 4. [Keras Model visualization](https://keras.io/visualization/)
+5. [Introduction to Data Science](https://rafalab.github.io/dsbook/)
 
 ## Deploy and Environments
 1. [Docker: Environment Management with Docker](https://environments.rstudio.com/docker)
