@@ -78,7 +78,7 @@ project.name    <- "eclipse"
 class_label     <- "long_lived"
 if(IN_DEBUG_MODE)
 {
-  classifiers  <- c(KNN)
+  classifiers  <- c(KNN, NB, NNET, RF, SVM)
 } else {
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
 }
