@@ -78,11 +78,12 @@ project.name    <- "eclipse"
 class_label     <- "long_lived"
 if(IN_DEBUG_MODE)
 {
-  classifiers  <- c(KNN, NB, NNET, RF, SVM)
+  classifiers  <- c(KNN)
 } else {
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
 }
 
+appender.tee(file.path(DATADIR, "predict_long_lived_bug_e1_best_tune_rev1.log"))
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)

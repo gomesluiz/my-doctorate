@@ -10,14 +10,14 @@ WORKDIR /tmp/
 RUN Rscript install_packages.R
 
 # create the owner user
-RUN addgroup --gid ${GROUP_ID} gomes
-RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} gomes
+RUN addgroup --gid ${GROUP_ID} lgomes
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} lgomes
 
 # create directories
-WORKDIR /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
+WORKDIR /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
 #RUN mkdir -p /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
 #RUN mkdir -p /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
 COPY . /
 
-RUN chown ${USER_ID}:${GROUP_ID} -R /home/${USER_ID}
-USER ${USER_ID}
+RUN chown ${USER_ID}:${GROUP_ID} -R /home/lgomes
+USER lgomes
