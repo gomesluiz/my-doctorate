@@ -15,8 +15,9 @@ RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} go
 
 # create directories
 WORKDIR /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
-RUN mkdir -p /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
-COPY -R . /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
+#RUN mkdir -p /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
+#RUN mkdir -p /home/${USER_ID}/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
+COPY . /
 
 RUN chown ${USER_ID}:${GROUP_ID} -R /home/${USER_ID}
 USER ${USER_ID}
