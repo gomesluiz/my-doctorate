@@ -43,7 +43,7 @@ PROCESSED_DATA_DIR = ROOT_DIR + '/data/processed'
 
 # constants
 # DATASETS  = ["gcc", "freedesktop", "eclipse", "gnome", "mozilla", "winehq"]
-DATASETS  = ["eclipse"]
+DATASETS  = ["winehq"]
 FEATURES  = ['long_description']
 CLASSIFIERS = ['lstm+tfidf']
 BALANCINGS = ['smote']
