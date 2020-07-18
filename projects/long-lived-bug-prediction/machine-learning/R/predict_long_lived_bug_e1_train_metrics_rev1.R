@@ -206,8 +206,6 @@ for (row in 1:nrow(all.best.metrics)) {
   }
   
   all_train.results <- rbind(all_train.results, train.results[1, ])
-
-    
 }
-   write_csv(all_train.results,  file.path( DATADIR,  "teste_rf_svm.csv"))
-  flog.trace("Training results recorded on CSV file.")
+write_csv(all_train.results,  file.path( DATADIR,  "teste_rf_svm.csv"))
+flog.trace("Training results recorded on CSV file.")
