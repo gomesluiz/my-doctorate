@@ -71,7 +71,7 @@ source(file.path(LIBDIR, "train_helper.R"))
 
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+processors <- ifelse(IN_DEBUG_MODE, 3, 30)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 project.name    <- "eclipse"
@@ -172,7 +172,9 @@ for (row in 1:nrow(all.best.metrics)) {
   all.best.metrics[row, "hyper1"] = names(fit_model$bestTune)[1]
   all.best.metrics[row, "value1"] = fit_model$bestTune[[1]] 
 
-  if ((parameter$classifier == SVM) | (parameter$classifier == NB))
+  if ((parameter$classifier == SVM) | 
+      (parameter$classifier == NB)  | 
+      (parameter$classifier == NNET))
   {
     all.best.metrics[row, "hyper2"] = names(fit_model$bestTune)[2]
     all.best.metrics[row, "value2"] = fit_model$bestTune[[2]] 

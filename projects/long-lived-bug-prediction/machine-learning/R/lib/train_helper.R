@@ -65,12 +65,13 @@ fourStats <- function(data, lev=levels(data$obs), model=NULL)
 #' @param .control A control Caret parameter
 #'
 #' @return a trained model knn.
-train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED, .grid) {
   
   flog.trace("[train_with_knn] Training model with KNN and %s", .metric)
   
   # k: neighbors 
-  grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
+  if (is.na(.grid))
+    .grid <- expand.grid(k = c(5, 11, 15, 21, 25, 33))
  
   set.seed(.seed) 
   result <- train(
@@ -78,7 +79,7 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=
     y = .y,
     method = KNN,
     trControl = .control,
-    tuneGrid  = grid,
+    tuneGrid  = .grid,
     metric=.metric
   )
 
@@ -92,15 +93,16 @@ train_with_knn <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
-  
+train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC
+                        , .seed=DEFAULT_SEED, .grid=NA) {
   flog.trace("[train_with_nb] Training model with NB and %s", .metric)
   
-  grid <- expand.grid(
-    fL        = 0:5,               # laplace correction
-    usekernel = c(TRUE, FALSE),    # distribution type
-    adjust    = seq(0, 5, by = 1)  # bandwidth adjustment
-  )
+  if (is.na(.grid))
+      .grid <- expand.grid(
+        fL        = 0:5,               # laplace correction
+        usekernel = c(TRUE, FALSE),    # distribution type
+        adjust    = seq(0, 5, by = 1)  # bandwidth adjustment
+      )
   
   set.seed(.seed) 
   result <- train(
@@ -108,8 +110,7 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
     y = .y,
     method = NB,
     trControl = .control,
-    tuneGrid  = grid,
-    #preProc   = DEFAULT_PREPROC,
+    tuneGrid  = .grid,
     metric=.metric
   )
 
@@ -123,14 +124,16 @@ train_with_nb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC
+                          , .seed=DEFAULT_SEED, .grid=NA) {
   
   flog.trace("[train_with_nnet] Training model with NNET and %s", .metric)
   
-  grid <- expand.grid(
-    size  = c(10, 20, 30, 40, 50),  # Hidden units 
-    decay = (0.5)                   # Weight decay
-  )
+  if (is.na(.grid))
+    .grid <- expand.grid(
+      size  = c(10, 20, 30, 40, 50),  # Hidden units 
+      decay = (0.5)                   # Weight decay
+    )
   
   set.seed(.seed) 
   result <- train(
@@ -138,10 +141,9 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed
     y = .y,
     method = "nnet",
     trControl = .control,
-    tuneGrid  = grid,
+    tuneGrid  = .grid,
     MaxNWts   = 5000,
     verbose   = FALSE,
-    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
   
@@ -155,13 +157,15 @@ train_with_nnet <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC
+                        , .seed=DEFAULT_SEED, .grid=NA) {
   
   flog.trace("[train_with_rf] Training model with RF and %s", .metric)
-  
-  grid <- expand.grid(
-    mtry = c(25, 50, 75, 100)
-  )
+
+  if (is.na(.grid)) 
+    .grid <- expand.grid(
+      mtry = c(25, 50, 75, 100)
+    )
   
   set.seed(.seed) 
   result <- train(
@@ -169,10 +173,9 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
     y = .y,
     method = RF,
     trControl = .control,
-    tuneGrid  = grid,
+    tuneGrid  = .grid,
     ntree   = 200,
     verbose = FALSE,
-    #preProc   = DEFAULT_PREPROC,
     metric = .metric
   )
   
@@ -186,18 +189,20 @@ train_with_rf <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC
+                         , .seed=DEFAULT_SEED, .grid=NA) {
   
   flog.trace("[train_with_svm] Training model with SVM and %s", .metric)
-  
-  grid <- expand.grid(
-    C = c(
-      2**(-5), 2**(0), 2**(5), 2**(10)
-    ),
-    sigma = c(
-      2**(-15), 2**(-10), 2**(-5), 2**(0), 2**(5)
+
+  if (is.na(.grid)) 
+    .grid <- expand.grid(
+      C = c(
+        2**(-5), 2**(0), 2**(5), 2**(10)
+      ),
+      sigma = c(
+        2**(-15), 2**(-10), 2**(-5), 2**(0), 2**(5)
+      )
     )
-  )
   
   set.seed(.seed) 
   result <- train(
@@ -205,8 +210,7 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=
     y = .y,
     method    = "svmRadial",
     trControl = .control,
-    tuneGrid  = grid,
-    #preProc   = DEFAULT_PREPROC,
+    tuneGrid  = .grid,
     metric = .metric
   )
 
@@ -220,20 +224,21 @@ train_with_svm <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC
+                        , .seed=DEFAULT_SEED, .grid=NA) {
   
   flog.trace("[train_with_xb] Training model with XgBoost and %s", .metric)
   
-  set.seed(.seed) 
-  grid <- expand.grid(
-    nrounds = c(100, 200, 300, 400), # Boosting iterations
-    max_depth = c(3:7),              # Max tree depth
-    eta = c(0.05, 1),                # Shrinkage
-    gamma = c(0.01),                 # Minimum loss reduction 
-    colsample_bytree = c(0.75),      # Subsamble ratio of columns
-    subsample = c(0.50),             # Subsample percentage
-    min_child_weight = c(0)          # Minimum sum of instance weight
-  )
+  if (is.na(.grid))
+    .grid <- expand.grid(
+      nrounds = c(100, 200, 300, 400), # Boosting iterations
+      max_depth = c(3:7),              # Max tree depth
+      eta = c(0.05, 1),                # Shrinkage
+      gamma = c(0.01),                 # Minimum loss reduction 
+      colsample_bytree = c(0.75),      # Subsamble ratio of columns
+      subsample = c(0.50),             # Subsample percentage
+      min_child_weight = c(0)          # Minimum sum of instance weight
+    )
 
   set.seed(.seed) 
   result <- train(
@@ -241,8 +246,7 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
     y = .y,
     method = "xgbTree",
     trControl = .control,
-    tuneGrid  = grid,
-    #preProc   = DEFAULT_PREPROC,
+    tuneGrid  = .grid,
     metric = .metric
   )
 
@@ -255,7 +259,8 @@ train_with_xb <- function(.x, .y, .control=DEFAULT_CONTROL, .metric=ACC, .seed=D
 #' @param .control A control Caret parameter
 #'
 #' @return A trained model.
-train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL, .metric=ACC, .seed=DEFAULT_SEED) {
+train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL, 
+                       .metric=ACC, .seed=DEFAULT_SEED, .grid=NA) {
   if (!.classifier %in% train_classifiers)
     stop(sprintf("%s unknown classifier!", .classifier))
  
@@ -281,16 +286,16 @@ train_with <- function(.x, .y, .classifier, .control=DEFAULT_CONTROL, .metric=AC
   }
   
   if (.classifier == KNN) {
-    return(train_with_knn(.x, .y, .control, .metric, .seed))
+    return(train_with_knn(.x, .y, .control, .metric, .seed, .grid))
   } else if (.classifier == NB) {
     return(train_with_nb(.x, .y, .control, .metric, .seed))
   } else if (.classifier == NNET) {
-    return(train_with_nnet(.x, .y, .control, .metric, .seed))
+    return(train_with_nnet(.x, .y, .control, .metric, .seed, .grid))
   } else if (.classifier == RF) {
-    return(train_with_rf(.x, .y, .control, .metric, .seed))
+    return(train_with_rf(.x, .y, .control, .metric, .seed, .grid))
   } else if (.classifier == SVM) {
-    return(train_with_svm(.x, .y, .control, .metric, .seed))
+    return(train_with_svm(.x, .y, .control, .metric, .seed, .grid))
   } else if (.classifier == XB) {
-    return(train_with_xb(.x, .y, .control, .metric, .seed))
+    return(train_with_xb(.x, .y, .control, .metric, .seed, .grid))
   }
 }

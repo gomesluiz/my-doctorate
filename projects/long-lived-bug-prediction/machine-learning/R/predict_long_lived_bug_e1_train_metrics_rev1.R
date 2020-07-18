@@ -79,26 +79,28 @@ class_label     <- "long_lived"
 if(IN_DEBUG_MODE)
 {
   classifiers  <- c(RF, SVM)
+  seeds <- c(DEFAULT_SEED, 283)
 } else {
   classifiers  <- c(KNN,NB, NNET, RF, SVM)
+  seeds <- c(DEFAULT_SEED, 283, 1087, 2293, 3581)
 }
   #
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
-metrics.file   = sprintf("20190918180550_rq4e1_%s_predict_long_lived_metrics.csv", project.name)
+modo.exec      = ifelse(IN_DEBUG_MODE, "debug", "final")
+metrics.file   = sprintf("20200731_rq3e1_all_best_train_tunes_%s.csv", modo.exec)
 metrics.path   = file.path(DATADIR, metrics.file)
 metrics.data   = read_csv(metrics.path)
-all.best.metrics   = metrics.data[FALSE, ]
 
-for(predictor in classifiers){
-  best.metrics = metrics.data %>% 
-        filter(classifier == predictor & metric != "Kappa") %>%
-        top_n(1, balanced_acc)
-  all.best.metrics <- rbind(all.best.metrics, best.metrics)
-}
-print(all.best.metrics)
+#for(predictor in classifiers){
+#  best.metrics = metrics.data %>% 
+#        filter(classifier == predictor & metric != "Kappa") %>%
+#        top_n(1, balanced_acc)
+#  all.best.metrics <- rbind(all.best.metrics, best.metrics)
+#}
+#print(all.best.metrics)
 flog.trace("Current project name : %s", project.name)
   
 reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
@@ -119,93 +121,88 @@ flog.trace("Clean text features")
 reports$short_description <- clean_text(reports$short_description)
 reports$long_description  <- clean_text(reports$long_description)
 all_train.results <- NA 
-for (row in 1:nrow(all.best.metrics)) {
-  set.seed(DEFAULT_SEED)
-  
-  parameter <- all.best.metrics[row, ]
-  flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Metric...: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
-           , parameter$n_term , parameter$classifier , parameter$metric, parameter$feature
-           , parameter$threshold , parameter$balancing , parameter$resampling)
-  
-  flog.trace("Converting dataframe to term matrix")
-  flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
-  reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
-  flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
-  
-  flog.trace("Partitioning dataset in training and testing")
-  reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
-  in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
-  train.dataset <- reports.dataset[in_train, ]
-  test.dataset  <- reports.dataset[-in_train, ]
-   
-  flog.trace("Balancing training dataset")
-  balanced.dataset = balance_dataset(
-    train.dataset,  
-    class_label,  
-    c("bug_id", "bug_fix_time"), 
-    parameter$balancing
-  )
-  
-  X_train <- subset(balanced.dataset, select=-c(long_lived))
-  
-  y_train <- balanced.dataset[, class_label]
-  X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
-  y_test  <- test.dataset[, class_label]
+for (row in 1:nrow(metrics.data)) {
+  parameter <- metrics.data[row, ]
+  for ( seed in seeds ){
+    set.seed(seed)
+    flog.trace("SEED <%d>", seed)
+    flog.trace("Current parameters:\n N.Terms...: [%d]\n Classifier: [%s]\n Metric...: [%s]\n Feature...: [%s]\n Threshold.: [%s]\n Balancing.: [%s]\n Resampling: [%s]"
+            , parameter$n_term , parameter$classifier , parameter$metric, parameter$feature
+            , parameter$threshold , parameter$balancing , parameter$resampling)
+    
+    flog.trace("Converting dataframe to term matrix")
+    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term, parameter$feature)
+    reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
+    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
+    
+    flog.trace("Partitioning dataset in training and testing")
+    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
+    in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
+    train.dataset <- reports.dataset[in_train, ]
+    test.dataset  <- reports.dataset[-in_train, ]
+    
+    flog.trace("Balancing training dataset")
+    balanced.dataset = balance_dataset(
+      train.dataset,  
+      class_label,  
+      c("bug_id", "bug_fix_time"), 
+      parameter$balancing
+    )
+    
+    X_train <- subset(balanced.dataset, select=-c(long_lived))
+    
+    y_train <- balanced.dataset[, class_label]
+    X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
+    y_test  <- test.dataset[, class_label]
 
-  flog.trace("Training model ")
-  fit_control <- get_resampling_method(parameter$resampling)
-  fit_model   <- train_with (.x=X_train, 
-                             .y=y_train, 
-                             .classifier=parameter$classifier,
-                             .control=fit_control,
-                             .metric=parameter$metric)
+    flog.trace("Training prediction model ")
+    #fit_control <- get_resampling_method(parameter$resampling)
+    fit_control <- caret::trainControl(method = "cv", number = 10, search = "grid")
+    fit_model   <- train_with (.x=X_train, 
+                               .y=y_train, 
+                               .classifier=parameter$classifier,
+                               .control=fit_control,
+                               .metric=parameter$metric,
+                               .seed=seed)
+
+    
+    flog.trace("Recording training resultas in CSV file")
+    train.results <- fit_model$resampledCM
+    train.results <- train.results[, !(names(train.results) %in% names(fit_model$bestTune))]
+    
+    names(train.results)[1] <- "tn"
+    names(train.results)[2] <- "fn"
+    names(train.results)[3] <- "fp"
+    names(train.results)[4] <- "tp"
+    
+    train.results$acc <- (train.results$tp + train.results$tn) /
+      (train.results$tp + train.results$fp + train.results$tn + train.results$fn)
+    
+    positives   <- train.results$tp + train.results$fn
+    train.results$sensitivity <- ifelse(positives == 0, 0, train.results$tp / positives)
+    
+    negatives   <- train.results$tn + train.results$fp
+    train.results$specificity <- ifelse(negatives == 0, 0, train.results$tn / negatives)
+    
+    train.results$balanced_acc <- (train.results$tp / (train.results$tp+train.results$fp) + 
+                                  train.results$tn / (train.results$tn+train.results$fn)) / 2 
+    
+    train.results = train.results %>% top_n(1, balanced_acc) 
+    
+    train.results$classifier <- parameter$classifier
+    train.results$balancing  <  parameter$balancing
+    train.results$resampling <- parameter$resampling
+    train.results$metric     <- parameter$metric
+    train.results$n_term     <- parameter$n_term
+    train.results$feature    <- parameter$feature
   
-  
-  results.file  <- sprintf( "20200731_rq3e1_%s_%s_%s_%s_train_results.csv",  project.name
-                            ,  parameter$classifier,  parameter$resampling,  parameter$balancing)
-  
-  flog.trace("Recording training resultas in CSV file")
-  train.results <- fit_model$resampledCM
-  train.results <- train.results[, !(names(train.results) %in% names(fit_model$bestTune))]
-  
-  names(train.results)[1] <- "tn"
-  names(train.results)[2] <- "fn"
-  names(train.results)[3] <- "fp"
-  names(train.results)[4] <- "tp"
-  
-  train.results$acc <- (train.results$tp + train.results$tn) /
-    (train.results$tp + train.results$fp + train.results$tn + train.results$fn)
-  
-  positives   <- train.results$tp + train.results$fn
-  train.results$sensitivity <- ifelse(positives == 0, 0, train.results$tp / positives)
-  
-  negatives   <- train.results$tn + train.results$fp
-  train.results$specificity <- ifelse(negatives == 0, 0, train.results$tn / negatives)
-  
-  train.results$balanced_acc <- (train.results$tp / (train.results$tp+train.results$fp) + 
-                                 train.results$tn / (train.results$tn+train.results$fn)) / 2 
-  
-  train.results = train.results %>% top_n(1, balanced_acc) 
-  
-  train.results$classifier <- parameter$classifier
-  train.results$balancing  <  parameter$balancing
-  train.results$resampling <- parameter$resampling
-  train.results$metric     <- parameter$metric
-  train.results$n_term     <- parameter$n_term
-  train.results$feature    <- parameter$feature
- 
-  train.results$hyper1 <- ""
-  train.results$value1 <- 0 
-  train.results$hyper2 <- ""
-  train.results$value2 <- 0  
-  train.results$hyper3 <- ""
-  train.results$value3 <- 0  
-  
-  if (row == 1){
-    all_train.results = train.results[FALSE, ]
-  }
-  
-  all_train.results <- rbind(all_train.results, train.results[1, ])
+    if (row == 1){
+      all_train.results = train.results[FALSE, ]
+    }
+  }    
+    all_train.results <- rbind(all_train.results, train.results[1, ])
 }
+results.file  <- sprintf( "20200731_rq3e1_%s_%s_%s_%s_train_results.csv",  project.name
+                              ,  parameter$classifier,  parameter$resampling,  parameter$balancing)
 write_csv(all_train.results,  file.path( DATADIR,  "teste_rf_svm.csv"))
 flog.trace("Training results recorded on CSV file.")
