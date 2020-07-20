@@ -78,7 +78,7 @@ project.name    <- "eclipse"
 class_label     <- "long_lived"
 if(IN_DEBUG_MODE)
 {
-  classifiers  <- c(RF, SVM)
+  classifiers  <- c(KNN,NB, NNET, RF, SVM)
   seeds <- c(DEFAULT_SEED, 283)
 } else {
   classifiers  <- c(KNN,NB, NNET, RF, SVM)
@@ -101,7 +101,7 @@ metrics.data   = read_csv(metrics.path)
 #  all.best.metrics <- rbind(all.best.metrics, best.metrics)
 #}
 #print(all.best.metrics)
-flog.trace("Current project name : %s", project.name)
+flog.trace("Curfirrent project name : %s", project.name)
   
 reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
 flog.trace("Bug report file name: %s", reports.file)
@@ -120,7 +120,7 @@ reports <- reports[complete.cases(reports), ]
 flog.trace("Clean text features")
 reports$short_description <- clean_text(reports$short_description)
 reports$long_description  <- clean_text(reports$long_description)
-all_train.results <- NA 
+flag <- FALSE
 for (row in 1:nrow(metrics.data)) {
   parameter <- metrics.data[row, ]
   for ( seed in seeds ){
@@ -155,17 +155,35 @@ for (row in 1:nrow(metrics.data)) {
     X_test  <- subset(test.dataset, select=-c(bug_id, bug_fix_time, long_lived))
     y_test  <- test.dataset[, class_label]
 
+
     flog.trace("Training prediction model ")
-    #fit_control <- get_resampling_method(parameter$resampling)
-    fit_control <- caret::trainControl(method = "cv", number = 10, search = "grid")
+    if (parameter$classifier == KNN)
+    {
+      grid = expand.grid(k=c(parameter$value1))
+    } else if (parameter$classifier == NB) {
+      grid = expand.grid(fL=c(parameter$value1), useKernel=c(parameter$value2), adjust=c(parameter$value3))
+    } else if (parameter$classifier == NNET) {
+      grid = expand.grid(size=c(parameter$value1), decay=c(parameter$value2))
+    } else if (parameter$classifier == RF) {
+      grid = expand.grid(mtry=c(parameter$value1))
+    } else if (parameter$classifier == SVM) {
+      grid = expand.grid(sigma=c(parameter$value1), C=c(parameter$value2))
+    }
+
+    if (parameter$metric == ROC)
+      fit_control <- caret::trainControl(method = "cv", number = 10
+      , classProbs=TRUE, summaryFunction = twoClassSummary)
+    else
+      fit_control <- caret::trainControl(method = "cv", number = 10)
+
     fit_model   <- train_with (.x=X_train, 
                                .y=y_train, 
                                .classifier=parameter$classifier,
                                .control=fit_control,
                                .metric=parameter$metric,
-                               .seed=seed)
+                               .seed=seed,
+                               .grid=grid)
 
-    
     flog.trace("Recording training resultas in CSV file")
     train.results <- fit_model$resampledCM
     train.results <- train.results[, !(names(train.results) %in% names(fit_model$bestTune))]
@@ -187,22 +205,26 @@ for (row in 1:nrow(metrics.data)) {
     train.results$balanced_acc <- (train.results$tp / (train.results$tp+train.results$fp) + 
                                   train.results$tn / (train.results$tn+train.results$fn)) / 2 
     
-    train.results = train.results %>% top_n(1, balanced_acc) 
-    
     train.results$classifier <- parameter$classifier
     train.results$balancing  <  parameter$balancing
-    train.results$resampling <- parameter$resampling
+    train.results$resampling <- "10-cv"
     train.results$metric     <- parameter$metric
     train.results$n_term     <- parameter$n_term
     train.results$feature    <- parameter$feature
-  
-    if (row == 1){
+    train.results$hyper1     <- parameter$hyper1
+    train.results$value1     <- parameter$value1
+    train.results$hyper2     <- parameter$hyper2
+    train.results$value2     <- parameter$value2
+    train.results$hyper3     <- parameter$hyper3
+    train.results$value3     <- parameter$value3
+    train.results$seed       <- seed
+    if (!flag){
       all_train.results = train.results[FALSE, ]
+      flag <- TRUE
     }
+    all_train.results <- rbind(all_train.results, train.results)
   }    
-    all_train.results <- rbind(all_train.results, train.results[1, ])
 }
-results.file  <- sprintf( "20200731_rq3e1_%s_%s_%s_%s_train_results.csv",  project.name
-                              ,  parameter$classifier,  parameter$resampling,  parameter$balancing)
-write_csv(all_train.results,  file.path( DATADIR,  "teste_rf_svm.csv"))
+results.file  <- sprintf( "20200731_rq3e1_train_fold_metrics_%s_%s.csv",  project.name, modo.exec)
+write_csv(all_train.results,  file.path( DATADIR, results.file))
 flog.trace("Training results recorded on CSV file.")
