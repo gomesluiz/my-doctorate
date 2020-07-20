@@ -71,7 +71,7 @@ source(file.path(LIBDIR, "train_helper.R"))
 
 
 # main function
-processors <- ifelse(IN_DEBUG_MODE, 3, 8)
+processors <- ifelse(IN_DEBUG_MODE, 30, 31)
 r_cluster <-  makePSOCKcluster(processors)
 registerDoParallel(r_cluster)
 project.name    <- "eclipse"
@@ -225,7 +225,6 @@ for (row in 1:nrow(metrics.data)) {
     }
     all_train.results <- rbind(all_train.results, train.results)
   }    
-  if (row==1) break
 }
 results.file  <- sprintf( "20200731_rq3e1_train_fold_metrics_%s_%s.csv",  project.name, modo.exec)
 write_csv(all_train.results,  file.path( DATADIR, results.file))
