@@ -1,6 +1,6 @@
 calculate_metrics <- function(.y_hat, .y_test) {
   cm <- confusionMatrix(data = .y_hat, reference = .y_test, positive = "Y")
-  cm_tn <- cm$table[1, 1]
+  cm_tn <- cm$table[1, 1] 
   cm_fn <- cm$table[1, 2]
   cm_fp <- cm$table[2, 1]
   cm_tp <- cm$table[2, 2]
