@@ -11,7 +11,7 @@ RUN Rscript install_packages.R
 
 # create the owner user
 RUN addgroup --gid ${GROUP_ID} lgomes
-RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID}
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} lgomes
 
 # create directories
 WORKDIR /home/lgomes/Workspace/doctorate/projects/long-lived-bug-prediction/machine-learning/
