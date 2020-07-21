@@ -15,7 +15,7 @@
 # clean R Studio session.
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
-timestamp       <- format(Sys.time(), "%Y%m%d%H%M%S")
+timestamp       <- format(Sys.time(), "%Y%m%d")
 
 # setup project folders.
 IN_DEBUG_MODE  <- TRUE
@@ -187,6 +187,6 @@ for (row in 1:nrow(all.best.metrics)) {
   }
 }
 
-results.file  <- sprintf( "20200731_rq3e1_all_best_train_tunes_%s.csv", ifelse(IN_DEBUG_MODE, "debug", "final"))
-write_csv(all.best.metrics,  file.path(DATADIR, results.file))
+results.file  <- sprintf( "%s_rq3e1_all_best_train_tunes_%s.csv", timestamp, 
+  ifelse(IN_DEBUG_MODE, "debug", "final")) write_csv(all.best.metrics,  file.path(DATADIR, results.file))
 flog.trace("Training best tune hyperparameters recorded on CSV file.")
