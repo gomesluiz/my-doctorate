@@ -1,6 +1,6 @@
-,project,feature,n_term,classifier,resampling,metric,threshold,balanced_acc,sensitivity,specificity,hyper1,value1,hyper2,value2,hyper3,value3
-0,eclipse,long_description,100,knn,repeatedcv,ROC,365,0.523238315833066,0.598930481283422,0.44754615038271,k,11.0,,0.0,,0
-1,eclipse,short_description,100,nb,repeatedcv,ROC,365,0.5406875047532129,0.62962962962963,0.451745379876797,fL,0.0,usekernel,1.0,adjust,1
-2,eclipse,long_description,100,nn,repeatedcv,Accuracy,365,0.542158347518943,0.3796791443850271,0.704637550652859,size,20.0,decay,0.5,,0
-3,eclipse,long_description,100,rf,repeatedcv,Accuracy,365,0.530513306382682,0.106951871657754,0.9540747411076089,mtry,25.0,,0.0,,0
-4,eclipse,long_description,100,svm,repeatedcv,Accuracy,365,0.5105013639854861,0.058823529411765,0.9621791985592081,sigma,0.03125,C,1024.0,,0
+,project,feature,n_term,classifier,resampling,balancing,metric,threshold,balanced_acc,sensitivity,specificity,hyper1,value1,hyper2,value2,hyper3,value3
+0,eclipse,long_description,100,knn,repeatedcv,smote,ROC,365,0.523238315833066,0.598930481283422,0.44754615038271,k,11.0,,0.0,,0
+1,eclipse,short_description,100,nb,repeatedcv,unbalanced,ROC,365,0.5406875047532129,0.62962962962963,0.451745379876797,fL,0.0,usekernel,1.0,adjust,1
+2,eclipse,long_description,100,nn,repeatedcv,smote,Accuracy,365,0.542158347518943,0.3796791443850271,0.704637550652859,size,20.0,decay,0.5,,0
+3,eclipse,long_description,100,rf,repeatedcv,smote,Accuracy,365,0.530513306382682,0.106951871657754,0.9540747411076089,mtry,25.0,,0.0,,0
+4,eclipse,long_description,100,svm,repeatedcv,smote,Accuracy,365,0.5105013639854861,0.058823529411765,0.9621791985592081,sigma,0.03125,C,1024.0,,0

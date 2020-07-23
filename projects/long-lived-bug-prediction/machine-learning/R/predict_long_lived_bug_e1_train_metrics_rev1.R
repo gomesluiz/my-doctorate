@@ -5,25 +5,26 @@
 #' Luiz Alberto (gomes.luiz@gmail.com)
 #'
 #' @usage:
-#' $ nohup Rscript ./predict_long_lived_bug_e1.R > predict_long_lived_bug_e1.log 2>&1 &
+#' $ nohup Rscript ./predict_long_lived_bug_e1_train_metrics_rev1.R > 
+#'    predict_long_lived_bug_e1_train_metrics_rev1.log 2>&1 &
 #'
 #' @details:
 #'
 #'         17/09/2019 16:00 pre-process in the train method removed
 #'
-
 # clean R Studio session.
+
 rm(list = ls(all.names = TRUE))
 options(readr.num_columns = 0)
 timestamp <- format(Sys.time(), "%Y%m%d")
 
 # setup project folders.
-IN_DEBUG_MODE <- TRUE
-FORCE_NEW_FILE <- TRUE
+IN_DEBUG_MODE   <- FALSE
+FORCE_NEW_FILE  <- TRUE
 BASEDIR <- file.path("~", "Workspace", "doctorate", "projects")
-PRJDIR <- file.path(BASEDIR, "long-lived-bug-prediction", "machine-learning")
-SRCDIR <- file.path(PRJDIR, "R")
-LIBDIR <- file.path(SRCDIR, "lib")
+PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction", "machine-learning")
+SRCDIR  <- file.path(PRJDIR, "R")
+LIBDIR  <- file.path(SRCDIR, "lib")
 DATADIR <- file.path(PRJDIR, "source", "datasets")
 
 if (!require("caret")) install.packages("caret")
@@ -90,6 +91,12 @@ modo.exec = ifelse(IN_DEBUG_MODE, "debug", "final")
 metrics.file = sprintf("20200731_rq3e1_all_best_train_tunes_%s.csv", modo.exec)
 metrics.path = file.path(DATADIR, metrics.file)
 metrics.data = read_csv(metrics.path)
+results.file <- sprintf(
+  "%s_rq3e1_train_fold_metrics_%s_%s.csv", 
+  timestamp, 
+  project.name,
+  modo.exec
+)
 
 flog.trace("Curfirrent project name : %s", project.name)
 reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
@@ -108,10 +115,12 @@ reports <- reports[complete.cases(reports), ]
 #
 flog.trace("Clean text features")
 reports$short_description <- clean_text(reports$short_description)
-reports$long_description <- clean_text(reports$long_description)
-flag <- FALSE
+reports$long_description  <- clean_text(reports$long_description)
+results.started <- FALSE
+
 for (row in 1:nrow(metrics.data)) {
   parameter <- metrics.data[row, ]
+
   for (seed in seeds) {
     set.seed(seed)
     flog.trace("SEED <%d>", seed)
@@ -120,22 +129,22 @@ for (row in 1:nrow(metrics.data)) {
       parameter$threshold, parameter$balancing, parameter$resampling)
 
     flog.trace("Converting dataframe to term matrix")
-    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term,
-      parameter$feature)
+    flog.trace("Text mining: extracting %d terms from %s", parameter$n_term,parameter$feature)
     reports.dataset <- convert_to_term_matrix(reports, parameter$feature, parameter$n_term)
-    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) -
-      2, parameter$feature)
+    flog.trace("Text mining: extracted %d terms from %s", ncol(reports.dataset) - 2, parameter$feature)
 
     flog.trace("Partitioning dataset in training and testing")
-    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <=
-      parameter$threshold, "N", "Y"))
+    reports.dataset$long_lived <- as.factor(ifelse(reports.dataset$bug_fix_time <= parameter$threshold, "N", "Y"))
     in_train <- createDataPartition(reports.dataset$long_lived, p = 0.75, list = FALSE)
     train.dataset <- reports.dataset[in_train, ]
-    test.dataset <- reports.dataset[-in_train, ]
+    test.dataset  <- reports.dataset[-in_train, ]
 
     flog.trace("Balancing training dataset")
-    balanced.dataset = balance_dataset(train.dataset, class_label, c("bug_id",
-      "bug_fix_time"), parameter$balancing)
+    balanced.dataset = balance_dataset(
+      train.dataset, class_label, 
+      c("bug_id", "bug_fix_time"), 
+      parameter$balancing
+    )
 
     X_train <- subset(balanced.dataset, select = -c(long_lived))
     y_train <- balanced.dataset[, class_label]
@@ -147,8 +156,11 @@ for (row in 1:nrow(metrics.data)) {
     if (parameter$classifier == KNN) {
       grid = expand.grid(k = c(parameter$value1))
     } else if (parameter$classifier == NB) {
-      grid = expand.grid(fL = c(parameter$value1), useKernel = c(parameter$value2),
-        adjust = c(parameter$value3))
+      grid = expand.grid(
+        fL = c(parameter$value1), 
+        useKernel = c(parameter$value2),
+        adjust = c(parameter$value3)
+      )
     } else if (parameter$classifier == NNET) {
       grid = expand.grid(size = c(parameter$value1), decay = c(parameter$value2))
     } else if (parameter$classifier == RF) {
@@ -158,15 +170,30 @@ for (row in 1:nrow(metrics.data)) {
     }
 
     if (parameter$metric == ROC)
-      fit_control <- caret::trainControl(method = "cv", number = 10, classProbs = TRUE,
-        summaryFunction = twoClassSummary) else fit_control <- caret::trainControl(method = "cv", number = 10)
+      fit_control <- caret::trainControl(
+        method = "cv", 
+        number = 10, 
+        classProbs = TRUE,
+        summaryFunction = twoClassSummary
+      ) 
+    else 
+      fit_control <- caret::trainControl(
+        method = "cv", 
+        number = 10
+      )
 
-    fit_model <- train_with(.x = X_train, .y = y_train, .classifier = parameter$classifier,
-      .control = fit_control, .metric = parameter$metric, .seed = seed, .grid = grid)
+    fit_model <- train_with(
+      .x = X_train, 
+      .y = y_train, 
+      .classifier = parameter$classifier,
+      .control = fit_control, 
+      .metric = parameter$metric, 
+      .seed = seed, 
+      .grid = grid
+    )
 
     flog.trace("Recording training resultas in CSV file")
     train.results <- fit_model$resampledCM
-
     train.results <- train.results[, !(names(train.results) %in% names(fit_model$bestTune))]
 
     names(train.results)[1] <- "tn"
@@ -174,8 +201,8 @@ for (row in 1:nrow(metrics.data)) {
     names(train.results)[3] <- "fp"
     names(train.results)[4] <- "tp"
 
-    train.results$acc <- (train.results$tp + train.results$tn)/(train.results$tp +
-      train.results$fp + train.results$tn + train.results$fn)
+    train.results$acc <- (train.results$tp + train.results$tn) / 
+      (train.results$tp + train.results$fp + train.results$tn + train.results$fn)
 
     positives <- train.results$tp + train.results$fn
     train.results$sensitivity <- ifelse(positives == 0, 0, train.results$tp/positives)
@@ -183,8 +210,6 @@ for (row in 1:nrow(metrics.data)) {
     negatives <- train.results$tn + train.results$fp
     train.results$specificity <- ifelse(negatives == 0, 0, train.results$tn/negatives)
 
-    #train.results$balanced_acc <- (train.results$tp/(train.results$tp + train.results$fp) +
-    #  train.results$tn/(train.results$tn + train.results$fn))/2
     train.results$balanced_acc <- (train.results$sensitivity + train.results$specificity)/2
 
     train.results$classifier <- parameter$classifier
@@ -200,14 +225,13 @@ for (row in 1:nrow(metrics.data)) {
     train.results$hyper3  <- parameter$hyper3
     train.results$value3  <- parameter$value3
     train.results$seed    <- seed
-    if (!flag) {
+    train.results$row     <- row
+    if (!results.started) {
       all_train.results = train.results[FALSE, ]
-      flag <- TRUE
+      results.started <- TRUE
     }
     all_train.results <- rbind(all_train.results, train.results)
+    write_csv(all_train.results, file.path(DATADIR, results.file))
+    flog.trace("Training results recorded on CSV file.")
   }
 }
-results.file <- sprintf("%s_rq3e1_train_fold_metrics_%s_%s.csv", timestamp, project.name,
-  modo.exec)
-write_csv(all_train.results, file.path(DATADIR, results.file))
-flog.trace("Training results recorded on CSV file.")
