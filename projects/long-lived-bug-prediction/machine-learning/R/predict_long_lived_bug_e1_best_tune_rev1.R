@@ -83,16 +83,18 @@ if(IN_DEBUG_MODE)
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
 }
 
-if (!IN_DEBUG_MODE)
+flog.threshold(TRACE)
+if (IN_DEBUG_MODE == FALSE)
 {
   flog.appender(
-    file.path(
-      DATADIR, 
-      sprintf("%s_predict_long_lived_bug_e1_best_tune_rev1.log", timestamp)
-     )
+    appender.file(
+      file.path(
+        DATADIR, 
+        sprintf("%s_predict_long_lived_bug_e1_best_tune_rev1.log", timestamp)
+      )
+    )
   )
 }
-flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 flog.trace("Current project name : %s", project.name)
@@ -115,7 +117,6 @@ all.best.metrics$hyper2 <- ""
 all.best.metrics$value2 <- 0  
 all.best.metrics$hyper3 <- ""
 all.best.metrics$value3 <- 0  
-print(all.best.metrics)
 
 reports.file <- file.path(DATADIR, sprintf("20190917_%s_bug_report_data.csv", project.name))
 flog.trace("Bug report file name: %s", reports.file)
