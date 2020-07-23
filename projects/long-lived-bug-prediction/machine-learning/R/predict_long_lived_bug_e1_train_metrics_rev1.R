@@ -83,12 +83,21 @@ if (IN_DEBUG_MODE) {
   seeds <- c(DEFAULT_SEED, 283, 1087, 2293, 3581)
 }
 #
+if (!IN_DEBUG_MODE)
+{
+  flog.appender(
+    file.path(
+      DATADIR, 
+      sprintf("%_predict_long_lived_bug_e1_train_metrics_rev1.log", timestamp)
+     )
+  )
+}
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
 modo.exec = ifelse(IN_DEBUG_MODE, "debug", "final")
-metrics.file = sprintf("20200731_rq3e1_all_best_train_tunes_%s.csv", modo.exec)
+metrics.file = sprintf("%s_rq3e1_all_best_train_tunes_%s.csv", timestamp, modo.exec)
 metrics.path = file.path(DATADIR, metrics.file)
 metrics.data = read_csv(metrics.path)
 results.file <- sprintf(
