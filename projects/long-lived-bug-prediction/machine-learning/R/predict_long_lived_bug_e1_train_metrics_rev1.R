@@ -88,7 +88,7 @@ if (!IN_DEBUG_MODE)
   flog.appender(
     file.path(
       DATADIR, 
-      sprintf("%_predict_long_lived_bug_e1_train_metrics_rev1.log", timestamp)
+      sprintf("%s_predict_long_lived_bug_e1_train_metrics_rev1.log", timestamp)
      )
   )
 }
