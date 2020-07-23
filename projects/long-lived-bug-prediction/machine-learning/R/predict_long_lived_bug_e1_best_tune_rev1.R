@@ -83,7 +83,15 @@ if(IN_DEBUG_MODE)
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
 }
 
-appender.tee(file.path(DATADIR, "predict_long_lived_bug_e1_best_tune_rev1.log"))
+if (!IN_DEBUG_MODE)
+{
+  flog.appender(
+    file.path(
+      DATADIR, 
+      sprintf("%_predict_long_lived_bug_e1_best_tune_rev1.log", timestamp)
+     )
+  )
+}
 flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
