@@ -18,7 +18,7 @@ options(readr.num_columns = 0)
 timestamp       <- format(Sys.time(), "%Y%m%d")
 
 # setup project folders.
-IN_DEBUG_MODE  <- TRUE
+IN_DEBUG_MODE  <- FALSE
 FORCE_NEW_FILE <- TRUE
 BASEDIR <- file.path("~","Workspace", "doctorate", "projects")
 PRJDIR  <- file.path(BASEDIR, "long-lived-bug-prediction", "machine-learning")
