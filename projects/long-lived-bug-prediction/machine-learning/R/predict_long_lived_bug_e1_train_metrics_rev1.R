@@ -83,16 +83,18 @@ if (IN_DEBUG_MODE) {
   seeds <- c(DEFAULT_SEED, 283, 1087, 2293, 3581)
 }
 #
-if (!IN_DEBUG_MODE)
+flog.threshold(TRACE)
+if (IN_DEBUG_MODE == FALSE)
 {
   flog.appender(
-    file.path(
-      DATADIR, 
-      sprintf("%s_predict_long_lived_bug_e1_train_metrics_rev1.log", timestamp)
-     )
+    appender.file(
+      file.path(
+        DATADIR, 
+        sprintf("%s_predict_long_lived_bug_e1_train_metrics_rev1.log", timestamp)
+      )
+    )
   )
 }
-flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
