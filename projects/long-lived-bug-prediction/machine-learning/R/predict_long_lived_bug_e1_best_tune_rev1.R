@@ -78,14 +78,10 @@ project.name    <- "eclipse"
 class_label     <- "long_lived"
 if(IN_DEBUG_MODE)
 {
+  #classifiers  <- c(KNN)
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
 } else {
   classifiers  <- c(KNN, NB, NNET, RF, SVM)
-}
-
-flog.threshold(TRACE)
-if (IN_DEBUG_MODE == FALSE)
-{
   flog.appender(
     appender.file(
       file.path(
@@ -95,6 +91,8 @@ if (IN_DEBUG_MODE == FALSE)
     )
   )
 }
+
+flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 flog.trace("Current project name : %s", project.name)
@@ -196,6 +194,7 @@ for (row in 1:nrow(all.best.metrics)) {
   }
 }
 
-results.file  <- sprintf( "%s_rq3e1_all_best_train_tunes_%s.csv", timestamp, 
-  ifelse(IN_DEBUG_MODE, "debug", "final")) write_csv(all.best.metrics,  file.path(DATADIR, results.file))
+results.file  <- sprintf( "%s_rq3e1_all_best_train_tunes_%s.csv", timestamp, ifelse(IN_DEBUG_MODE, "debug", "final")) 
+
+write_csv(all.best.metrics,  file.path(DATADIR, results.file))
 flog.trace("Training best tune hyperparameters recorded on CSV file.")

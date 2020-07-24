@@ -81,11 +81,6 @@ if (IN_DEBUG_MODE) {
   seeds <- c(DEFAULT_SEED, 283, 1087, 2293, 3581)
 } else {
   seeds <- c(DEFAULT_SEED, 283, 1087, 2293, 3581)
-}
-#
-flog.threshold(TRACE)
-if (IN_DEBUG_MODE == FALSE)
-{
   flog.appender(
     appender.file(
       file.path(
@@ -95,6 +90,8 @@ if (IN_DEBUG_MODE == FALSE)
     )
   )
 }
+#
+flog.threshold(TRACE)
 flog.trace("Long live prediction Research Question 3 - Experiment 1")
 flog.trace("Evaluation metrics ouput path: %s", DATADIR)
 
