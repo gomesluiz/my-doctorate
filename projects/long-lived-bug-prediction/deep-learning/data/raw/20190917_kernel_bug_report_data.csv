@@ -1,1 +1,3 @@
-bug_id,creation_date,component_name,product_name,short_description,long_description,assignee_name,reporter_name,resolution_category,resolution_code,status_category,status_code,update_date,quantity_of_votes,quantity_of_comments,resolution_date,bug_fix_time,severity_category,severity_code
+version https://git-lfs.github.com/spec/v1
+oid sha256:a4647b525760b7ebba0f00d83cb3c7bafa6d6d4121458dd455c65d5d4b56cf03
+size 289

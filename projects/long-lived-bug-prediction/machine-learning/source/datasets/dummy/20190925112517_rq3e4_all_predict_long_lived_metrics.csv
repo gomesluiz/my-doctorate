@@ -1,3 +1,3 @@
-project,feature,n_term,classifier,balancing,resampling,metric,threshold,train_size,train_size_class_0,train_size_class_1,test_size,test_size_class_0,test_size_class_1,tp,fp,tn,fn,sensitivity,specificity,balanced_acc,balanced_acc_manual,precision,recall,fmeasure
-eclipse,short_description,100,nb,unbalanced,repeatedcv,Kappa,365,644,592,52,214,197,17,0,0,197,17,0,1,0.5,0.5,0,0,0
-freedesktop,short_description,100,nb,unbalanced,repeatedcv,Kappa,365,653,575,78,216,191,25,0,0,191,25,0,1,0.5,0.5,0,0,0
+version https://git-lfs.github.com/spec/v1
+oid sha256:5c2a297b2af7947421923895b2dc6eba56af9b953eac692cd87433c278472574
+size 498
