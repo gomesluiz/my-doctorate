@@ -27,6 +27,7 @@ A crawler for issue extraction information from many issue tracking systems.
 ### R Programming
 1. [UC Business Analytics R Programming Guinde](https://uc-r.github.io/)
 2. [This R Data Import Tutorial Is Everything You Need](https://www.datacamp.com/community/tutorials/r-data-import-tutorial)
+3. [R Advanced Programming](http://adv-r.had.co.nz/)
 
 ### Statistics
 1. [How to Calculate Nonparametric Statistical Hypothesis Tests in Python](https://machinelearningmastery.com/nonparametric-statistical-significance-tests-in-python/  )
@@ -38,7 +39,7 @@ A crawler for issue extraction information from many issue tracking systems.
 2. [Top Books on Natural Language Processing](https://machinelearningmastery.com/books-on-natural-language-processing/)
 3. [Generating WordClouds in Python](https://www.datacamp.com/community/tutorials/wordcloud-python)
 4. [Text Analytics with Python: A Practical Real-World Approach to Gaining Actionable Insights from your Data](https://www.amazon.com/Text-Analytics-Python-Real-World-Actionable/dp/148422387X/ref=as_li_ss_tl?ie=UTF8&qid=1506457805&sr=8-1&keywords=text+analytics+with+python&linkCode=sl1&tag=edbholdings02-20&linkId=2b025608bbaa4e96327aa46b834c3900c5)
-5. [Text Mining in R](https://www.oreilly.com/library/view/text-mining-with/9781491981641/ch04.html)
+5. [Text Mining in R](https://www.tidytextmining.com/)
 6. [Intuitive guide to word embedding, RNN (SimpleRNN, LSTM) with step by step implementation in keras for spam detection](https://medium.com/@hemantranvir/spam-detection-using-rnn-simplernn-lstm-with-step-by-step-explanation-530367608071)
 
 
